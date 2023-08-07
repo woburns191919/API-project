@@ -43,7 +43,8 @@ router.post(
       email: user.email,
       username: user.username,
     };
-   
+    console.log('first***', typeof firstName)
+
 
     await setTokenCookie(res, safeUser);
 
