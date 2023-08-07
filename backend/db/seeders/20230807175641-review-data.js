@@ -22,11 +22,25 @@ module.exports = {
     */
    await Review.bulkCreate([
     {
-      id: 8,
-      spotId: 4,
-      userId: 4,
+      id: 1,
+      spotId: 1,
+      userId: 1,
       review: "It was great!",
       stars: 4
+    },
+    {
+      id: 2,
+      spotId: 2,
+      userId: 2,
+      review: "It was okay",
+      stars: 3
+    },
+    {
+      id: 3,
+      spotId: 3,
+      userId: 3,
+      review: "It was not good",
+      stars: 2
     }
    ], { validate: true }
    );
@@ -44,7 +58,7 @@ module.exports = {
      return queryInterface.bulkDelete(
        options,
        {
-         spotId: 4
+         spotId: [1, 2, 3]
        },
        {}
      );
