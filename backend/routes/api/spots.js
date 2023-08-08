@@ -23,36 +23,27 @@ const validateLogin = [
 
 
 
-
 router.get('/', async (req, res) => {
     let reviews = await Review.findAll()
     const allSpots = await Spot.findAll()
-    // let reviewCount = await Review.count()
-    // console.log(reviewCount)
-
+    let reviewCount = Review.count()
     let allSpotsList = []
     allSpots.forEach(spot => {
-      let starSum = 0
-      reviews.forEach(review => {
-        starSum += review.stars
-      })
-      console.log(starSum)
-
       allSpotsList.push(spot.toJSON())
     })
-
     allSpotsList.forEach(spots => {
-
-
-
-    //   let avgRating = starSum/reviewCount
-    //   spots.avgRating = avgRating
-    //   spots.previewImage = 'url.url.com'
-    //   delete spots.Reviews
+      // console.log('spots***', spots)
+      let starSum = 0
+      reviews.forEach(reviews => {
+        // console.log('stars***', reviews.stars)
+        starSum += reviews.stars
+      })
+      spots.avgRating = starSum/reviewCount
+      spots.previewImage = 'url.url.com'
+      delete spots.Reviews
     })
-    // return res.json(allSpotsList)
-  }
-);
+    return res.json(allSpotsList)
+  })
 
 
 router.post('/', requireAuth, async (req, res) => {
@@ -124,15 +115,25 @@ router.post('/', requireAuth, async (req, res) => {
   const user = await spot.getUser()
   const spotImages = await spot.getSpotImages()
 
+
+
   const spotObj = spot.toJSON()
   spotObj.spotImages = spotImages
   spotObj.owner = user
   return res.json(spotObj)
  })
 
+
+
+
+
+
+
+
+
  router.delete('/:spotId', requireAuth, async (req, res) => {
    const spot = await Spot.findByPk(req.params.spotId)
-   const user = req.user.id
+   console.log(spot)
    if (spot) {
     await spot.destroy()
     return res.json({
@@ -142,22 +143,43 @@ router.post('/', requireAuth, async (req, res) => {
   })
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  router.put('/:spotId', requireAuth, async (req, res, next) => {
     const user = req.user.id
     if (user) {
       const { id, ownerId, address, city, state, country, lat, lng, name, description, price, createdAt, updatedAt } = req.body
-      if (!req.params.spotId) {
-        res.status(404)
-        next(err)
+      // if (!req.params.spotId) {
+      //   res.status(404)
+      //   return res.json(
+      //     {
+      //     message: "Spot couldn't be found"
+      //     }
+      //   )
+      // }
+      const spot = await Spot.findByPk(req.params.spotId)
+      if (!spot) {
+      res.status(404)
         return res.json(
           {
           message: "Spot couldn't be found"
           }
         )
-
-
       }
-      const spot = await Spot.findByPk(req.params.spotId)
       await spot.update({
         id,
         ownerId,
@@ -174,7 +196,8 @@ router.post('/', requireAuth, async (req, res) => {
         updatedAt
       })
       await spot.save()
-      return res.json(spot)
+      res.status(201)
+      res.json(spot)
     }
  })
 
