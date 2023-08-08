@@ -61,10 +61,6 @@ router.post('/', requireAuth, async (req, res) => {
   if (ownerId) {
   const { address, city, state, country, lat, lng, name, description, price } = req.body
 
-
-
-
-
   const newSpot = await Spot.create({
     ownerId,
     address,
