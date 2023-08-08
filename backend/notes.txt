@@ -20,3 +20,8 @@ Delete render every time make new seed?
 Rollback command?
 
 Math on agg functions?
+
+I made a minor change to a seeder file. Render was not happy. Is there a better way-- rather than deleting the postgress instance entirely--to resolve this render build error?
+
+
+include username with spot from id--this okay?
