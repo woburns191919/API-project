@@ -46,12 +46,12 @@ router.get('/', async (req, res) => {
 
 
 
-      // let avgRating = starSum/reviewCount
-      // spots.avgRating = avgRating
-      // spots.previewImage = 'url.url.com'
-      // delete spots.Reviews
+      let avgRating = starSum/reviewCount
+      spots.avgRating = avgRating
+      spots.previewImage = 'url.url.com'
+      delete spots.Reviews
     })
-    // return res.json(allSpotsList)
+    return res.json(allSpotsList)
   }
 );
 
