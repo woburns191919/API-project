@@ -2,7 +2,7 @@ const express = require('express')
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth  } = require('../../utils/auth');
 const { User, Spot, Review } = require('../../db/models');
 const router = express.Router();
 
@@ -29,24 +29,39 @@ router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
       include: {
         model: Review
+
       }
     })
-    console.log(allSpots)
+    let reviewCount = await Review.count()
     let allSpotsList = []
     allSpots.forEach(spot => {
       allSpotsList.push(spot.toJSON())
-      //previewImage
-      //avgRating
     })
-
-    allSpotsList.forEach(spot => {
-      let starSum = 0
-      spot.Reviews.forEach(review => {
-        starSum += review.stars
+    let starSum = 0
+    allSpotsList.forEach(spots => {
+      spots.Reviews.forEach(reviews => {
+      starSum += reviews.stars
       })
-      console.log(starSum)
+      spots.avgRating = starSum/reviewCount
+      spots.previewImage = 'url.url.com'
+      delete spots.Reviews
     })
+    return res.json(allSpotsList)
   }
 );
+
+ router.get('/current', requireAuth, async (req, res, next) => {
+  const userId = req.user.id
+    const currentUserSpots = await Spot.findAll({
+      where: {
+        ownerId: userId
+      }
+    })
+    let currentUserSpotsList = []
+    currentUserSpots.forEach(spots => {
+      console.log(spots)
+    })
+    console.log(currentUserSpots)
+ })
 
 module.exports = router;
