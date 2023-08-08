@@ -41,6 +41,13 @@ module.exports = {
       userId: 3,
       review: "It was not good",
       stars: 2
+    },
+    {
+      id: 4,
+      spotId: 1,
+      userId: 3,
+      review: "It was just right",
+      stars: 5
     }
    ], { validate: true }
    );

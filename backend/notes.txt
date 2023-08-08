@@ -1,0 +1,14 @@
+npm install && npm run build && npm run sequelize --prefix backend db:seed:undo:all && npm run sequelize --prefix backend db:migrate:undo:all && npm run sequelize --prefix backend db:migrate && npm run sequelize --prefix backend db:seed:all
+
+
+
+
+1) roll back seed files
+2) roll back migrations
+3) db migrate (remigrate)
+4) db seed (reseed)
+
+
+in package json
+"dbreset":
+npx dotenv sequelize db:seed:undo:all && npx dotenv sequelize db:migrate:undo:all && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all
