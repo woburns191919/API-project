@@ -133,7 +133,7 @@ router.post('/', requireAuth, async (req, res) => {
 
  router.delete('/:spotId', requireAuth, async (req, res) => {
    const spot = await Spot.findByPk(req.params.spotId)
-   console.log(spot)
+   console.log('hasmanydeleted***', spot)
    if (spot) {
     await spot.destroy()
     return res.json({
@@ -141,15 +141,6 @@ router.post('/', requireAuth, async (req, res) => {
     })
    }
   })
-
-
-
-
-
-
-
-
-
 
 
 
