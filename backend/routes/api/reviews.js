@@ -26,6 +26,7 @@ const validateLogin = [
 
 router.get('/current', requireAuth, async (req, res) => {
    console.log('hello')
+   console.log(req.user.id)
 })
 
 
