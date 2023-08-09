@@ -61,3 +61,7 @@ price .isfloat() min 0
 questions for standup:
 
 1) authentication current user vs null?
+
+
+
+making changes
