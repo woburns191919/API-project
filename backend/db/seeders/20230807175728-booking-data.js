@@ -12,15 +12,6 @@ if (process.env.NODE_ENV === "production") {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
    await Booking.bulkCreate([
     {
       spotId: 1,
@@ -62,8 +53,8 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        username: {
-          [Op.in]: ['2023-08-18'],
+        startDate: {
+          [Op.in]: ['2023-08-18', '2023-09-18', '2023-10-20', '2023-07-10'],
         },
       },
       {}
