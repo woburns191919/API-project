@@ -52,6 +52,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", requireAuth, async (req, res) => {
   const ownerId = req.user.id;
+
   if (ownerId) {
     const {
       address,
@@ -82,10 +83,10 @@ router.post("/", requireAuth, async (req, res) => {
   }
 });
 
-router.get("/current", requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res) => {
   const userId = req.user.id;
+  console.log('hello')
   if (userId) {
-    const reviews = await Review.findAll();
     const currentUserSpots = await Spot.findAll({
       include: {
         model: Review,
@@ -111,10 +112,26 @@ router.get("/current", requireAuth, async (req, res) => {
       spots.previewImage = "url.url.com";
       delete spots.Reviews;
     });
-
     return res.json(currentUserSpotsList);
   }
 });
+
+// router.get('/current', requireAuth, async (req, res) => {
+//   const userId = req.user.id
+//   if (userId) {
+//     const spot = await Spot.findAll({
+//       include: {
+//         model: Review,
+//         attributes: ["stars"],
+//       },
+//       where: {
+//         ownerId: userId,
+//       },
+//     })
+//     console.log('curr**', spot)
+//   }
+// })
+
 
 router.get("/:spotId", async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
