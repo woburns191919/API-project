@@ -27,9 +27,9 @@ I made a minor change to a seeder file. Render was not happy. Is there a better 
 include username with spot from id--this okay?
 
 
-1) I'm currently working on 'Get all reviews of the current user for Air bnb,' and when I try to hit /reviews/current, the info from /spots/current pops up. This could be from eager loading the data in spots/current (which works in production--it would be great not to have to change this).
 
-2) I'm currently working on 'Add an image to a spot basesd on the spot's id' for Air bnb, and when hit  a spot that doesn't exist (i.e. /spots/20/images), I'm getting a foreign key constraint error but am expecting a 404. Any ideas why this could be happening?
+
+2) I'm currently working on 'Add an image to a spot basesd on the spot's id' for Air bnb, and when I hit a spot that doesn't exist (i.e. /spots/20/images), I'm getting a foreign key constraint error but am expecting a 404. Any ideas why this could be happening?
 
 
 

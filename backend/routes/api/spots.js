@@ -48,6 +48,18 @@ const validateEdit = [
   handleValidationErrors,
 ];
 
+// const authorize = [
+//   check('credential')
+//     .exists({ checkFalsy: true })
+//     .notEmpty()
+//     .withMessage('Please provide a valid email or username.'),
+//   check('password')
+//     .exists({ checkFalsy: true })
+//     .withMessage('Please provide a password.'),
+//   handleValidationErrors
+// ];
+
+
 router.get("/", async (req, res) => {
   // let reviews = await Review.findAll();
   const allSpots = await Spot.findAll({
@@ -171,16 +183,30 @@ router.get("/:spotId", async (req, res) => {
 });
 
 router.delete("/:spotId", requireAuth, async (req, res) => {
-  const spot = await Spot.findByPk(req.params.spotId);
-  if (spot) {
-    await spot.destroy();
-    return res.json({
+  const spot = req.params.spotId;
+  const officialOwner = await Spot.findByPk(spot)
+  const deletedSpot = await Spot.destroy({
+    where: {
+      id: spot,
+      ownerId: req.user.id
+    }
+  })
+
+  if (!officialOwner) {
+  return res.status(404).json({
+    message: "Spot couldn't be found",
+  })
+}
+   else if (officialOwner && officialOwner.id !== req.user.id) {
+    return res.status(403).json(
+      {
+        message: "Forbidden"
+      }
+    )
+  }
+  else if (deletedSpot) {
+    return res.status(200).json({
       message: "Successfully deleted",
-    });
-  } else if (!spot) {
-    res.status(404)
-    return res.json({
-      message: "Spot couldn't be found",
     });
   }
 });
@@ -232,10 +258,12 @@ router.put("/:spotId", requireAuth, validateEdit, async (req, res, next) => {
   }
 });
 
-router.post("/:spotId/images", requireAuth, async (req, res) => {
+router.post("/:spotId/images", requireAuth,  async (req, res) => {
   const user = req.user.id;
   const spotId = req.params.spotId;
-  if (user) {
+  const spot = await Spot.findByPk(req.params.id)
+  console.log(spot)
+  if (spot) {
     const { url, preview } = req.body;
     const newSpotImage = await SpotImage.create({
       spotId,
