@@ -29,8 +29,8 @@ router.get("/", async (req, res) => {
   const allSpots = await Spot.findAll({
     include: {
       model: Review,
-      attributes: ['stars']
-    }
+      attributes: ["stars"],
+    },
   });
   // let reviewCount = Review.count();
   let allSpotsList = [];
@@ -38,13 +38,12 @@ router.get("/", async (req, res) => {
     allSpotsList.push(spot.toJSON());
   });
   allSpotsList.forEach((spots) => {
-
     let starSum = 0;
     spots.Reviews.forEach((reviews) => {
       starSum += reviews.stars;
     });
-    spots.avgRating = starSum / (spots.Reviews.length ? spots.Reviews.length:1);
-    console.log(spots.avgRating, spots.Reviews.length)
+    spots.avgRating =
+      starSum / (spots.Reviews.length ? spots.Reviews.length : 1);
     spots.previewImage = "url.url.com";
     delete spots.Reviews;
   });
@@ -83,26 +82,32 @@ router.post("/", requireAuth, async (req, res) => {
   }
 });
 
-router.get("/current", requireAuth, async (req, res, next) => {
+router.get("/current", requireAuth, async (req, res) => {
   const userId = req.user.id;
   if (userId) {
     const reviews = await Review.findAll();
     const currentUserSpots = await Spot.findAll({
+      include: {
+        model: Review,
+        attributes: ["stars"],
+      },
       where: {
         ownerId: userId,
       },
     });
-    let reviewCount = await Review.count();
     let currentUserSpotsList = [];
     currentUserSpots.forEach((spot) => {
       currentUserSpotsList.push(spot.toJSON());
     });
     let starSum = 0;
+
     currentUserSpotsList.forEach((spots) => {
-      reviews.forEach((review) => {
-        starSum += review.stars;
+      spots.Reviews.forEach((reviews) => {
+        starSum += reviews.stars;
       });
-      spots.avgRating = starSum / reviewCount;
+      spots.numReviews = spots.Reviews.length;
+      spots.avgRating =
+        starSum / (spots.Reviews.length ? spots.Reviews.length : 1);
       spots.previewImage = "url.url.com";
       delete spots.Reviews;
     });
@@ -132,11 +137,15 @@ router.get("/:spotId", async (req, res) => {
 
 router.delete("/:spotId", requireAuth, async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
-  console.log("hasmanydeleted***", spot);
   if (spot) {
     await spot.destroy();
     return res.json({
       message: "Successfully deleted",
+    });
+  } else if (!spot) {
+    res.status(404)
+    return res.json({
+      message: "Spot couldn't be found",
     });
   }
 });
@@ -190,7 +199,7 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
       updatedAt,
     });
     await spot.save();
-    res.status(201);
+    res.status(200);
     res.json(spot);
   }
 });
