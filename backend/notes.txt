@@ -43,7 +43,7 @@ include username with spot from id--this okay?
 Delete User--authorization check
 
 
-authentication current user vs null?
+
 
 
 
@@ -56,3 +56,8 @@ authentication current user vs null?
   -180 max 180 for lng
   .isfloat()
 price .isfloat() min 0
+
+
+questions for standup:
+
+1) authentication current user vs null?
