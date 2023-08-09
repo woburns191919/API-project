@@ -41,3 +41,9 @@ include username with spot from id--this okay?
 
 
 Delete User--authorization check
+
+
+
+
+  errors: { credential: 'Please provide a valid email or username.' } vs  "credential": "Email or username is required"
+  on Log In User error response
