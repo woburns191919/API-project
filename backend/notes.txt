@@ -45,22 +45,17 @@ Delete User--authorization check
 
 
 
-
-
   errors: { credential: 'Please provide a valid email or username.' } vs  "credential": "Email or username is required"
   on Log In User error response
 
 
-  check address etc w validator like /post
-  min -90 max 90 for lat
-  -180 max 180 for lng
-  .isfloat()
-price .isfloat() min 0
+
 
 
 questions for standup:
 
 1) authentication current user vs null?
+2) exact error messages, besides the custom validations in put spots/:spotId
 
 
 
