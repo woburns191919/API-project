@@ -36,7 +36,8 @@ include username with spot from id--this okay?
 
 
 1) Get Current User: authentication: true, how to log out
-
+2) Edit a spot--accepting invalid body info
+3) delete spot--how to check if authenticated user, how to check if owner is owner of spot
 
 
 Delete User--authorization check

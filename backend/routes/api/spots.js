@@ -85,7 +85,7 @@ router.post("/", requireAuth, async (req, res) => {
 
 router.get('/current', requireAuth, async (req, res) => {
   const userId = req.user.id;
-  console.log('hello')
+
   if (userId) {
     const currentUserSpots = await Spot.findAll({
       include: {
@@ -136,6 +136,7 @@ router.get('/current', requireAuth, async (req, res) => {
 router.get("/:spotId", async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
 
+
   if (!spot) {
     res.status(404);
     res.json({
@@ -145,8 +146,17 @@ router.get("/:spotId", async (req, res) => {
 
   const user = await spot.getUser();
   const spotImages = await spot.getSpotImages();
+  const spotReviews = await spot.getReviews()
+  let numReviews = spotReviews.length
+  let starSum = 0
+  spotReviews.forEach(el => {
+    starSum += el.stars
+  })
+  let avgStarRating = starSum/numReviews
 
   const spotObj = spot.toJSON();
+  spotObj.numReviews = numReviews
+  spotObj.avgStarRating = avgStarRating
   spotObj.spotImages = spotImages;
   spotObj.owner = user;
   return res.json(spotObj);
