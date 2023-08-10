@@ -33,7 +33,9 @@ include username with spot from id--this okay?
 
 2) I'm currently working on 'Create a review for a spot based on the spot's id' for Air bnb, and I can't run the code without hitting my 500 server error. It was working before I implemented this check to ensure reviews weren't duplicated. Is this an issue of error code placement?
 
-3) I'm currently working on 'Get all reviews for a current user' for Air bnb, and I'm having trouble checking the current user's to make sure I'm returning only reviews created by the current user. It looks like I'm going down a strange and convoluted path. Is there a more streamlined/viable way for me to execute this code?
+3) I'm currently working on 'Get all reviews for a current user' for Air bnb, and I'm having trouble retrieving the 'reviewImages' associated--this is my only real issue with the route. Whenever I try to 'findAll' where the id's match up, I get either null or an empty array. Is this an issue with my methods? I would appreciate any help available.
+
+
 
 
 
@@ -60,7 +62,28 @@ questions for standup:
 
 1) authentication current user vs null?
 2) exact error messages, besides the custom validations in put spots/:spotId
-3) sign up/log in every time? token? have to go through sign up, login each time 
+3) sign up/log in every time? token? have to go through sign up, login each time
+4) associations with reviews?
 
 
 making changes
+
+dan notes:
+
+1. When there is no preview image, we can either return null or “no preview image”
+
+2. When there is a preview image, preview: false, we still want to return null or “no preview image”
+
+3. Where there is a preview image, preview: true, we want to return the url
+
+4. Where there are multiple preview images, preview: true, we want to return the latest preview: true, and the old preview:true image needs to be updated to preview: false
+
+
+most basic default page size pagination
+
+add keys
+
+
+http//image.com
+
+wk13 monday: tips on comparing dates in sequelize

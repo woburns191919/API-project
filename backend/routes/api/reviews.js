@@ -7,7 +7,7 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { User, Spot, Review, SpotImage } = require("../../db/models");
+const { User, Spot, Review, SpotImage, Booking, ReviewImage } = require("../../db/models");
 const router = express.Router();
 
 const { check } = require("express-validator");
@@ -25,17 +25,66 @@ const validateLogin = [
 ];
 
 router.get('/current', requireAuth, async (req, res) => {
-
-  const reviews = await Review.findAll()
-  let reviewsArr = [];
-  let userId = ''
-  reviews.forEach(reviews => {
-    if (reviews.userId === req.user.id) {
-      userId += reviews.userId
+  const user = await User.findOne({
+    where: {
+      id: req.user.id
     }
   })
-  console.log(userId)
+  const spot = await Spot.findOne({
+    where: {
+      id: req.user.id
+    }
+  })
 
+  const reviewImages = await ReviewImage.findAll({
+    where: {
+      reviewId: spot.id
+    }
+  })
+  console.log(reviewImages)
+
+
+  const reviews = await Review.findAll({
+    where: {
+      id: spot.id
+    }
+  })
+
+
+
+  let userObj = {
+   id: user.id,
+   firstName: user.firstName,
+   lastName: user.lastName
+  }
+
+  let spotObj = {
+    id: spot.id,
+    ownerId: spot.ownerId,
+    address: spot.address,
+    city: spot.city,
+    state: spot.state,
+    country: spot.country,
+    lat: spot.lat,
+    lng: spot.lng,
+    name: spot.name,
+    price: spot.price,
+    previewImage: 'url'
+  }
+
+
+
+
+  let reviewsArr = []
+  reviews.forEach(reviews => {
+    reviewsArr.push(reviews.toJSON())
+  })
+  reviewsArr.forEach(review => {
+    review.User = userObj,
+    review.Spot = spotObj
+  })
+
+// console.log(reviewsArr)
 
 
 })
