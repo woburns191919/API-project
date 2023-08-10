@@ -66,59 +66,6 @@ router.get("/current", requireAuth, async (req, res) => {
   res.json(reviewsArr)
 
 
-
-  // console.log(reviews);
-
-  // const user = await User.findOne({
-  //   where: {
-  //     id: req.user.id,
-  //   },
-  // });
-
-  // const reviewImages = await ReviewImage.findAll({
-  //   where: {
-  //     id: Review.id
-  //   },
-  // });
-  // console.log(reviewImages)
-
-  // const spot = await Spot.findOne({
-  //   where: {
-  //     id: Review.spotId
-  //   },
-  // });
-
-  // console.log(reviewImages);
-
-  // let userObj = {
-  //   id: user.id,
-  //   firstName: user.firstName,
-  //   lastName: user.lastName,
-  // };
-
-  // let spotObj = {
-  //   id: spot.id,
-  //   ownerId: spot.ownerId,
-  //   address: spot.address,
-  //   city: spot.city,
-  //   state: spot.state,
-  //   country: spot.country,
-  //   lat: spot.lat,
-  //   lng: spot.lng,
-  //   name: spot.name,
-  //   price: spot.price,
-  //   previewImage: "url",
-  // };
-
-  // let reviewsArr = [];
-  // reviews.forEach((reviews) => {
-  //   reviewsArr.push(reviews.toJSON());
-  // });
-  // reviewsArr.forEach((review) => {
-  //   (review.User = userObj), (review.Spot = spotObj);
-  // });
-
-  // console.log(reviewsArr);
 });
 
 module.exports = router;
