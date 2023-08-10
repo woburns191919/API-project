@@ -29,7 +29,7 @@ include username with spot from id--this okay?
 
 
 
-2) I'm currently working on 'Add an image to a spot basesd on the spot's id' for Air bnb, and when I hit a spot that doesn't exist (i.e. /spots/20/images), I'm getting a foreign key constraint error but am expecting a 404. Any ideas why this could be happening?
+1) I'm currently working on 'Add an image to a spot basesd on the spot's id' for Air bnb, and when I hit a spot that doesn't exist (i.e. /spots/50/images), I'm getting a server error but am expecting a 404. Any ideas why this could be happening?
 
 
 
@@ -56,7 +56,7 @@ questions for standup:
 
 1) authentication current user vs null?
 2) exact error messages, besides the custom validations in put spots/:spotId
-
+3) sign up/log in every time? token?
 
 
 making changes

@@ -259,11 +259,10 @@ router.put("/:spotId", requireAuth, validateEdit, async (req, res, next) => {
 });
 
 router.post("/:spotId/images", requireAuth,  async (req, res) => {
-  const user = req.user.id;
   const spotId = req.params.spotId;
-  const spot = await Spot.findByPk(req.params.id)
-  console.log(spot)
-  if (spot) {
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  if (parseInt(spot.id) === parseInt(req.user.id)) {
     const { url, preview } = req.body;
     const newSpotImage = await SpotImage.create({
       spotId,
@@ -271,12 +270,19 @@ router.post("/:spotId/images", requireAuth,  async (req, res) => {
       preview,
     });
     return res.json(newSpotImage);
-  } else if (!spotId) {
-    res.status(404);
-    return res.json({
+  } else if (!spot) {
+    return res.status(404).json({
       message: "Spot couldn't be found",
-    });
-  }
-});
+    })
+   } else if (spot && spot.id !== req.user.id) {
+
+    return res.status(403).json(
+      {
+        message: "Forbidden"
+      }
+    )
+   }
+  })
+
 
 module.exports = router;
