@@ -50,8 +50,6 @@ router.get('/current', requireAuth, async (req, res) => {
     }
   })
 
-
-
   let userObj = {
    id: user.id,
    firstName: user.firstName,

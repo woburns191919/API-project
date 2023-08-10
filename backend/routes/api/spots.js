@@ -18,12 +18,8 @@ const validateEdit = [
     .exists({ checkFalsy: true })
     .notEmpty()
     .withMessage("Street address is required"),
-  check("city")
-    .exists({ checkFalsy: true })
-    .withMessage("City is required"),
-  check("state")
-    .exists({ checkFalsy: true })
-    .withMessage("State is required"),
+  check("city").exists({ checkFalsy: true }).withMessage("City is required"),
+  check("state").exists({ checkFalsy: true }).withMessage("State is required"),
   check("country")
     .exists({ checkFalsy: true })
     .withMessage("Country is required"),
@@ -68,10 +64,6 @@ const validateReview = [
 //   handleValidationErrors,
 // ];
 
-
-
-
-
 // const authorize = [
 //   check('credential')
 //     .exists({ checkFalsy: true })
@@ -82,7 +74,6 @@ const validateReview = [
 //     .withMessage('Please provide a password.'),
 //   handleValidationErrors
 // ];
-
 
 router.get("/", async (req, res) => {
   // let reviews = await Review.findAll();
@@ -107,7 +98,7 @@ router.get("/", async (req, res) => {
     spots.previewImage = "url.url.com";
     delete spots.Reviews;
   });
-  return res.json({"Spots": allSpotsList});
+  return res.json({ Spots: allSpotsList });
 });
 
 router.post("/", requireAuth, async (req, res) => {
@@ -143,7 +134,7 @@ router.post("/", requireAuth, async (req, res) => {
   }
 });
 
-router.get('/current', requireAuth, async (req, res) => {
+router.get("/current", requireAuth, async (req, res) => {
   const userId = req.user.id;
 
   if (userId) {
@@ -176,10 +167,8 @@ router.get('/current', requireAuth, async (req, res) => {
   }
 });
 
-
 router.get("/:spotId", async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
-
 
   if (!spot) {
     res.status(404);
@@ -190,17 +179,17 @@ router.get("/:spotId", async (req, res) => {
 
   const user = await spot.getUser();
   const spotImages = await spot.getSpotImages();
-  const spotReviews = await spot.getReviews()
-  let numReviews = spotReviews.length
-  let starSum = 0
-  spotReviews.forEach(el => {
-    starSum += el.stars
-  })
-  let avgStarRating = starSum/numReviews
+  const spotReviews = await spot.getReviews();
+  let numReviews = spotReviews.length;
+  let starSum = 0;
+  spotReviews.forEach((el) => {
+    starSum += el.stars;
+  });
+  let avgStarRating = starSum / numReviews;
 
   const spotObj = spot.toJSON();
-  spotObj.numReviews = numReviews
-  spotObj.avgStarRating = avgStarRating
+  spotObj.numReviews = numReviews;
+  spotObj.avgStarRating = avgStarRating;
   spotObj.spotImages = spotImages;
   spotObj.owner = user;
   return res.json(spotObj);
@@ -208,27 +197,23 @@ router.get("/:spotId", async (req, res) => {
 
 router.delete("/:spotId", requireAuth, async (req, res) => {
   const spot = req.params.spotId;
-  const officialOwner = await Spot.findByPk(spot)
+  const officialOwner = await Spot.findByPk(spot);
   const deletedSpot = await Spot.destroy({
     where: {
       id: spot,
-      ownerId: req.user.id
-    }
-  })
+      ownerId: req.user.id,
+    },
+  });
 
   if (!officialOwner) {
-  return res.status(404).json({
-    message: "Spot couldn't be found",
-  })
-}
-   else if (officialOwner && officialOwner.id !== req.user.id) {
-    return res.status(403).json(
-      {
-        message: "Forbidden"
-      }
-    )
-  }
-  else if (deletedSpot) {
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+    });
+  } else if (officialOwner && officialOwner.id !== req.user.id) {
+    return res.status(403).json({
+      message: "Forbidden",
+    });
+  } else if (deletedSpot) {
     return res.status(200).json({
       message: "Successfully deleted",
     });
@@ -282,13 +267,13 @@ router.put("/:spotId", requireAuth, validateEdit, async (req, res, next) => {
   }
 });
 
-router.post("/:spotId/images", requireAuth,  async (req, res) => {
+router.post("/:spotId/images", requireAuth, async (req, res) => {
   const spotId = req.params.spotId;
-  const spot = await Spot.findByPk(req.params.spotId)
+  const spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
     return res.status(404).json({
       message: "Spot couldn't be found",
-    })
+    });
   }
   if (parseInt(spot.id) === parseInt(req.user.id)) {
     const { url, preview } = req.body;
@@ -299,48 +284,49 @@ router.post("/:spotId/images", requireAuth,  async (req, res) => {
     });
     return res.json(newSpotImage);
   } else if (spot && spot.id !== req.user.id) {
-    return res.status(403).json(
-      {
-        message: "Forbidden"
-      }
-    )
-   }
-  })
+    return res.status(403).json({
+      message: "Forbidden",
+    });
+  }
+});
 
-  router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
-    const spot = await Spot.findByPk(req.params.spotId)
+router.post(
+  "/:spotId/reviews",
+  requireAuth,
+  validateReview,
+  async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    const { review, stars, createdAt, updatedAt } = req.body;
     if (!spot) {
-      return res.status(404).json(
-        {
-          message: "Spot couldn't be found"
-        }
-      )
-    } else if (spot) {
-      const { id, userId, spotId, review, stars, createdAt, updatedAt } = req.body;
+      return res.status(404).json({
+        message: "Spot couldn't be found",
+      });
+    }
+    const existingReview = await Review.findAll({
+      where: {
+        userId: req.user.id,
+        spotId: req.params.spotId,
+      },
+    });
+    // console.log('existing***', existingReview) // -------console log
+    if (existingReview.length > 0) {
+      res.status(500);
+      return res.json({
+        message: "User already has a review for this spot",
+      });
+    }
+    if (existingReview.length === 0) {
       const newReview = await Review.create({
-        id,
         userId: req.user.id,
         spotId: req.params.spotId,
         review,
         stars,
         createdAt,
         updatedAt
-      })
-    //   if (newReview.id) {
-    //     return res.status(500).json(
-    //       {
-    //         message: "User already has a review for this spot"
-    //       }
-    //     )
-    // } else {
-      return res.status(200).json(newReview)
-    // }
+      });
+      return res.json(newReview);
+    }
   }
-})
-
-
-
-
-
+);
 
 module.exports = router;
