@@ -25,9 +25,47 @@ const validateLogin = [
 ];
 
 router.get('/current', requireAuth, async (req, res) => {
-   console.log('hello')
-   console.log(req.user.id)
+
+  const reviews = await Review.findAll()
+  let reviewsArr = [];
+  let userId = ''
+  reviews.forEach(reviews => {
+    if (reviews.userId === req.user.id) {
+      userId += reviews.userId
+    }
+  })
+  console.log(userId)
+
+
+
 })
+
+
+
+
+
+
+
+  // let reviewList = []
+  // reviews.forEach(reviews => {
+  //   reviewList.push(reviews.toJSON())
+  // })
+  // let idCheck = ''
+  // reviewList.forEach(review => {
+  //   idCheck += review.userId
+  //   })
+  //   console.log(idCheck.split(' '))
+  // })
+
+  // console.log(reviews)
+
+  //  const currentUserReviews = await Review.findAll({
+  //   where: {
+  //     userId: req.user.id
+  //   }
+  //  })
+  //  console.log(currentUserReviews)
+
 
 
 

@@ -57,6 +57,18 @@ const validateReview = [
     .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrors,
 ];
+// const validateAddImageReview = [
+//   check("review")
+//     .exists({ checkFalsy: true })
+//     .withMessage("Review text is required"),
+//   check("stars")
+//     .exists({ checkFalsy: true })
+//     .isFloat({ min: 1, max: 5 })
+//     .withMessage("Stars must be an integer from 1 to 5"),
+//   handleValidationErrors,
+// ];
+
+
 
 
 
@@ -95,7 +107,7 @@ router.get("/", async (req, res) => {
     spots.previewImage = "url.url.com";
     delete spots.Reviews;
   });
-  return res.json(allSpotsList);
+  return res.json({"Spots": allSpotsList});
 });
 
 router.post("/", requireAuth, async (req, res) => {
@@ -315,17 +327,19 @@ router.post("/:spotId/images", requireAuth,  async (req, res) => {
         createdAt,
         updatedAt
       })
-      if (!newReview.id) {
-      return res.json(newReview)
-    } else if (newReview.id) {
-      return res.status(500).json(
-        {
-          message: "User already has a review for this spot"
-        }
-      )
-    }
+    //   if (newReview.id) {
+    //     return res.status(500).json(
+    //       {
+    //         message: "User already has a review for this spot"
+    //       }
+    //     )
+    // } else {
+      return res.status(200).json(newReview)
+    // }
   }
 })
+
+
 
 
 
