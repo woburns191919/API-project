@@ -29,9 +29,8 @@ include username with spot from id--this okay?
 
 
 
-2) I'm currently working on 'Create a review for a spot based on the spot's id' for Air bnb, and I can't run the code without hitting my 500 server error. It was working before I implemented this check to ensure reviews weren't duplicated. Is this an issue of error code placement?
 
-3) I'm currently working on 'Get all reviews for a current user' for Air bnb, and I'm having trouble retrieving the 'reviewImages' associated--this is my only real issue with the route. Whenever I try to 'findAll' where the id's match up, I get either null or an empty array. Is this an issue with my methods? I would appreciate any help available.
+3) Hello again! I'm (still) currently working on 'Get all reviews for a current user' for Air bnb, and I'm having trouble retrieving the 'reviewImages' associated--this is my only real issue with the route. Whenever I try to 'findAll' where the id's match up, I get either null or an empty array. Is this an issue with my methods? I would appreciate any help available. I'm not attempting to return any JSON at this particular moment.
 
 
 
