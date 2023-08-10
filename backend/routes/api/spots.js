@@ -47,6 +47,18 @@ const validateEdit = [
     .withMessage("Price per day is required"),
   handleValidationErrors,
 ];
+const validateReview = [
+  check("review")
+    .exists({ checkFalsy: true })
+    .withMessage("Review text is required"),
+  check("stars")
+    .exists({ checkFalsy: true })
+    .isFloat({ min: 1, max: 5 })
+    .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors,
+];
+
+
 
 // const authorize = [
 //   check('credential')
@@ -283,6 +295,39 @@ router.post("/:spotId/images", requireAuth,  async (req, res) => {
     )
    }
   })
+
+  router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+    if (!spot) {
+      return res.status(404).json(
+        {
+          message: "Spot couldn't be found"
+        }
+      )
+    } else if (spot) {
+      const { id, userId, spotId, review, stars, createdAt, updatedAt } = req.body;
+      const newReview = await Review.create({
+        id,
+        userId,
+        spotId,
+        review,
+        stars,
+        createdAt,
+        updatedAt
+      })
+      if (!newReview.id) {
+      return res.json(newReview)
+    } else if (newReview.id) {
+      return res.status(500).json(
+        {
+          message: "User already has a review for this spot"
+        }
+      )
+    }
+  }
+})
+
+
 
 
 module.exports = router;
