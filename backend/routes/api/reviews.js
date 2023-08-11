@@ -33,6 +33,16 @@ const reviewValidateEdit = [
 ];
 
 
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+  const review = req.params.reviewId
+  const currReview = await Review.findByPk(req.params.id)
+  // const deletedReview = await Review.destroy({
+  //   where: {
+  //     id: req.params.id,
+  //     currReview.userId
+  //   }
+  // })
+})
 
 
 
