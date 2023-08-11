@@ -98,7 +98,8 @@ router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
       }
       )
     }
-    if (req.user.id === findReview.id) {
+    console.log(findReview)
+    if (req.user.id === findReview.userId) {
     const { review, stars } = req.body
      await findReview.update({
       review,
@@ -106,6 +107,13 @@ router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
      })
      await findReview.save()
      return res.json(findReview)
+   } else if (req.user.id !== findReview.userId) {
+    res.status(403)
+    return res.json(
+      {
+        message: "Forbidden"
+      }
+    )
    }
 })
 
