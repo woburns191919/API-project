@@ -61,6 +61,28 @@ const validateReview = [
     .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrors,
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const validateAddImageReview = [
 //   check("review")
 //     .exists({ checkFalsy: true })
@@ -419,11 +441,33 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
         delete ownedSpotObj.endDate
       })
     }
-    res.json({ "bookings": bookings })
+    return res.json({ "bookings": bookings })
 })
 
-// router.post('/:spotId/bookings', requireAuth, async (req, res) => {
-//   if (req.user.id !== )
-// })
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+
+  const spot = await Spot.findByPk(req.params.spotId)
+  if (!spot) {
+    res.status(404)
+    return res.json(
+      {
+        message: "Spot couldn't be found"
+      }
+    )
+  }
+  if(req.user.id !== spot.ownerId) {
+    const { spotId, userId, startDate, endDate, createdAt, updatedAt } = req.body
+    const newSpot = await Booking.create({
+      spotId,
+      userId,
+      startDate,
+      endDate,
+      createdAt,
+      updatedAt
+    })
+    return res.json(newSpot)
+  }
+})
+
 
 module.exports = router;

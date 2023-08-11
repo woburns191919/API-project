@@ -28,6 +28,10 @@ router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
 
+// const checkDates = (req, res, next) => {
+//   if ()
+// }
+
 
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
