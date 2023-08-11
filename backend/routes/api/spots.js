@@ -7,7 +7,14 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { User, Spot, Review, SpotImage, ReviewImage } = require("../../db/models");
+const {
+  User,
+  Booking,
+  Spot,
+  Review,
+  SpotImage,
+  ReviewImage,
+} = require("../../db/models");
 const router = express.Router();
 
 const { check } = require("express-validator");
@@ -272,7 +279,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
-    res.status(404)
+    res.status(404);
     return res.json({
       message: "Spot couldn't be found",
     });
@@ -300,7 +307,7 @@ router.post(
     const spot = await Spot.findByPk(req.params.spotId);
     const { review, stars, createdAt, updatedAt } = req.body;
     if (!spot) {
-      res.status(404)
+      res.status(404);
       return res.json({
         message: "Spot couldn't be found",
       });
@@ -312,7 +319,7 @@ router.post(
       },
     });
     if (existingReview.length > 0) {
-      res.status(500)
+      res.status(500);
       return res.json({
         message: "User already has a review for this spot",
       });
@@ -324,40 +331,99 @@ router.post(
         review,
         stars,
         createdAt,
-        updatedAt
+        updatedAt,
       });
-      res.status(201)
+      res.status(201);
       return res.json(newReview);
     }
   }
 );
 
-router.get('/:spotId/reviews', async (req, res) => {
+router.get("/:spotId/reviews", async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId, {
+    include: {
+      model: Review,
+      include: [
+        {
+          model: User,
+          attributes: ["id", "firstName", "lastName"],
+        },
+        {
+          model: ReviewImage,
+          attributes: ["id", "url"],
+        },
+      ],
+    },
+  });
+  let spotObj = spot.toJSON();
+  let spotArr = spotObj.Reviews;
+  let newObj = {
+    Reviews: spotArr,
+  };
 
-    const spot = await Spot.findByPk(req.params.spotId, {
+  return res.json(newObj);
+});
+
+router.get("/:spotId/bookings", requireAuth, async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId);
+
+  if (!spot) {
+    res.status(404)
+    return res.json(
+      {
+        message: "Spot couldn't be found"
+      }
+    )
+  }
+
+    let bookings = await Booking.findAll({
+      where: {
+        spotId: spot.id,
+      },
+      attributes: ['spotId', 'startDate', 'endDate']
+    });
+
+    // bookings.forEach(bookedSpotObj => {
+    //   let date = bookedSpotObj.createdAt.toDateString()
+    //   console.log(date)
+    //   newObj = {
+    //     Bookings: bookedSpotObj
+    //   }
+    // })
+
+
+    if (req.user.id === spot.ownerId) {
+      console.log(req.user.id)
+    bookings = await Booking.findAll({
+      where: {
+        spotId: spot.id
+      },
       include: {
-        model: Review,
-        include: [
-          {
-            model: User,
-            attributes: ['id', 'firstName', 'lastName']
-
-          },
-          {
-            model: ReviewImage,
-            attributes: ['id', 'url']
-          }
-        ]
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
       }
     })
-    let spotObj = spot.toJSON()
-    let spotArr = spotObj.Reviews
-    let newObj = {
-      Reviews: spotArr
+
+      let ownedSpotArr = []
+      bookings.forEach(ownedSpot =>{
+        ownedSpotArr.push(ownedSpot.toJSON())
+      })
+
+      ownedSpotArr.forEach(ownedSpotObj => {
+        // console.log(ownedSpotObj.startDate)
+        let newStartDate = ownedSpotObj.startDate.toISOString().split('T')[0]
+        ownedSpotObj.startDate = newStartDate
+        // delete ownedSpotObj.startDate
+        let endDate = ownedSpotObj.endDate.toISOString().split('T')[0]
+        ownedSpotObj.endDate = endDate
+        delete ownedSpotObj.endDate
+      })
     }
+    res.json({ "bookings": bookings })
+})
 
-    return res.json(newObj)
-  })
-
+// router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+//   if (req.user.id !== )
+// })
 
 module.exports = router;
