@@ -325,6 +325,7 @@ router.post(
         createdAt,
         updatedAt
       });
+      res.status(201)
       return res.json(newReview);
     }
   }
@@ -350,22 +351,25 @@ router.get('/:spotId/reviews', async (req, res) => {
     })
     let spotObj = spot.toJSON()
     let spotArr = spotObj.Reviews
+    let newObj = {
+      Reviews: spotArr
+    }
 
-    let resObj = ''
+    // let resObj = ''
 
-    spotArr.forEach(el => {
-      // console.log(el.ReviewImages[0])
-       resObj = {
-       Reviews: [el]
-       }
-  
-       resObj.Reviews.forEach(review => {
-        review.ReviewImages = el.ReviewImages
-        // console.log('images***', review.ReviewImages)
-        // console.log('el.rev***', el.ReviewImages)
-       })
-    })
-    return res.json(resObj)
+    // spotArr.forEach(el => {
+    //   // console.log(el.ReviewImages[0])
+    //    resObj = {
+    //    Reviews: [el]
+    //    }
+
+    //    resObj.Reviews.forEach(review => {
+    //     review.ReviewImages = el.ReviewImages
+    //     // console.log('images***', review.ReviewImages)
+    //     // console.log('el.rev***', el.ReviewImages)
+    //    })
+    // })
+    return res.json(newObj)
   })
 
 
