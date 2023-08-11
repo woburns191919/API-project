@@ -140,7 +140,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       url
     })
     let newReviewImageObj = newReviewImage.toJSON()
-    let deleteKeys = ['createdAt', 'updatedAt']
+    let deleteKeys = ['createdAt', 'updatedAt', 'reviewId']
     deleteKeys.forEach(key => {
       delete newReviewImageObj[key]
     })
