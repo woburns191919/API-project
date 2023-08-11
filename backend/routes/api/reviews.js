@@ -20,6 +20,20 @@ const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
+const reviewValidateEdit = [
+  check("review")
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage("Review text is required"),
+  check("stars")
+  .exists({ checkFalsy: true })
+  .isFloat({ min: 1, max: 5 })
+  .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors
+];
+
+
+
 
 
 router.get("/current", requireAuth, async (req, res) => {
@@ -69,10 +83,43 @@ router.get("/current", requireAuth, async (req, res) => {
 
 });
 
+
+
+
+
+
+router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
+  const review = await Review.findByPk(req.params.reviewId)
+  if (!review) {
+    res.status(404);
+    return res.json(
+      {
+        message: "Review couldn't be found"
+      }
+      )
+    }
+    if (req.user.id === review.id) {
+    const { review, stars } = req.body
+     await review.update({
+      review,
+      stars
+     })
+     await review.save()
+     return res.json(review)
+   }
+})
+
+
+
+
+
+
+
+
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
   const review = await Review.findByPk(req.params.reviewId)
-  if (!req.params.reviewId) {
+  if (!review) {
     res.status(404)
     return res.json({
       message: "Review couldn't be found"
