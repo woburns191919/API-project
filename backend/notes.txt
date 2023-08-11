@@ -87,7 +87,5 @@ wk13 monday: tips on comparing dates in sequelize
 
 
 
-2) I'm working on get reviews by spotId. It's mostly there, and I'm able to console log my ReviewImages; however, whenever I attempt to push those into my Reviews array, all I can get is null.
 
-
-3) I'm unable to get past the 'review.update is not a function' error. I thought I'd defined 'review' above, and I assumed that 'update' was a valid method for this.
+3) I'm currently working on 'edit a review'. I'm unable to get past the 'review.update is not a function' error. I thought I'd defined 'review' above, and I assumed that 'update' was a valid method for this.
