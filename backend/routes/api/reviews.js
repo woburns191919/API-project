@@ -35,13 +35,36 @@ const reviewValidateEdit = [
 
 router.delete('/:reviewId', requireAuth, async (req, res) => {
   const review = req.params.reviewId
-  const currReview = await Review.findByPk(req.params.id)
-  // const deletedReview = await Review.destroy({
-  //   where: {
-  //     id: req.params.id,
-  //     currReview.userId
-  //   }
-  // })
+  const currReview = await Review.findByPk(req.params.reviewId)
+  console.log(currReview)
+
+  if (!currReview) {
+    res.status(404)
+    return res.json(
+      {
+        message: "Review couldn't be found"
+      }
+    );
+  }
+
+  const deletedReview = await Review.destroy({
+    where: {
+      id: req.params.reviewId,
+      userId: currReview.userId
+    }
+  })
+
+   if (currReview && currReview.userId !== req.user.id) {
+    res.status(403)
+    return res.json({
+      message: 'Forbidden'
+    });
+  } else if (deletedReview) {
+    res.status(200)
+    return res.json({
+      message: "Successfully deleted"
+    })
+  }
 })
 
 
