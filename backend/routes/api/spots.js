@@ -12,6 +12,7 @@ const router = express.Router();
 
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const e = require("express");
 
 const validateEdit = [
   check("address")
@@ -352,10 +353,13 @@ router.get('/:spotId/reviews', async (req, res) => {
     let resObj = ''
 
     spotArr.forEach(el => {
-      // console.log(el.ReviewImages)
+      console.log(el.ReviewImages[0])
        resObj = {
-       Reviews: [el, el.ReviewImages],
+       Reviews: [el]
        }
+       resObj.Reviews.forEach(review => {
+        review.ReviewImages.push(el.ReviewImages[0])
+       })
     })
     return res.json(resObj)
   })

@@ -20,6 +20,8 @@ const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
+
+
 router.get("/current", requireAuth, async (req, res) => {
   let reviews = await Review.findAll({
     where: {
@@ -65,7 +67,48 @@ router.get("/current", requireAuth, async (req, res) => {
   // console.log(reviews)
   res.json(reviewsArr)
 
-
 });
+
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
+
+  const review = await Review.findByPk(req.params.reviewId)
+  if (!req.params.reviewId) {
+    res.status(404)
+    return res.json({
+      message: "Review couldn't be found"
+    })
+  }
+
+  if (review.id !== req.user.id) {
+    res.status(403)
+    return res.json({
+      message: "Forbidden"
+    })
+  }
+  const reviewImages = await ReviewImage.findAll()
+
+  if (review.id === req.user.id && reviewImages.length <= 10) {
+    const { url } = req.body;
+    const newReviewImage = await ReviewImage.create({
+      url
+    })
+    let newReviewImageObj = newReviewImage.toJSON()
+    let deleteKeys = ['createdAt', 'updatedAt']
+    deleteKeys.forEach(key => {
+      delete newReviewImageObj[key]
+    })
+    return res.json(newReviewImageObj)
+  } else if (review.id === req.user.id && reviewImages.length > 10) {
+    res.status(403)
+    return res.json(
+      {
+        message: "Maximum number of images for this resource was reached"
+      }
+    )
+  }
+})
+
+
+
 
 module.exports = router;

@@ -86,5 +86,8 @@ http//image.com
 wk13 monday: tips on comparing dates in sequelize
 
 
+add image to review based on review's id
+1) I'm working on 'create an image for a review,' and when enter non-existing review in the params, I can't get past the id check that reads 'null'. I want to be able to throw a 404
+error but seem to be unale to get anything but a 500.
 
-I'm querying for an existing user that matches the user creating the review, setting the userId property to the id of the currently logged in user. I've been getting errors each way I've tried to include the spotId in my second query (Review.findAll()). Feeling a little lost in the sauce and stuck in the mud.
+2) I'm working on get reviews by spotId. It's mostly there, and I'm able to console log my ReviewImages; however, whenever I attempt to push those into my Reviews array, all I can get is null.
