@@ -140,11 +140,16 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       url
     })
     let newReviewImageObj = newReviewImage.toJSON()
+    const newestReviewImage = await ReviewImage.findOne({
+      where: newReviewImage.id,
+      attributes: ['id', 'url']
+    })
+    console.log(newestReviewImage)
     let deleteKeys = ['createdAt', 'updatedAt', 'reviewId']
     deleteKeys.forEach(key => {
       delete newReviewImageObj[key]
     })
-    return res.json(newReviewImageObj)
+    return res.json(newestReviewImage)
   } else if (review.id === req.user.id && reviewImages.length > 10) {
     res.status(403)
     return res.json(
