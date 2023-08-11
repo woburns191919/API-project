@@ -7,11 +7,12 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { User, Spot, Review, SpotImage } = require("../../db/models");
+const { User, Spot, Review, SpotImage, ReviewImage } = require("../../db/models");
 const router = express.Router();
 
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const e = require("express");
 
 const validateEdit = [
   check("address")
@@ -309,7 +310,6 @@ router.post(
         spotId: req.params.spotId,
       },
     });
-    // console.log('existing***', existingReview) // -------console log
     if (existingReview.length > 0) {
       res.status(500);
       return res.json({
@@ -329,5 +329,44 @@ router.post(
     }
   }
 );
+
+router.get('/:spotId/reviews', async (req, res) => {
+
+    const spot = await Spot.findByPk(req.params.spotId, {
+      include: {
+        model: Review,
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+
+          },
+          {
+            model: ReviewImage,
+            attributes: ['id', 'url']
+          }
+        ]
+      }
+    })
+    let spotObj = spot.toJSON()
+    let spotArr = spotObj.Reviews
+
+    let resObj = ''
+
+    spotArr.forEach(el => {
+      // console.log(el.ReviewImages[0])
+       resObj = {
+       Reviews: [el]
+       }
+  
+       resObj.Reviews.forEach(review => {
+        review.ReviewImages = el.ReviewImages
+        // console.log('images***', review.ReviewImages)
+        // console.log('el.rev***', el.ReviewImages)
+       })
+    })
+    return res.json(resObj)
+  })
+
 
 module.exports = router;
