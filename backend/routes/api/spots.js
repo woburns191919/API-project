@@ -300,7 +300,8 @@ router.post(
     const spot = await Spot.findByPk(req.params.spotId);
     const { review, stars, createdAt, updatedAt } = req.body;
     if (!spot) {
-      return res.status(404).json({
+      res.status(404)
+      return res.json({
         message: "Spot couldn't be found",
       });
     }
@@ -311,7 +312,7 @@ router.post(
       },
     });
     if (existingReview.length > 0) {
-      res.status(500);
+      res.status(500)
       return res.json({
         message: "User already has a review for this spot",
       });
