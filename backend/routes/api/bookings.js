@@ -44,6 +44,8 @@ router.get('/current', requireAuth, async (req, res) => {
     return res.json({'Bookings': bookingsArr})
   })
 
+ 
+
 
 
 
