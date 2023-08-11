@@ -21,33 +21,27 @@ router.get('/current', requireAuth, async (req, res) => {
     },
     include: {
       model: Spot,
+      attributes: {
+        exclude: ['createdAt', 'updatedAt', 'description', 'SpotImages']
+      },
       include: {
-        model: SpotImage
+        model: SpotImage,
+        attributes: {
+          exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
+        }
       }
     }
-    //   include: [
-    //   {
-    //     model: Spot
-    //   },
-    //   {
-    //     model: SpotImage
-    //   }
-    // ]
-      // attributes: ['startDate', 'endDate', 'createdAt', 'updatedAt']
     })
-    // include: {
-    //   model: User,
-    //   attributes: ['id']
-    // }
+
     const bookingsArr = []
     bookings.forEach(bookingsObj => {
       bookingsArr.push(bookingsObj.toJSON())
     })
     bookingsArr.forEach(bookingsObj => {
-      bookingsObj.previewImage = bookingsObj.SpotImages
-      console.log(bookingsObj)
+      bookingsObj.Spot.previewImage = bookingsObj.Spot.SpotImages[0].url
+      delete bookingsObj.Spot.SpotImages
     })
-    // console.log(bookingsArr)
+    return res.json({'Bookings': bookingsArr})
   })
 
 
