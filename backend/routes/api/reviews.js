@@ -89,8 +89,8 @@ router.get("/current", requireAuth, async (req, res) => {
 
 
 router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
-  const review = await Review.findByPk(req.params.reviewId)
-  if (!review) {
+  const findReview = await Review.findByPk(req.params.reviewId)
+  if (!findReview) {
     res.status(404);
     return res.json(
       {
@@ -98,14 +98,14 @@ router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
       }
       )
     }
-    if (req.user.id === review.id) {
+    if (req.user.id === findReview.id) {
     const { review, stars } = req.body
-     await review.update({
+     await findReview.update({
       review,
       stars
      })
-     await review.save()
-     return res.json(review)
+     await findReview.save()
+     return res.json(findReview)
    }
 })
 
