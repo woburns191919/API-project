@@ -212,12 +212,13 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
       ownerId: req.user.id,
     },
   });
+  console.log(officialOwner)
 
   if (!officialOwner) {
     return res.status(404).json({
       message: "Spot couldn't be found",
     });
-  } else if (officialOwner && officialOwner.id !== req.user.id) {
+  } else if (officialOwner.ownerId !== req.user.id) {
     return res.status(403).json({
       message: "Forbidden",
     });
@@ -284,7 +285,8 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
       message: "Spot couldn't be found",
     });
   }
-  if (parseInt(spot.id) === parseInt(req.user.id)) {
+  console.log(spot)
+  if (spot.ownerId === req.user.id) {
     const { url, preview } = req.body;
     const newSpotImage = await SpotImage.create({
       spotId,
@@ -292,9 +294,9 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
       preview,
     });
     return res.json(newSpotImage);
-  } else if (spot && spot.id !== req.user.id) {
+  } else if (spot.ownerId !== req.user.id) {
     return res.status(403).json({
-      message: "Forbidden",
+      message: "Forbidden"
     });
   }
 });
