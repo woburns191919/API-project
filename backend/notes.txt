@@ -98,6 +98,13 @@ url.url etc on /spots/current
 all dates format?
 
 
+booking conflicts in bookings
+
+
+
+
+
+
 from spots route
 
 
