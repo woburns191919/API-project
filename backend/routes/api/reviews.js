@@ -72,7 +72,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 router.get("/current", requireAuth, async (req, res) => {
   let reviews = await Review.findAll({
     where: {
-      id: req.user.id,
+      userId: req.user.id,
     },
     include: [
       {
@@ -112,7 +112,7 @@ router.get("/current", requireAuth, async (req, res) => {
   // reviewsArr[0].Spot.previewImage = reviewsArr[0].Spot.SpotImages.url
   // console.log(reviewsArr[0].Spot.SpotImages[0].url)
   // console.log(reviews)
-  res.json(reviewsArr)
+  res.json({ "Reviews": reviewsArr })
 
 });
 

@@ -62,50 +62,49 @@ const validateReview = [
   handleValidationErrors,
 ];
 
-// const validateAddImageReview = [
-//   check("review")
-//     .exists({ checkFalsy: true })
-//     .withMessage("Review text is required"),
-//   check("stars")
-//     .exists({ checkFalsy: true })
-//     .isFloat({ min: 1, max: 5 })
-//     .withMessage("Stars must be an integer from 1 to 5"),
-//   handleValidationErrors,
-// ];
-
-// const authorize = [
-//   check('credential')
-//     .exists({ checkFalsy: true })
-//     .notEmpty()
-//     .withMessage('Please provide a valid email or username.'),
-//   check('password')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Please provide a password.'),
-//   handleValidationErrors
-// ];
 
 router.get("/", async (req, res) => {
-  // let reviews = await Review.findAll();
+
+
+  // const where = {}
+
+  // const { page, size, }
+
   const allSpots = await Spot.findAll({
-    include: {
+    include: [
+      {
       model: Review,
       attributes: ["stars"],
     },
+    {
+      model: SpotImage,
+      attributes: ['url']
+    }
+  ],
   });
-  // let reviewCount = Review.count();
+
+
+
+
   let allSpotsList = [];
   allSpots.forEach((spot) => {
     allSpotsList.push(spot.toJSON());
   });
   allSpotsList.forEach((spots) => {
+    spots.SpotImages.forEach(image => {
+      spots.previewImage = image.url
+    })
+
+
     let starSum = 0;
     spots.Reviews.forEach((reviews) => {
       starSum += reviews.stars;
     });
     spots.avgRating =
       starSum / (spots.Reviews.length ? spots.Reviews.length : 1);
-    spots.previewImage = "url.url.com";
+    // spots.previewImage = "url.url.com";
     delete spots.Reviews;
+    delete spots.SpotImages
   });
   return res.json({ Spots: allSpotsList });
 });
@@ -172,7 +171,7 @@ router.get("/current", requireAuth, async (req, res) => {
       spots.previewImage = "url.url.com";
       delete spots.Reviews;
     });
-    return res.json(currentUserSpotsList);
+    return res.json({ "Spots": currentUserSpotsList });
   }
 });
 
@@ -199,8 +198,8 @@ router.get("/:spotId", async (req, res) => {
   const spotObj = spot.toJSON();
   spotObj.numReviews = numReviews;
   spotObj.avgStarRating = avgStarRating;
-  spotObj.spotImages = spotImages;
-  spotObj.owner = user;
+  spotObj.SpotImages = spotImages;
+  spotObj.Owner = user;
   return res.json(spotObj);
 });
 
@@ -438,19 +437,49 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       message: "Spot couldn't be found",
     });
   }
+  if (req.user.id === spot.ownerId) {
+    res.status(403)
+    return res.json(
+      {
+       message: "Forbidden"
+      }
+    )
+  }
+
   if (req.user.id !== spot.ownerId) {
-    const { spotId, userId, startDate, endDate, createdAt, updatedAt } =
+    const {spotId, userId, startDate, endDate, createdAt, updatedAt } =
       req.body;
+      const currentDate = new Date().toJSON().slice(0,10)
+      console.log(startDate)
+      if (endDate < currentDate) {
+        res.status(400)
+        return res.json(
+          {
+            message: "Bad Request",
+            errors: {
+              endDate: "endDate cannot come before startDate"
+            }
+          }
+        )
+      }
+    // let formattedStart = startDate.toISOString().split("T")[0]
+    // console.log(formattedStart)
     const newSpot = await Booking.create({
-      spotId,
-      userId,
+      spotId: parseInt(req.params.spotId),
+      userId: req.user.id,
       startDate,
       endDate,
       createdAt,
       updatedAt,
     });
-    return res.json(newSpot);
+    let newSpotObj = newSpot.toJSON()
+    return res.json(newSpotObj)
+    // return res.json(newSpot);
   }
 });
+
+
+
+
 
 module.exports = router;

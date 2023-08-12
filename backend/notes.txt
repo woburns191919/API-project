@@ -89,3 +89,10 @@ wk13 monday: tips on comparing dates in sequelize
 
 
 3) I'm currently working on 'edit a review'. I'm unable to get past the 'review.update is not a function' error. I thought I'd defined 'review' above, and I assumed that 'update' was a valid method for this.
+
+
+
+url.url etc on /spots/id
+url.url etc on /spots/current
+
+all dates format?

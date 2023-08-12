@@ -24,7 +24,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 router.get('/current', requireAuth, async (req, res) => {
   const bookings = await Booking.findAll({
     where: {
-      id: req.user.id
+      userId: req.user.id
     },
     include: {
       model: Spot,
@@ -51,6 +51,31 @@ router.get('/current', requireAuth, async (req, res) => {
     return res.json({'Bookings': bookingsArr})
   })
 
+router.put('/:bookingId', requireAuth, async (req, res) => {
+  const booking = await Booking.findByPk(req.params.bookingId)
+  if (!booking) {
+    res.status(404)
+    return res.json(
+      {
+        message: "Booking couldn't be found"
+      }
+    )
+  }
+  const endDate = booking.endDate.toISOString().split("T")[0]
+  const startDate = booking.startDate.toISOString().split("T")[0]
+
+  if (endDate < startDate) {
+    res.status(400)
+    return res.json(
+      {
+        message: "Bad Request",
+        errors: {
+          endDate: "endDate cannot come before startDate"
+        }
+      }
+    )
+  }
+})
 
 
 
