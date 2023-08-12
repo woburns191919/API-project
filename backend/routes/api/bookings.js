@@ -61,8 +61,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
       }
     )
   }
-  const endDate = booking.endDate.toISOString().split("T")[0]
-  const startDate = booking.startDate.toISOString().split("T")[0]
+  const endDate = booking.endDate
+  const startDate = booking.startDate
 
   if (endDate < startDate) {
     res.status(400)
