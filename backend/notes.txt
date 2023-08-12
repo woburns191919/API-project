@@ -96,3 +96,35 @@ url.url etc on /spots/id
 url.url etc on /spots/current
 
 all dates format?
+
+
+from spots route
+
+
+ // let ownedSpotArr = [];
+    // bookings.forEach((ownedSpot) => {
+    //   ownedSpotArr.push(ownedSpot.toJSON());
+    // });
+
+    // ownedSpotArr.forEach((ownedSpotObj) => {
+    //   console.log('ownedSpot******************************', ownedSpotObj)
+    //   // let newStartDate = ownedSpotObj.startDate.toISOString().split("T")[0];
+    //   // delete ownedSpotObj.startDate;
+    //   // ownedSpotObj.startDate = newStartDate;
+
+    //   // let endDate = ownedSpotObj.endDate.toISOString().split("T")[0];
+    //   // delete ownedSpotObj.endDate;
+    //   // ownedSpotObj.endDate = endDate;
+    // });
+
+
+     // bookedSpotArr.forEach((bookedSpotObj) => {
+
+    //   // let newStartDate = bookedSpotObj.startDate.toISOString().split("T")[0];
+    //   delete bookedSpotObj.startDate;
+    //   bookedSpotObj.startDate = newStartDate;
+
+    //   let endDate = bookedSpotObj.endDate.toISOString().split("T")[0];
+    //   delete bookedSpotObj.endDate;
+    //   bookedSpotObj.endDate = endDate;
+    // });
