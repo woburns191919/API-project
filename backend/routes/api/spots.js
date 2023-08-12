@@ -62,27 +62,6 @@ const validateReview = [
   handleValidationErrors,
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const validateAddImageReview = [
 //   check("review")
 //     .exists({ checkFalsy: true })
@@ -390,84 +369,88 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
 
   if (!spot) {
-    res.status(404)
-    return res.json(
-      {
-        message: "Spot couldn't be found"
-      }
-    )
+    res.status(404);
+    return res.json({
+      message: "Spot couldn't be found",
+    });
   }
 
+  if (req.user.id === spot.ownerId) {
+    console.log(req.user.id);
     let bookings = await Booking.findAll({
       where: {
         spotId: spot.id,
       },
-      attributes: ['spotId', 'startDate', 'endDate']
-    });
-
-    // bookings.forEach(bookedSpotObj => {
-    //   let date = bookedSpotObj.createdAt.toDateString()
-    //   console.log(date)
-    //   newObj = {
-    //     Bookings: bookedSpotObj
-    //   }
-    // })
-
-
-    if (req.user.id === spot.ownerId) {
-      console.log(req.user.id)
-    bookings = await Booking.findAll({
-      where: {
-        spotId: spot.id
-      },
       include: {
         model: User,
-        attributes: ['id', 'firstName', 'lastName']
-      }
-    })
+        attributes: ["id", "firstName", "lastName"],
+      },
+    });
 
-      let ownedSpotArr = []
-      bookings.forEach(ownedSpot =>{
-        ownedSpotArr.push(ownedSpot.toJSON())
-      })
+    let ownedSpotArr = [];
+    bookings.forEach((ownedSpot) => {
+      ownedSpotArr.push(ownedSpot.toJSON());
+    });
 
-      ownedSpotArr.forEach(ownedSpotObj => {
-        // console.log(ownedSpotObj.startDate)
-        let newStartDate = ownedSpotObj.startDate.toISOString().split('T')[0]
-        ownedSpotObj.startDate = newStartDate
-        // delete ownedSpotObj.startDate
-        let endDate = ownedSpotObj.endDate.toISOString().split('T')[0]
-        ownedSpotObj.endDate = endDate
-        delete ownedSpotObj.endDate
-      })
-    }
-    return res.json({ "bookings": bookings })
-})
+    ownedSpotArr.forEach((ownedSpotObj) => {
+      let newStartDate = ownedSpotObj.startDate.toISOString().split("T")[0];
+      delete ownedSpotObj.startDate;
+      ownedSpotObj.startDate = newStartDate;
 
-router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+      let endDate = ownedSpotObj.endDate.toISOString().split("T")[0];
+      delete ownedSpotObj.endDate;
+      ownedSpotObj.endDate = endDate;
+    });
+    return res.json({ "Bookings": ownedSpotArr });
 
-  const spot = await Spot.findByPk(req.params.spotId)
-  if (!spot) {
-    res.status(404)
-    return res.json(
-      {
-        message: "Spot couldn't be found"
-      }
-    )
+  } else if (spot) {
+    let bookings = await Booking.findAll({
+      where: {
+        spotId: spot.id,
+      },
+      attributes: ["spotId", "startDate", "endDate"],
+    });
+
+    let bookedSpotArr = [];
+    bookings.forEach((bookedSpot) => {
+      bookedSpotArr.push(bookedSpot.toJSON());
+    });
+
+    bookedSpotArr.forEach((bookedSpotObj) => {
+
+      let newStartDate = bookedSpotObj.startDate.toISOString().split("T")[0];
+      delete bookedSpotObj.startDate;
+      bookedSpotObj.startDate = newStartDate;
+
+      let endDate = bookedSpotObj.endDate.toISOString().split("T")[0];
+      delete bookedSpotObj.endDate;
+      bookedSpotObj.endDate = endDate;
+    });
+    return res.json({ "Bookings": bookedSpotArr });
   }
-  if(req.user.id !== spot.ownerId) {
-    const { spotId, userId, startDate, endDate, createdAt, updatedAt } = req.body
+});
+
+router.post("/:spotId/bookings", requireAuth, async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    res.status(404);
+    return res.json({
+      message: "Spot couldn't be found",
+    });
+  }
+  if (req.user.id !== spot.ownerId) {
+    const { spotId, userId, startDate, endDate, createdAt, updatedAt } =
+      req.body;
     const newSpot = await Booking.create({
       spotId,
       userId,
       startDate,
       endDate,
       createdAt,
-      updatedAt
-    })
-    return res.json(newSpot)
+      updatedAt,
+    });
+    return res.json(newSpot);
   }
-})
-
+});
 
 module.exports = router;

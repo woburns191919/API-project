@@ -29,8 +29,14 @@ router.post('/test', (req, res) => {
 });
 
 // const checkDates = (req, res, next) => {
-//   if ()
+//   const { startDate, endDate } = req.body
+//   const newEnd =
+
 // }
+
+// router.get('/bookings/:bookingId', checkDates, async (req, res) => {
+
+// })
 
 
 router.get('/set-token-cookie', async (_req, res) => {
