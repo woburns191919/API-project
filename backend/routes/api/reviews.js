@@ -176,7 +176,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
   }
   const reviewImages = await ReviewImage.findAll()
 
-  if (review.id === req.user.id && reviewImages.length <= 10) {
+  if (review.userId === req.user.id && reviewImages.length <= 10) {
     const { url } = req.body;
     const newReviewImage = await ReviewImage.create({
       reviewId: req.params.reviewId,
@@ -187,7 +187,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       where: newReviewImage.id,
       attributes: ['id', 'url']
     })
-    console.log(newestReviewImage)
+
     let deleteKeys = ['createdAt', 'updatedAt', 'reviewId']
     deleteKeys.forEach(key => {
       delete newReviewImageObj[key]
