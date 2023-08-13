@@ -185,11 +185,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     )
   }
 
-<<<<<<< HEAD
   if (review.userId === req.user.id) {
-=======
-  if (review.userId === req.user.id && reviewImages.length <= 10) {
->>>>>>> dev
     const { url } = req.body;
     const newReviewImage = await ReviewImage.create({
       reviewId: req.params.reviewId,
