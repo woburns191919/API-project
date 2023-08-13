@@ -413,7 +413,6 @@ router.get("/:spotId/bookings", requireAuth, async (req, res) => {
 });
 
 router.post("/:spotId/bookings", requireAuth, async (req, res) => {
-  // let errors = {};
   const spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
     res.status(404);
@@ -444,11 +443,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     const { spotId, userId, startDate, endDate, createdAt, updatedAt } =
       req.body;
     bookingsArr.forEach((bookingsObj) => {
-      console.log("bookingobjstrt***", bookingsObj.startDate);
-      console.log("bookingobjend****", bookingsObj.endDate);
-      console.log("startdate****", startDate);
-      console.log("enddate*****", endDate);
-      console.log(endDate > startDate);
             //3                     //1              //3              //5
       if (startDate >= bookingsObj.startDate  &&  startDate <= bookingsObj.endDate) {
         errors.status = 403
@@ -475,29 +469,12 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       });
     }
 
-    // const start = new Date(startDate)
-    // const end = new Date(endDate)
-    // if (end < start) {
-    //   res.status(400)
-    //   return res.json(
-    //     {
-    //       message: "Bad Request",
-    //       errors: {
-    //         endDate: "endDate cannot come before startDate"
-    //       }
-    //     }
-    //   )
-    // }
-
     const newSpot = await Booking.create({
       spotId: parseInt(req.params.spotId),
       userId: req.user.id,
       startDate,
       endDate,
-      // createdAt,
-      // updatedAt,
     });
-    // let newSpotObj = newSpot.toJSON()
     return res.json(newSpot);
   }
 });

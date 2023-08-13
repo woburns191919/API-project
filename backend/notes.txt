@@ -95,10 +95,14 @@ wk13 monday: tips on comparing dates in sequelize
 url.url etc on /spots/id
 url.url etc on /spots/current
 
+check delete and post routes from dan messages
+
+edit review  not an issue
+
 all dates format?
 
+today's date on current bookign post?
 
-booking conflicts in bookings
 
 
 
