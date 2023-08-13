@@ -109,7 +109,7 @@ router.get("/current", requireAuth, async (req, res) => {
     review.Spot.previewImage = review.Spot.SpotImages[0].url
     delete review.Spot.SpotImages
   })
-  res.json({ "Reviews": reviewsArr })
+  return res.json({ Reviews: reviewsArr })
 
 });
 
