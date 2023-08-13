@@ -179,6 +179,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
   if (review.id === req.user.id && reviewImages.length <= 10) {
     const { url } = req.body;
     const newReviewImage = await ReviewImage.create({
+      reviewId: req.params.reviewId,
       url
     })
     let newReviewImageObj = newReviewImage.toJSON()
