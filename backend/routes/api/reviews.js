@@ -164,7 +164,11 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       message: "Review couldn't be found"
     })
   }
-  const reviewImages = await ReviewImage.findAll()
+  const reviewImages = await ReviewImage.findAll({
+    where: {
+      reviewId: review.id
+    }
+  })
 
   if (review.userId !== req.user.id) {
     res.status(403)
@@ -172,8 +176,16 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       message: "Forbidden"
     })
   }
+  if (reviewImages.length > 10) {
+    res.status(403)
+    return res.json(
+      {
+        message: "Maximum number of images for this resource was reached"
+      }
+    )
+  }
 
-  if (review.userId === req.user.id && reviewImages.length <= 10) {
+  if (review.userId === req.user.id) {
     const { url } = req.body;
     const newReviewImage = await ReviewImage.create({
       reviewId: req.params.reviewId,
@@ -190,13 +202,6 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       delete newReviewImageObj[key]
     })
     return res.json(newestReviewImage)
-  } else if (review.id === req.user.id && reviewImages.length > 10) {
-    res.status(403)
-    return res.json(
-      {
-        message: "Maximum number of images for this resource was reached"
-      }
-    )
   }
 })
 
