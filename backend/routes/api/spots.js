@@ -67,8 +67,8 @@ router.get("/", async (req, res) => {
 
   let { page, size } = req.query;
 
-  page = parseInt(page)
-  size = parseInt(size)
+  page = parseInt(page);
+  size = parseInt(size);
 
   if (size > 20 || size < 1 || !size) size = 20;
   if (page > 10 || page > 1 || !page) page = 1;
@@ -85,7 +85,7 @@ router.get("/", async (req, res) => {
       {
         model: SpotImage,
         attributes: ["url"],
-      }
+      },
     ],
     ...pagination,
   });
@@ -154,10 +154,16 @@ router.get("/current", requireAuth, async (req, res) => {
 
   if (userId) {
     const currentUserSpots = await Spot.findAll({
-      include: {
-        model: Review,
-        attributes: ["stars"],
-      },
+      include: [
+        {
+          model: Review,
+          attributes: ["stars"],
+        },
+        {
+          model: SpotImage,
+          attributes: ["url"],
+        },
+      ],
       where: {
         ownerId: userId,
       },
@@ -166,17 +172,20 @@ router.get("/current", requireAuth, async (req, res) => {
     currentUserSpots.forEach((spot) => {
       currentUserSpotsList.push(spot.toJSON());
     });
-    let starSum = 0;
-
     currentUserSpotsList.forEach((spots) => {
+      spots.SpotImages.forEach((image) => {
+        spots.previewImage = image.url;
+      });
+
+      let starSum = 0;
       spots.Reviews.forEach((reviews) => {
         starSum += reviews.stars;
       });
       spots.numReviews = spots.Reviews.length;
       spots.avgRating =
         starSum / (spots.Reviews.length ? spots.Reviews.length : 1);
-      spots.previewImage = "url.url.com";
       delete spots.Reviews;
+      delete spots.SpotImages;
     });
     return res.json({ Spots: currentUserSpotsList });
   }
@@ -219,7 +228,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
       ownerId: req.user.id,
     },
   });
-  console.log(officialOwner)
+  console.log(officialOwner);
 
   if (!officialOwner) {
     return res.status(404).json({
@@ -292,7 +301,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
       message: "Spot couldn't be found",
     });
   }
-  console.log(spot)
+  console.log(spot);
   if (spot.ownerId === req.user.id) {
     const { url, preview } = req.body;
     const newSpotImage = await SpotImage.create({
@@ -303,7 +312,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
     return res.json(newSpotImage);
   } else if (spot.ownerId !== req.user.id) {
     return res.status(403).json({
-      message: "Forbidden"
+      message: "Forbidden",
     });
   }
 });
@@ -440,37 +449,37 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   let errors = {};
 
   if (req.user.id !== spot.ownerId) {
-    const { startDate, endDate } =
-      req.body;
-      if (endDate <= startDate) {
-        res.status(400)
-        return res.json(
-        {
-          message: "Bad Request",
-          errors: {
-            endDate: "endDate cannot be on or before startDate"
-          }
-        })
-      }
+    const { startDate, endDate } = req.body;
+    if (endDate <= startDate) {
+      res.status(400);
+      return res.json({
+        message: "Bad Request",
+        errors: {
+          endDate: "endDate cannot be on or before startDate",
+        },
+      });
+    }
 
     bookingsArr.forEach((bookingsObj) => {
-            //3                     //1              //3              //5
-      if (startDate >= bookingsObj.startDate  &&  startDate <= bookingsObj.endDate) {
-        errors.status = 403
+      //3                     //1              //3              //5
+      if (
+        startDate >= bookingsObj.startDate &&
+        startDate <= bookingsObj.endDate
+      ) {
+        errors.status = 403;
         // errors.message = "Sorry, this spot is already booked for the specified dates"
         errors.startDate = "Start date conflicts with an existing booking";
-      }     //3                  //5          //3                    //1
+      } //3                  //5          //3                    //1
       if (endDate <= bookingsObj.endDate && endDate >= bookingsObj.startDate) {
-        errors.status = 403
+        errors.status = 403;
         // errors.message = "Sorry, this spot is already booked for the specified dates"
         errors.endDate = "End date conflicts with an existing booking";
       }
-
     });
 
     if (Object.keys(errors).length > 0) {
-      res.status(errors.status)
-      delete errors.status
+      res.status(errors.status);
+      delete errors.status;
       return res.json({
         message: "Sorry, this spot is already booked for the specified dates",
         errors: errors,

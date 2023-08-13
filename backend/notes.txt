@@ -92,8 +92,6 @@ wk13 monday: tips on comparing dates in sequelize
 
 --------
 
-url.url etc on /spots/id
-url.url etc on /spots/current
 
 check delete and post routes from dan messages
 
