@@ -440,8 +440,19 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
   let errors = {};
 
   if (req.user.id !== spot.ownerId) {
-    const { spotId, userId, startDate, endDate, createdAt, updatedAt } =
+    const { startDate, endDate } =
       req.body;
+      if (endDate <= startDate) {
+        res.status(400)
+        return res.json(
+        {
+          message: "Bad Request",
+          errors: {
+            endDate: "endDate cannot be on or before startDate"
+          }
+        })
+      }
+
     bookingsArr.forEach((bookingsObj) => {
             //3                     //1              //3              //5
       if (startDate >= bookingsObj.startDate  &&  startDate <= bookingsObj.endDate) {
@@ -453,9 +464,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         errors.status = 403
         // errors.message = "Sorry, this spot is already booked for the specified dates"
         errors.endDate = "End date conflicts with an existing booking";
-      } if (endDate <= startDate) {
-        errors.status = 400
-        errors.endDate = "endDate cannot be on or before startDate"
       }
 
     });

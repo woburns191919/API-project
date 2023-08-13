@@ -5,6 +5,8 @@ const sessionRouter = require('./session.js');
 const spotsRouter = require('./spots.js');
 const reviewsRouter = require('./reviews.js');
 const bookingsRouter = require('./bookings.js');
+const spotImagesRouter = require('./spotImages.js');
+const reviewImagesRouter = require('./reviewImages.js');
 
 const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
@@ -24,19 +26,13 @@ router.use('/users', usersRouter);
 
 router.use('/bookings', bookingsRouter);
 
+router.use('/spot-images', spotImagesRouter);
+
+router.use('/review-images', reviewImagesRouter);
+
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
-
-// const checkDates = (req, res, next) => {
-//   const { startDate, endDate } = req.body
-//   const newEnd =
-
-// }
-
-// router.get('/bookings/:bookingId', checkDates, async (req, res) => {
-
-// })
 
 
 router.get('/set-token-cookie', async (_req, res) => {
