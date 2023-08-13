@@ -84,9 +84,14 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       },
     });
   }
+
+
   const bookingslist = await Booking.findAll({
     where: {
-      userId: req.user.id,
+      spotId: currentBooking.spotId,
+      id: {
+        [Op.ne]: currentBooking.id
+      }
     },
   });
 
@@ -95,9 +100,8 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
   bookingslist.forEach((existingBookingObj) => {
     bookingsListArr.push(existingBookingObj.toJSON());
   });
-
+  let errors = {};
   bookingsListArr.forEach((existingBookingObj) => {
-    let errors = {};
 
     if (
       startDate >= existingBookingObj.startDate &&
@@ -115,18 +119,17 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       // errors.message = "Sorry, this spot is already booked for the specified dates"
       errors.endDate = "End date conflicts with an existing booking";
     }
+});
+// ----end compare array
 
-    if (Object.keys(errors).length > 0) {
-      res.status(errors.status);
-      delete errors.status;
-      return res.json({
-        message: "Sorry, this spot is already booked for the specified dates",
-        errors: errors,
-      });
-    }
+if (Object.keys(errors).length > 0) {
+  res.status(errors.status);
+  delete errors.status;
+  return res.json({
+    message: "Sorry, this spot is already booked for the specified dates",
+    errors: errors,
   });
- // ----end compare array
-
+}
   await currentBooking.update({
   startDate,
   endDate
@@ -134,6 +137,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
   await currentBooking.save()
   res.status(200)
   return res.json(currentBooking)
+
 
 });
 

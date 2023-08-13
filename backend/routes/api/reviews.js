@@ -176,7 +176,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       message: "Forbidden"
     })
   }
-  if (reviewImages.length > 10) {
+  if (reviewImages.length > 9) {
     res.status(403)
     return res.json(
       {
