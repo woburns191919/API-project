@@ -148,13 +148,6 @@ router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
         message: "Forbidden"
       }
     )
-   } else {
-    res.status(404)
-    return res.json(
-      {
-        message: "Review couldn't be found"
-      }
-      )
    }
 })
 
