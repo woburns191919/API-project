@@ -246,6 +246,20 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
 });
 
 router.put("/:spotId", requireAuth, validateEdit, async (req, res, next) => {
+  const spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    res.status(404);
+    return res.json({
+      message: "Spot couldn't be found",
+    });
+  }
+  if (req.user.id !== spot.ownerId) {
+    res.status(403);
+    return res.json({
+      message: "Forbidden",
+    });
+  }
+
   const user = req.user.id;
   if (user) {
     const {
@@ -264,13 +278,6 @@ router.put("/:spotId", requireAuth, validateEdit, async (req, res, next) => {
       updatedAt,
     } = req.body;
 
-    const spot = await Spot.findByPk(req.params.spotId);
-    if (!spot) {
-      res.status(404);
-      return res.json({
-        message: "Spot couldn't be found",
-      });
-    }
     await spot.update({
       id,
       ownerId,
