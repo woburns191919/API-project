@@ -103,6 +103,8 @@ all dates format?
 
 today's date on current bookign post?
 
+check glitch in create booking, where end date is before start date and it says there's already a booking 
+
 
 
 
