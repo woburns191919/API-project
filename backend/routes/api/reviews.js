@@ -164,14 +164,14 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
       message: "Review couldn't be found"
     })
   }
+  const reviewImages = await ReviewImage.findAll()
 
-  if (review.id !== req.user.id) {
+  if (review.userId !== req.user.id) {
     res.status(403)
     return res.json({
       message: "Forbidden"
     })
   }
-  const reviewImages = await ReviewImage.findAll()
 
   if (review.userId === req.user.id && reviewImages.length <= 10) {
     const { url } = req.body;
