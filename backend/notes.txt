@@ -107,6 +107,14 @@ throw forbidden error before not found in bookings delete route, delete spotimag
 
 -------
 
+previewimage questions
+
+spot forbidden delete?
+
+get reviews of current user  
+
+------
+
 
 from spots route
 
