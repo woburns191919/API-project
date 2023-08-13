@@ -104,7 +104,7 @@ all dates format?
 today's date on current bookign post?
 
 
-throw forbidden error before not found in bookings delete route
+throw forbidden error before not found in bookings delete route, delete spotimage route, delete reviewimage route
 
 
 
