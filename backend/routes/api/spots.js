@@ -451,17 +451,24 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       console.log(endDate > startDate);
             //3                     //1              //3              //5
       if (startDate >= bookingsObj.startDate  &&  startDate <= bookingsObj.endDate) {
+        errors.status = 403
         // errors.message = "Sorry, this spot is already booked for the specified dates"
         errors.startDate = "Start date conflicts with an existing booking";
       }     //3                  //5          //3                    //1
       if (endDate <= bookingsObj.endDate && endDate >= bookingsObj.startDate) {
+        errors.status = 403
         // errors.message = "Sorry, this spot is already booked for the specified dates"
         errors.endDate = "End date conflicts with an existing booking";
+      } if (endDate <= startDate) {
+        errors.status = 400
+        errors.endDate = "endDate cannot be on or before startDate"
       }
+
     });
 
     if (Object.keys(errors).length > 0) {
-      res.status(403);
+      res.status(errors.status)
+      delete errors.status
       return res.json({
         message: "Sorry, this spot is already booked for the specified dates",
         errors: errors,
