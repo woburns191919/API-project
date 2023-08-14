@@ -62,8 +62,21 @@ const validateReview = [
   handleValidationErrors,
 ];
 
-router.get("/", async (req, res) => {
+const validatequery = [
+  check("page")
+     .isFloat({ min: 1 })
+    .withMessage("Page must be greater than or equal to 1"),
+  check("size")
+    .isFloat({ min: 1 })
+    .withMessage("Size must be greater than or equal to 1"),
+  handleValidationErrors,
+];
+
+
+
+router.get("/", validatequery, async (req, res) => {
   const pagination = {};
+  let errors = {}
 
   let { page, size } = req.query;
 
@@ -75,6 +88,8 @@ router.get("/", async (req, res) => {
 
   pagination.limit = size;
   pagination.offset = (page - 1) * size;
+
+
 
   const allSpots = await Spot.findAll({
     include: [
