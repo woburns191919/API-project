@@ -154,8 +154,7 @@ from spots route
 important:
 1) delete -- created/updated, owner:username-- at from spotimages in 'get details of a spot by id'
 
-2) 'create an image for a spot' --add validation mid ware for all (check longitude)
-If we want to really hit this out of the park, we can legit check for actual values. -90 to 90 for latitude, -180 to 180 for longitude (long done on edit)
+
 
 3) delete createdat/updated at from 'create image for spot' post response
 
