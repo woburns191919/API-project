@@ -273,10 +273,6 @@ router.get("/:spotId", async (req, res) => {
   spotObj.Owner = user;
 
 
-
-
-
-
   // delete spotObj.SpotImages.createdAt
   // delete spotObj.SpotImages.updatedAt
   // delete spotObj.Owner.userName

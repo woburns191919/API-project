@@ -156,7 +156,7 @@ important:
 
 
 
-3) delete createdat/updated at from 'create image for spot' post response
+
 
 
 
