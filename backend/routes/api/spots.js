@@ -442,7 +442,19 @@ router.get("/:spotId/reviews", async (req, res) => {
       ],
     },
   });
+
+  if (!spot) {
+    res.status(404)
+    return res.json(
+      {
+        message: "Spot couldn't be found"
+      }
+    )
+  }
+
+
   let spotObj = spot.toJSON();
+
   let spotArr = spotObj.Reviews;
   let newObj = {
     Reviews: spotArr,
