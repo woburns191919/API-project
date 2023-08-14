@@ -158,7 +158,7 @@ important:
 
 3) delete createdat/updated at from 'create image for spot' post response
 
-4) 'get reviews by spotId' not getting 404 with non-existent review
+
 
 5) booking conflicts not woring with edit booking
 
