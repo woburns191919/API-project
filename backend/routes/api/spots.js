@@ -254,7 +254,18 @@ router.get("/:spotId", async (req, res) => {
   }
 
   const user = await spot.getUser();
+  const userObj = user.toJSON()
+  delete userObj.username
   const spotImages = await spot.getSpotImages();
+  let spotImagesArr = []
+  spotImages.forEach(image => {
+    spotImagesArr.push(image.toJSON())
+  })
+  spotImagesArr.forEach(el => {
+    delete el.createdAt
+    delete el.updatedAt
+    delete el.spotId
+  })
   const spotReviews = await spot.getReviews();
   let numReviews = spotReviews.length;
   let starSum = 0;
@@ -263,14 +274,14 @@ router.get("/:spotId", async (req, res) => {
   });
   let avgStarRating = starSum / numReviews;
 
-  const userObj = user.toJSON()
-  delete userObj.username
+
+  // delete userObj.username
 
   const spotObj = spot.toJSON();
   spotObj.numReviews = numReviews;
   spotObj.avgStarRating = avgStarRating;
-  spotObj.SpotImages = spotImages;
-  spotObj.Owner = user;
+  spotObj.SpotImages = spotImagesArr;
+  spotObj.Owner = userObj;
 
 
   // delete spotObj.SpotImages.createdAt
