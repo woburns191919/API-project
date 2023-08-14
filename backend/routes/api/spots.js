@@ -195,6 +195,8 @@ router.post("/", requireAuth, validatePost, async (req, res) => {
       price,
     });
     res.status(201);
+
+
     return res.json(newSpot);
   }
 });
@@ -378,7 +380,12 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
       url,
       preview,
     });
-    return res.json(newSpotImage);
+    const newSpotImageObj = newSpotImage.toJSON()
+    delete newSpotImageObj.updatedAt
+    delete newSpotImageObj.createdAt
+    delete newSpotImageObj.spotId
+
+    return res.json(newSpotImageObj);
   } else if (spot.ownerId !== req.user.id) {
     return res.status(403).json({
       message: "Forbidden",
