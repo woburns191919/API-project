@@ -1,6 +1,7 @@
 const express = require("express");
 const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
+// const { query } = require('express-validator/check');
 
 const {
   setTokenCookie,
@@ -17,7 +18,7 @@ const {
 } = require("../../db/models");
 const router = express.Router();
 
-const { check } = require("express-validator");
+const { check, query } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const e = require("express");
 
@@ -63,20 +64,22 @@ const validateReview = [
 ];
 
 const validatequery = [
-  check("page")
+  query("page")
+      .exists({ checkFalsy: true})
      .isFloat({ min: 1 })
+     .optional()
     .withMessage("Page must be greater than or equal to 1"),
-  check("size")
+  query("size")
+    .exists({ checkFalsy: true })
     .isFloat({ min: 1 })
+    .optional()
     .withMessage("Size must be greater than or equal to 1"),
   handleValidationErrors,
 ];
 
 
-
 router.get("/", validatequery, async (req, res) => {
   const pagination = {};
- 
 
   let { page, size } = req.query;
 
