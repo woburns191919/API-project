@@ -76,7 +76,7 @@ const validatequery = [
 
 router.get("/", validatequery, async (req, res) => {
   const pagination = {};
-  let errors = {}
+ 
 
   let { page, size } = req.query;
 
@@ -84,7 +84,7 @@ router.get("/", validatequery, async (req, res) => {
   size = parseInt(size);
 
   if (size > 20 || size < 1 || !size) size = 20;
-  if (page > 10 || page > 1 || !page) page = 1;
+  if (page > 10 || page < 1 || !page) page = 1;
 
   pagination.limit = size;
   pagination.offset = (page - 1) * size;
