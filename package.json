@@ -1,7 +1,7 @@
 {
   "name": "api-project",
   "version": "1.0.0",
-  "description": "<!--!!START SILENT --> # AirBnB Clone <!--!!END --> <!--!!ADD --> Authenticate Me <!--!!END_ADD -->",
+  "description": "# AirBnB Clone",
   "main": "index.js",
   "scripts": {
     "render-postbuild": "npm run build --prefix frontend",
