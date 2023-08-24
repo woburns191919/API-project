@@ -170,6 +170,14 @@ window.store.dispatch(
 );
 
 
+login
+window.store.dispatch(
+  window.sessionActions.login({
+    credential: "Demo-lition",
+    password: "password",
+  })
+);
+
 
 
 
