@@ -36,7 +36,7 @@ const reviewValidateEdit = [
 router.delete('/:reviewId', requireAuth, async (req, res) => {
   const review = req.params.reviewId
   const currReview = await Review.findByPk(req.params.reviewId)
-  console.log(currReview)
+
 
   if (!currReview) {
     res.status(404)
@@ -128,7 +128,7 @@ router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
       }
       )
     }
-    console.log(findReview)
+
     if (req.user.id === findReview.userId) {
       const { review, stars } = req.body
       await findReview.update({
@@ -138,7 +138,7 @@ router.put('/:reviewId', requireAuth, reviewValidateEdit, async (req, res) => {
       await findReview.save()
       return res.json(findReview)
     } else if (req.user.id !== findReview.userId) {
-    //  console.log(findReview.userId)
+  
     res.status(403)
     return res.json(
       {

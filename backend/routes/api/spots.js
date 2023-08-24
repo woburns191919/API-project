@@ -299,7 +299,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
       ownerId: req.user.id,
     },
   });
-  console.log(officialOwner);
+ 
 
   if (!officialOwner) {
     return res.status(404).json({
@@ -379,7 +379,7 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
       message: "Spot couldn't be found",
     });
   }
-  console.log(spot);
+
   if (spot.ownerId === req.user.id) {
     const { url, preview } = req.body;
     const newSpotImage = await SpotImage.create({

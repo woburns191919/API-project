@@ -13,11 +13,6 @@ const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
-// router.get('/:bookingId', requireAuth, async (req, res) => {
-//   // const booking = await Booking.findByPk(req.params.bookingId)
-//   // console.log(booking)
-//   console.log('hello')
-// })
 
 router.get("/current", requireAuth, async (req, res) => {
   const bookings = await Booking.findAll({
