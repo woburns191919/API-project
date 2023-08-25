@@ -23,7 +23,7 @@ module.exports = {
     */
    await Spot.bulkCreate([
     {
-      ownerId: 1,
+      ownerId: 2,
       address: "140 Washington St",
       city: "New York",
       state: "New York",
@@ -35,7 +35,7 @@ module.exports = {
       price: 200
     },
     {
-      ownerId: 2,
+      ownerId: 3,
       address: "200 Congress Pl",
       city: "Cape May",
       state: "New Jersey",
@@ -47,7 +47,7 @@ module.exports = {
       price: 300
     },
     {
-      ownerId: 3,
+      ownerId: 4,
       address: "400 E Capitol Ave",
       city: "Little Rock",
       state: "Arkansas",
@@ -56,6 +56,30 @@ module.exports = {
       lng: -92.26761,
       name: "Hilton Garden Inn",
       description: "Nice spot by the river",
+      price: 200
+    },
+    {
+      ownerId: 3,
+      address: "300 Kansas st",
+      city: "Baileyville",
+      state: "Kansas",
+      country: "United States of America",
+      lat: 38.74513,
+      lng: -90.26761,
+      name: "Zome on the Range",
+      description: "Nice zome",
+      price: 400
+    },
+    {
+      ownerId: 4,
+      address: "20 Montana St",
+      city: "Bozeman",
+      state: "Montana",
+      country: "United States of America",
+      lat: 38.74513,
+      lng: -91.26761,
+      name: "Silo",
+      description: "Nice silo",
       price: 200
     }
    ], { validate: true }
