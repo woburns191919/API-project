@@ -82,4 +82,9 @@ export const restoreUser = () => async (dispatch) => {
   return response;
 };
 
+
+export const getAllSpots = () => async(dispatch) => {
+  
+}
+
 export default sessionReducer;

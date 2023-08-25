@@ -23,26 +23,68 @@ module.exports = {
     await User.bulkCreate(
       [
         {
-          email: "demo@user.io",
-          username: "Demo-lition",
-          hashedPassword: bcrypt.hashSync("password"),
-          firstName: "demo",
-          lastName: "user",
+          email: "Oblivion@gmail.com",
+          username: "Oblivion",
+          hashedPassword: bcrypt.hashSync("mrsquishy"),
+          firstName: "David",
+          lastName: "Fosterwallace",
         },
         {
-          email: "user1@user.io",
-          username: "FakeUser1",
-          hashedPassword: bcrypt.hashSync("password2"),
-          firstName: "fake",
-          lastName: "user",
+          email: "biggie@gmail.com",
+          username: "biggie",
+          hashedPassword: bcrypt.hashSync("bigpappa"),
+          firstName: "Christopher",
+          lastName: "Wallace",
         },
         {
-          email: "user2@user.io",
-          username: "FakeUser2",
-          hashedPassword: bcrypt.hashSync("password3"),
-          firstName: "demo",
-          lastName: "user",
+          email: "junot@gmail.com",
+          username: "Junot",
+          hashedPassword: bcrypt.hashSync("asteroid"),
+          firstName: "Junot",
+          lastName: "Diaz",
         },
+        {
+          email: "emergency@hotmail.com",
+          username: "emergency",
+          hashedPassword: bcrypt.hashSync("jesusson"),
+          firstName: "Denis",
+          lastName: "Johnson",
+        },
+        // {
+        //   email: "nas@hotmail.com",
+        //   username: "nas",
+        //   hashedPassword: bcrypt.hashSync("queensbridge"),
+        //   firstName: "Nasir",
+        //   lastName: "Jones",
+        // },
+        // {
+        //   email: "whereareyougoing@gmail.com",
+        //   username: "whereareyougoing",
+        //   hashedPassword: bcrypt.hashSync("prolific"),
+        //   firstName: "Joyce",
+        //   lastName: "Caroloates",
+        // },
+        // {
+        //   email: "unsafejobs@gmail.com",
+        //   username: "unsafejobs",
+        //   hashedPassword: bcrypt.hashSync("gnomes"),
+        //   firstName: "Alissa",
+        //   lastName: "Nutting",
+        // },
+        // {
+        //   email: "arrangedmarriages@gmail.com",
+        //   username: "arrangedmarriages",
+        //   hashedPassword: bcrypt.hashSync("before"),
+        //   firstName: "Chitra",
+        //   lastName: "Divakaruni",
+        // },
+        // {
+        //   email: "therethere@gmail.com",
+        //   username: "therethere",
+        //   hashedPassword: bcrypt.hashSync("channelorange"),
+        //   firstName: "Tommy",
+        //   lastName: "Orange",
+        // },
       ],
       { validate: true }
     );
@@ -60,8 +102,8 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        username: {
-          [Op.in]: ["Demo-litian", "FakeUser1", "FakeUser2"],
+        firstName: {
+          [Op.in]: ["David", "Christopher", "Junot", "Denis", "Nasir"]
         },
       },
       {}

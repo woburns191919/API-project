@@ -32,14 +32,17 @@ function Navigation({ isLoaded }) {
     );
   }
 
+
   return (
     <ul>
       <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
+        <NavLink exact to="/">Home</NavLink>
       </li>
-      {isLoaded && sessionLinks}
+      {isLoaded && (
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
+      )}
     </ul>
   );
 }
