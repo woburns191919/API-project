@@ -103,7 +103,7 @@ module.exports = {
       options,
       {
         firstName: {
-          [Op.in]: ["David", "Christopher", "Junot", "Denis", "Nasir"]
+          [Op.in]: ["David", "Christopher", "Junot", "Denis"]
         },
       },
       {}
