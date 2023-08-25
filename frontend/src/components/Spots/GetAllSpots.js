@@ -14,6 +14,10 @@ const GetAllSpots = () => {
   useEffect(() => {
     dispatch(thunkGetAllSpots())
   }, [dispatch])
+  
+  return (
+    <h1>beard stuff</h1>
+  )
 }
 
 
