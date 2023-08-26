@@ -14,7 +14,7 @@ export const thunkGetAllSpots = () => async (dispatch) => {
   const res = await csrfFetch("/api/spots");
   if (res.ok) {
   const data  = await res.json();
-  console.log("data from thunk: ", data);
+  // console.log("data from thunk: ", data);
   dispatch(actionGetSpots(normalizerSpots(data)));
   return data;
   } else {
@@ -28,7 +28,7 @@ let initialState = { allSpots: {}, singleSpot: {} };
 
 function normalizerSpots (spots) {
   const normalSpotObj = {};
-  console.log('spots****', spots.Spots)
+  // console.log('spots****', spots.Spots)
   spots.Spots.forEach((spot) => (
     normalSpotObj[spot.id] = spot
   ));

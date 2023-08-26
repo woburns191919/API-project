@@ -1,0 +1,45 @@
+.outer-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+
+.photo-container {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  /* width: 200px;
+  height: 200px; */
+
+}
+
+img {
+  height: 200px;
+  width: 200px;
+}
+
+.info {
+  display:flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-info {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.star-info {
+
+  justify-content: right;
+  /* position: fixed; */
+  right: 0px;
+}
+
+.left-info {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5px;
+}
