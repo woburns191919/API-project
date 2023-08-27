@@ -43,9 +43,18 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`);
   if (res.ok) {
     const data = await res.json();
-    dispatch(actionGetSpotDetails(data));
-    console.log('data from thunk', data)
-    return data;
+    const spotImageArr = data.SpotImages
+    const normalizedSpotDetails = {};
+    for (let i = 1; i < spotImageArr.length; i++) {
+      let spotObj = spotImageArr[i]
+      normalizedSpotDetails[spotObj.id] = spotObj
+
+    }
+    dispatch(actionGetSpotDetails(normalizedSpotDetails));
+    console.log(normalizedSpotDetails)
+    return normalizedSpotDetails
+    // console.log('data??', data)
+
   } else {
     console.warn("error: ", res);
   }
@@ -65,6 +74,7 @@ function normalizerSpots(spots) {
 //GetSpotDetails normalizer
 
 // function normalizerGetSpotDetails(spot) {
+
 
 // }
 

@@ -47,11 +47,33 @@ img {
   padding-right: 5px;
 }
 
-.big-photo-container {
-  width: 60%;
+.details-big-photo-container {
+  width: 90%;
+  display: flex;
+  gap: 10px;
+
+
 }
 
 .preview-image {
   width:400px;
   height: 400px;
+}
+
+.small-images-container {
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-wrapper {
+  display: flex;
+  width: 80%;
+
+}
+
+.try-image {
+  border-radius: none;
 }
