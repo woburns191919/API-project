@@ -1,8 +1,4 @@
 import { csrfFetch } from "./csrf";
-import { getState } from 'react-redux'
-
-
-
 
 //types
 
@@ -40,21 +36,23 @@ export const thunkGetAllSpots = () => async (dispatch) => {
   }
 };
 
-//GetSpotDetails thunk for small images
+//GetSpotDetails thunk
 
-export const thunkGetSpotDetails = (spotId) => async (dispatch, getState) => {
-
+export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
+  // console.log('entered thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`);
   if (res.ok) {
     const data = await res.json();
+    // console.log('before array', data.Owner)
     const spotImageArr = data.SpotImages
     const normalizedSpotDetails = {};
     for (let i = 1; i < spotImageArr.length; i++) {
       let spotObj = spotImageArr[i]
       normalizedSpotDetails[spotObj.id] = spotObj
     }
+    normalizedSpotDetails.owner = data.Owner
     dispatch(actionGetSpotDetails(normalizedSpotDetails));
-    console.log(normalizedSpotDetails)
+
     return normalizedSpotDetails
     // console.log('data??', data)
 
@@ -62,16 +60,6 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch, getState) => {
     console.warn("error: ", res);
   }
 };
-
-// export const thunkGetSpotDetailsBelowImg = (spotId) => async (dispatch)  => {
-//   console.log('entered thunk 2')
-//   const res = await csrfFetch(`/api/spots/${spotId}`);
-//   if (res.ok) {
-//     const data = await res.json();
-//     dispatch(actionGetSpotDetails(data))
-//     console.log('data from thunk', data)
-//   }
-// }
 
 
 let initialState = { allSpots: {}, singleSpot: {} };
