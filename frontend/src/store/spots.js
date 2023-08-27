@@ -51,7 +51,12 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
       normalizedSpotDetails[spotObj.id] = spotObj
     }
     normalizedSpotDetails.owner = data.Owner
+    normalizedSpotDetails.description = data.description
+    normalizedSpotDetails.reviews = data.numReviews
+    normalizedSpotDetails.avgStarRating = data.avgStarRating
+    normalizedSpotDetails.price = data.price
     dispatch(actionGetSpotDetails(normalizedSpotDetails));
+
 
     return normalizedSpotDetails
     // console.log('data??', data)

@@ -20,6 +20,8 @@ const SpotShow = () => {
       state.spots.singleSpot ? state.spots.singleSpot : []
     )
   );
+
+
   // console.log("spot!!", spotArr);
 
   // console.log('spot by id: ', spots.id.SpotImages)
@@ -55,13 +57,37 @@ const SpotShow = () => {
           </div>
         </div>
 
-        <div>
+
+        <section className="lower-spot-show">
+          <article className="description">
           {spotArr.map((spotObj, i) => (
+            <div key={i}>
             <h2>
               {spotObj.firstName} {"  "} {spotObj.lastName}
             </h2>
+            <p>
+            </p>
+            </div>
           ))}
+          {spotArr[5]}
+        </article>
+        <div className = 'price-star-review-wrapper'>
+          <div className= 'top-price-star-review-wrapper'>
+            <div className = "night">
+            ${spotArr[8]} night
+            </div>
+            <div className = "stars">
+            {spotArr[7]} #.#
+            </div>
+            <div className = "reviews">
+            {spotArr[6]} reviews
+            </div>
+          </div>
+          <div className ='bottom-price-star-review-wrapper'>
+            <button className="reserve">Reserve</button>
+          </div>
         </div>
+        </section>
       </main>
     </>
   );

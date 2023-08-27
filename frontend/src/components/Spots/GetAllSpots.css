@@ -52,7 +52,6 @@ img {
   display: flex;
   gap: 10px;
 
-
 }
 
 .preview-image {
@@ -76,4 +75,29 @@ img {
 
 .try-image {
   border-radius: none;
+}
+
+.lower-spot-show {
+  display: flex;
+  justify-content: space-between;
+  width: 80%
+}
+
+.price-star-review-wrapper {
+  border: 2px solid gray;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  align-items: center;
+}
+
+.top-price-star-review-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+
+.reserve {
+  width: 200px;
 }
