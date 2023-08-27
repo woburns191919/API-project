@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetSpotDetails } from "../../store/spots";
+import { thunkGetSpotDetails, thunkGetSpotDetailsBelowImg } from "../../store/spots";
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
@@ -9,7 +9,7 @@ const SpotShow = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { spotId } = params;
-  console.log("im in spot show page");
+
 
   const spots = useSelector((state) =>
     state.spots.allSpots ? state.spots.allSpots[spotId] : []
@@ -20,7 +20,17 @@ const SpotShow = () => {
       state.spots.singleSpot ? state.spots.singleSpot : []
     )
   );
-  console.log("spot!!", spotArr);
+
+  // const spotDetailsBelowIageArr = Object.values(
+  //   useSelector((state) =>
+  //   state.spots.singleSpot ? state.spots.singleSpot : []
+  //   )
+  // )
+
+  // useEffect(() => {
+  //   dispatch(thunkGetSpotDetailsBelowImg(spotId))
+  // }, [dispatch])
+
 
   // console.log('spot by id: ', spots.id.SpotImages)
 
@@ -31,7 +41,7 @@ const SpotShow = () => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
 
-  if (!spots) return null;
+  if (!spots)return null;
 
   return (
     <>
@@ -45,14 +55,37 @@ const SpotShow = () => {
           </div>
           <div className="small-images-container">
             {spotArr.map((spotObj, i) => (
+
               <div key={i} className="other-images">
                 <Link to={`/spots/${spotId}`}>
-                  <img class ="try-image" src={`${spotObj.url}`} />
+                  <img className ="try-image" src={`${spotObj.url}`} />
                 </Link>
+                {spotObj.address}
               </div>
+
             ))}
           </div>
+        </div>
+        <div className="spot-details-lower-section">
+        <article className="description">
+        {/* <h2>
+          {spotDetailsBelowIageArr.map((spotObj, i) => (
+           <p>{spotObj.Owner}</p>
+          ))}
+          hello
+          </h2> */}
+        </article>
+        <div className = "price-review-container">
+            <div className = "price-review-price-stars">
 
+            </div>
+            <div className="reserve-button">
+              <button>
+                Reserve
+              </button>
+            </div>
+
+        </div>
         </div>
       </main>
     </>
