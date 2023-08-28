@@ -42,7 +42,9 @@ const SpotShow = () => {
   }, [dispatch]);
 
 
-  const reviews = useSelector((state) => console.log('data??', state))
+  const reviews = useSelector((reviews) => console.log('data??', reviews))
+  // const reviewDataFunction = thunkGetReviewsBySpotId(spotId)
+
 
 
   if (!spots) return null;
@@ -50,6 +52,7 @@ const SpotShow = () => {
   return (
     <>
       <main className="outer-wrapper">
+        <p>{spotArr[9]}, {spotArr[10]}, {spotArr[11]}</p>
         <div className="details-big-photo-container">
           {/* I am in spot page now { hasUserFinishedReservationWithinLastTenDays && < reviewComponent /> } */}
           <div className="preview-image-container">
