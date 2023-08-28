@@ -51,6 +51,7 @@ const SpotShow = () => {
   return (
     <>
       <main className="outer-wrapper">
+        <h3>{spotArr[12]}</h3>
         <p>{spotArr[9]}, {spotArr[10]}, {spotArr[11]}</p>
         <div className="details-big-photo-container">
           {/* I am in spot page now { hasUserFinishedReservationWithinLastTenDays && < reviewComponent /> } */}
@@ -112,8 +113,6 @@ const SpotShow = () => {
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
                 <p>{reviewsObj.review}</p>
-
-
               </div>
             ))}
           </div>

@@ -65,6 +65,7 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
     normalizedSpotDetails.city = data.city
     normalizedSpotDetails.state = data.state
     normalizedSpotDetails.country = data.country
+    normalizedSpotDetails.name = data.name
     dispatch(actionGetSpotDetails(normalizedSpotDetails));
 
 
