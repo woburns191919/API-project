@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 90%;
+  width: 95%;
   margin: 70px;
 }
 
@@ -100,4 +100,11 @@ img {
 
 .reserve {
   width: 200px;
+}
+
+.spot-form {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 4px;
+  justify-content: center;
 }
