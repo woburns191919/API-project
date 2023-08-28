@@ -22,11 +22,11 @@ function App() {
       {isLoaded && (
         <Switch>
           <Switch>
-            <Route exact path = "/spots">
-            <SpotForm />
-            </Route>
             <Route exact path="/">
               <SpotsIndexPage />
+            </Route>
+            <Route exact path = "/spots">
+            <SpotForm />
             </Route>
             <Route exact path = "/spots/:spotId">
               <SpotShow />
