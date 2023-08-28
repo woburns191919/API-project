@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetSpotDetails } from "../../store/spots";
-import { thunkGetReviewsBySpotId } from "../../store/reviews";
+import { thunkGetSpotDetails, thunkGetReviewsBySpotId } from "../../store/spots";
+// import { thunkGetReviewsBySpotId } from "../../store/reviews";
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
@@ -24,8 +24,6 @@ const SpotShow = () => {
   );
 
 
-
-
   // console.log("spot!!", spotArr);
 
   // console.log('spot by id: ', spots.id.SpotImages)
@@ -42,7 +40,8 @@ const SpotShow = () => {
   }, [dispatch]);
 
 
-  const reviews = useSelector((reviews) => console.log('data??', reviews))
+  const reviewsArr = useSelector((state) => state.spots.spot.Reviews)
+  console.log(reviewsArr)
   // const reviewDataFunction = thunkGetReviewsBySpotId(spotId)
 
 
@@ -106,7 +105,17 @@ const SpotShow = () => {
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
           {spotArr[7]} #.# {'  '} {spotArr[6]} reviews
+          </div>
+          <div className="reviews-lower-text">
+            {reviewsArr.map((reviewsObj, i) => (
+              <div key={i}>
+                <h3>{reviewsObj.User.firstName}</h3>
+                <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
+                <p>{reviewsObj.review}</p>
 
+
+              </div>
+            ))}
           </div>
 
         </section>

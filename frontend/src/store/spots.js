@@ -6,6 +6,13 @@ const GETALLSPOTS = "/spots/get_all_spots";
 
 const GETSPOTDETAILS = "/spots/get_spot_details";
 
+const GETREVIEWSBYSPOTID = "/spots/get_reviews_by_id";
+
+const actionGetReviewsBySpotId = (reviews) => ({
+  type: GETREVIEWSBYSPOTID,
+  reviews,
+});
+
 //actions
 
 //GetAllSpot action
@@ -88,7 +95,22 @@ function normalizerSpots(spots) {
 
   //reducer
 
-  let initialState = { allSpots: {}, singleSpot: {} };
+
+  export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
+    // console.log("entered review thunk");
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(actionGetReviewsBySpotId(data));
+      // console.log("data from thunk: ", data);
+      return data;
+    }
+  };
+
+
+
+
+  let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
   export default function spotReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
@@ -100,6 +122,10 @@ function normalizerSpots(spots) {
       newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot;
       return newState;
+      case GETREVIEWSBYSPOTID:
+        newState = { ...state, spot: {} };
+        newState.spot = action.reviews;
+        return newState;
     default:
       return state;
   }
