@@ -6,6 +6,8 @@ import * as spotActions from "./store/spots";
 import Navigation from "./components/Navigation";
 import SpotsIndexPage from "./components/Spots/SpotsIndexPage";
 import SpotShow from "./components/Spots/SpotShow"
+import ProfileButton from "./components/Navigation/ProfileButton";
+import SpotForm from "./components/Spots/SpotForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +22,9 @@ function App() {
       {isLoaded && (
         <Switch>
           <Switch>
+            <Route exact path = "/spots">
+            <SpotForm />
+            </Route>
             <Route exact path="/">
               <SpotsIndexPage />
             </Route>
