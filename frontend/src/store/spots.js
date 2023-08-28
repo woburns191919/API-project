@@ -67,7 +67,6 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
 };
 
 
-let initialState = { allSpots: {}, singleSpot: {} };
 
 //GetAllSpots normalizer
 
@@ -82,11 +81,12 @@ function normalizerSpots(spots) {
 // function normalizerGetSpotDetails(spot) {
 
 
-// }
+  // }
 
-//reducer
+  //reducer
 
-export default function spotReducer(state = initialState, action) {
+  let initialState = { allSpots: {}, singleSpot: {} };
+  export default function spotReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GETALLSPOTS:

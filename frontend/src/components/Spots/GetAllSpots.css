@@ -108,3 +108,7 @@ img {
   padding: 4px 4px;
   justify-content: center;
 }
+
+.reviews-lower {
+  border-top: 2px solid gray;
+}

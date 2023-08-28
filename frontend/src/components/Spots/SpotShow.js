@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetSpotDetails } from "../../store/spots";
+import { thunkGetReviewsBySpotId } from "../../store/reviews";
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
+// import "./Reviews.css";
 
 const SpotShow = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { spotId } = params;
-  console.log("im in spot show page");
+
 
   const spots = useSelector((state) =>
     state.spots.allSpots ? state.spots.allSpots[spotId] : []
@@ -22,16 +24,26 @@ const SpotShow = () => {
   );
 
 
+
+
   // console.log("spot!!", spotArr);
 
   // console.log('spot by id: ', spots.id.SpotImages)
 
-  // const hasUserFinishedReservationWithinLastTenDays = true;
-  // end date - today's date === 10  boolean
+
 
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
+
+
+  useEffect(() => {
+    dispatch(thunkGetReviewsBySpotId(spotId));
+  }, [dispatch]);
+
+
+  const reviews = useSelector((state) => console.log('data??', state))
+
 
   if (!spots) return null;
 
@@ -87,6 +99,13 @@ const SpotShow = () => {
             <button className="reserve">Reserve</button>
           </div>
         </div>
+        </section>
+        <section className="reviews-lower">
+          <div className="reviews-lower-stars-number">
+          {spotArr[7]} #.# {'  '} {spotArr[6]} reviews
+
+          </div>
+
         </section>
       </main>
     </>
