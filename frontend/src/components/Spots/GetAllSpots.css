@@ -102,11 +102,12 @@ img {
   width: 200px;
 }
 
-.spot-form {
-  display: flex;
-  flex-direction: column;
-  padding: 4px 4px;
-  justify-content: center;
+.form-wrapper {
+  display: block;
+  height: fit-content;
+  width: 18%;
+  margin: 0 auto;
+
 }
 
 .reviews-lower {

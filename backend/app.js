@@ -41,9 +41,6 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  res.send('Welcome!')
-})
 
 app.use(routes)
 
