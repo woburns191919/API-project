@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { Link } from "react";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -34,6 +35,11 @@ function Navigation({ isLoaded }) {
 
 
   return (
+    <header className="header">
+      <div className ="air-logo">
+      logo
+      </div>
+    <div className ="sign-up">
     <ul>
       <li>
         <NavLink exact to="/">Home</NavLink>
@@ -44,6 +50,8 @@ function Navigation({ isLoaded }) {
         </li>
       )}
     </ul>
+    </div>
+    </header>
   );
 }
 
