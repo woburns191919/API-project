@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { createSpot } from '../../store/spots';
+import { useDispatch, useSelector } from 'react-redux';
+import { thunkCreateSpot } from '../../store/spots';
 import "./GetAllSpots.css";
 
 
@@ -21,6 +24,12 @@ const SpotForm = () => {
   const [smallImage4, setSmallImage4] = useState('')
   const [validationErrors, setValidationErrors] = useState({})
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(thunkCreateSpot())
+  }, [dispatch])
+
 
   useEffect(() => {
     const errors = {}
@@ -29,7 +38,7 @@ const SpotForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const submittedForm = {
+    const payload= {
      country,
      address,
      city,
@@ -43,7 +52,7 @@ const SpotForm = () => {
      smallImage3,
      smallImage4
     }
-    console.log(submittedForm)
+    console.log(payload)
     history.push('/')  //    /spot/:spotId
     setCountry('')
     setAddress('')
@@ -60,19 +69,21 @@ const SpotForm = () => {
     setValidationErrors({})
   }
 
+// const createdSpot = await dispatchEvent(createSpot(payload))
 
 
   return (
+    <main className="form-wrapper">
     <form
       className="spot-form"
       // onSubmit={handleSubmit}
     >
-      <h4>Country</h4>
+      <h4>Create a new Spot</h4>
       <label>
        Country
         <input
           type="text"
-          name="country"
+          // name="country"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
         />
@@ -95,6 +106,15 @@ const SpotForm = () => {
           name="city"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+        />
+      </label>
+      <label>
+        State
+        <input
+          type="text"
+          name="state"
+          value={state}
+          onChange={(e) => setState(e.target.value)}
         />
       </label>
       {/* {validationErrors.sweetness && <p className='errors'>{validationErrors.sweetness} </p>} */}
@@ -182,6 +202,7 @@ const SpotForm = () => {
         Create Spot
       </button>
     </form>
+    </main>
   );
 }
 
