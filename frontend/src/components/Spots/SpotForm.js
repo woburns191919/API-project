@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import { createSpot } from '../../store/spots';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSpot } from "../../store/spots";
 import "./GetAllSpots.css";
 
 const SpotForm = () => {
   const history = useHistory();
+  const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+  console.log('current user****', user)
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -25,20 +28,13 @@ const SpotForm = () => {
   const [smallImage4, setSmallImage4] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
 
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(thunkCreateSpot())
-  // }, [dispatch])
-
-  useEffect(() => {
-    const errors = {};
-    setValidationErrors(errors);
-  }, []);
-
-  const handleSubmit = (e) => {
-    console.log("in handle submit");
+  if (!user) {
+    alert('You must be logged in to create a spot!')
+    history.push('/')
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const payload = {
       country,
       address,
@@ -58,7 +54,7 @@ const SpotForm = () => {
     };
 
     try {
-      const createdSpot = dispatch(thunkCreateSpot(payload));
+      const createdSpot = await dispatch(thunkCreateSpot(payload));
 
       console.log("payload****", payload);
       history.push("/"); //    /spot/:spotId
@@ -70,6 +66,13 @@ const SpotForm = () => {
       console.log(error);
     }
   };
+
+    // useEffect(() => {
+  //   const errors = {};
+  //   setValidationErrors(errors);
+  // }, []);
+
+  // if (!createdSpot) return null;
 
   return (
     <main className="form-wrapper">
