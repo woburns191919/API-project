@@ -84,12 +84,19 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   }
 };
 
+
+
+
+
+
+
 //thunk for create spot
 
 export const thunkCreateSpot = (payload) => async (dispatch) => {
   // if (!payload) return null;
   console.log('form***', payload)
   console.log("entered create spot thunk");
+
   const res = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {
@@ -97,15 +104,13 @@ export const thunkCreateSpot = (payload) => async (dispatch) => {
     },
     body: JSON.stringify(payload),
   });
-  console.log("res from thunk: ", res);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(actionCreateSpot(data));
-    return data
-  } else {
-    console.log('error')
+  if (!res.ok) {
+   throw new Error()
   }
-};
+    const formData = await res.json()
+    dispatch(actionCreateSpot(formData))
+    return formData
+  }
 
 
 
