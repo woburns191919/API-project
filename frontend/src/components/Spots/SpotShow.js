@@ -46,7 +46,7 @@ const SpotShow = () => {
 
 
 
-  if (!spots) return null;
+  if (!spots || spotArr.length === 0) return null;
 
   return (
     <>

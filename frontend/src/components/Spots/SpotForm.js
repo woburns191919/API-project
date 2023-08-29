@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+// import { createSpot } from '../../store/spots';
+import { useDispatch } from 'react-redux';
+import { thunkCreateSpot } from '../../store/spots';
 import "./GetAllSpots.css";
 
 
@@ -11,6 +14,8 @@ const SpotForm = () => {
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
   const [description, setDescription] = useState('')
   const [title, setTitle] = useState('')
   const [basePrice, setBasePrice] = useState('')
@@ -21,6 +26,13 @@ const SpotForm = () => {
   const [smallImage4, setSmallImage4] = useState('')
   const [validationErrors, setValidationErrors] = useState({})
 
+  const dispatch = useDispatch();
+
+
+  // useEffect(() => {
+  //   dispatch(thunkCreateSpot())
+  // }, [dispatch])
+
 
   useEffect(() => {
     const errors = {}
@@ -28,12 +40,16 @@ const SpotForm = () => {
   }, [])
 
   const handleSubmit = e => {
+
+    console.log('in handle submit')
     e.preventDefault()
-    const submittedForm = {
+    const payload= {
      country,
      address,
      city,
      state,
+     latitude,
+     longitude,
      description,
      title,
      basePrice,
@@ -43,43 +59,53 @@ const SpotForm = () => {
      smallImage3,
      smallImage4
     }
-    console.log(submittedForm)
+
+    if (!payload) return null;
+
+    // if (createdSpot.id) history.push('/spots/')
+
+    const createdSpot = dispatch(thunkCreateSpot(payload))
+
+    console.log('payload****', payload)
     history.push('/')  //    /spot/:spotId
-    setCountry('')
-    setAddress('')
-    setCity('')
-    setState('')
-    setDescription('')
-    setTitle('')
-    setBasePrice('')
-    setPreviewImage('')
-    setSmallImage1('')
-    setSmallImage2('')
-    setSmallImage3('')
-    setSmallImage4('')
-    setValidationErrors({})
+    // setCountry('')
+    // setAddress('')
+    // setCity('')
+    // setState('')
+    // setDescription('')
+    // setTitle('')
+    // setBasePrice('')
+    // setPreviewImage('')
+    // setSmallImage1('')
+    // setSmallImage2('')
+    // setSmallImage3('')
+    // setSmallImage4('')
+    // setValidationErrors({})
+
+
   }
 
 
 
   return (
+    <main className="form-wrapper">
     <form
       className="spot-form"
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
-      <h4>Country</h4>
+      <h4>Create a new Spot</h4>
+       Country <br></br>
       <label>
-       Country
         <input
           type="text"
-          name="country"
+          // name="country"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
         />
       </label>
       {/* {validationErrors.name && <p className='errors'>{validationErrors.name} </p>} */}
+        Street Address <br></br>
       <label>
-        Street Address
         <input
         type="text"
         name="address"
@@ -97,13 +123,40 @@ const SpotForm = () => {
           onChange={(e) => setCity(e.target.value)}
         />
       </label>
+      <label>
+        State
+        <input
+          type="text"
+          name="state"
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+        />
+      </label>
+      <label>
+        Latitude
+        <input
+          type="text"
+          name="latitude"
+          value={latitude}
+          onChange={(e) => setLatitude(e.target.value)}
+        />
+      </label>
+      <label>
+        Longitude
+        <input
+          type="text"
+          name="longitude"
+          value={longitude}
+          onChange={(e) => setLongitude(e.target.value)}
+        />
+      </label>
       {/* {validationErrors.sweetness && <p className='errors'>{validationErrors.sweetness} </p>} */}
       <label>
         Describe your place to guests
         <input
           type="textarea"
           value={description}
-          name="seeds"
+          name="description"
           onChange={(e) => {
             setDescription(e.target.value)
           }}
@@ -120,16 +173,18 @@ const SpotForm = () => {
           }}
         />
       </label>
-      Set a base price for your spot
+      <label>
+        Set a base price for your spot
       <input
         type="number"
         name="base price"
-        value={setBasePrice}
+        value={basePrice}
         onChange={(e) => {
           setBasePrice(e.target.value)
         }}
       >
       </input>
+      </label>
       Liven up your spot with photos
       <input
         type="url"
@@ -182,6 +237,7 @@ const SpotForm = () => {
         Create Spot
       </button>
     </form>
+    </main>
   );
 }
 
