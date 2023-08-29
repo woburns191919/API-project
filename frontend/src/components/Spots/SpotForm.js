@@ -19,6 +19,7 @@ const SpotForm = () => {
   const [description, setDescription] = useState('')
   const [title, setTitle] = useState('')
   const [basePrice, setBasePrice] = useState('')
+  const [name, setName] = useState('')
   const [previewImage, setPreviewImage] = useState('')
   const [smallImage1, setSmallImage1] = useState('')
   const [smallImage2, setSmallImage2] = useState('')
@@ -40,7 +41,6 @@ const SpotForm = () => {
   }, [])
 
   const handleSubmit = e => {
-
     console.log('in handle submit')
     e.preventDefault()
     const payload= {
@@ -51,8 +51,9 @@ const SpotForm = () => {
      latitude,
      longitude,
      description,
-     title,
+     name,
      basePrice,
+     title,
      previewImage,
      smallImage1,
      smallImage2,
@@ -60,7 +61,7 @@ const SpotForm = () => {
      smallImage4
     }
 
-    if (!payload) return null;
+
 
     // if (createdSpot.id) history.push('/spots/')
 
@@ -68,20 +69,10 @@ const SpotForm = () => {
 
     console.log('payload****', payload)
     history.push('/')  //    /spot/:spotId
-    // setCountry('')
-    // setAddress('')
-    // setCity('')
-    // setState('')
-    // setDescription('')
-    // setTitle('')
-    // setBasePrice('')
-    // setPreviewImage('')
-    // setSmallImage1('')
-    // setSmallImage2('')
-    // setSmallImage3('')
-    // setSmallImage4('')
-    // setValidationErrors({})
-
+    if (createdSpot) {
+      setValidationErrors();
+      history.push(`/spots/${createdSpot.id}`)
+    }
 
   }
 
@@ -94,8 +85,8 @@ const SpotForm = () => {
       onSubmit={handleSubmit}
     >
       <h4>Create a new Spot</h4>
-       Country <br></br>
       <label>
+       Country <br></br>
         <input
           type="text"
           // name="country"
@@ -103,9 +94,9 @@ const SpotForm = () => {
           onChange={(e) => setCountry(e.target.value)}
         />
       </label>
-      {/* {validationErrors.name && <p className='errors'>{validationErrors.name} </p>} */}
-        Street Address <br></br>
+    <div>
       <label>
+        Street Address <br></br>
         <input
         type="text"
         name="address"
@@ -114,8 +105,10 @@ const SpotForm = () => {
         >
         </input>
       </label>
+      </div>
+      <div>
       <label>
-        City
+        City <br></br>
         <input
           type="text"
           name="city"
@@ -123,8 +116,10 @@ const SpotForm = () => {
           onChange={(e) => setCity(e.target.value)}
         />
       </label>
+      </div>
+        <div>
       <label>
-        State
+        State <br></br>
         <input
           type="text"
           name="state"
@@ -132,8 +127,10 @@ const SpotForm = () => {
           onChange={(e) => setState(e.target.value)}
         />
       </label>
+      </div>
+      <div>
       <label>
-        Latitude
+        Latitude <br></br>
         <input
           type="text"
           name="latitude"
@@ -141,8 +138,10 @@ const SpotForm = () => {
           onChange={(e) => setLatitude(e.target.value)}
         />
       </label>
+      </div>
+      <div>
       <label>
-        Longitude
+        Longitude <br></br>
         <input
           type="text"
           name="longitude"
@@ -150,9 +149,21 @@ const SpotForm = () => {
           onChange={(e) => setLongitude(e.target.value)}
         />
       </label>
-      {/* {validationErrors.sweetness && <p className='errors'>{validationErrors.sweetness} </p>} */}
+      </div>
+      <div>
       <label>
-        Describe your place to guests
+        Name <br></br>
+        <input
+          type="text"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      </div>
+    <div>
+      <label>
+        Describe your place to guests <br></br>
         <input
           type="textarea"
           value={description}
@@ -162,8 +173,11 @@ const SpotForm = () => {
           }}
         />
       </label>
-        Create a title for your spot
+      </div>
+
+      <div>
       <label>
+        Create a title for your spot <br></br>
         <input
           type="text"
           value={title}
@@ -173,8 +187,10 @@ const SpotForm = () => {
           }}
         />
       </label>
+      </div>
+      <div>
       <label>
-        Set a base price for your spot
+        Set a base price for your spot <br></br>
       <input
         type="number"
         name="base price"
@@ -185,7 +201,10 @@ const SpotForm = () => {
       >
       </input>
       </label>
-      Liven up your spot with photos
+      </div>
+      <div>
+      <label>
+      Liven up your spot with photos <br></br>
       <input
         type="url"
         name="priview image URL"
@@ -195,6 +214,9 @@ const SpotForm = () => {
         }}
       >
       </input>
+      </label>
+      </div>
+      <div>
       <input
         type="url"
         name="image URL"
@@ -204,6 +226,8 @@ const SpotForm = () => {
         }}
       >
       </input>
+      </div>
+      <div>
       <input
         type="url"
         name="image URL"
@@ -213,6 +237,7 @@ const SpotForm = () => {
         }}
       >
       </input>
+      </div>
       <input
         type="url"
         name="image URL"
@@ -222,6 +247,7 @@ const SpotForm = () => {
         }}
       >
       </input>
+      <div>
       <input
         type="url"
         name="priview image URL"
@@ -231,11 +257,14 @@ const SpotForm = () => {
         }}
       >
       </input>
+      </div>
+      <div>
       <button
         type="submit"
       >
         Create Spot
       </button>
+      </div>
     </form>
     </main>
   );
