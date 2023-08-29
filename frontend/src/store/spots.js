@@ -8,6 +8,8 @@ const GETSPOTDETAILS = "/spots/get_spot_details";
 
 const GETREVIEWSBYSPOTID = "/spots/get_reviews_by_id";
 
+const CREATESPOT = "/spots/create_spot";
+
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,
   reviews,
@@ -27,6 +29,11 @@ const actionGetSpots = (spots) => ({
 const actionGetSpotDetails = (spot) => ({
   type: GETSPOTDETAILS,
   spot,
+});
+
+const actionCreateSpot = (form) => ({
+  type: CREATESPOT,
+  form,
 });
 
 //GetAllSpots thunk
@@ -77,6 +84,40 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   }
 };
 
+//thunk for create spot
+
+export const thunkCreateSpot = (payload) => async (dispatch) => {
+  // if (!payload) return null;
+  console.log('form***', payload)
+  console.log("entered create spot thunk");
+  const res = await csrfFetch("/api/spots", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  console.log("res from thunk: ", res);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionCreateSpot(data));
+    return data
+  } else {
+    console.log('error')
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //GetAllSpots normalizer
@@ -110,24 +151,26 @@ function normalizerSpots(spots) {
 
 
 
-
   let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
   export default function spotReducer(state = initialState, action) {
-  let newState;
-  switch (action.type) {
-    case GETALLSPOTS:
-      newState = { ...state, allSpots: {} };
-      newState.allSpots = action.spots;
-      return newState;
-    case GETSPOTDETAILS:
-      newState = { ...state, singleSpot: {} };
-      newState.singleSpot = action.spot;
-      return newState;
+    let newState;
+    switch (action.type) {
+      case GETALLSPOTS:
+        newState = { ...state, allSpots: {} };
+        newState.allSpots = action.spots;
+        return newState;
+      case GETSPOTDETAILS:
+        newState = { ...state, singleSpot: {} };
+        newState.singleSpot = action.spot;
+        return newState;
       case GETREVIEWSBYSPOTID:
         newState = { ...state, spot: {} };
         newState.spot = action.reviews;
         return newState;
-    default:
-      return state;
+      case CREATESPOT:
+        console.log('payload***', action)
+        newState = {...state, [action.payload.id]: action.payload}
+      default:
+        return state;
+    }
   }
-}
