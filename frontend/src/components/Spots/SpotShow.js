@@ -5,6 +5,7 @@ import { thunkGetSpotDetails, thunkGetReviewsBySpotId } from "../../store/spots"
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
+
 // import "./Reviews.css";
 
 const SpotShow = () => {
@@ -17,16 +18,19 @@ const SpotShow = () => {
     state.spots.allSpots ? state.spots.allSpots[spotId] : []
   );
 
-  const spotArr = Object.values(
+  const spotArr =
     useSelector((state) =>
       state.spots.singleSpot ? state.spots.singleSpot : []
     )
-  );
 
 
-  // console.log("spot!!", spotArr);
+
+  // console.log("spot", spot);
+  // console.log("spot array", spotArr);
 
   // console.log('spot by id: ', spots.id.SpotImages)
+
+  console.log("%c wjirhrishdsifshfihdsfifi", "color:orange", {spots, spotArr});
 
 
 
@@ -44,38 +48,29 @@ const SpotShow = () => {
   console.log(reviewsArr)
   // const reviewDataFunction = thunkGetReviewsBySpotId(spotId)
 
+console.log('spot arr spot images: ', spotArr.SpotImages)
 
-
-  if (!spots || spotArr.length === 0) return null;
+  if (!spotArr.SpotImages) return null;
 
   return (
     <>
       <main className="outer-wrapper">
-        <h3>{spotArr[12]}</h3>
-        <p>{spotArr[9]}, {spotArr[10]}, {spotArr[11]}</p>
-        <div className="details-big-photo-container">
-          {/* I am in spot page now { hasUserFinishedReservationWithinLastTenDays && < reviewComponent /> } */}
-          <div className="preview-image-container">
-            <Link key={spotId} to={`/spots/${spotId}`}>
-              <img className="preview-image" src={`${spots.previewImage}`} />
-            </Link>
+
+
+        {/* </div> */}
+
+        {spotArr.SpotImages.map(spotImageObj => (
+          <div>
+            <img src= {spotImageObj.url}>
+            </img>
           </div>
-          <div className="small-images-container">
-            {spotArr.map((spotObj, i) => (
-              i < 4 &&
-              <div key={i} className="other-images">
-                <Link to={`/spots/${spotId}`}>
-                  <img className="try-image" src={`${spotObj.url}`} />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
 
 
         <section className="lower-spot-show">
           <article className="description">
-          {spotArr.map((spotObj, i) => (
+           <h2>{spotArr.Owner.firstName}, {spotArr.Owner.lastName}</h2>
+          {/* {spotArr.map((spotObj, i) => (
             <div key={i}>
             <h2>
               {spotObj.firstName} {"  "} {spotObj.lastName}
@@ -83,7 +78,7 @@ const SpotShow = () => {
             <p>
             </p>
             </div>
-          ))}
+          ))} */}
           {spotArr[5]}
         </article>
         <div className = 'price-star-review-wrapper'>
@@ -108,7 +103,7 @@ const SpotShow = () => {
           {spotArr[7]} #.# {'  '} {spotArr[6]} reviews
           </div>
           <div className="reviews-lower-text">
-            {reviewsArr.map((reviewsObj, i) => (
+            {reviewsArr?.map((reviewsObj, i) => (
               <div key={i}>
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>

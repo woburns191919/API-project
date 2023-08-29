@@ -2,24 +2,25 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import { createSpot } from '../../store/spots';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkCreateSpot } from "../../store/spots";
+import { thunkSpotCreateSpot } from "../../store/spots";
+import { thunkSpotImageCreateSpot } from "../../store/spots";
 import "./GetAllSpots.css";
 
 const SpotForm = () => {
   const history = useHistory();
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
-  console.log('current user****', user)
+  // console.log('current user****', user)
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [basePrice, setBasePrice] = useState("");
+  const [price, setPrice] = useState("");
   const [name, setName] = useState("");
   const [previewImage, setPreviewImage] = useState("");
   const [smallImage1, setSmallImage1] = useState("");
@@ -36,32 +37,65 @@ const SpotForm = () => {
     e.preventDefault();
 
     const payload = {
-      country,
       address,
       city,
       state,
-      latitude,
-      longitude,
-      description,
+      country,
+      lat,
+      lng,
       name,
-      basePrice,
-      title,
-      previewImage,
-      smallImage1,
-      smallImage2,
-      smallImage3,
-      smallImage4,
+      description,
+      price,
     };
 
-    try {
-      const createdSpot = await dispatch(thunkCreateSpot(payload));
+    const imageObj = [{
+      url: previewImage,
+      preview: true
+    },
+    {
+      url: smallImage1,
+      preview: false
+    },
+    {
+      url: smallImage2,
+      preview: false
+    },
+    {
+      url: smallImage3,
+      preview: false
+    },
+    {
+      url: smallImage4,
+      preview: false
+    },
+  ]
+const newImageArray = []
+imageObj.forEach(obj => {
+ obj.url && newImageArray.push(obj)
+})
 
-      console.log("payload****", payload);
-      history.push("/"); //    /spot/:spotId
-      if (createdSpot.id) {
-        setValidationErrors();
+// console.log('1st new imageArr****', newImageArray)
+
+    try {
+
+      // console.log(' from created spotimage*******', newImageArray)
+      // console.log("created spot id****", createdSpot.id)
+      const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
+      if (!createdSpot.id) return null
+      else {
+        // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
+      // imageObj.forEach(async (el) => await thunkSpotImageCreateSpot(el, createdSpot.id))
+      for (let el of imageObj) {
+        await dispatch(thunkSpotImageCreateSpot(el, createdSpot.id))
+      }
+
+        // setValidationErrors();
         history.push(`/spots/${createdSpot.id}`);
       }
+
+      // } else if (createdSpot) {
+      //   throw new Error('spot exists');
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -126,8 +160,8 @@ const SpotForm = () => {
             <input
               type="text"
               name="latitude"
-              value={latitude}
-              onChange={(e) => setLatitude(e.target.value)}
+              value={lat}
+              onChange={(e) => setLat(e.target.value)}
             />
           </label>
         </div>
@@ -137,8 +171,8 @@ const SpotForm = () => {
             <input
               type="text"
               name="longitude"
-              value={longitude}
-              onChange={(e) => setLongitude(e.target.value)}
+              value={lng}
+              onChange={(e) => setLng(e.target.value)}
             />
           </label>
         </div>
@@ -186,9 +220,9 @@ const SpotForm = () => {
             <input
               type="number"
               name="base price"
-              value={basePrice}
+              value={price}
               onChange={(e) => {
-                setBasePrice(e.target.value);
+                setPrice(e.target.value);
               }}
             ></input>
           </label>
@@ -201,7 +235,7 @@ const SpotForm = () => {
               name="priview image URL"
               value={previewImage}
               onChange={(e) => {
-                setPreviewImage(e.target.value);
+                {setPreviewImage(e.target.value)};
               }}
             ></input>
           </label>

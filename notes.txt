@@ -6,3 +6,27 @@ colorZilla
 
 full crud: spots
 crd: reviews
+
+
+
+
+
+<h3>{spotArr[12]}</h3>
+        <p>{spotArr[9]}, {spotArr[10]}, {spotArr[11]}</p>
+        <div className="details-big-photo-container">
+          {/* I am in spot page now { hasUserFinishedReservationWithinLastTenDays && < reviewComponent /> } */}
+          <div className="preview-image-container">
+            <Link key={spotId} to={`/spots/${spotId}`}>
+              <img className="preview-image" src={`${spots.previewImage}`} />
+            </Link>
+          </div>
+          <div className="small-images-container">
+            {spotArr.map((spotObj, i) => (
+              i < 4 &&
+              <div key={i} className="other-images">
+                <Link to={`/spots/${spotId}`}>
+                  <img className="try-image" src={`${spotObj.url}`} />
+                </Link>
+              </div>
+            ))}
+          </div>
