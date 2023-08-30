@@ -25,6 +25,18 @@ const SpotShow = () => {
 
   const reviewsArr = useSelector((state) => state.spots.spot.Reviews);
 
+  const loggedInUser = useSelector(
+    (state) => state.session && state.session.user
+  );
+
+
+  // console.log('spotArr info***', spotArr)
+  // console.log("logged in user info***", loggedInUser);
+
+
+  // console.log('reviews arr', reviewsArr)
+
+
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
@@ -33,37 +45,39 @@ const SpotShow = () => {
     dispatch(thunkGetReviewsBySpotId(spotId));
   }, [dispatch]);
 
-
   if (!spotArr.SpotImages) return null;
 
   return (
     <>
       <main className="outer-wrapper">
         <div className="details-big-photo-container">
-          {spotArr.SpotImages.map((spotImageObj, i) => (
-            spotImageObj.preview === true &&
-            <div key={i}>
-              <img src={spotImageObj.url}></img>
-            </div>
-          ))}
+          {spotArr.SpotImages.map(
+            (spotImageObj, i) =>
+              spotImageObj.preview === true && (
+                <div key={i}>
+                  <img src={spotImageObj.url}></img>
+                </div>
+              )
+          )}
         </div>
         <div className="small-images-container">
-          {spotArr.SpotImages.map((spotImageObj, i) => (
-            spotImageObj.preview === false &&
-            <div key={i}>
-              <img src={spotImageObj.url}></img>
-            </div>
-          ))}
+          {spotArr.SpotImages.map(
+            (spotImageObj, i) =>
+              spotImageObj.preview === false && (
+                <div key={i}>
+                  <img src={spotImageObj.url}></img>
+                </div>
+              )
+          )}
         </div>
 
         <section className="lower-spot-show">
           <article className="description">
             <h2>
-              Hosted by {spotArr.Owner.firstName}  {"  "} {spotArr.Owner.lastName}
+              Hosted by {spotArr.Owner.firstName} {"  "}{" "}
+              {spotArr.Owner.lastName}
             </h2>
-          <p className="description">
-            {spotArr.description}
-          </p>
+            <p className="description">{spotArr.description}</p>
           </article>
           <div className="price-star-review-wrapper">
             <div className="top-price-star-review-wrapper">
@@ -81,6 +95,15 @@ const SpotShow = () => {
           <div className="reviews-lower-stars-number">
             {spotArr.avgStarRating} #.# {"  "} {spotArr.numReviews} reviews
           </div>
+          <Link to="/reviews/current">
+          <div>
+
+            <button className="button-post-review" hidden={spotArr.Owner.id === loggedInUser.id &&loggedInUser.id === loggedInUser.id
+            }>
+              Post Your Review
+            </button>
+          </div>
+              </Link>
           <div className="reviews-lower-text">
             {reviewsArr?.map((reviewsObj, i) => (
               <div key={i}>

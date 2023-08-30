@@ -101,7 +101,7 @@ imageObj.forEach(obj => {
     }
   };
 
-    // useEffect(() => {
+  //   useEffect(() => {
   //   const errors = {};
   //   setValidationErrors(errors);
   // }, []);
@@ -116,6 +116,7 @@ imageObj.forEach(obj => {
           Country <br></br>
           <input
             type="text"
+            required="true"
             // name="country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
@@ -126,6 +127,7 @@ imageObj.forEach(obj => {
             Street Address <br></br>
             <input
               type="text"
+              required="true"
               name="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -136,6 +138,7 @@ imageObj.forEach(obj => {
           <label>
             City <br></br>
             <input
+              required="true"
               type="text"
               name="city"
               value={city}
@@ -147,6 +150,7 @@ imageObj.forEach(obj => {
           <label>
             State <br></br>
             <input
+              required="true"
               type="text"
               name="state"
               value={state}
@@ -158,6 +162,7 @@ imageObj.forEach(obj => {
           <label>
             Latitude <br></br>
             <input
+              required="true"
               type="text"
               name="latitude"
               value={lat}
@@ -169,6 +174,7 @@ imageObj.forEach(obj => {
           <label>
             Longitude <br></br>
             <input
+             required="true"
               type="text"
               name="longitude"
               value={lng}
@@ -176,7 +182,7 @@ imageObj.forEach(obj => {
             />
           </label>
         </div>
-        <div>
+        {/* <div>
           <label>
             Name <br></br>
             <input
@@ -186,11 +192,13 @@ imageObj.forEach(obj => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-        </div>
+        </div> */}
         <div>
           <label>
             Describe your place to guests <br></br>
             <input
+            required="true"
+            minLength="30"
               type="textarea"
               value={description}
               name="description"
@@ -205,6 +213,7 @@ imageObj.forEach(obj => {
           <label>
             Create a title for your spot <br></br>
             <input
+             required="true"
               type="text"
               value={title}
               name="title"
@@ -218,6 +227,7 @@ imageObj.forEach(obj => {
           <label>
             Set a base price for your spot <br></br>
             <input
+             required="true"
               type="number"
               name="base price"
               value={price}
@@ -231,6 +241,7 @@ imageObj.forEach(obj => {
           <label>
             Liven up your spot with photos <br></br>
             <input
+             required="true"
               type="url"
               name="priview image URL"
               value={previewImage}
@@ -242,6 +253,7 @@ imageObj.forEach(obj => {
         </div>
         <div>
           <input
+           required="true"
             type="url"
             name="image URL"
             value={smallImage1}
