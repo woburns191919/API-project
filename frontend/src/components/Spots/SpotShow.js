@@ -32,11 +32,18 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
+  console.log('spot array', spotArr)
 
   console.log('spot arry from details page', spotArr)
 
   return (
     <>
+    <div className="spot-name">
+      {spotArr.name}
+    </div>
+    <div className="city-state-country">
+      {spotArr.city}, {spotArr.state}, {''} {spotArr.country}
+    </div>
       <main className="outer-wrapper">
         <div className="details-big-photo-container">
           {spotArr.SpotImages.map(
