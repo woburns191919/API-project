@@ -4,38 +4,24 @@ import {
   thunkGetSpotDetails,
   thunkGetReviewsBySpotId,
 } from "../../store/spots";
-// import { thunkGetReviewsBySpotId } from "../../store/reviews";
+
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
-
-// import "./Reviews.css";
+import OpenModalButton from "../OpenModalButton";
 
 const SpotShow = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
-
-  // const spots = useSelector((state) =>
-  //   state.spots.allSpots ? state.spots.allSpots[spotId] : []
-  // );
 
   const spotArr = useSelector((state) =>
     state.spots.singleSpot ? state.spots.singleSpot : []
   );
 
   const reviewsArr = useSelector((state) => state.spots.spot.Reviews);
-
   const loggedInUser = useSelector(
     (state) => state.session && state.session.user
   );
-
-
-  // console.log('spotArr info***', spotArr)
-  // console.log("logged in user info***", loggedInUser);
-
-
-  // console.log('reviews arr', reviewsArr)
-
 
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
@@ -96,15 +82,18 @@ const SpotShow = () => {
             {spotArr.avgStarRating} #.# {"  "} {spotArr.numReviews} reviews
           </div>
           <Link to="/reviews/current">
-          <div>
+            <OpenModalButton
+              buttonText="Post Your Review"
+              hidden={
+                spotArr.Owner &&
+                loggedInUser &&
+                spotArr.Owner.id === loggedInUser.id &&
+                loggedInUser.id === loggedInUser.id
+              }
+              modalComponent={<OpenModalButton />}
+            />
+          </Link>
 
-            <button className="button-post-review"
-            hidden={spotArr.Owner.id === loggedInUser.id &&loggedInUser.id === loggedInUser.id
-            }>
-              Post Your Review
-            </button>
-          </div>
-              </Link>
           <div className="reviews-lower-text">
             {reviewsArr?.map((reviewsObj, i) => (
               <div key={i}>

@@ -33,7 +33,7 @@ function LoginFormModal() {
           Username or Email
           <input
             type="text"
-            minlength="4"
+            minLength="4"
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
@@ -43,7 +43,7 @@ function LoginFormModal() {
           Password
           <input
             type="password"
-            minlength="6"
+            minLength="6"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

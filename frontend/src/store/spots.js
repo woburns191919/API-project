@@ -12,6 +12,8 @@ const CREATESPOT = "/spots/create_spot";
 
 const SPOTIMAGECREATESPOT = "/spots_spot_image_create_spot";
 
+const GETCURRENTSPOTS = "/spots_get_current_spots";
+
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,
   reviews,
@@ -37,9 +39,18 @@ const actionGetSpotDetails = (spot) => ({
   spot,
 });
 
+//create spot action
+
 const actionCreateSpot = (form) => ({
   type: CREATESPOT,
   form,
+});
+
+// get current spots action
+
+const actionGetCurrentSpots = (spots) => ({
+  type: GETCURRENTSPOTS,
+  spots,
 });
 
 //GetAllSpots thunk
@@ -64,7 +75,6 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
     const data = await res.json();
     dispatch(actionGetSpotDetails(data));
     return data;
-
   } else {
     console.warn("error: ", res);
   }
@@ -84,19 +94,21 @@ export const thunkSpotCreateSpot = (payload) => async (dispatch) => {
     },
     body: JSON.stringify(payload),
   });
-  console.log('res??', res)
+  console.log("res??", res);
   if (!res.ok) {
     throw new Error();
   }
   const data = await res.json();
   dispatch(actionCreateSpot(data));
-  console.log('data at bottom of thunk 1', data)
+  console.log("data at bottom of thunk 1", data);
   return data;
 };
 
+// thunk for create spot image
+
 export const thunkSpotImageCreateSpot =
-(imageData, spotId) => async (dispatch) => {
-    console.log('entering thunk 2')
+  (imageData, spotId) => async (dispatch) => {
+    console.log("entering thunk 2");
     const res = await csrfFetch(`/api/spots/${spotId}/images`, {
       method: "POST",
       headers: {
@@ -108,10 +120,24 @@ export const thunkSpotImageCreateSpot =
       throw new Error();
     }
     const data = await res.json();
-    console.log('data from thunk 2', data)
+    console.log("data from thunk 2", data);
     dispatch(actionSpotImageCreateSpot(data));
     return data;
   };
+
+//thunk for get current spots
+
+export const thunkGetCurrentSpots = () => async (dispatch) => {
+  console.log("entering thunk for get current spots");
+  const res = await csrfFetch(`/api/spots/current`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionGetCurrentSpots(data));
+    return data;
+  } else {
+    console.warn("error: ", res);
+  }
+};
 
 //GetAllSpots normalizer
 
@@ -122,9 +148,6 @@ function normalizerSpots(spots) {
 }
 
 //GetSpotDetails normalizer
-
-
-
 
 // function normalizerGetSpotDetails(spot) {
 
@@ -163,9 +186,12 @@ export default function spotReducer(state = initialState, action) {
       newState = { ...state, [action.form.id]: action.form };
     case SPOTIMAGECREATESPOT:
       newState = { ...state, singleSpot: {} };
-      console.log("payload***", action);
+    case GETCURRENTSPOTS:
+      console.log("payload***");
+      newState = { ...state, allSpots: {} };
+      newState.allSpots = action.spots;
       return newState;
-      default:
+    default:
       return state;
   }
 }
