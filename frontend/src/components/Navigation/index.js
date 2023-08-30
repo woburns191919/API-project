@@ -14,9 +14,12 @@ function Navigation({ isLoaded }) {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
+      <>
+
       <li>
         <ProfileButton user={sessionUser} />
       </li>
+      </>
     );
   } else {
     sessionLinks = (
@@ -35,9 +38,21 @@ function Navigation({ isLoaded }) {
 
 
   return (
+    <>
     <header className="header">
       <div className ="air-logo">
       logo
+      </div>
+     <div className="create-spot-in-manage-spots">
+
+        {sessionUser &&
+       <button>
+          <NavLink to="/spots/new">
+               Create a New Spot
+             </NavLink>
+          </button>
+          }
+
       </div>
     <div className ="sign-up">
     <ul>
@@ -52,7 +67,24 @@ function Navigation({ isLoaded }) {
     </ul>
     </div>
     </header>
+    </>
   );
 }
 
 export default Navigation;
+
+
+
+
+/*
+  <div className="create-spot-in-manage-spots">
+        {sessionUser &&
+       <button>
+          <Link to="/spots">
+               Create a New Spot
+             </Link>
+          </button>
+          }
+
+      </div>
+*/

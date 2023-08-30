@@ -27,7 +27,7 @@ function App() {
             <Route exact path="/">
               <SpotsIndexPage />
             </Route>
-            <Route exact path="/spots">
+            <Route exact path="/spots/new">
               <SpotForm />
             </Route>
             <Route exact path="/spots/current">

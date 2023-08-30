@@ -45,6 +45,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
+
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
@@ -59,9 +60,6 @@ function ProfileButton({ user }) {
               <button onClick={logout}>Log Out</button>
 
             </li>
-            <Link to="/spots">
-               Create a New Spot
-             </Link>
             <Link to="/spots/current">
                Manage Spots
              </Link>
