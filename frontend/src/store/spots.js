@@ -14,6 +14,10 @@ const SPOTIMAGECREATESPOT = "/spots_spot_image_create_spot";
 
 const GETCURRENTSPOTS = "/spots_get_current_spots";
 
+const GETEDITSPOT = "/spots/get_edit_spot"
+
+const PUTEDITSPOT = "/spots/put_edit_spot"
+
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,
   reviews,
@@ -52,6 +56,22 @@ const actionGetCurrentSpots = (spots) => ({
   type: GETCURRENTSPOTS,
   spots,
 });
+
+
+//edit get spot action
+
+const actionGetEditSpot = (spot) => ({
+  type: GETEDITSPOT,
+  spot
+})
+
+//edit put spot action
+
+const actionPutEditSpot = (spot) => ({
+  type: PUTEDITSPOT,
+  spot
+})
+
 
 //GetAllSpots thunk
 export const thunkGetAllSpots = () => async (dispatch) => {
@@ -128,7 +148,7 @@ export const thunkSpotImageCreateSpot =
 //thunk for get current spots
 
 export const thunkGetCurrentSpots = () => async (dispatch) => {
-  console.log("entering thunk for get current spots");
+  // console.log("entering thunk for get current spots");
   const res = await csrfFetch(`/api/spots/current`);
   if (res.ok) {
     const data = await res.json();
@@ -139,6 +159,38 @@ export const thunkGetCurrentSpots = () => async (dispatch) => {
   }
 };
 
+//thunk GET for edit spot
+
+// export const thunkGetEditSpot = () => async (dispatch) => {
+//   const res = await csrfFetch('/api/spots/id');
+//   if (res.ok) {
+//     const data = await res.json();
+//     dispatch(actionGetEditSpot(data));
+//     return data
+//   } else {
+//     console.warn("error: ", res)
+//   }
+// }
+
+
+//thunk PUT for edit spot
+
+export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(spotData),
+    });
+    if (!res.ok) {
+      throw new Error();
+    }
+    const data = await res.json();
+    console.log("data from edit thunk", data);
+    dispatch(actionPutEditSpot(data));
+    return data;
+  };
 //GetAllSpots normalizer
 
 function normalizerSpots(spots) {
@@ -187,9 +239,18 @@ export default function spotReducer(state = initialState, action) {
     case SPOTIMAGECREATESPOT:
       newState = { ...state, singleSpot: {} };
     case GETCURRENTSPOTS:
-      console.log("payload***");
+      // console.log("current spots payload***", action);
       newState = { ...state, allSpots: {} };
       newState.allSpots = action.spots;
+    // case GETEDITSPOT:
+    //   console.log('action from get edit', action)
+    //   newState = { ...state, singleSpot: {} };
+    //   newState.singleSpot = action.spot
+      return newState;
+    case PUTEDITSPOT:
+      console.log('action from put edit', action)
+      newState = { ...state, [action.form.id]: action.form };
+      newState.singleSpot = action.spot
       return newState;
     default:
       return state;

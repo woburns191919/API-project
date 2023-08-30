@@ -33,6 +33,8 @@ const SpotShow = () => {
 
   if (!spotArr.SpotImages) return null;
 
+  console.log('spot arry from details page', spotArr)
+
   return (
     <>
       <main className="outer-wrapper">

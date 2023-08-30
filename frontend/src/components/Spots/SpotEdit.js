@@ -1,67 +1,4 @@
-make sure country is showing on details page
-
-
-colorZilla
-
-
-full crud: spots
-crd: reviews
-
-
-
-
-
-<h3>{spotArr[12]}</h3>
-        <p>{spotArr[9]}, {spotArr[10]}, {spotArr[11]}</p>
-        <div className="details-big-photo-container">
-          {/* I am in spot page now { hasUserFinishedReservationWithinLastTenDays && < reviewComponent /> } */}
-          <div className="preview-image-container">
-            <Link key={spotId} to={`/spots/${spotId}`}>
-              <img className="preview-image" src={`${spots.previewImage}`} />
-            </Link>
-          </div>
-          <div className="small-images-container">
-            {spotArr.map((spotObj, i) => (
-              i < 4 &&
-              <div key={i} className="other-images">
-                <Link to={`/spots/${spotId}`}>
-                  <img className="try-image" src={`${spotObj.url}`} />
-                </Link>
-              </div>
-            ))}
-          </div>
-
-convert it to a date obj through date api. then pass in created at string into date obj
-getmonth method  (returns integer) on created At. build array in front end.
-
-
-
-
-!loggedInUser.id &&
-
-
-{reviewsArr.filter(reviewsObj => reviewsObj.userId === loggedInUser.id).length}
-
-
-
-
-
-pet rating ---- use for reviews
-
-
-
-get reviews, already did in spots
-
-
-
-
-
-
-
-notes for edit spots:
-
-
-import { thunkPutEditSpot} from "../../store/spots";
+// import { thunkPutEditSpot} from "../../store/spots";
 // import { useHistory, useParams } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 // import { useState, useEffect } from "react";
@@ -259,4 +196,3 @@ import { thunkPutEditSpot} from "../../store/spots";
 // };
 
 // export default SpotEdit;
-

@@ -10,6 +10,7 @@ import ProfileButton from "./components/Navigation/ProfileButton";
 import SpotForm from "./components/Spots/SpotForm";
 import ReviewForm from "./components/Reviews/ReviewForm";
 import SpotsManage from "./components/Spots/SpotsManage";
+import SpotEdit from "./components/Spots/SpotEdit";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route exact path="/reviews/current">
               <ReviewForm />
+            </Route>
+            <Route exact path="/spots/edit">
+              <SpotEdit />
             </Route>
           </Switch>
         </Switch>

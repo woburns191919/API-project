@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import { createSpot } from '../../store/spots';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkSpotCreateSpot } from "../../store/spots";
-import { thunkSpotImageCreateSpot } from "../../store/spots";
+import { thunkSpotCreateSpot, thunkGetEditSpot, thunkPutEditSpot, thunkSpotImageCreateSpot  } from "../../store/spots";
+
 import "./GetAllSpots.css";
 
 const SpotForm = () => {
