@@ -10,6 +10,8 @@ const GETREVIEWSBYSPOTID = "/spots/get_reviews_by_id";
 
 const CREATESPOT = "/spots/create_spot";
 
+const SPOTIMAGECREATESPOT = "/spots_spot_image_create_spot";
+
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,
   reviews,
@@ -17,6 +19,10 @@ const actionGetReviewsBySpotId = (reviews) => ({
 
 //actions
 
+const actionSpotImageCreateSpot = (images) => ({
+  type: SPOTIMAGECREATESPOT,
+  images,
+});
 //GetAllSpot action
 
 const actionGetSpots = (spots) => ({
@@ -38,7 +44,6 @@ const actionCreateSpot = (form) => ({
 
 //GetAllSpots thunk
 export const thunkGetAllSpots = () => async (dispatch) => {
-
   const res = await csrfFetch("/api/spots");
   // console.log(res)
   if (res.ok) {
@@ -57,44 +62,19 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`);
   if (res.ok) {
     const data = await res.json();
-    // console.log('before array', data.Owner)
-    const spotImageArr = data.SpotImages
-    const normalizedSpotDetails = {};
-    for (let i = 1; i < spotImageArr.length; i++) {
-      let spotObj = spotImageArr[i]
-      normalizedSpotDetails[spotObj.id] = spotObj
-    }
-    normalizedSpotDetails.owner = data.Owner
-    normalizedSpotDetails.description = data.description
-    normalizedSpotDetails.reviews = data.numReviews
-    normalizedSpotDetails.avgStarRating = data.avgStarRating
-    normalizedSpotDetails.price = data.price
-    normalizedSpotDetails.city = data.city
-    normalizedSpotDetails.state = data.state
-    normalizedSpotDetails.country = data.country
-    normalizedSpotDetails.name = data.name
-    dispatch(actionGetSpotDetails(normalizedSpotDetails));
-
-
-    return normalizedSpotDetails
-    // console.log('data??', data)
+    dispatch(actionGetSpotDetails(data));
+    return data;
 
   } else {
     console.warn("error: ", res);
   }
 };
 
-
-
-
-
-
-
 //thunk for create spot
 
-export const thunkCreateSpot = (payload) => async (dispatch) => {
-  // if (!payload) return null;
-  console.log('form***', payload)
+export const thunkSpotCreateSpot = (payload) => async (dispatch) => {
+  if (!payload) return null;
+  console.log("form***", payload);
   console.log("entered create spot thunk");
 
   const res = await csrfFetch("/api/spots", {
@@ -104,26 +84,34 @@ export const thunkCreateSpot = (payload) => async (dispatch) => {
     },
     body: JSON.stringify(payload),
   });
+  console.log('res??', res)
   if (!res.ok) {
-   throw new Error()
+    throw new Error();
   }
-    const formData = await res.json()
-    dispatch(actionCreateSpot(formData))
-    return formData
-  }
+  const data = await res.json();
+  dispatch(actionCreateSpot(data));
+  console.log('data at bottom of thunk 1', data)
+  return data;
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
+export const thunkSpotImageCreateSpot =
+(imageData, spotId) => async (dispatch) => {
+    console.log('entering thunk 2')
+    const res = await csrfFetch(`/api/spots/${spotId}/images`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(imageData),
+    });
+    if (!res.ok) {
+      throw new Error();
+    }
+    const data = await res.json();
+    console.log('data from thunk 2', data)
+    dispatch(actionSpotImageCreateSpot(data));
+    return data;
+  };
 
 //GetAllSpots normalizer
 
@@ -135,47 +123,49 @@ function normalizerSpots(spots) {
 
 //GetSpotDetails normalizer
 
+
+
+
 // function normalizerGetSpotDetails(spot) {
 
+// }
 
-  // }
+//reducer
 
-  //reducer
-
-
-  export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
-    // console.log("entered review thunk");
-    const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(actionGetReviewsBySpotId(data));
-      // console.log("data from thunk: ", data);
-      return data;
-    }
-  };
-
-
-
-  let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
-  export default function spotReducer(state = initialState, action) {
-    let newState;
-    switch (action.type) {
-      case GETALLSPOTS:
-        newState = { ...state, allSpots: {} };
-        newState.allSpots = action.spots;
-        return newState;
-      case GETSPOTDETAILS:
-        newState = { ...state, singleSpot: {} };
-        newState.singleSpot = action.spot;
-        return newState;
-      case GETREVIEWSBYSPOTID:
-        newState = { ...state, spot: {} };
-        newState.spot = action.reviews;
-        return newState;
-      case CREATESPOT:
-        console.log('payload***', action)
-        newState = {...state, [action.payload.id]: action.payload}
-      default:
-        return state;
-    }
+export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
+  // console.log("entered review thunk");
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionGetReviewsBySpotId(data));
+    // console.log("data from thunk: ", data);
+    return data;
   }
+};
+
+let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
+export default function spotReducer(state = initialState, action) {
+  let newState;
+  switch (action.type) {
+    case GETALLSPOTS:
+      newState = { ...state, allSpots: {} };
+      newState.allSpots = action.spots;
+      return newState;
+    case GETSPOTDETAILS:
+      newState = { ...state, singleSpot: {} };
+      newState.singleSpot = action.spot;
+      return newState;
+    case GETREVIEWSBYSPOTID:
+      newState = { ...state, spot: {} };
+      newState.spot = action.reviews;
+      return newState;
+    case CREATESPOT:
+      newState = { ...state, [action.form.id]: action.form };
+    case SPOTIMAGECREATESPOT:
+      newState = { ...state, singleSpot: {} };
+      console.log("payload***", action);
+      return newState;
+      default:
+      return state;
+  }
+}
