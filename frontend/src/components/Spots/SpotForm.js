@@ -8,7 +8,7 @@ import "./GetAllSpots.css";
 
 const SpotForm = () => {
   const history = useHistory();
-  const user = useSelector(state => state.session.user)
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   // console.log('current user****', user)
 
@@ -30,8 +30,8 @@ const SpotForm = () => {
   const [validationErrors, setValidationErrors] = useState({});
 
   if (!user) {
-    alert('You must be logged in to create a spot!')
-    history.push('/')
+    alert("You must be logged in to create a spot!");
+    history.push("/");
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,46 +48,46 @@ const SpotForm = () => {
       price,
     };
 
-    const imageObj = [{
-      url: previewImage,
-      preview: true
-    },
-    {
-      url: smallImage1,
-      preview: false
-    },
-    {
-      url: smallImage2,
-      preview: false
-    },
-    {
-      url: smallImage3,
-      preview: false
-    },
-    {
-      url: smallImage4,
-      preview: false
-    },
-  ]
-const newImageArray = []
-imageObj.forEach(obj => {
- obj.url && newImageArray.push(obj)
-})
+    const imageObj = [
+      {
+        url: previewImage,
+        preview: true,
+      },
+      {
+        url: smallImage1,
+        preview: false,
+      },
+      {
+        url: smallImage2,
+        preview: false,
+      },
+      {
+        url: smallImage3,
+        preview: false,
+      },
+      {
+        url: smallImage4,
+        preview: false,
+      },
+    ];
+    const newImageArray = [];
+    imageObj.forEach((obj) => {
+      obj.url && newImageArray.push(obj);
+    });
 
-// console.log('1st new imageArr****', newImageArray)
+    // console.log('1st new imageArr****', newImageArray)
 
     try {
-
       // console.log(' from created spotimage*******', newImageArray)
       // console.log("created spot id****", createdSpot.id)
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
-      if (!createdSpot.id) return null
+      if (!createdSpot.id) return null;
       else {
         // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
-      // imageObj.forEach(async (el) => await thunkSpotImageCreateSpot(el, createdSpot.id))
-      for (let el of imageObj) {
-        await dispatch(thunkSpotImageCreateSpot(el, createdSpot.id))
-      }
+        // imageObj.forEach(async (el) => await thunkSpotImageCreateSpot(el, createdSpot.id))
+        for (let el of imageObj) {
+          await dispatch(thunkSpotImageCreateSpot(el, createdSpot.id));
+        }
 
         // setValidationErrors();
         history.push(`/spots/${createdSpot.id}`);
@@ -174,7 +174,7 @@ imageObj.forEach(obj => {
           <label>
             Longitude <br></br>
             <input
-             required="true"
+              required="true"
               type="text"
               name="longitude"
               value={lng}
@@ -182,7 +182,7 @@ imageObj.forEach(obj => {
             />
           </label>
         </div>
-        {/* <div>
+        <div>
           <label>
             Name <br></br>
             <input
@@ -192,13 +192,13 @@ imageObj.forEach(obj => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-        </div> */}
+        </div>
         <div>
           <label>
             Describe your place to guests <br></br>
             <input
-            required="true"
-            minLength="30"
+              required="true"
+              minLength="30"
               type="textarea"
               value={description}
               name="description"
@@ -213,7 +213,7 @@ imageObj.forEach(obj => {
           <label>
             Create a title for your spot <br></br>
             <input
-             required="true"
+              required="true"
               type="text"
               value={title}
               name="title"
@@ -227,7 +227,7 @@ imageObj.forEach(obj => {
           <label>
             Set a base price for your spot <br></br>
             <input
-             required="true"
+              required="true"
               type="number"
               name="base price"
               value={price}
@@ -241,19 +241,21 @@ imageObj.forEach(obj => {
           <label>
             Liven up your spot with photos <br></br>
             <input
-             required="true"
+              required="true"
               type="url"
               name="priview image URL"
               value={previewImage}
               onChange={(e) => {
-                {setPreviewImage(e.target.value)};
+                {
+                  setPreviewImage(e.target.value);
+                }
               }}
             ></input>
           </label>
         </div>
         <div>
           <input
-           required="true"
+            required="true"
             type="url"
             name="image URL"
             value={smallImage1}
