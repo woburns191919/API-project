@@ -98,7 +98,8 @@ const SpotShow = () => {
           <Link to="/reviews/current">
           <div>
 
-            <button className="button-post-review" hidden={spotArr.Owner.id === loggedInUser.id &&loggedInUser.id === loggedInUser.id
+            <button className="button-post-review"
+            hidden={spotArr.Owner.id === loggedInUser.id &&loggedInUser.id === loggedInUser.id
             }>
               Post Your Review
             </button>
