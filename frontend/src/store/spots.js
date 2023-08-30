@@ -123,6 +123,9 @@ function normalizerSpots(spots) {
 
 //GetSpotDetails normalizer
 
+
+
+
 // function normalizerGetSpotDetails(spot) {
 
 // }

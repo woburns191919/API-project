@@ -30,3 +30,6 @@ crd: reviews
               </div>
             ))}
           </div>
+
+convert it to a date obj through date api. then pass in created at string into date obj
+getmonth method  (returns integer) on created At. build array in front end.
