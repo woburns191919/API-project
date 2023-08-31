@@ -90,7 +90,7 @@ const SpotEdit = () => {
           Country <br></br>
           <input
             type="text"
-            required="true"
+            required={true}
             // name="country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
@@ -101,7 +101,7 @@ const SpotEdit = () => {
             Street Address <br></br>
             <input
               type="text"
-              required="true"
+              required={true}
               name="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -112,7 +112,7 @@ const SpotEdit = () => {
           <label>
             City <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="city"
               value={city}
@@ -124,7 +124,7 @@ const SpotEdit = () => {
           <label>
             State <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="state"
               value={state}
@@ -136,7 +136,7 @@ const SpotEdit = () => {
           <label>
             Latitude <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="latitude"
               value={lat}
@@ -148,7 +148,7 @@ const SpotEdit = () => {
           <label>
             Longitude <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="longitude"
               value={lng}
@@ -171,7 +171,7 @@ const SpotEdit = () => {
           <label>
             Describe your place to guests <br></br>
             <input
-              required="true"
+              required={true}
               minLength="30"
               type="textarea"
               value={description}
@@ -187,7 +187,7 @@ const SpotEdit = () => {
           <label>
             Create a title for your spot <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               value={title}
               name="title"
@@ -201,7 +201,7 @@ const SpotEdit = () => {
           <label>
             Set a base price for your spot <br></br>
             <input
-              required="true"
+              required={true}
               type="number"
               name="base price"
               value={price}

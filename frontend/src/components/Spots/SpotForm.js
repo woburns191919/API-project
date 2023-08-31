@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import { createSpot } from '../../store/spots';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkSpotCreateSpot, thunkGetEditSpot, thunkPutEditSpot, thunkSpotImageCreateSpot  } from "../../store/spots";
+import { thunkSpotCreateSpot, thunkSpotImageCreateSpot  } from "../../store/spots";
 
 import "./GetAllSpots.css";
 
@@ -79,8 +79,8 @@ const SpotForm = () => {
 
     try {
       // console.log(' from created spotimage*******', newImageArray)
-      // console.log("created spot id****", createdSpot.id)
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
+      console.log("created spot id****", createdSpot.id)
       if (!createdSpot.id) return null;
       else {
         // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
@@ -116,7 +116,7 @@ const SpotForm = () => {
           Country <br></br>
           <input
             type="text"
-            required="true"
+            required={true}
             // name="country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
@@ -127,7 +127,7 @@ const SpotForm = () => {
             Street Address <br></br>
             <input
               type="text"
-              required="true"
+              required={true}
               name="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
@@ -138,7 +138,7 @@ const SpotForm = () => {
           <label>
             City <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="city"
               value={city}
@@ -150,7 +150,7 @@ const SpotForm = () => {
           <label>
             State <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="state"
               value={state}
@@ -162,7 +162,7 @@ const SpotForm = () => {
           <label>
             Latitude <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="latitude"
               value={lat}
@@ -174,7 +174,7 @@ const SpotForm = () => {
           <label>
             Longitude <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               name="longitude"
               value={lng}
@@ -197,7 +197,7 @@ const SpotForm = () => {
           <label>
             Describe your place to guests <br></br>
             <input
-              required="true"
+              required={true}
               minLength="30"
               type="textarea"
               value={description}
@@ -213,7 +213,7 @@ const SpotForm = () => {
           <label>
             Create a title for your spot <br></br>
             <input
-              required="true"
+              required={true}
               type="text"
               value={title}
               name="title"
@@ -227,7 +227,7 @@ const SpotForm = () => {
           <label>
             Set a base price for your spot <br></br>
             <input
-              required="true"
+              required={true}
               type="number"
               name="base price"
               value={price}
@@ -241,7 +241,7 @@ const SpotForm = () => {
           <label>
             Liven up your spot with photos <br></br>
             <input
-              required="true"
+              required={true}
               type="url"
               name="priview image URL"
               value={previewImage}
@@ -255,7 +255,7 @@ const SpotForm = () => {
         </div>
         <div>
           <input
-            required="true"
+            required={true}
             type="url"
             name="image URL"
             value={smallImage1}
