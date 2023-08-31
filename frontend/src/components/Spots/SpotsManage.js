@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { NavLink} from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
+import "./SpotsManage.css";
 
  const SpotsManage= () => {
   // console.log('component rendered')
@@ -16,6 +17,11 @@ const sessionUser = useSelector((state) => state.session.user);
 useEffect(() => {
   dispatch(thunkGetCurrentSpots(sessionUser))
 }, [dispatch])
+
+const { setModalContent, setOnModalClose } = useModal();
+
+console.log(setModalContent)
+
 
 // dispatch(thunkGetCurrentSpots(sessionUser))
 const currentSpots = useSelector((state) => state.spots.allSpots.Spots)
@@ -46,7 +52,7 @@ if (!currentSpots) return null;
               Update
              </NavLink>
               </button> {'   '}
-              <button>
+
                 <Link to={`/spots/delete/${currentSpotObj.id}`}>
                 <NavLink to="/reviews/current">
             <OpenModalButton
@@ -61,7 +67,12 @@ if (!currentSpots) return null;
             />
           </NavLink>
                 </Link>
-                </button>
+
+                <button>
+          <NavLink to={`/spots/delete/${currentSpotObj.id}`}>
+               delete
+             </NavLink>
+          </button>
             </div>
           ))}
         </div>

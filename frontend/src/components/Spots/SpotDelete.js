@@ -1,18 +1,21 @@
-import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
-import { Link } from "react-router-dom";
-import { NavLink} from "react-router-dom";
+import { Link, NavLink, useParams, useHistory } from "react-router-dom";
+
 import { thunkSpotDelete, thunkGetSpotDetails } from "../../store/spots";
 
 const SpotDelete = () => {
-  return (
-    <>
-   null
-    </>
-  )
+  const { spotId } = useParams();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(thunkSpotDelete(spotId)).then(data => console.log('deleted', data))
+}, [dispatch])
+
+if (!spotId) return null;
 }
 
 

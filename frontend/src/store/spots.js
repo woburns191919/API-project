@@ -60,7 +60,9 @@ const actionGetCurrentSpots = (spots) => ({
 //delete spot action
 
 const actionSpotDelete = (spot) => ({
-  type: SPOTDELETE
+  type: SPOTDELETE,
+  spot
+
 })
 
 
@@ -190,15 +192,19 @@ export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
 //thunk for deleting a spot
 
 export const thunkSpotDelete = (spotId) => async (dispatch) => {
+  console.log('entered delete thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   })
+
+  console.log('res from delete thunk', res)
   if (res.ok) {
     const data = await res.json();
-    dispatch(actionSpotDelete(data.id))
+    dispatch(actionSpotDelete(data))
+    console.log('data from delete thunk', data)
     return data;
   }
 }
@@ -256,17 +262,15 @@ export default function spotReducer(state = initialState, action) {
       // console.log("current spots payload***", action);
       newState = { ...state, allSpots: {} };
       newState.allSpots = action.spots;
-    // case GETEDITSPOT:
-    //   console.log('action from get edit', action)
-    //   newState = { ...state, singleSpot: {} };
-    //   newState.singleSpot = action.spot
       return newState;
     case PUTEDITSPOT:
-      console.log('action from put edit', action)
+      // console.log('action from put edit', action)
       newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot
     case SPOTDELETE:
-      newState = { ...state, singleSpot: {} };
+      console.log('action from delete', action)
+      newState = { ...state, singleSpot: {} }
+      newState.singleSpot = action.spot
       return newState;
     default:
       return state;

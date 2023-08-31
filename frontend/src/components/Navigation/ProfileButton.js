@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
-    history.push('/')
+    history.push('/spots')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
