@@ -66,13 +66,6 @@ const actionSpotDelete = (spot) => ({
 })
 
 
-//edit get spot action
-
-// const actionGetEditSpot = (spot) => ({
-//   type: GETEDITSPOT,
-//   spot
-// })
-
 //edit put spot action
 
 const actionPutEditSpot = (spot) => ({
