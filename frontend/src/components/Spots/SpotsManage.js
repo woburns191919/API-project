@@ -1,80 +1,70 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetCurrentSpots } from "../../store/spots";
-import { Link } from 'react-router-dom';
-import { NavLink} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
+import SpotDelete from "./SpotDelete";
 import "./SpotsManage.css";
 
- const SpotsManage= () => {
+const SpotsManage = () => {
   // console.log('component rendered')
 
-const dispatch = useDispatch();
+  // const { setModalContent, setOnModalClose } = useModal()
+  // console.log('spot id from manage', spotId)
 
-const sessionUser = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
-useEffect(() => {
-  dispatch(thunkGetCurrentSpots(sessionUser))
-}, [dispatch])
+  const sessionUser = useSelector((state) => state.session.user);
 
-const { setModalContent, setOnModalClose } = useModal();
+  useEffect(() => {
+    dispatch(thunkGetCurrentSpots(sessionUser));
+  }, [dispatch]);
 
-console.log(setModalContent)
+  const currentSpotsObj = useSelector(
+    (state) => state.spots && state.spots.allSpots
+  );
 
+  const currentSpots = Object.values(currentSpotsObj)
 
-// dispatch(thunkGetCurrentSpots(sessionUser))
-const currentSpots = useSelector((state) => state.spots && state.spots.allSpots.Spots)
-// console.log('current spots****', currentSpots)
-if (!currentSpots) return null;
+  console.log('current spots from component', currentSpots)
+
+  if (!currentSpots) return null;
   return (
     <>
-    <main className="outer-wrapper">
-      <div className="photo-container">
-        {currentSpots.length && currentSpots.map((currentSpotObj, i) => (
-          <div key={i} className = "inner-Container">
-          <Link to={`/spots/${currentSpotObj.id}`}>
-            <img src={`${currentSpotObj.previewImage}`} />
-          </Link>
-          <div className="info">
-                <div className="left-info">
-                  <div className="city-state">
-                    {currentSpotObj.city}, {"   "} {"   "}
-                    {currentSpotObj.state}
-                  </div>
-                  <div className="star-info">{currentSpotObj.avgRating}</div>
-                </div>
-
-                <div className="right-info">${currentSpotObj.price} night</div>
-              </div>
-              <button>
-               <NavLink to={`/spots/edit/${currentSpotObj.id}`}>
-              Update
-             </NavLink>
-              </button> {'   '}
-
-                <Link to={`/spots/delete/${currentSpotObj.id}`}>
-                <NavLink to="/reviews/current">
-            <OpenModalButton
-              buttonText="Delete"
-              // hidden={
-              //   spotArr.Owner &&
-              //   loggedInUser &&
-              //   spotArr.Owner.id === loggedInUser.id &&
-              //   loggedInUser.id === loggedInUser.id
-              // }
-              modalComponent={<OpenModalButton />}
-            />
-          </NavLink>
+      <main className="outer-wrapper">
+        <div className="photo-container">
+          {currentSpots.length &&
+            currentSpots.map((currentSpotObj, i) => (
+              <div key={i} className="inner-Container">
+                <Link to={`/spots/${currentSpotObj.id}`}>
+                  <img src={`${currentSpotObj.previewImage}`} />
                 </Link>
-
+                <div className="info">
+                  <div className="left-info">
+                    <div className="city-state">
+                      {currentSpotObj.city}, {"   "} {"   "}
+                      {currentSpotObj.state}
+                    </div>
+                    <div className="star-info">{currentSpotObj.avgRating}</div>
+                  </div>
+                  <div className="right-info">
+                    ${currentSpotObj.price} night
+                  </div>
+                </div>
                 <button>
-          <NavLink to={`/spots/delete/${currentSpotObj.id}`}>
-               delete
-             </NavLink>
-          </button>
-            </div>
-          ))}
+                  <NavLink to={`/spots/edit/${currentSpotObj.id}`}>
+                    Update
+                  </NavLink>
+                </button>{" "}
+                {"   "}
+                <OpenModalButton
+                  buttonText="Delete"
+                  modalComponent={<SpotDelete spotId={currentSpotObj.id} />}
+                />
+              </div>
+            ))}
         </div>
       </main>
     </>
