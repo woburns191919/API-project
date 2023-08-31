@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-// import { createSpot } from '../../store/spots';
+import { thunkPutEditSpot, thunkGetSpotDetails } from "../../store/spots";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkSpotCreateSpot, thunkGetEditSpot, thunkPutEditSpot, thunkSpotImageCreateSpot  } from "../../store/spots";
+import { useState, useEffect } from "react";
 
-import "./GetAllSpots.css";
-
-const SpotForm = () => {
+const SpotEdit = () => {
+  console.log("rendering spot edit");
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  // console.log('current user****', user)
+  const { spotId } = useParams();
+
+  console.log("spot id***", spotId);
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -22,91 +22,65 @@ const SpotForm = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [name, setName] = useState("");
-  const [previewImage, setPreviewImage] = useState("");
-  const [smallImage1, setSmallImage1] = useState("");
-  const [smallImage2, setSmallImage2] = useState("");
-  const [smallImage3, setSmallImage3] = useState("");
-  const [smallImage4, setSmallImage4] = useState("");
-  const [validationErrors, setValidationErrors] = useState({});
+
+  console.log("current user", user);
 
   if (!user) {
-    alert("You must be logged in to create a spot!");
+    alert("You must be logged in to edit a spot!");
     history.push("/");
   }
+
+  useEffect(() => {
+    dispatch(thunkGetSpotDetails(spotId)).then((data) => {
+      console.log("data from before", data);
+      setCountry(data.country);
+      setAddress(data.address);
+      setCity(data.city);
+      setState(data.state);
+      setLat(data.lat)
+      setLng(data.lng);
+      setDescription(data.description);
+      setTitle(data.title);
+      setPrice(data.price)
+      setName(data.name);
+    });
+  }, [dispatch, spotId]);
+
+  console.log("country", country);
+
+  // useEffect(() => {
+  //   dispatch(thunkPutEditSpot(spotId))
+  // }, [dispatch])
+
+  // const foundSpot = useSelector((state) =>
+  // console.log("state from edit get", state)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const payload = {
+    const updatedSpot = {
+      spotId,
+      country,
       address,
       city,
       state,
-      country,
       lat,
       lng,
-      name,
       description,
+      title,
       price,
+      name,
     };
+    // const hasData = await dispatch(thunkPutEditSpot(updatedSpot))
+    // if (hasData.id) history.push(`/spots/${spotId}`)
 
-    const imageObj = [
-      {
-        url: previewImage,
-        preview: true,
-      },
-      {
-        url: smallImage1,
-        preview: false,
-      },
-      {
-        url: smallImage2,
-        preview: false,
-      },
-      {
-        url: smallImage3,
-        preview: false,
-      },
-      {
-        url: smallImage4,
-        preview: false,
-      },
-    ];
-    const newImageArray = [];
-    imageObj && imageObj.forEach((obj) => {
-      obj.url && newImageArray.push(obj);
-    });
-
-    // console.log('1st new imageArr****', newImageArray)
-
-    try {
-      // console.log(' from created spotimage*******', newImageArray)
-      // console.log("created spot id****", createdSpot.id)
-      const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
-      if (!createdSpot.id) return null;
-      else {
-        // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
-        // imageObj.forEach(async (el) => await thunkSpotImageCreateSpot(el, createdSpot.id))
-        for (let el of imageObj) {
-          await dispatch(thunkSpotImageCreateSpot(el, createdSpot.id));
-        }
-
-        // setValidationErrors();
-        history.push(`/spots/${createdSpot.id}`);
-      }
-
-      // } else if (createdSpot) {
-      //   throw new Error('spot exists');
-      // }
-    } catch (error) {
-      console.log(error);
+    if (!updatedSpot.spotId) return null;
+    const editedSpot = await dispatch(thunkPutEditSpot(updatedSpot, spotId));
+    if (editedSpot.id) {
+      history.push(`/spots/${editedSpot.id}`);
+    } else {
+      return null;
     }
   };
-
-  //   useEffect(() => {
-  //   const errors = {};
-  //   setValidationErrors(errors);
-  // }, []);
-
-  // if (!createdSpot) return null;
 
   return (
     <main className="form-wrapper">
@@ -237,67 +211,10 @@ const SpotForm = () => {
             ></input>
           </label>
         </div>
-        <div>
-          <label>
-            Liven up your spot with photos <br></br>
-            <input
-              required="true"
-              type="url"
-              name="priview image URL"
-              value={previewImage}
-              onChange={(e) => {
-                {
-                  setPreviewImage(e.target.value);
-                }
-              }}
-            ></input>
-          </label>
-        </div>
-        <div>
-          <input
-            required="true"
-            type="url"
-            name="image URL"
-            value={smallImage1}
-            onChange={(e) => {
-              setSmallImage1(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <input
-            type="url"
-            name="image URL"
-            value={smallImage2}
-            onChange={(e) => {
-              setSmallImage2(e.target.value);
-            }}
-          ></input>
-        </div>
-        <input
-          type="url"
-          name="image URL"
-          value={smallImage3}
-          onChange={(e) => {
-            setSmallImage3(e.target.value);
-          }}
-        ></input>
-        <div>
-          <input
-            type="url"
-            name="priview image URL"
-            value={smallImage4}
-            onChange={(e) => {
-              setSmallImage4(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <button type="submit">Create Spot</button>
-        </div>
+        <button type="submit">Submit</button>
       </form>
     </main>
   );
 };
 
-export default SpotForm;
+export default SpotEdit;

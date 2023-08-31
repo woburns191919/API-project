@@ -5,7 +5,6 @@ import { useModal } from "../../context/Modal";
 // import "./LoginForm.css";
 
 const ReviewForm = () => {
-
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -25,17 +24,17 @@ const ReviewForm = () => {
       });
   };
 
-  console.log('session actions', sessionActions)
-
+  console.log("session actions", sessionActions);
 
   return (
     <>
-    <form onSubmit={handleSubmit}>
-    <h1>in review form</h1>
+      <form onSubmit={handleSubmit}>
+        <h1>in review form</h1>
 
-    </form>
+   
+      </form>
     </>
-  )
-}
+  );
+};
 
 export default ReviewForm;

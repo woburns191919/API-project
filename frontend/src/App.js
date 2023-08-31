@@ -5,10 +5,13 @@ import * as sessionActions from "./store/session";
 import * as spotActions from "./store/spots";
 import Navigation from "./components/Navigation";
 import SpotsIndexPage from "./components/Spots/SpotsIndexPage";
-import SpotShow from "./components/Spots/SpotShow"
+import SpotShow from "./components/Spots/SpotShow";
 import ProfileButton from "./components/Navigation/ProfileButton";
 import SpotForm from "./components/Spots/SpotForm";
 import ReviewForm from "./components/Reviews/ReviewForm";
+import SpotsManage from "./components/Spots/SpotsManage";
+import SpotEdit from "./components/Spots/SpotEdit";
+import SpotDelete from "./components/Spots/SpotDelete";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,18 +26,29 @@ function App() {
       {isLoaded && (
         <Switch>
           <Switch>
+
             <Route exact path="/">
               <SpotsIndexPage />
             </Route>
-            <Route exact path = "/spots">
-            <SpotForm />
+            <Route exact path="/spots/new">
+              <SpotForm />
             </Route>
-            <Route exact path = "/spots/:spotId">
+            <Route exact path="/spots/edit/:spotId">
+              <SpotEdit />
+            </Route>
+            <Route exact path="/spots/delete/:spotId">
+              <SpotDelete />
+            </Route>
+            <Route exact path="/spots/current">
+              <SpotsManage />
+            </Route>
+            <Route exact path="/spots/:spotId">
               <SpotShow />
             </Route>
-            <Route exact path = "/reviews/current">
+            <Route exact path="/reviews/current">
               <ReviewForm />
             </Route>
+
           </Switch>
         </Switch>
       )}
