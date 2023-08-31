@@ -24,7 +24,7 @@ console.log(setModalContent)
 
 
 // dispatch(thunkGetCurrentSpots(sessionUser))
-const currentSpots = useSelector((state) => state.spots.allSpots.Spots)
+const currentSpots = useSelector((state) => state.spots && state.spots.allSpots.Spots)
 // console.log('current spots****', currentSpots)
 if (!currentSpots) return null;
   return (
