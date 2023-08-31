@@ -60,10 +60,10 @@ const actionGetCurrentSpots = (spots) => ({
 
 //edit get spot action
 
-const actionGetEditSpot = (spot) => ({
-  type: GETEDITSPOT,
-  spot
-})
+// const actionGetEditSpot = (spot) => ({
+//   type: GETEDITSPOT,
+//   spot
+// })
 
 //edit put spot action
 
@@ -188,7 +188,8 @@ export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
     }
     const data = await res.json();
     console.log("data from edit thunk", data);
-    dispatch(actionPutEditSpot(data));
+    dispatch(actionPutEditSpot(data.id));
+    //  dispatch(thunkGetSpotDetails(spotId))
     return data;
   };
 //GetAllSpots normalizer
@@ -249,7 +250,7 @@ export default function spotReducer(state = initialState, action) {
       return newState;
     case PUTEDITSPOT:
       console.log('action from put edit', action)
-      newState = { ...state, [action.form.id]: action.form };
+      newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot
       return newState;
     default:

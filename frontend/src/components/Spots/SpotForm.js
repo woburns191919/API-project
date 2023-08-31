@@ -71,7 +71,7 @@ const SpotForm = () => {
       },
     ];
     const newImageArray = [];
-    imageObj.forEach((obj) => {
+    imageObj && imageObj.forEach((obj) => {
       obj.url && newImageArray.push(obj);
     });
 

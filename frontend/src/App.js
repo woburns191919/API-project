@@ -25,11 +25,15 @@ function App() {
       {isLoaded && (
         <Switch>
           <Switch>
+
             <Route exact path="/">
               <SpotsIndexPage />
             </Route>
             <Route exact path="/spots/new">
               <SpotForm />
+            </Route>
+            <Route exact path="/spots/edit/:spotId">
+              <SpotEdit />
             </Route>
             <Route exact path="/spots/current">
               <SpotsManage />
@@ -40,9 +44,7 @@ function App() {
             <Route exact path="/reviews/current">
               <ReviewForm />
             </Route>
-            <Route exact path="/spots/edit">
-              <SpotEdit />
-            </Route>
+
           </Switch>
         </Switch>
       )}

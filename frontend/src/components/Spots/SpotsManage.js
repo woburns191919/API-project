@@ -18,12 +18,12 @@ useEffect(() => {
 // dispatch(thunkGetCurrentSpots(sessionUser))
 const currentSpots = useSelector((state) => state.spots.allSpots.Spots)
 // console.log('current spots****', currentSpots)
-
+if (!currentSpots) return null;
   return (
     <>
     <main className="outer-wrapper">
       <div className="photo-container">
-        {currentSpots?.map((currentSpotObj, i) => (
+        {currentSpots.length && currentSpots.map((currentSpotObj, i) => (
           <div key={i} className = "inner-Container">
           <Link to={`/spots/${currentSpotObj.id}`}>
             <img src={`${currentSpotObj.previewImage}`} />
@@ -40,7 +40,7 @@ const currentSpots = useSelector((state) => state.spots.allSpots.Spots)
                 <div className="right-info">${currentSpotObj.price} night</div>
               </div>
               <button>
-               <NavLink to="/spots/new">
+               <NavLink to={`/spots/edit/${currentSpotObj.id}`}>
               Update
              </NavLink>
               </button> {'   '}
