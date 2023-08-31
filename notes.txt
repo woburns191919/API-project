@@ -260,3 +260,8 @@ import { thunkPutEditSpot} from "../../store/spots";
 
 // export default SpotEdit;
 
+
+
+
+
+random 404 that just pops up? at logout

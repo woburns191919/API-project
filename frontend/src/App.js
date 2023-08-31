@@ -11,6 +11,7 @@ import SpotForm from "./components/Spots/SpotForm";
 import ReviewForm from "./components/Reviews/ReviewForm";
 import SpotsManage from "./components/Spots/SpotsManage";
 import SpotEdit from "./components/Spots/SpotEdit";
+import SpotDelete from "./components/Spots/SpotDelete";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route exact path="/spots/edit/:spotId">
               <SpotEdit />
+            </Route>
+            <Route exact path="/spots/delete/:spotId">
+              <SpotDelete />
             </Route>
             <Route exact path="/spots/current">
               <SpotsManage />

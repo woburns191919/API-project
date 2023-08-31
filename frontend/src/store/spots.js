@@ -14,9 +14,9 @@ const SPOTIMAGECREATESPOT = "/spots_spot_image_create_spot";
 
 const GETCURRENTSPOTS = "/spots_get_current_spots";
 
-const GETEDITSPOT = "/spots/get_edit_spot"
+const PUTEDITSPOT = "/spots/put_edit_spot";
 
-const PUTEDITSPOT = "/spots/put_edit_spot"
+const SPOTDELETE = "/spots/delete_spot"
 
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,
@@ -56,6 +56,12 @@ const actionGetCurrentSpots = (spots) => ({
   type: GETCURRENTSPOTS,
   spots,
 });
+
+//delete spot action
+
+const actionSpotDelete = (spot) => ({
+  type: SPOTDELETE
+})
 
 
 //edit get spot action
@@ -159,19 +165,6 @@ export const thunkGetCurrentSpots = () => async (dispatch) => {
   }
 };
 
-//thunk GET for edit spot
-
-// export const thunkGetEditSpot = () => async (dispatch) => {
-//   const res = await csrfFetch('/api/spots/id');
-//   if (res.ok) {
-//     const data = await res.json();
-//     dispatch(actionGetEditSpot(data));
-//     return data
-//   } else {
-//     console.warn("error: ", res)
-//   }
-// }
-
 
 //thunk PUT for edit spot
 
@@ -192,6 +185,26 @@ export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
     //  dispatch(thunkGetSpotDetails(spotId))
     return data;
   };
+
+
+//thunk for deleting a spot
+
+export const thunkSpotDelete = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionSpotDelete(data.id))
+    return data;
+  }
+}
+
+
+
 //GetAllSpots normalizer
 
 function normalizerSpots(spots) {
@@ -252,6 +265,8 @@ export default function spotReducer(state = initialState, action) {
       console.log('action from put edit', action)
       newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot
+    case SPOTDELETE:
+      newState = { ...state, singleSpot: {} };
       return newState;
     default:
       return state;

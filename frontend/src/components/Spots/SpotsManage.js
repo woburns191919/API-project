@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkGetCurrentSpots } from "../../store/spots";
 import { Link } from 'react-router-dom';
 import { NavLink} from "react-router-dom";
+import { useModal } from "../../context/Modal";
+import OpenModalButton from "../OpenModalButton";
 
  const SpotsManage= () => {
   // console.log('component rendered')
@@ -44,7 +46,22 @@ if (!currentSpots) return null;
               Update
              </NavLink>
               </button> {'   '}
-              <button>Delete</button>
+              <button>
+                <Link to={`/spots/delete/${currentSpotObj.id}`}>
+                <NavLink to="/reviews/current">
+            <OpenModalButton
+              buttonText="Delete"
+              // hidden={
+              //   spotArr.Owner &&
+              //   loggedInUser &&
+              //   spotArr.Owner.id === loggedInUser.id &&
+              //   loggedInUser.id === loggedInUser.id
+              // }
+              modalComponent={<OpenModalButton />}
+            />
+          </NavLink>
+                </Link>
+                </button>
             </div>
           ))}
         </div>
