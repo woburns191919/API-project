@@ -2,39 +2,37 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import ReviewModalChild from "./ReviewModalChild";
+import OpenModalButton from "../OpenModalButton";
+import StarRatingInput from "./StarRatingInput";
+import { useParams } from "react-router-dom"
 // import "./LoginForm.css";
 
 const ReviewForm = () => {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { spotId } = useParams()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+  }
 
-  console.log("session actions", sessionActions);
 
-  return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h1>in review form</h1>
-
-   
-      </form>
-    </>
-  );
+  return(
+  <form onSubmit={handleSubmit} >
+  <h4>How was your stay?</h4>
+  <textarea>
+    Leave your review here...
+  </textarea>
+  <div className="star-rating-input">
+    <StarRatingInput />
+  </div>
+    <button
+    >
+      Submit Your Review
+    </button>
+  </form>
+  )
 };
 
 export default ReviewForm;

@@ -2,7 +2,10 @@ import { csrfFetch } from "./csrf";
 
 //types
 
-const GETREVIEWSBYSPOTID = "/spots/get_reviews_by_id";
+const GETREVIEWSBYSPOTID = "/reviews/get_reviews_by_id";
+
+
+const CREATEREVIEWFORSPOT = "/reviews_create_review_for_spot"
 
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,

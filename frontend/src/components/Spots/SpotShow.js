@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
+import ReviewForm from "../Reviews/ReviewForm";
 
 const SpotShow = () => {
   const dispatch = useDispatch();
@@ -99,7 +100,7 @@ const SpotShow = () => {
                 spotArr.Owner.id === loggedInUser.id &&
                 loggedInUser.id === loggedInUser.id
               }
-              modalComponent={<OpenModalButton />}
+              modalComponent={<ReviewForm/>}
             />
           </Link>
 
