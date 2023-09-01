@@ -23,12 +23,18 @@ const SpotsManage = () => {
   }, [dispatch]);
 
   const currentSpotsObj = useSelector(
-    (state) => state.spots && state.spots.allSpots
+    (state) => state && state.spots && state.spots.allSpots
   );
+  console.log('current spots obj', currentSpotsObj)
+if (!currentSpotsObj) return null;
+
+console.log('current spots obj after check')
 
   const currentSpots = Object.values(currentSpotsObj)
+  console.log('array, after check', currentSpots)
 
-  console.log('current spots from component', currentSpots)
+
+  // console.log('current spots from component', currentSpots)
 
   if (!currentSpots) return null;
   return (
@@ -70,4 +76,5 @@ const SpotsManage = () => {
     </>
   );
 };
+
 export default SpotsManage;

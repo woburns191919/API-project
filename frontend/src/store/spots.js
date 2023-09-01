@@ -137,13 +137,16 @@ export const thunkSpotImageCreateSpot =
   //thunk for get current spots
 
   export const thunkGetCurrentSpots = () => async (dispatch) => {
-    console.log("entering thunk for get current spots");
+    // console.log("entering thunk for get current spots");
     const res = await csrfFetch(`/api/spots/current`);
-    console.log('res from current spot thunk', res)
+    // console.log('res from current spot thunk', res)
     if (res.ok) {
       const data = await res.json();
       dispatch(actionGetCurrentSpots(normalizerSpots(data)));
-      console.log('data from cur spot thunk', data)
+      // console.log('data from cur spot thunk', data)
+      if (!data) {
+        return null
+      }
       return data;
     } else {
       console.warn("error: ", res);
@@ -198,29 +201,21 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
   // console.log('entered delete thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'DELETE',
-    headers: {
-      "Content-Type": "application/json",
-    },
   })
-
   console.log('res from delete thunk', res)
   if (res.ok) {
     const data = await res.json();
     dispatch(actionSpotDelete(data))
-    // console.log('data from delete thunk', data)
+    if (!data) {
+      throw new Error('no data')
+    }
+    console.log('data from delete thunk', data)
     return data;
+  } else {
+    throw new Error('no data')
   }
 }
 
-
-
-//GetSpotDetails normalizer
-
-// function normalizerGetSpotDetails(spot) {
-
-// }
-
-//reducer
 
 export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
   // console.log("entered review thunk");
@@ -232,6 +227,8 @@ export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
     return data;
   }
 };
+
+//reducer
 
 let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
 export default function spotReducer(state = initialState, action) {
@@ -264,10 +261,9 @@ export default function spotReducer(state = initialState, action) {
       newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot
     case SPOTDELETE:
-      console.log('action from delete', action)
       newState = { ...state, allSpots: { ...state.allSpots }}
-    //write delete logic here
-      // newState.singleSpot = action.spot
+      console.log('newstate allspots', newState.allSpots)
+      delete newState.allSpots
       return newState;
     default:
       return state;
