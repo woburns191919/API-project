@@ -40,7 +40,7 @@ const SpotEdit = () => {
       setLat(data.lat)
       setLng(data.lng);
       setDescription(data.description);
-      setTitle(data.title);
+      // setTitle(data.title);
       setPrice(data.price)
       setName(data.name);
     });
@@ -66,7 +66,6 @@ const SpotEdit = () => {
       lat,
       lng,
       description,
-      title,
       price,
       name,
     };
@@ -189,10 +188,10 @@ const SpotEdit = () => {
             <input
               required={true}
               type="text"
-              value={title}
+              value={name}
               name="title"
               onChange={(e) => {
-                setTitle(e.target.value);
+                setName(e.target.value);
               }}
             />
           </label>
