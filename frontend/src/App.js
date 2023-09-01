@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
-import * as spotActions from "./store/spots";
 import Navigation from "./components/Navigation";
 import SpotsIndexPage from "./components/Spots/SpotsIndexPage";
 import SpotShow from "./components/Spots/SpotShow";
-import ProfileButton from "./components/Navigation/ProfileButton";
 import SpotForm from "./components/Spots/SpotForm";
-import ReviewForm from "./components/Reviews/ReviewForm";
 import SpotsManage from "./components/Spots/SpotsManage";
 import SpotEdit from "./components/Spots/SpotEdit";
 import SpotDelete from "./components/Spots/SpotDelete";
@@ -45,10 +42,6 @@ function App() {
             <Route exact path="/spots/:spotId">
               <SpotShow />
             </Route>
-            <Route exact path="/reviews/current">
-              <ReviewForm />
-            </Route>
-
           </Switch>
         </Switch>
       )}

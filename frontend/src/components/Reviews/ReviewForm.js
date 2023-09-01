@@ -1,40 +1,67 @@
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
+
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal, closeModal } from "../../context/Modal";
+import { useParams } from "react-router-dom"
+import { thunkCreateReview } from "../../store/reviews";
+
+
+
 // import "./LoginForm.css";
 
-const ReviewForm = () => {
+const ReviewForm = ({ spotId }) => {
+  const { closeModal } = useModal()
+  const [review, setReview] = useState('')
+  const [stars, setStars] = useState(1)
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  // const { spotId } = useParams()
+  console.log('spotId from review form', spotId)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+        const payload = {
+          review,
+          stars
         }
-      });
-  };
-
-  console.log("session actions", sessionActions);
+    await dispatch(thunkCreateReview(payload, spotId));
+    closeModal();
+  }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h1>in review form</h1>
 
-   
-      </form>
-    </>
-  );
+  <>
+  <h4>How was your stay?</h4>
+<label>
+    Leave your review here...
+  <input
+  type="textarea"
+  value={review}
+  onChange={(e) => {
+    setReview(e.target.value)
+  }}
+  />
+</label>
+
+  <div className="star-rating-input">
+<label>
+  <input
+    type="number"
+    value={stars}
+    onChange={(e) => {
+      setStars(e.target.value);
+    }}
+
+    // <StarRatingInput />
+     />
+    </label>
+  </div>
+    <button
+    onClick={(e) => handleSubmit(e)}
+    >
+      Submit Your Review
+    </button>
+  </>
+  )
 };
 
 export default ReviewForm;

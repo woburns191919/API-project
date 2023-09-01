@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
+import ReviewForm from "../Reviews/ReviewForm";
+import ConfirmDelete from "../Reviews/ConfirmDelete";
 
 const SpotShow = () => {
   const dispatch = useDispatch();
@@ -99,16 +101,21 @@ const SpotShow = () => {
                 spotArr.Owner.id === loggedInUser.id &&
                 loggedInUser.id === loggedInUser.id
               }
-              modalComponent={<OpenModalButton />}
+              modalComponent={<ReviewForm spotId={spotId}/>}
             />
           </Link>
 
           <div className="reviews-lower-text">
             {reviewsArr?.map((reviewsObj, i) => (
               <div key={i}>
+
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
                 <p>{reviewsObj.review}</p>
+                <OpenModalButton
+                buttonText="Delete"
+                modalComponent={<ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />}
+                />
               </div>
             ))}
           </div>
