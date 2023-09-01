@@ -40,7 +40,7 @@ const SpotsManage = () => {
     <>
       <main className="outer-wrapper">
         <div className="photo-container">
-          {currentSpots.length &&
+          {currentSpots.length > 0 &&
             currentSpots.map((currentSpotObj, i) => (
               <div key={i} className="inner-Container">
                 <Link to={`/spots/${currentSpotObj.id}`}>

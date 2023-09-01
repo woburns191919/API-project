@@ -100,7 +100,7 @@ const SpotShow = () => {
                 spotArr.Owner.id === loggedInUser.id &&
                 loggedInUser.id === loggedInUser.id
               }
-              modalComponent={<ReviewForm/>}
+              modalComponent={<ReviewForm spotId={spotId}/>}
             />
           </Link>
 
