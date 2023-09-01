@@ -74,18 +74,6 @@ const actionPutEditSpot = (spot) => ({
 })
 
 
-//GetAllSpots thunk
-export const thunkGetAllSpots = () => async (dispatch) => {
-  const res = await csrfFetch("/api/spots");
-  // console.log(res)
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(actionGetSpots(normalizerSpots(data)));
-    return data;
-  } else {
-    console.warn("error: ", res);
-  }
-};
 
 //GetSpotDetails thunk
 
@@ -146,27 +134,52 @@ export const thunkSpotImageCreateSpot =
     return data;
   };
 
-//thunk for get current spots
+  //thunk for get current spots
 
-export const thunkGetCurrentSpots = () => async (dispatch) => {
-  // console.log("entering thunk for get current spots");
-  const res = await csrfFetch(`/api/spots/current`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(actionGetCurrentSpots(data));
-    return data;
-  } else {
-    console.warn("error: ", res);
+  export const thunkGetCurrentSpots = () => async (dispatch) => {
+    // console.log("entering thunk for get current spots");
+    const res = await csrfFetch(`/api/spots/current`);
+    // console.log('res from current spot thunk', res)
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(actionGetCurrentSpots(normalizerSpots(data)));
+      // console.log('data from cur spot thunk', data)
+      if (!data) {
+        return null
+      }
+      return data;
+    } else {
+      console.warn("error: ", res);
+    }
+  };
+
+  //GetAllSpots thunk
+  export const thunkGetAllSpots = () => async (dispatch) => {
+    const res = await csrfFetch("/api/spots");
+    if (res.ok) {
+      const data = await res.json();
+      console.log('thunk spot all', data)
+      dispatch(actionGetSpots(normalizerSpots(data)));
+      return data;
+    } else {
+      console.warn("error: ", res);
+    }
+  };
+
+  //GetAllSpots normalizer
+
+  function normalizerSpots(spots) {
+    const normalSpotObj = {};
+    spots.Spots.forEach((spot) => (normalSpotObj[spot.id] = spot));
+    return normalSpotObj;
   }
-};
-
 
 //thunk PUT for edit spot
 
 export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
-      headers: {
+    headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(spotData),
@@ -175,7 +188,7 @@ export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
       throw new Error();
     }
     const data = await res.json();
-    console.log("data from edit thunk", data);
+    // console.log("data from edit thunk", data);
     dispatch(actionPutEditSpot(data.id));
     //  dispatch(thunkGetSpotDetails(spotId))
     return data;
@@ -185,40 +198,24 @@ export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
 //thunk for deleting a spot
 
 export const thunkSpotDelete = (spotId) => async (dispatch) => {
-  console.log('entered delete thunk')
+  // console.log('entered delete thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: 'DELETE',
-    headers: {
-      "Content-Type": "application/json",
-    },
   })
-
   console.log('res from delete thunk', res)
   if (res.ok) {
     const data = await res.json();
     dispatch(actionSpotDelete(data))
+    if (!data) {
+      throw new Error('no data')
+    }
     console.log('data from delete thunk', data)
     return data;
+  } else {
+    throw new Error('no data')
   }
 }
 
-
-
-//GetAllSpots normalizer
-
-function normalizerSpots(spots) {
-  const normalSpotObj = {};
-  spots.Spots.forEach((spot) => (normalSpotObj[spot.id] = spot));
-  return normalSpotObj;
-}
-
-//GetSpotDetails normalizer
-
-// function normalizerGetSpotDetails(spot) {
-
-// }
-
-//reducer
 
 export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
   // console.log("entered review thunk");
@@ -231,12 +228,15 @@ export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
   }
 };
 
+//reducer
+
 let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
 export default function spotReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GETALLSPOTS:
-      newState = { ...state, allSpots: {} };
+      // console.log("current dot spots payload***", action.spots);
+      newState = { ...state, allSpots: {} }; //box
       newState.allSpots = action.spots;
       return newState;
     case GETSPOTDETAILS:
@@ -252,7 +252,7 @@ export default function spotReducer(state = initialState, action) {
     case SPOTIMAGECREATESPOT:
       newState = { ...state, singleSpot: {} };
     case GETCURRENTSPOTS:
-      // console.log("current spots payload***", action);
+      // dont forget normalizer again
       newState = { ...state, allSpots: {} };
       newState.allSpots = action.spots;
       return newState;
@@ -261,9 +261,9 @@ export default function spotReducer(state = initialState, action) {
       newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot
     case SPOTDELETE:
-      console.log('action from delete', action)
-      newState = { ...state, singleSpot: {} }
-      newState.singleSpot = action.spot
+      newState = { ...state, allSpots: { ...state.allSpots }}
+      console.log('newstate allspots', newState.allSpots)
+      delete newState.allSpots
       return newState;
     default:
       return state;
