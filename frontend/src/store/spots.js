@@ -267,7 +267,8 @@ export default function spotReducer(state = initialState, action) {
     case SPOTDELETE:
       newState = { ...state, allSpots: { ...state.allSpots }}
       console.log('newstate allspots', newState.allSpots)
-      delete newState.allSpots
+
+      delete newState.allSpots[action.id]
       return newState;
     default:
       return state;

@@ -20,7 +20,7 @@ const SpotsIndexPage = () => {
       <main className="outer-wrapper">
         <div className="photo-container">
           {spots.map((spotObj, i) => (
-           
+
             <div key = {i} className="inner-container">
              <Link to={`/spots/${spotObj.id}`}>
                <img src={`${spotObj.previewImage}`} />
@@ -32,7 +32,7 @@ const SpotsIndexPage = () => {
                     {spotObj.city}, {"   "} {"   "}
                     {spotObj.state}
                   </div>
-                  <div className="star-info">{spotObj.avgRating}</div>
+                  <div className="star-info">{spotObj.avgRating > 0 && spotObj.avgRating}</div>
                 </div>
 
                 <div className="right-info">${spotObj.price} night</div>
