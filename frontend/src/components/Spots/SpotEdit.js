@@ -155,7 +155,7 @@ const SpotEdit = () => {
             />
           </label>
         </div>
-        <div>
+        {/* <div>
           <label>
             Name <br></br>
             <input
@@ -165,7 +165,7 @@ const SpotEdit = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-        </div>
+        </div> */}
         <div>
           <label>
             Describe your place to guests <br></br>
