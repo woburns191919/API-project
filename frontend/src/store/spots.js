@@ -248,9 +248,12 @@ export default function spotReducer(state = initialState, action) {
       newState.spot = action.reviews;
       return newState;
     case CREATESPOT:
+      console.log('action from create spot', action)
       newState = { ...state, [action.form.id]: action.form };
+      return newState
     case SPOTIMAGECREATESPOT:
       newState = { ...state, singleSpot: {} };
+      return newState
     case GETCURRENTSPOTS:
       // dont forget normalizer again
       newState = { ...state, allSpots: {} };
@@ -260,6 +263,7 @@ export default function spotReducer(state = initialState, action) {
       // console.log('action from put edit', action)
       newState = { ...state, singleSpot: {} };
       newState.singleSpot = action.spot
+      return newState
     case SPOTDELETE:
       newState = { ...state, allSpots: { ...state.allSpots }}
       console.log('newstate allspots', newState.allSpots)
