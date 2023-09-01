@@ -25,14 +25,13 @@ const SpotsManage = () => {
   const currentSpotsObj = useSelector(
     (state) => state && state.spots && state.spots.allSpots
   );
-  console.log('current spots obj', currentSpotsObj)
-if (!currentSpotsObj) return null;
+  console.log("current spots obj", currentSpotsObj);
+  if (!currentSpotsObj) return null;
 
-console.log('current spots obj after check')
+  console.log("current spots obj after check");
 
-  const currentSpots = Object.values(currentSpotsObj)
-  console.log('array, after check', currentSpots)
-
+  const currentSpots = Object.values(currentSpotsObj);
+  console.log("array, after check", currentSpots);
 
   // console.log('current spots from component', currentSpots)
 
@@ -53,7 +52,7 @@ console.log('current spots obj after check')
                       {currentSpotObj.city}, {"   "} {"   "}
                       {currentSpotObj.state}
                     </div>
-                    <div className="star-info">{currentSpotObj.avgRating}</div>
+                    <div className="star-info">{currentSpotObj.avgRating > 0 && currentSpotObj.avgRating}</div>
                   </div>
                   <div className="right-info">
                     ${currentSpotObj.price} night

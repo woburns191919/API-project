@@ -34,7 +34,7 @@ const SpotShow = () => {
   if (!spotArr.SpotImages) return null;
   console.log('spot array', spotArr)
 
-  console.log('spot arry from details page', spotArr)
+  console.log('spot array from details page', spotArr)
 
   return (
     <>
