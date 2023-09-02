@@ -7,6 +7,7 @@ import {
 
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
+import "./SpotShow.css";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
@@ -34,38 +35,41 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  console.log('spot array', spotArr)
+  console.log("spot array", spotArr);
 
-  console.log('spot array from details page', spotArr)
+  console.log("spot array from details page", spotArr);
 
   return (
     <>
-    <div className="spot-name">
-      {spotArr.name}
-    </div>
-    <div className="city-state-country">
-      {spotArr.city}, {spotArr.state}, {''} {spotArr.country}
-    </div>
       <main className="outer-wrapper">
-        <div className="details-big-photo-container">
-          {spotArr.SpotImages.map(
-            (spotImageObj, i) =>
-              spotImageObj.preview === true && (
-                <div key={i}>
-                  <img src={spotImageObj.url}></img>
-                </div>
-              )
-          )}
+
+          <div className="spot-photo-wrapper">
+          <div className="spot-name">{spotArr.name}</div>
+          <div className="city-state-country">
+            {spotArr.city}, {spotArr.state}, {""} {spotArr.country}
+          </div>
         </div>
-        <div className="small-images-container">
-          {spotArr.SpotImages.map(
-            (spotImageObj, i) =>
-              spotImageObj.preview === false && (
-                <div key={i}>
-                  <img src={spotImageObj.url}></img>
-                </div>
-              )
-          )}
+        <div className="spot-show-photo-container">
+          <div className="big-photo-container">
+            {spotArr.SpotImages.map(
+              (spotImageObj, i) =>
+                spotImageObj.preview === true && (
+                  <div className="big-photo-inner-box" key={i}>
+                    <img className="big-photo" src={spotImageObj.url}></img>
+                  </div>
+                )
+            )}
+          </div>
+          <div className="small-photo-container">
+            {spotArr.SpotImages.map(
+              (spotImageObj, i) =>
+                spotImageObj.preview === false && (
+                  <div key={i}>
+                    <img src={spotImageObj.url}></img>
+                  </div>
+                )
+            )}
+          </div>
         </div>
 
         <section className="lower-spot-show">
@@ -101,20 +105,21 @@ const SpotShow = () => {
                 spotArr.Owner.id === loggedInUser.id &&
                 loggedInUser.id === loggedInUser.id
               }
-              modalComponent={<ReviewForm spotId={spotId}/>}
+              modalComponent={<ReviewForm spotId={spotId} />}
             />
           </Link>
 
           <div className="reviews-lower-text">
             {reviewsArr?.map((reviewsObj, i) => (
               <div key={i}>
-
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
                 <p>{reviewsObj.review}</p>
                 <OpenModalButton
-                buttonText="Delete"
-                modalComponent={<ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />}
+                  buttonText="Delete"
+                  modalComponent={
+                    <ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />
+                  }
                 />
               </div>
             ))}

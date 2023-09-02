@@ -1,0 +1,55 @@
+.outer-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 92%;
+}
+
+
+.small-photo-container {
+  width: 45%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.spot-name {
+  padding: 18px;
+}
+
+
+.big-photo-inner-box {
+  height: 159%;
+}
+
+.city-state-country {
+  padding: 17px;
+}
+.spot-show-photo-container {
+
+  display: flex;
+  width: 99%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.big-photo-container {
+}
+
+
+.big-photo-container {
+  width: 48%
+}
+
+.big-photo {
+  width: 98%;
+  height: 62%;
+}
+
+
+
+
+img {
+ border-radius: 0px;
+}
