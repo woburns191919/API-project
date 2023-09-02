@@ -1,19 +1,15 @@
 .outer-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 95%;
-  margin: 70px;
+  margin: 0 auto;
+  padding: 8%;
 }
 
 
 .photo-container {
-  flex-wrap: wrap;
   display: flex;
-  gap:10px;
-  /* justify-content: center; */
-  /* width: 200px;
-  height: 200px; */
+  width: 99%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  gap: 10px;
 
 }
 
@@ -32,6 +28,7 @@ img {
 .right-info {
   display: flex;
   justify-content: flex-start;
+  gap: 8px;
 }
 
 .star-info {
