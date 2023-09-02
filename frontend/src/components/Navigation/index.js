@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
@@ -15,15 +15,15 @@ function Navigation({ isLoaded }) {
   if (sessionUser) {
     sessionLinks = (
       <>
-
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
+        <li>
+          <ProfileButton user={sessionUser} />
+        </li>
       </>
     );
   } else {
     sessionLinks = (
       <li>
+        document.querySelector(document.querySelector(
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
@@ -36,45 +36,36 @@ function Navigation({ isLoaded }) {
     );
   }
 
-
   return (
     <>
-    <header className="header">
-      <div className ="air-logo">
-      logo
-      </div>
-     <div className="create-spot-in-manage-spots">
-
-        {sessionUser &&
-       <button>
-          <NavLink to="/spots/new">
-               Create a New Spot
-             </NavLink>
-          </button>
-          }
-
-      </div>
-    <div className ="sign-up">
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
-    </ul>
-    </div>
-    </header>
+      <header className="header">
+        <div className="air-logo">
+          <NavLink exact to="/">
+            <i className="fa fa-house"></i>
+          </NavLink>
+        </div>
+        <div className="create-spot-in-manage-spots">
+          {sessionUser && (
+            <button>
+              <NavLink to="/spots/new">Create a New Spot</NavLink>
+            </button>
+          )}
+        </div>
+        <div className="header-right">
+          <div className="list-icon">
+            <i className="fa fa-list"></i>
+          </div>
+          <div className="sign-up">
+            {isLoaded && <ProfileButton user={sessionUser} />}
+          </div>
+        </div>
+      </header>
+      <hr></hr>
     </>
   );
 }
 
 export default Navigation;
-
-
-
 
 /*
   <div className="create-spot-in-manage-spots">

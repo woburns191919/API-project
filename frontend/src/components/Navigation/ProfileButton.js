@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom'
+import "./ProfileButton.css"
 
 function ProfileButton({ user }) {
   const history = useHistory()
@@ -66,15 +67,15 @@ function ProfileButton({ user }) {
           </>
         ) : (
           <>
+          <OpenModalMenuItem
+            itemText="Sign Up"
+            onItemClick={closeMenu}
+            modalComponent={<SignupFormModal />}
+          />
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
             />
           </>
         )}
