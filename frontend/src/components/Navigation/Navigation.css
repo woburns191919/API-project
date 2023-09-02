@@ -20,11 +20,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 15px;
 }
+
+.style {
+  align-items: center;
+}
+.upper-right-nav-wrap {
+  display: flex;
+  align-items: center;
+  gap:5px;
+}
+
 .sign-up {
 }
 .sign-up li {
 }
 
 .sign-up ul {
+}
+
+
+
+.create-spot-in-manage-spots {
+
 }

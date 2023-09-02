@@ -3,14 +3,25 @@
   flex-direction: column;
   flex-wrap: wrap;
   width: 92%;
+  margin: 0px;
 }
 
 
 .small-photo-container {
-  width: 45%;
+  width: 72%;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  height: 71%;
+}
+
+.small-photo-container img {
+
+}
+
+.parent-flex {
+  display: flex;
+  gap:10px;
 }
 
 .spot-name {
@@ -18,9 +29,9 @@
 }
 
 
-.big-photo-inner-box {
+/* .big-photo-inner-box {
   height: 159%;
-}
+} */
 
 .city-state-country {
   padding: 17px;
@@ -28,23 +39,44 @@
 .spot-show-photo-container {
 
   display: flex;
-  width: 99%;
+  width: 92%;
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 10px;
+  padding: 10px;
+  flex-direction: column;
 }
 
-.big-photo-container {
+.price-star-review-wrapper {
+
+  width: 52%;
+  position: sticky;
+  height: 267%;
+  background: white;
+  border: .5px solid gray
 }
 
 
-.big-photo-container {
-  width: 48%
-}
+/* .big-photo-container {
+  width: 66%
+} */
+
+/* .big-photo {
+  width: 131%;
+  height: 90%;
+  border-top-left-radius: 4%;
+  border-bottom-left-radius: 4%;
+
+} */
 
 .big-photo {
-  width: 98%;
-  height: 62%;
+  width:100%;
+  height:100%;
+}
+
+.small-photo-container{
+     width: 72%;
+    height: 88%;
 }
 
 
@@ -52,4 +84,72 @@
 
 img {
  border-radius: 0px;
+
+}
+
+.description {
+  width: 100%;
+}
+
+
+.lower-spot-show{
+
+  display: flex;
+  justify-content: space-between;
+  width: 94%;
+}
+
+
+.top-price-star-review-wrapper{
+  font-family: sans-serif;
+}
+
+
+.price-star-review-wrapper {
+  justify-content: space-around;
+}
+
+.bottom-price-star-review-wrapper {
+  font-family: sans-serif;
+}
+
+.reserve {
+  font-family: sans-serif;
+  height: 48px;
+  background-color: #b33636;
+  color: white;
+  border-radius: 10%
+}
+
+
+.reviews-lower {
+  font-family: fantasy;
+  padding: 5px;
+}
+
+
+.spot-name {
+  font-family: sans-serif;
+  font-size: x-large;
+}
+
+
+
+.city-state-country {
+
+  font-family: sans-serif;
+  /* padding-left: 90px; */
+  text-decoration: underline;
+  font-weight: 200;
+}
+
+
+.big-photo-container {
+  width: 66%;
+}
+
+.big-photo-container > img {
+
+  height: 413px;
+
 }

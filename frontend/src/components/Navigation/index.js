@@ -44,6 +44,7 @@ function Navigation({ isLoaded }) {
             <i className="fa fa-house"></i>
           </NavLink>
         </div>
+        <div className="upper-right-nav-wrap">
         <div className="create-spot-in-manage-spots">
           {sessionUser && (
             <button>
@@ -57,6 +58,7 @@ function Navigation({ isLoaded }) {
           </div>
           <div className="sign-up">
             {isLoaded && <ProfileButton user={sessionUser} />}
+          </div>
           </div>
         </div>
       </header>
