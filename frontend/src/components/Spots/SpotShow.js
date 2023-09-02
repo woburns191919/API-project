@@ -43,7 +43,7 @@ const SpotShow = () => {
     <>
       <main className="outer-wrapper">
         <div className="spot-name">{spotArr.name}</div>
-        <div className="city-state-country"> </div>
+       
         <div className="spot-photo-wrapper">
           {spotArr.city}, {spotArr.state}, {""} {spotArr.country}
         </div>
@@ -69,7 +69,7 @@ const SpotShow = () => {
                   )
               )}
             </div>
-         
+
         </div>
 
         <section className="lower-spot-show">
