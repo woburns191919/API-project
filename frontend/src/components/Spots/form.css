@@ -1,7 +1,6 @@
 .most-boxes {
-  width: 100%;
+  width: 128%;
 }
-
 
 .same-line-citystate {
   width: 100%;
@@ -9,17 +8,82 @@
   gap: 15px;
 }
 
-
+.latlngbox {
+  display: flex;
+  width: 121%;
+  gap: 10px;
+}
 
 .spot-form {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
 }
 
-.statebox input {
-  width: 100%;
+.citystatebox {
+  display: flex;
+  width: 121%;
+  gap: 10px;
 }
 
-.citybox input {
-  width:100%;
+
+ * {
+  font-family:'Courier New', Courier, monospace;
+
+}
+
+a {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+textarea {
+  width: 130%;
+  height: 100px;
+}
+
+.basepricebox p {
+ width: 146%;
+}
+
+.basepricebox input {
+  width: 128%;
+}
+
+.titlebox p {
+  width: 131%;
+}
+
+h4 {
+  width: 120%;
+}
+
+.photo-input-box p {
+  width: 134%;
+}
+
+.outer-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.outer-input-wrapper p {
+  width: 135%;
+}
+
+.form-top-info {
+  width: 110%;
+}
+
+.textarea-description p {
+  width: 125%;
+}
+
+.button-div {
+  width: 131%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper {
+  height: fit-content;
 }

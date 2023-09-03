@@ -116,15 +116,15 @@ const SpotForm = () => {
   return (
     <main className="form-wrapper">
       <form className="spot-form" onSubmit={handleSubmit}>
-        <h4>Create a new Spot</h4>
+        <h3>Create a new Spot</h3>
         <div className="form-top-info">
-          <h5>Where's your place located?</h5>
+          <h4>Where's your place located?</h4>
           <p>
             Guests will only get your exact address once they booked a
             reservation.
           </p>
         </div>
-        <label>
+        <label htmlFor="Country">
           Country <br></br>
           <input
             className="most-boxes"
@@ -149,7 +149,7 @@ const SpotForm = () => {
           </label>
         </div>
 
-          <div className="same-line-citystate">
+        <div className="citystatebox">
           <label className="citybox">
             City <br></br>
             <input
@@ -159,62 +159,57 @@ const SpotForm = () => {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-
           </label>
 
-        <div>
-          <label className="statebox">
-            State <br></br>
-            <input
-              required={true}
-              type="text"
-              name="state"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-            />
-          </label>
+          <div className="statebox">
+            <label>
+              State <br></br>
+              <input
+                required={true}
+                type="text"
+                name="state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </label>
+          </div>
         </div>
+        <div className="latlngbox">
+          <div className="latbox">
+            <label>
+              Latitude <br></br>
+              <input
+                required={true}
+                type="text"
+                name="latitude"
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="lngbox">
+            <label>
+              Longitude <br></br>
+              <input
+                required={true}
+                type="text"
+                name="longitude"
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
+              />
+            </label>
+          </div>
         </div>
-
-        <div>
+        <div className="textarea-description">
           <label>
-            Latitude <br></br>
-            <input
-              required={true}
-              type="text"
-              name="latitude"
-              value={lat}
-              onChange={(e) => setLat(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Longitude <br></br>
-            <input
-              required={true}
-              type="text"
-              name="longitude"
-              value={lng}
-              onChange={(e) => setLng(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Name <br></br>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Describe your place to guests <br></br>
-            <input
+            <h4>Describe your place to guests</h4> <br></br>
+            <p>
+              Mention the best features of your space, any special amentities
+              like fast wifi or parking, and what you love about the
+              neighborhood.
+            </p>
+            <div className="textareadiv">
+            <textarea
               required={true}
               minLength="30"
               type="textarea"
@@ -223,13 +218,18 @@ const SpotForm = () => {
               onChange={(e) => {
                 setDescription(e.target.value);
               }}
-            />
+              />
+              </div>
           </label>
         </div>
 
-        <div>
+        <div className="titlebox">
           <label>
-            Create a title for your spot <br></br>
+            <h4>Create a title for your spot</h4> <br></br>
+            <p>
+              Catch guests' attention with a spot title that highlights what
+              makes your place special.
+            </p>
             <input
               className="most-boxes"
               required={true}
@@ -242,9 +242,15 @@ const SpotForm = () => {
             />
           </label>
         </div>
-        <div>
-          <label>
-            Set a base price for your spot <br></br>
+        <div className="basepricebox">
+       <label>
+            <h4>Set a base price for your spot </h4>
+            <br></br>
+            <p>
+              Competitive pricing can help your listing stand out and rank
+              higher in search results.
+            </p>
+
             <input
               required={true}
               type="number"
@@ -255,10 +261,15 @@ const SpotForm = () => {
               }}
             ></input>
           </label>
+
         </div>
-        <div>
+<div className="outer-input-wrapper">
+            <div>
           <label>
-            Liven up your spot with photos <br></br>
+            <h4>Liven up your spot with photos </h4>
+            <br></br>
+            <p>Submit a link to at least one photo to publish your spot.</p>
+
             <input
               className="most-boxes"
               required={true}
@@ -272,8 +283,9 @@ const SpotForm = () => {
               }}
             ></input>
           </label>
-        </div>
-        <div>
+            </div>
+            <div>
+
           <input
             className="most-boxes"
             required={true}
@@ -284,7 +296,9 @@ const SpotForm = () => {
               setSmallImage1(e.target.value);
             }}
           ></input>
+
         </div>
+
         <div>
           <input
             className="most-boxes"
@@ -315,9 +329,12 @@ const SpotForm = () => {
               setSmallImage4(e.target.value);
             }}
           ></input>
-        </div>
+          </div>
+
+          </div>
+
         <hr></hr>
-        <div>
+        <div className="button-div">
           <button type="submit">Create Spot</button>
         </div>
       </form>
