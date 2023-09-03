@@ -12,8 +12,11 @@ import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
+import { useState } from "react";
 
 const SpotShow = () => {
+
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
@@ -102,7 +105,9 @@ const SpotShow = () => {
               </div>
             </div>
             <div className="bottom-price-star-review-wrapper">
-              <button className="reserve">Reserve</button>
+              <button
+              onClick={() => alert("Feature coming soon")}
+              className="reserve">Reserve</button>
             </div>
           </div>
         </section>
@@ -114,24 +119,29 @@ const SpotShow = () => {
             <i className="fa fa-star"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} &middot;{" "}
             {' '}
-            {spotArr.numReviews == 1
+            {spotArr.numReviews === 1
               ? spotArr.numReviews + " " + "Review"
               : spotArr.numReviews > 0 && spotArr.numReviews !== 1
               ? spotArr.numReviews + " " + "Reviews"
-              : "new"}
+              : spotArr.numReviews === 0 ? <p>Be the first to post a review!</p> :
+              "new"}
           </div>
           <Link to="/reviews/current">
             <OpenModalButton
               buttonText="Post Your Review"
-              hidden={
-                spotArr.Owner &&
-                loggedInUser &&
-                spotArr.Owner.id === loggedInUser.id &&
-                loggedInUser.id === loggedInUser.id
+              setShowModal={
+                // spotArr &&
+                // spotArr.Owner &&
+                // loggedInUser &&
+                // spotArr.Owner.id === loggedInUser.id
+                    false
               }
               modalComponent={<ReviewForm spotId={spotId} />}
-            />
+              />
           </Link>
+              {/* {console.log(' owner id', spotArr.Owner.id)
+               }
+               {console.log('loggedin user', loggedInUser.id)} */}
 
           <div className="reviews-lower-text">
           {reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (

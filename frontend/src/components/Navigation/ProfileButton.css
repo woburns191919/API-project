@@ -3,13 +3,14 @@
   right: 1%;
   border: 0.1px solid gray;
   padding: 13px;
-  width: 145px;
+  width: 210px;
   text-align: center;
   display: flex;
   flex-direction: column;
   background: white;
   margin: 1.5%;
   border-radius: 4%;
+  overflow: scroll;
 }
 
 .username-email-dropdown {

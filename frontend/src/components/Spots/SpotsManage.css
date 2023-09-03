@@ -8,3 +8,9 @@
   width:200px;
   height: 30px;
 }
+
+.photo-container a {
+  text-decoration: none;
+  color: gray;
+}
+

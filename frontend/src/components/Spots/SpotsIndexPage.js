@@ -24,7 +24,7 @@ const SpotsIndexPage = () => {
             <div key = {i} className="inner-container">
              <Link to={`/spots/${spotObj.id}`}>
                <img src={`${spotObj.previewImage}`} />
-             </Link>
+
 
               <div className="info">
                 <div className="left-info">
@@ -39,6 +39,7 @@ const SpotsIndexPage = () => {
 
                 <div className="right-info"><b>${spotObj.price}</b> night</div>
               </div>
+            </Link>
             </div>
           ))}
         </div>
