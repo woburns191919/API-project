@@ -233,10 +233,10 @@ const SpotForm = () => {
               className="most-boxes"
               required={true}
               type="text"
-              value={title}
+              value={name}
               name="title"
               onChange={(e) => {
-                setTitle(e.target.value);
+                setName(e.target.value);
               }}
             />
           </label>
