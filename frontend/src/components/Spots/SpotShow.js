@@ -48,28 +48,30 @@ const SpotShow = () => {
           {spotArr.city}, {spotArr.state}, {""} {spotArr.country}
         </div>
         <div className="parent-flex">
-
-            <div className="big-photo-container">
-              {spotArr.SpotImages.map(
-                (spotImageObj, i) =>
-                  spotImageObj.preview === true && (
-                    // <div className="big-photo-inner-box" key={i}>
-                    <img key={i} className="big-photo" src={spotImageObj.url}></img>
-                    // </div>
-                  )
-              )}
-            </div>
-            <div className="small-photo-container">
-              {spotArr.SpotImages.map(
-                (spotImageObj, i) =>
-                  spotImageObj.preview === false && (
-                    <div key={i}>
-                      <img src={spotImageObj.url}></img>
-                    </div>
-                  )
-              )}
-            </div>
-
+          <div className="big-photo-container">
+            {spotArr.SpotImages.map(
+              (spotImageObj, i) =>
+                spotImageObj.preview === true && (
+                  // <div className="big-photo-inner-box" key={i}>
+                  <img
+                    key={i}
+                    className="big-photo"
+                    src={spotImageObj.url}
+                  ></img>
+                  // </div>
+                )
+            )}
+          </div>
+          <div className="small-photo-container">
+            {spotArr.SpotImages.map(
+              (spotImageObj, i) =>
+                spotImageObj.preview === false && (
+                  <div key={i}>
+                    <img src={spotImageObj.url}></img>
+                  </div>
+                )
+            )}
+          </div>
         </div>
 
         <section className="lower-spot-show">
@@ -87,10 +89,17 @@ const SpotShow = () => {
                 <b>${spotArr.price} </b> night
               </div>
               <div className="stars">
-                <i className="fa fa-star"></i>
-                {" "}{spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ''} {' '}.
+                <i className="fa fa-star"></i>{" "}
+                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} .
               </div>
-              <div className="reviews">  {spotArr.numReviews > 0 ? spotArr.numReviews + " " + "Reviews" : 'new'}</div>
+              <div className="reviews">
+                {" "}
+                {spotArr.numReviews == 1
+              ? spotArr.numReviews + " " + "Review"
+              : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+              ? spotArr.numReviews + " " + "Reviews"
+              : "new"}
+              </div>
             </div>
             <div className="bottom-price-star-review-wrapper">
               <button className="reserve">Reserve</button>
@@ -102,8 +111,13 @@ const SpotShow = () => {
 
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-          <i className="fa fa-star"></i>{" "}{spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ''}{' '}.{' '}
-            {spotArr.numReviews > 0 ? spotArr.numReviews: ''} reviews {"  "}
+            <i className="fa fa-star"></i>{" "}
+            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} .{" "}
+            {spotArr.numReviews == 1
+              ? spotArr.numReviews + " " + "Review"
+              : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+              ? spotArr.numReviews + " " + "Reviews"
+              : "new"}
           </div>
           <Link to="/reviews/current">
             <OpenModalButton
