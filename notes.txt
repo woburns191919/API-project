@@ -265,3 +265,7 @@ import { thunkPutEditSpot} from "../../store/spots";
 
 
 random 404 that just pops up? at logout
+
+
+
+random for each type error on refreshing 

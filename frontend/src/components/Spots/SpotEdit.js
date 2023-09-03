@@ -2,6 +2,10 @@ import { thunkPutEditSpot, thunkGetSpotDetails } from "../../store/spots";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import "./form.css";
+import "./edit-form.css";
+
+
 
 const SpotEdit = () => {
   console.log("rendering spot edit");

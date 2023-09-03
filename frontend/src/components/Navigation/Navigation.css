@@ -1,36 +1,47 @@
 .profile-dropdown.hidden {
-display: none;
+  display: none;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid gray;
+  border-radius: 30%;
+  padding: 10px;
 
-.logo {
+}
+
+.air-logo {
   width: fit-content;
-  height: fit-content;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid gray;
+  margin: 15px;
 }
-.sign-up {
-  flex-direction: column;
+
+.style {
+  align-items: center;
+}
+.upper-right-nav-wrap {
   display: flex;
-  justify-content: center;
-  border: 2px solid gray;
-  border-radius: 99%;
+  align-items: center;
+  gap:5px;
+}
+
+.sign-up {
 }
 .sign-up li {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
 }
 
 .sign-up ul {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  gap: 4px;
+}
+
+
+
+.create-spot-in-manage-spots {
+
 }
