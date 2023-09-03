@@ -87,10 +87,8 @@ const SpotShow = () => {
                 <b>${spotArr.price} </b> night
               </div>
               <div className="stars">
-                <i className="fa fa-star"></i>{' '}.{' '}
-                {" "}{spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ''}
-                {/* {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'} */}
-                {console.log('spot array', spotArr)}
+                <i className="fa fa-star"></i>
+                {" "}{spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ''} {' '}.
               </div>
               <div className="reviews">  {spotArr.numReviews > 0 ? spotArr.numReviews + " " + "Reviews" : 'new'}</div>
             </div>
