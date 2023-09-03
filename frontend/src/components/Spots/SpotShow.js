@@ -114,11 +114,12 @@ const SpotShow = () => {
             <i className="fa fa-star"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} &middot;{" "}
             {' '}
-            {spotArr.numReviews == 1
+            {spotArr.numReviews === 1
               ? spotArr.numReviews + " " + "Review"
               : spotArr.numReviews > 0 && spotArr.numReviews !== 1
               ? spotArr.numReviews + " " + "Reviews"
-              : "new"}
+              : spotArr.numReviews === 0 ? <p>Be the first to post a review!</p> :
+              "new"}
           </div>
           <Link to="/reviews/current">
             <OpenModalButton
