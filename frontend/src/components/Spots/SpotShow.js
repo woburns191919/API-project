@@ -35,9 +35,9 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  console.log("spot array", spotArr);
+  // console.log("spot array", spotArr);
 
-  console.log("spot array from details page", spotArr);
+  // console.log("spot array from details page", spotArr);
 
   return (
     <>
@@ -54,7 +54,7 @@ const SpotShow = () => {
                 (spotImageObj, i) =>
                   spotImageObj.preview === true && (
                     // <div className="big-photo-inner-box" key={i}>
-                    <img className="big-photo" src={spotImageObj.url}></img>
+                    <img key={i} className="big-photo" src={spotImageObj.url}></img>
                     // </div>
                   )
               )}
@@ -87,11 +87,12 @@ const SpotShow = () => {
                 <b>${spotArr.price} </b> night
               </div>
               <div className="stars">
-                <i className="fa fa-star"></i>
+                <i className="fa fa-star"></i>{' '}.{' '}
+                {" "}{spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ''}
                 {/* {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'} */}
                 {console.log('spot array', spotArr)}
               </div>
-              <div className="reviews">  {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'}</div>
+              <div className="reviews">  {spotArr.numReviews > 0 ? spotArr.numReviews + " " + "Reviews" : 'new'}</div>
             </div>
             <div className="bottom-price-star-review-wrapper">
               <button className="reserve">Reserve</button>
@@ -103,8 +104,8 @@ const SpotShow = () => {
 
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-          {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'} <i className="fa fa-star"></i>{" "}
-            {spotArr.numReviews} reviews {"  "}
+          <i className="fa fa-star"></i>{" "}{spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ''}{' '}.{' '}
+            {spotArr.numReviews > 0 ? spotArr.numReviews: ''} reviews {"  "}
           </div>
           <Link to="/reviews/current">
             <OpenModalButton
