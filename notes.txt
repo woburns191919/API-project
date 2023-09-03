@@ -271,12 +271,61 @@ random 404 that just pops up? at logout
 random for each type error on refreshing
 
 
+------
+styling issue
+------
+edit page vs create
+$ and city state length
 
 
-
+view ratings and reviews
+-----
 
 If the review count is zero (there are no reviews yet for this spot), it should not show the centered dot or the review count (only the average star rating should be displayed)
 
-newest reviews at top
+issue with preview image mixup
 
-redirect after review post
+decimal thing
+
+first post review order
+
+fix year issue with review
+
+--------
+
+
+-------
+landing page
+
+tooltip
+
+-----
+CREATE Spot
+
+button disabled if errors?
+
+
+------
+post a review
+
+logged in user spot owener 38, 39
+
+navigate away, no reroute
+
+star rating input
+
+button disabled no stars or ratings (46)
+
+
+-----
+delete
+
+modal, same as above (67)
+
+
+
+--
+style modals
+
+
+

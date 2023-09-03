@@ -126,6 +126,7 @@ const SpotForm = () => {
         <label htmlFor="Country">
           Country <br></br>
           <input
+          placeholder="Country"
             className="most-boxes"
             type="text"
             required={true}
@@ -138,6 +139,7 @@ const SpotForm = () => {
           <label>
             Street Address <br></br>
             <input
+            placeholder="Address"
               className="most-boxes"
               type="text"
               required={true}
@@ -152,6 +154,7 @@ const SpotForm = () => {
           <label className="citybox">
             City <br></br>
             <input
+            placeholder="City"
               required={true}
               type="text"
               name="city"
@@ -164,6 +167,7 @@ const SpotForm = () => {
             <label>
               State <br></br>
               <input
+              placeholder="STATE"
                 required={true}
                 type="text"
                 name="state"
@@ -178,6 +182,7 @@ const SpotForm = () => {
             <label>
               Latitude <br></br>
               <input
+              placeholder="Latitude"
                 required={true}
                 type="text"
                 name="latitude"
@@ -190,6 +195,7 @@ const SpotForm = () => {
             <label>
               Longitude <br></br>
               <input
+              placeholder="Longitude"
                 required={true}
                 type="text"
                 name="longitude"
@@ -209,6 +215,7 @@ const SpotForm = () => {
             </p>
             <div className="textareadiv">
             <textarea
+            placeholder="Please write at least 30 characters"
               required={true}
               minLength="30"
               type="textarea"
@@ -230,6 +237,7 @@ const SpotForm = () => {
               makes your place special.
             </p>
             <input
+            placeholder="Name of your spot"
               className="most-boxes"
               required={true}
               type="text"
@@ -251,6 +259,7 @@ const SpotForm = () => {
             </p>
 
             <input
+            placeholder="Price per night (USD)"
               required={true}
               type="number"
               name="base price"
@@ -274,6 +283,7 @@ const SpotForm = () => {
               required={true}
               type="url"
               name="priview image URL"
+              placeholder="Priview Image URL"
               value={previewImage}
               onChange={(e) => {
                 {
@@ -286,6 +296,7 @@ const SpotForm = () => {
             <div>
 
           <input
+          placeholder="Image URL"
             className="most-boxes"
             required={true}
             type="url"
@@ -300,6 +311,7 @@ const SpotForm = () => {
 
         <div>
           <input
+          placeholder="Image URL"
             className="most-boxes"
             type="url"
             name="image URL"
@@ -310,6 +322,7 @@ const SpotForm = () => {
           ></input>
         </div>
         <input
+        placeholder="Image URL"
           className="most-boxes"
           type="url"
           name="image URL"
@@ -320,6 +333,7 @@ const SpotForm = () => {
         ></input>
         <div>
           <input
+          placeholder="Image URL"
             className="most-boxes"
             type="url"
             name="priview image URL"

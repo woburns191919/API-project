@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { useModal, closeModal } from "../../context/Modal";
 import { useParams } from "react-router-dom"
 import { thunkCreateReview } from "../../store/reviews";
+import { useHistory } from "react-router-dom"
 
 
 
 // import "./LoginForm.css";
 
 const ReviewForm = ({ spotId }) => {
+  const history = useHistory()
   const { closeModal } = useModal()
   const [review, setReview] = useState('')
   const [stars, setStars] = useState(1)
@@ -23,7 +25,10 @@ const ReviewForm = ({ spotId }) => {
           review,
           stars
         }
-    await dispatch(thunkCreateReview(payload, spotId));
+
+        history.push(`/spots/${spotId}`)
+
+    payload && spotId && await dispatch(thunkCreateReview(payload, spotId));
     closeModal();
   }
 
