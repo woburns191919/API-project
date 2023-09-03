@@ -32,10 +32,12 @@ const SpotsIndexPage = () => {
                     {spotObj.city}, {"   "} {"   "}
                     {spotObj.state}
                   </div>
-                  <div className="star-info">{spotObj.avgRating > 0 && spotObj.avgRating}</div>
+                  <div className="star-info">
+                  <i className="fa fa-star"></i>
+                 {spotObj.avgRating > 0 ? spotObj.avgRating : 'new'}</div>
                 </div>
 
-                <div className="right-info">${spotObj.price} night</div>
+                <div className="right-info"><b>${spotObj.price}</b> night</div>
               </div>
             </div>
           ))}

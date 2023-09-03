@@ -7,6 +7,7 @@ import {
 
 import { Link } from "react-router-dom";
 import "./GetAllSpots.css";
+import "./SpotShow.css";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
@@ -34,63 +35,76 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  console.log('spot array', spotArr)
+  console.log("spot array", spotArr);
 
-  console.log('spot array from details page', spotArr)
+  console.log("spot array from details page", spotArr);
 
   return (
     <>
-    <div className="spot-name">
-      {spotArr.name}
-    </div>
-    <div className="city-state-country">
-      {spotArr.city}, {spotArr.state}, {''} {spotArr.country}
-    </div>
       <main className="outer-wrapper">
-        <div className="details-big-photo-container">
-          {spotArr.SpotImages.map(
-            (spotImageObj, i) =>
-              spotImageObj.preview === true && (
-                <div key={i}>
-                  <img src={spotImageObj.url}></img>
-                </div>
-              )
-          )}
+        <div className="spot-name">{spotArr.name}</div>
+
+        <div className="spot-photo-wrapper">
+          {spotArr.city}, {spotArr.state}, {""} {spotArr.country}
         </div>
-        <div className="small-images-container">
-          {spotArr.SpotImages.map(
-            (spotImageObj, i) =>
-              spotImageObj.preview === false && (
-                <div key={i}>
-                  <img src={spotImageObj.url}></img>
-                </div>
-              )
-          )}
+        <div className="parent-flex">
+
+            <div className="big-photo-container">
+              {spotArr.SpotImages.map(
+                (spotImageObj, i) =>
+                  spotImageObj.preview === true && (
+                    // <div className="big-photo-inner-box" key={i}>
+                    <img className="big-photo" src={spotImageObj.url}></img>
+                    // </div>
+                  )
+              )}
+            </div>
+            <div className="small-photo-container">
+              {spotArr.SpotImages.map(
+                (spotImageObj, i) =>
+                  spotImageObj.preview === false && (
+                    <div key={i}>
+                      <img src={spotImageObj.url}></img>
+                    </div>
+                  )
+              )}
+            </div>
+
         </div>
 
         <section className="lower-spot-show">
-          <article className="description">
+          <div className="description">
             <h2>
               Hosted by {spotArr.Owner.firstName} {"  "}{" "}
               {spotArr.Owner.lastName}
             </h2>
             <p className="description">{spotArr.description}</p>
-          </article>
+          </div>
           <div className="price-star-review-wrapper">
             <div className="top-price-star-review-wrapper">
-              <div className="night">${spotArr.price} night</div>
-              <div className="stars">{spotArr.avgStarRating} #.#</div>
-              <div className="reviews">{spotArr.numReviews} reviews</div>
+              <div className="night">
+                {" "}
+                <b>${spotArr.price} </b> night
+              </div>
+              <div className="stars">
+                <i className="fa fa-star"></i>
+                {/* {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'} */}
+                {console.log('spot array', spotArr)}
+              </div>
+              <div className="reviews">  {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'}</div>
             </div>
             <div className="bottom-price-star-review-wrapper">
               <button className="reserve">Reserve</button>
             </div>
           </div>
         </section>
+
         <hr></hr>
+
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-            {spotArr.avgStarRating} #.# {"  "} {spotArr.numReviews} reviews
+          {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'} <i className="fa fa-star"></i>{" "}
+            {spotArr.numReviews} reviews {"  "}
           </div>
           <Link to="/reviews/current">
             <OpenModalButton
@@ -101,20 +115,21 @@ const SpotShow = () => {
                 spotArr.Owner.id === loggedInUser.id &&
                 loggedInUser.id === loggedInUser.id
               }
-              modalComponent={<ReviewForm spotId={spotId}/>}
+              modalComponent={<ReviewForm spotId={spotId} />}
             />
           </Link>
 
           <div className="reviews-lower-text">
             {reviewsArr?.map((reviewsObj, i) => (
               <div key={i}>
-
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
                 <p>{reviewsObj.review}</p>
                 <OpenModalButton
-                buttonText="Delete"
-                modalComponent={<ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />}
+                  buttonText="Delete"
+                  modalComponent={
+                    <ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />
+                  }
                 />
               </div>
             ))}

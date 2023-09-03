@@ -1,30 +1,30 @@
 .outer-wrapper {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  width: 95%;
-  margin: 70px;
+  flex-wrap: wrap;
+  width: fit-content;
+  margin: 0px;
+  justify-content: center;
 }
 
 
 .photo-container {
-  flex-wrap: wrap;
   display: flex;
-  gap:10px;
-  /* justify-content: center; */
-  /* width: 200px;
-  height: 200px; */
-
+  width: 99%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  gap: 10px;
+  padding: 43px;
 }
 
 img {
   height: 200px;
-  width: 200px;
+  width: 220px;
   border-radius: 20px;
 }
 
 .info {
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 20px;
 }
@@ -32,10 +32,10 @@ img {
 .right-info {
   display: flex;
   justify-content: flex-start;
+  gap: 8px;
 }
 
 .star-info {
-
   justify-content: right;
   /* position: fixed; */
   right: 0px;
@@ -51,11 +51,10 @@ img {
   width: 90%;
   display: flex;
   gap: 10px;
-
 }
 
 .preview-image {
-  width:400px;
+  width: 400px;
   height: 400px;
 }
 
@@ -70,7 +69,6 @@ img {
 .image-wrapper {
   display: flex;
   width: 80%;
-
 }
 
 .try-image {
@@ -80,7 +78,7 @@ img {
 .lower-spot-show {
   display: flex;
   justify-content: space-between;
-  width: 80%
+  width: 80%;
 }
 
 .price-star-review-wrapper {
@@ -88,7 +86,7 @@ img {
   border-radius: 10%;
   display: flex;
   flex-direction: column;
-  gap:20px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -96,7 +94,6 @@ img {
   display: flex;
   gap: 20px;
 }
-
 
 .reserve {
   width: 200px;
@@ -113,9 +110,34 @@ img {
   width: 25%;
   margin: 0 auto;
   /* border: 4px solid red; */
-
 }
 
 .reviews-lower {
   border-top: 2px solid gray;
+}
+
+.inner-container img {
+  border-radius: 7px;
+}
+
+.city-state {
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: smaller;
+}
+
+.star-info {
+  display: flex;
+  gap: 3px;
+}
+
+.create-spot-in-manage-spots button {
+  background: none;
+  border: none;
+  text-decoration: none;
+}
+
+
+.header-right {
+  border: 2px solid #eae8e8;
 }
