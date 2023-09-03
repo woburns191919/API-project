@@ -39,7 +39,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
-    history.push("/spots");
+    history.push("/");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -64,7 +64,9 @@ function ProfileButton({ user }) {
             <hr></hr>
             <div className="logout-dropdown">
 
-                <button onClick={logout}>Log Out</button>
+                <button
+
+                onClick={logout}>Log Out</button>
 
             </div>
           </>

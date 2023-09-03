@@ -7,7 +7,6 @@ import {
   thunkSpotImageCreateSpot,
 } from "../../store/spots";
 import "./form.css";
-
 import "./GetAllSpots.css";
 
 const SpotForm = () => {
