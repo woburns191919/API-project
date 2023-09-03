@@ -88,9 +88,10 @@ const SpotShow = () => {
               </div>
               <div className="stars">
                 <i className="fa fa-star"></i>
-                {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'}
+                {/* {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'} */}
+                {console.log('spot array', spotArr)}
               </div>
-              <div className="reviews">{spotArr.numReviews} reviews</div>
+              <div className="reviews">  {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'}</div>
             </div>
             <div className="bottom-price-star-review-wrapper">
               <button className="reserve">Reserve</button>
@@ -102,7 +103,7 @@ const SpotShow = () => {
 
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-            {spotArr.avgStarRating} <i className="fa fa-star"></i>{" "}
+          {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'} <i className="fa fa-star"></i>{" "}
             {spotArr.numReviews} reviews {"  "}
           </div>
           <Link to="/reviews/current">
