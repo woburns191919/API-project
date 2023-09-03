@@ -315,3 +315,17 @@ navigate away, no reroute
 star rating input
 
 button disabled no stars or ratings (46)
+
+
+-----
+delete
+
+modal, same as above (67)
+
+
+
+--
+style modals
+
+
+
