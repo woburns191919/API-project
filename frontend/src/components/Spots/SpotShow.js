@@ -90,15 +90,15 @@ const SpotShow = () => {
               </div>
               <div className="stars">
                 <i className="fa fa-star"></i>{" "}
-                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} .
+                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""}{" "}
+                &middot;
               </div>
               <div className="reviews">
-                {" "}
                 {spotArr.numReviews == 1
-              ? spotArr.numReviews + " " + "Review"
-              : spotArr.numReviews > 0 && spotArr.numReviews !== 1
-              ? spotArr.numReviews + " " + "Reviews"
-              : "new"}
+                  ? spotArr.numReviews + " " + "Review"
+                  : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+                  ? spotArr.numReviews + " " + "Reviews"
+                  : "new"}
               </div>
             </div>
             <div className="bottom-price-star-review-wrapper">
@@ -112,7 +112,8 @@ const SpotShow = () => {
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
             <i className="fa fa-star"></i>{" "}
-            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} .{" "}
+            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} &middot;{" "}
+            {' '}
             {spotArr.numReviews == 1
               ? spotArr.numReviews + " " + "Review"
               : spotArr.numReviews > 0 && spotArr.numReviews !== 1
@@ -133,7 +134,7 @@ const SpotShow = () => {
           </Link>
 
           <div className="reviews-lower-text">
-            {reviewsArr?.map((reviewsObj, i) => (
+          {reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
               <div key={i}>
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
