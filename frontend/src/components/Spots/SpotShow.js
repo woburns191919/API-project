@@ -43,7 +43,7 @@ const SpotShow = () => {
     <>
       <main className="outer-wrapper">
         <div className="spot-name">{spotArr.name}</div>
-       
+
         <div className="spot-photo-wrapper">
           {spotArr.city}, {spotArr.state}, {""} {spotArr.country}
         </div>
@@ -88,7 +88,7 @@ const SpotShow = () => {
               </div>
               <div className="stars">
                 <i className="fa fa-star"></i>
-                {spotArr.avgStarRating}
+                {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'}
               </div>
               <div className="reviews">{spotArr.numReviews} reviews</div>
             </div>

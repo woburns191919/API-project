@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // import { createSpot } from '../../store/spots';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkSpotCreateSpot, thunkSpotImageCreateSpot  } from "../../store/spots";
+import {
+  thunkSpotCreateSpot,
+  thunkSpotImageCreateSpot,
+} from "../../store/spots";
+import "./form.css";
 
 import "./GetAllSpots.css";
 
@@ -71,16 +75,17 @@ const SpotForm = () => {
       },
     ];
     const newImageArray = [];
-    imageObj && imageObj.forEach((obj) => {
-      obj.url && newImageArray.push(obj);
-    });
+    imageObj &&
+      imageObj.forEach((obj) => {
+        obj.url && newImageArray.push(obj);
+      });
 
     // console.log('1st new imageArr****', newImageArray)
 
     try {
       // console.log(' from created spotimage*******', newImageArray)
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
-      console.log("created spot id****", createdSpot.id)
+      console.log("created spot id****", createdSpot.id);
       if (!createdSpot.id) return null;
       else {
         // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
@@ -112,9 +117,17 @@ const SpotForm = () => {
     <main className="form-wrapper">
       <form className="spot-form" onSubmit={handleSubmit}>
         <h4>Create a new Spot</h4>
+        <div className="form-top-info">
+          <h5>Where's your place located?</h5>
+          <p>
+            Guests will only get your exact address once they booked a
+            reservation.
+          </p>
+        </div>
         <label>
           Country <br></br>
           <input
+            className="most-boxes"
             type="text"
             required={true}
             // name="country"
@@ -126,6 +139,7 @@ const SpotForm = () => {
           <label>
             Street Address <br></br>
             <input
+              className="most-boxes"
               type="text"
               required={true}
               name="address"
@@ -134,8 +148,9 @@ const SpotForm = () => {
             ></input>
           </label>
         </div>
-        <div>
-          <label>
+
+          <div className="same-line-citystate">
+          <label className="citybox">
             City <br></br>
             <input
               required={true}
@@ -144,10 +159,11 @@ const SpotForm = () => {
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
+
           </label>
-        </div>
+
         <div>
-          <label>
+          <label className="statebox">
             State <br></br>
             <input
               required={true}
@@ -158,6 +174,8 @@ const SpotForm = () => {
             />
           </label>
         </div>
+        </div>
+
         <div>
           <label>
             Latitude <br></br>
@@ -213,6 +231,7 @@ const SpotForm = () => {
           <label>
             Create a title for your spot <br></br>
             <input
+              className="most-boxes"
               required={true}
               type="text"
               value={title}
@@ -241,6 +260,7 @@ const SpotForm = () => {
           <label>
             Liven up your spot with photos <br></br>
             <input
+              className="most-boxes"
               required={true}
               type="url"
               name="priview image URL"
@@ -255,6 +275,7 @@ const SpotForm = () => {
         </div>
         <div>
           <input
+            className="most-boxes"
             required={true}
             type="url"
             name="image URL"
@@ -266,6 +287,7 @@ const SpotForm = () => {
         </div>
         <div>
           <input
+            className="most-boxes"
             type="url"
             name="image URL"
             value={smallImage2}
@@ -275,6 +297,7 @@ const SpotForm = () => {
           ></input>
         </div>
         <input
+          className="most-boxes"
           type="url"
           name="image URL"
           value={smallImage3}
@@ -284,6 +307,7 @@ const SpotForm = () => {
         ></input>
         <div>
           <input
+            className="most-boxes"
             type="url"
             name="priview image URL"
             value={smallImage4}
@@ -292,6 +316,7 @@ const SpotForm = () => {
             }}
           ></input>
         </div>
+        <hr></hr>
         <div>
           <button type="submit">Create Spot</button>
         </div>

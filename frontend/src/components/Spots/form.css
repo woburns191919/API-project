@@ -1,0 +1,25 @@
+.most-boxes {
+  width: 100%;
+}
+
+
+.same-line-citystate {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+}
+
+
+
+.spot-form {
+  display: flex;
+    flex-direction: column;
+}
+
+.statebox input {
+  width: 100%;
+}
+
+.citybox input {
+  width:100%;
+}
