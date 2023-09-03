@@ -293,3 +293,7 @@ fix year issue with review
 landing page
 
 tooltip
+
+-----
+CREATE Spot
+$ and city state length 

@@ -102,7 +102,9 @@ const SpotShow = () => {
               </div>
             </div>
             <div className="bottom-price-star-review-wrapper">
-              <button className="reserve">Reserve</button>
+              <button
+              onClick={() => alert("Feature coming soon")}
+              className="reserve">Reserve</button>
             </div>
           </div>
         </section>
