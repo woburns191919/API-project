@@ -45,7 +45,7 @@ const SpotsManage = () => {
               <div key={i} className="inner-Container">
                 <Link to={`/spots/${currentSpotObj.id}`}>
                   <img src={`${currentSpotObj.previewImage}`} />
-                </Link>
+
                 <div className="info">
                   <div className="left-info">
                     <div className="city-state">
@@ -58,6 +58,7 @@ const SpotsManage = () => {
                     ${currentSpotObj.price} night
                   </div>
                 </div>
+                  </Link>
                 <button>
                   <NavLink to={`/spots/edit/${currentSpotObj.id}`}>
                     Update

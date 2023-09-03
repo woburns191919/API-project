@@ -271,6 +271,11 @@ random 404 that just pops up? at logout
 random for each type error on refreshing
 
 
+------
+styling issue
+------
+edit page vs create
+$ and city state length
 
 
 view ratings and reviews
@@ -296,4 +301,17 @@ tooltip
 
 -----
 CREATE Spot
-$ and city state length 
+
+button disabled if errors?
+
+
+------
+post a review
+
+logged in user spot owener 38, 39
+
+navigate away, no reroute
+
+star rating input
+
+button disabled no stars or ratings (46)

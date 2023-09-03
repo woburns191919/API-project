@@ -12,8 +12,11 @@ import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
+import { useState } from "react";
 
 const SpotShow = () => {
+
+  const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
@@ -126,15 +129,19 @@ const SpotShow = () => {
           <Link to="/reviews/current">
             <OpenModalButton
               buttonText="Post Your Review"
-              hidden={
-                spotArr.Owner &&
-                loggedInUser &&
-                spotArr.Owner.id === loggedInUser.id &&
-                loggedInUser.id === loggedInUser.id
+              setShowModal={
+                // spotArr &&
+                // spotArr.Owner &&
+                // loggedInUser &&
+                // spotArr.Owner.id === loggedInUser.id
+                    false
               }
               modalComponent={<ReviewForm spotId={spotId} />}
-            />
+              />
           </Link>
+              {/* {console.log(' owner id', spotArr.Owner.id)
+               }
+               {console.log('loggedin user', loggedInUser.id)} */}
 
           <div className="reviews-lower-text">
           {reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (

@@ -88,7 +88,7 @@ const SpotEdit = () => {
   return (
     <main className="form-wrapper">
       <form className="spot-form" onSubmit={handleSubmit}>
-        <h4>Create a new Spot</h4>
+        <h4>Update your Spot</h4>
         <label>
           Country <br></br>
           <input
@@ -214,7 +214,7 @@ const SpotEdit = () => {
             ></input>
           </label>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Update your Spot</button>
       </form>
     </main>
   );

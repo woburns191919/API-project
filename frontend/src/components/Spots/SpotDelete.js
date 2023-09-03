@@ -7,6 +7,8 @@ import { closeModal, useModal } from '../../context/Modal';
 
 import { thunkSpotDelete, thunkGetSpotDetails, thunkGetCurrentSpots } from "../../store/spots";
 // import { closeModal } from "../context/Modal"
+import "./SpotDelete.css";
+
 
 const SpotDelete = ({ spotId }) => {
   // const { spotId } = useParams();
