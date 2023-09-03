@@ -35,9 +35,9 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  console.log("spot array", spotArr);
+  // console.log("spot array", spotArr);
 
-  console.log("spot array from details page", spotArr);
+  // console.log("spot array from details page", spotArr);
 
   return (
     <>
@@ -48,28 +48,30 @@ const SpotShow = () => {
           {spotArr.city}, {spotArr.state}, {""} {spotArr.country}
         </div>
         <div className="parent-flex">
-
-            <div className="big-photo-container">
-              {spotArr.SpotImages.map(
-                (spotImageObj, i) =>
-                  spotImageObj.preview === true && (
-                    // <div className="big-photo-inner-box" key={i}>
-                    <img className="big-photo" src={spotImageObj.url}></img>
-                    // </div>
-                  )
-              )}
-            </div>
-            <div className="small-photo-container">
-              {spotArr.SpotImages.map(
-                (spotImageObj, i) =>
-                  spotImageObj.preview === false && (
-                    <div key={i}>
-                      <img src={spotImageObj.url}></img>
-                    </div>
-                  )
-              )}
-            </div>
-
+          <div className="big-photo-container">
+            {spotArr.SpotImages.map(
+              (spotImageObj, i) =>
+                spotImageObj.preview === true && (
+                  // <div className="big-photo-inner-box" key={i}>
+                  <img
+                    key={i}
+                    className="big-photo"
+                    src={spotImageObj.url}
+                  ></img>
+                  // </div>
+                )
+            )}
+          </div>
+          <div className="small-photo-container">
+            {spotArr.SpotImages.map(
+              (spotImageObj, i) =>
+                spotImageObj.preview === false && (
+                  <div key={i}>
+                    <img src={spotImageObj.url}></img>
+                  </div>
+                )
+            )}
+          </div>
         </div>
 
         <section className="lower-spot-show">
@@ -87,11 +89,17 @@ const SpotShow = () => {
                 <b>${spotArr.price} </b> night
               </div>
               <div className="stars">
-                <i className="fa fa-star"></i>
-                {/* {spotArr.avgRating > 0 ? spotArr.avgRating : 'new'} */}
-                {console.log('spot array', spotArr)}
+                <i className="fa fa-star"></i>{" "}
+                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""}{" "}
+                &middot;
               </div>
-              <div className="reviews">  {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'}</div>
+              <div className="reviews">
+                {spotArr.numReviews == 1
+                  ? spotArr.numReviews + " " + "Review"
+                  : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+                  ? spotArr.numReviews + " " + "Reviews"
+                  : "new"}
+              </div>
             </div>
             <div className="bottom-price-star-review-wrapper">
               <button className="reserve">Reserve</button>
@@ -103,8 +111,14 @@ const SpotShow = () => {
 
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-          {spotArr.avgRating > 0 ? spotArr.avgRating + "Reviews" : 'new'} <i className="fa fa-star"></i>{" "}
-            {spotArr.numReviews} reviews {"  "}
+            <i className="fa fa-star"></i>{" "}
+            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} &middot;{" "}
+            {' '}
+            {spotArr.numReviews == 1
+              ? spotArr.numReviews + " " + "Review"
+              : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+              ? spotArr.numReviews + " " + "Reviews"
+              : "new"}
           </div>
           <Link to="/reviews/current">
             <OpenModalButton
@@ -120,7 +134,7 @@ const SpotShow = () => {
           </Link>
 
           <div className="reviews-lower-text">
-            {reviewsArr?.map((reviewsObj, i) => (
+          {reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
               <div key={i}>
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
