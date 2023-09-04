@@ -340,7 +340,6 @@ need to clear out after log in
 need to log in demo user
 ------
 
-
 --
 style modals
 ---
@@ -351,6 +350,14 @@ cant center login button
 ----
 
 manage spots after clicking, modal should close
+
+
+-----
+confirm delete styling wont take
+
+
+----
+position bug w index page?
 
 
 

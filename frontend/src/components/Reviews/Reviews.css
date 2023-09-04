@@ -22,3 +22,25 @@
    gap:10px;
 
  }
+
+ .yes-button-review-delete {
+  border: 4px solid red;
+  background-color:red;
+ }
+
+/*
+ .review-confirm-modal > button {
+  color:white;
+  background-color:red;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+ } */
+
+ .no-button-review-delete {
+  color:white;
+  background-color:rgb(105, 102, 102);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+ }
