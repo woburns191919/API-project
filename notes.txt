@@ -308,7 +308,7 @@ modal, same as above (67)   --high
 
 ----
 
-manage spots after clicking, modal should close --high
+
 
 
 -----
