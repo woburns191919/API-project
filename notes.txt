@@ -281,7 +281,7 @@ it should not show the centered dot or the review count    -- LOW
 
 **
 
-dots fixed 
+dots fixed
 
 **
 
@@ -301,6 +301,8 @@ modal styling confirm delete styling wont take --high
 need to clear out after log in  -- low by  itself
 
 ------
+
+form inputs same size
 
 
 -----
