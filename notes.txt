@@ -294,53 +294,64 @@ decimal thing
 
 **
 
-fix year issue with review
+fix year issue with review --HIGH
 
 **
 
+tooltip --HIGH
 --------
+
+delete
+
+modal, same as above (67)   --high
+
+
+----
+
+manage spots after clicking, modal should close --high
+
+
+-----
+modal styling confirm delete styling wont take --high
 
 
 -------
 landing page
 
-tooltip
+------
+invalid user name pw error
+need to clear out after log in  -- high altogether
+need to log in demo user
+------
+
 
 -----
 CREATE Spot
 **
-button disabled if errors?
+button disabled if errors?   LOW
 **
 
-redirect after review post
 
 ------
 post a review
 
 **
 
-logged in user spot owener 38, 39
+logged in user spot owener 38, 39 --LOW
 
 **
 
 navigate away, no reroute
 
-star rating input
+star rating input -- LOW
 
 button disabled no stars or ratings (46)  -- LOW
 
 
 -----
-delete
-
-modal, same as above (67)   --high
 
 
-------
-invalid user name pw error
-need to clear out after log in   high altogether
-need to log in demo user
-------
+
 
 
 cant center login button --low
@@ -356,7 +367,9 @@ manage spots after clicking, modal should close --high
 modal styling confirm delete styling wont take --high
 
 ----
-position bug w index page? --high
+
+
+
 
 
 
