@@ -40,6 +40,8 @@ const SpotShow = () => {
   if (!spotArr.SpotImages) return null;
   console.log("spot array", spotArr);
 
+
+
   // console.log("spot array from details page", spotArr);
 
   return (
@@ -159,3 +161,7 @@ const SpotShow = () => {
 };
 
 export default SpotShow;
+
+/*
+(reviewsArr && reviewsArr.length > 0 && reviewsArr.find(el => el.userId !== loggedInUser.id)) &&
+*/
