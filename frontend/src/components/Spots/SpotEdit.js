@@ -3,9 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./form.css";
-import "./edit-form.css";
-
-
+// import "./edit-form.css";
 
 const SpotEdit = () => {
   console.log("rendering spot edit");
@@ -14,7 +12,7 @@ const SpotEdit = () => {
   const dispatch = useDispatch();
   const { spotId } = useParams();
 
-  console.log("spot id***", spotId);
+  // console.log("spot id***", spotId);
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -41,11 +39,11 @@ const SpotEdit = () => {
       setAddress(data.address);
       setCity(data.city);
       setState(data.state);
-      setLat(data.lat)
+      setLat(data.lat);
       setLng(data.lng);
       setDescription(data.description);
       // setTitle(data.title);
-      setPrice(data.price)
+      setPrice(data.price);
       setName(data.name);
     });
   }, [dispatch, spotId]);
@@ -88,10 +86,19 @@ const SpotEdit = () => {
   return (
     <main className="form-wrapper">
       <form className="spot-form" onSubmit={handleSubmit}>
-        <h4>Update your Spot</h4>
-        <label>
+        <h3>Update your Spot</h3>
+        <div className="form-top-info">
+          <h4>Where's your place located?</h4>
+          <p>
+            Guests will only get your exact address once they booked a
+            reservation.
+          </p>
+        </div>
+        <label htmlFor="Country">
           Country <br></br>
           <input
+            placeholder="Country"
+            className="most-boxes"
             type="text"
             required={true}
             // name="country"
@@ -103,6 +110,8 @@ const SpotEdit = () => {
           <label>
             Street Address <br></br>
             <input
+              placeholder="Address"
+              className="most-boxes"
               type="text"
               required={true}
               name="address"
@@ -111,10 +120,12 @@ const SpotEdit = () => {
             ></input>
           </label>
         </div>
-        <div>
-          <label>
+
+        <div className="citystatebox">
+          <label className="citybox">
             City <br></br>
             <input
+              placeholder="City"
               required={true}
               type="text"
               name="city"
@@ -122,74 +133,83 @@ const SpotEdit = () => {
               onChange={(e) => setCity(e.target.value)}
             />
           </label>
+
+          <div className="statebox">
+            <label>
+              State <br></br>
+              <input
+                placeholder="STATE"
+                required={true}
+                type="text"
+                name="state"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </label>
+          </div>
         </div>
-        <div>
-          <label>
-            State <br></br>
-            <input
-              required={true}
-              type="text"
-              name="state"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-            />
-          </label>
+        <div className="latlngbox">
+          <div className="latbox">
+            <label>
+              Latitude <br></br>
+              <input
+                placeholder="Latitude"
+                required={true}
+                type="text"
+                name="latitude"
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="lngbox">
+            <label>
+              Longitude <br></br>
+              <input
+                placeholder="Longitude"
+                required={true}
+                type="text"
+                name="longitude"
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
+              />
+            </label>
+          </div>
         </div>
-        <div>
+        <div className="textarea-description">
           <label>
-            Latitude <br></br>
-            <input
-              required={true}
-              type="text"
-              name="latitude"
-              value={lat}
-              onChange={(e) => setLat(e.target.value)}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Longitude <br></br>
-            <input
-              required={true}
-              type="text"
-              name="longitude"
-              value={lng}
-              onChange={(e) => setLng(e.target.value)}
-            />
-          </label>
-        </div>
-        {/* <div>
-          <label>
-            Name <br></br>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-        </div> */}
-        <div>
-          <label>
-            Describe your place to guests <br></br>
-            <input
-              required={true}
-              minLength="30"
-              type="textarea"
-              value={description}
-              name="description"
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
+            <h4>Describe your place to guests</h4> <br></br>
+            <p>
+              Mention the best features of your space, any special amentities
+              like fast wifi or parking, and what you love about the
+              neighborhood.
+            </p>
+            <div className="textareadiv">
+              <textarea
+                placeholder="Please write at least 30 characters"
+                required={true}
+                minLength="30"
+                type="textarea"
+                value={description}
+                name="description"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+            </div>
           </label>
         </div>
 
-        <div>
+        <div className="titlebox">
           <label>
-            Create a title for your spot <br></br>
+            <h4>Create a title for your spot</h4> <br></br>
+            <p>
+              Catch guests' attention with a spot title that highlights what
+              makes your place special.
+            </p>
             <input
+              placeholder="Name of your spot"
+              className="most-boxes"
               required={true}
               type="text"
               value={name}
@@ -200,10 +220,17 @@ const SpotEdit = () => {
             />
           </label>
         </div>
-        <div>
+        <div className="basepricebox">
           <label>
-            Set a base price for your spot <br></br>
+            <h4>Set a base price for your spot </h4>
+            <br></br>
+            <p>
+              Competitive pricing can help your listing stand out and rank
+              higher in search results.
+            </p>
+
             <input
+              placeholder="Price per night (USD)"
               required={true}
               type="number"
               name="base price"
@@ -214,7 +241,10 @@ const SpotEdit = () => {
             ></input>
           </label>
         </div>
-        <button type="submit">Update your Spot</button>
+        <hr></hr>
+        <div className="button-div">
+          <button type="submit">Update Your Spot</button>
+        </div>
       </form>
     </main>
   );

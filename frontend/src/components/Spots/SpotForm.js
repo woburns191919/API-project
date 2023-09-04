@@ -79,18 +79,12 @@ const SpotForm = () => {
         obj.url && newImageArray.push(obj);
       });
 
-    // console.log('1st new imageArr****', newImageArray)
-
     try {
-      // console.log(' from created spotimage*******', newImageArray)
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
       console.log("created spot id****", createdSpot.id);
       if (!createdSpot.id) {
-       return null
+        return null;
       } else {
-        
-        // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
-        // imageObj.forEach(async (el) => await thunkSpotImageCreateSpot(el, createdSpot.id))
         for (let el of imageObj) {
           await dispatch(thunkSpotImageCreateSpot(el, createdSpot.id));
         }
@@ -98,10 +92,6 @@ const SpotForm = () => {
         // setValidationErrors();
         history.push(`/spots/${createdSpot.id}`);
       }
-
-      // } else if (createdSpot) {
-      //   throw new Error('spot exists');
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -128,7 +118,7 @@ const SpotForm = () => {
         <label htmlFor="Country">
           Country <br></br>
           <input
-          placeholder="Country"
+            placeholder="Country"
             className="most-boxes"
             type="text"
             required={true}
@@ -141,7 +131,7 @@ const SpotForm = () => {
           <label>
             Street Address <br></br>
             <input
-            placeholder="Address"
+              placeholder="Address"
               className="most-boxes"
               type="text"
               required={true}
@@ -156,7 +146,7 @@ const SpotForm = () => {
           <label className="citybox">
             City <br></br>
             <input
-            placeholder="City"
+              placeholder="City"
               required={true}
               type="text"
               name="city"
@@ -169,7 +159,7 @@ const SpotForm = () => {
             <label>
               State <br></br>
               <input
-              placeholder="STATE"
+                placeholder="STATE"
                 required={true}
                 type="text"
                 name="state"
@@ -184,7 +174,7 @@ const SpotForm = () => {
             <label>
               Latitude <br></br>
               <input
-              placeholder="Latitude"
+                placeholder="Latitude"
                 required={true}
                 type="text"
                 name="latitude"
@@ -197,7 +187,7 @@ const SpotForm = () => {
             <label>
               Longitude <br></br>
               <input
-              placeholder="Longitude"
+                placeholder="Longitude"
                 required={true}
                 type="text"
                 name="longitude"
@@ -216,18 +206,18 @@ const SpotForm = () => {
               neighborhood.
             </p>
             <div className="textareadiv">
-            <textarea
-            placeholder="Please write at least 30 characters"
-              required={true}
-              minLength="30"
-              type="textarea"
-              value={description}
-              name="description"
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
+              <textarea
+                placeholder="Please write at least 30 characters"
+                required={true}
+                minLength="30"
+                type="textarea"
+                value={description}
+                name="description"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
               />
-              </div>
+            </div>
           </label>
         </div>
 
@@ -239,7 +229,7 @@ const SpotForm = () => {
               makes your place special.
             </p>
             <input
-            placeholder="Name of your spot"
+              placeholder="Name of your spot"
               className="most-boxes"
               required={true}
               type="text"
@@ -252,7 +242,7 @@ const SpotForm = () => {
           </label>
         </div>
         <div className="basepricebox">
-       <label>
+          <label>
             <h4>Set a base price for your spot </h4>
             <br></br>
             <p>
@@ -261,7 +251,7 @@ const SpotForm = () => {
             </p>
 
             <input
-            placeholder="Price per night (USD)"
+              placeholder="Price per night (USD)"
               required={true}
               type="number"
               name="base price"
@@ -271,82 +261,78 @@ const SpotForm = () => {
               }}
             ></input>
           </label>
-
         </div>
-<div className="outer-input-wrapper">
-            <div>
-          <label>
-            <h4>Liven up your spot with photos </h4>
-            <br></br>
-            <p>Submit a link to at least one photo to publish your spot.</p>
+        <div className="outer-input-wrapper">
+          <div>
+            <label>
+              <h4>Liven up your spot with photos </h4>
+              <br></br>
+              <p>Submit a link to at least one photo to publish your spot.</p>
 
+              <input
+                className="most-boxes"
+                required={true}
+                type="url"
+                name="preview image URL"
+                placeholder="Priview Image URL"
+                value={previewImage}
+                onChange={(e) => {
+                  {
+                    setPreviewImage(e.target.value);
+                  }
+                }}
+              ></input>
+            </label>
+          </div>
+          <div>
             <input
+              placeholder="Image URL"
               className="most-boxes"
               required={true}
               type="url"
-              name="preview image URL"
-              placeholder="Priview Image URL"
-              value={previewImage}
+              name="image URL"
+              value={smallImage1}
               onChange={(e) => {
-                {
-                  setPreviewImage(e.target.value);
-                }
+                setSmallImage1(e.target.value);
               }}
             ></input>
-          </label>
-            </div>
-            <div>
+          </div>
 
+          <div>
+            <input
+              placeholder="Image URL"
+              className="most-boxes"
+              type="url"
+              name="image URL"
+              value={smallImage2}
+              onChange={(e) => {
+                setSmallImage2(e.target.value);
+              }}
+            ></input>
+          </div>
           <input
-          placeholder="Image URL"
-            className="most-boxes"
-            required={true}
-            type="url"
-            name="image URL"
-            value={smallImage1}
-            onChange={(e) => {
-              setSmallImage1(e.target.value);
-            }}
-          ></input>
-
-        </div>
-
-        <div>
-          <input
-          placeholder="Image URL"
+            placeholder="Image URL"
             className="most-boxes"
             type="url"
             name="image URL"
-            value={smallImage2}
+            value={smallImage3}
             onChange={(e) => {
-              setSmallImage2(e.target.value);
+              setSmallImage3(e.target.value);
             }}
           ></input>
+          <div>
+            <input
+              placeholder="Image URL"
+              className="most-boxes"
+              type="url"
+              name="priview image URL"
+              value={smallImage4}
+              onChange={(e) => {
+                setSmallImage4(e.target.value);
+              }}
+            ></input>
+          </div>
         </div>
-        <input
-        placeholder="Image URL"
-          className="most-boxes"
-          type="url"
-          name="image URL"
-          value={smallImage3}
-          onChange={(e) => {
-            setSmallImage3(e.target.value);
-          }}
-        ></input>
-        <div>
-          <input
-          placeholder="Image URL"
-            className="most-boxes"
-            type="url"
-            name="priview image URL"
-            value={smallImage4}
-            onChange={(e) => {
-              setSmallImage4(e.target.value);
-            }}
-          ></input>
-          </div>
-
-          </div>
 
         <hr></hr>
         <div className="button-div">
