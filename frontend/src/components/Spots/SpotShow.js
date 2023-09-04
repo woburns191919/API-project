@@ -136,16 +136,16 @@ const SpotShow = () => {
               modalComponent={<ReviewForm spotId={spotId} />}
               />
           </Link>}
-              {/* {console.log(' owner id', spotArr.Owner.id)
-               }
-               {console.log('loggedin user', loggedInUser.id)} */}
 
           <div className="reviews-lower-text">
-          {reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
+          {
+
+          reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
               <div key={i}>
                 <h3>{reviewsObj.User.firstName}</h3>
                 <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
                 <p>{reviewsObj.review}</p>
+
                 <OpenModalButton
                   buttonText="Delete"
                   modalComponent={
@@ -153,7 +153,7 @@ const SpotShow = () => {
                   }
                 />
               </div>
-            ))}
+          ))}
           </div>
         </section>
       </main>
@@ -164,7 +164,9 @@ const SpotShow = () => {
 export default SpotShow;
 
 /*
-(reviewsArr && reviewsArr.length > 0 && reviewsArr.filter(el => el.userId !== loggedInUser.id) < 0) &&
+(reviewsArr && reviewsArr.length > 0 && !reviewsArr.map(el => el.userId === loggedInUser.id)[0]) &&
 
-&& (reviewsArr.find(el => el.userId !== loggedInUser.id)  &&
+  {(reviewsArr && reviewsArr.length > 0 && !reviewsArr.map(el => el.userId === loggedInUser.id)[0])} &&
+
+&& !(reviewsArr.find(el => el.userId === loggedInUser.id) || &&
 */

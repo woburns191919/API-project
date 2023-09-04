@@ -36,7 +36,11 @@ const ReviewForm = ({ spotId }) => {
 
   <>
   <h4>How was your stay?</h4>
-<label>
+
+<label
+name="stars"
+htmlFor="stars">
+
 
   <textarea
   placeholder="Leave your review here..."
@@ -59,7 +63,8 @@ const ReviewForm = ({ spotId }) => {
 
     // <StarRatingInput />
      />
-    </label>
+    </label>{' '}Stars
+
   </div>
     <button
     onClick={(e) => handleSubmit(e)}

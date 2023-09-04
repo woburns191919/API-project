@@ -281,7 +281,9 @@ $ and city state length
 view ratings and reviews
 -----
 **
-If the review count is zero (there are no reviews yet for this spot), it should not show the centered dot or the review count (only the average star rating should be displayed)
+If the review count is zero (there are no reviews yet for this spot),
+it should not show the centered dot or the review count    -- LOW
+(only the average star rating should be displayed)
 **
 **
 
@@ -325,39 +327,36 @@ navigate away, no reroute
 
 star rating input
 
-button disabled no stars or ratings (46)
+button disabled no stars or ratings (46)  -- LOW
 
 
 -----
 delete
 
-modal, same as above (67)
+modal, same as above (67)   --high
 
 
 ------
 invalid user name pw error
-need to clear out after log in
+need to clear out after log in   high altogether
 need to log in demo user
 ------
 
---
-style modals
----
-cant center login button
+
+cant center login button --low
 ------
 
 
 ----
 
-manage spots after clicking, modal should close
+manage spots after clicking, modal should close --high
 
 
 -----
-confirm delete styling wont take
-
+modal styling confirm delete styling wont take --high
 
 ----
-position bug w index page?
+position bug w index page? --high
 
 
 
@@ -389,3 +388,18 @@ from Reviews.className
   gap:10px;
 
 }
+
+
+
+
+
+
+for review button vis
+  {reviewsArr.length > 0 && !(reviewsArr.find(el => el.userId === loggedInUser.id)) &&
+         <Link to="/reviews/current">
+            <OpenModalButton
+              buttonText="Post Your Review"
+
+              modalComponent={<ReviewForm spotId={spotId} />}
+              />
+          </Link>}
