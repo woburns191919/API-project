@@ -144,3 +144,12 @@ img {
   text-decoration: none;
   color: gray;
 }
+
+.outer-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 92%;
+  margin: 0px;
+  padding: 107px;
+}
