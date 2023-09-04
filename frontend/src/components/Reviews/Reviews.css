@@ -23,10 +23,17 @@
 
  }
 
- .yes-button-review-delete {
-  border: 4px solid red;
-  background-color:red;
+ #yes-button-review-delete-button > button {
+ background-color: red;
+
+  /* border: 4px solid red */
  }
+
+ /* #yesbutton {
+
+  background-color:red;
+  border: 4px solid red
+ } */
 
 /*
  .review-confirm-modal > button {

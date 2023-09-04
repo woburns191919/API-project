@@ -34,7 +34,7 @@ return (
   <h4 class="sure">Are you sure you want to remove this spot from the listings?</h4>
   <div className="buttondiv">
   <button
-  className="yesbutton"
+  id="yesbutton"
   onClick={handleDelete}
   >Yes(Delete Spot)
   </button>

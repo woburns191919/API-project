@@ -262,19 +262,10 @@ import { thunkPutEditSpot} from "../../store/spots";
 
 
 
-
-
-random 404 that just pops up? at logout
-
-
-
-random for each type error on refreshing
-
-
 ------
 styling issue
 ------
-edit page vs create
+
 $ and city state length
 
 
@@ -288,15 +279,9 @@ it should not show the centered dot or the review count    -- LOW
 **
 
 
-decimal thing
-
-**
-for each error every now and then?
-
-
 **
 
-fix year issue with review --HIGH
+
 
 **
 
@@ -305,8 +290,6 @@ tooltip --HIGH
 
 delete
 
-modal, same as above (67)   --high
-
 
 ----
 
@@ -314,9 +297,9 @@ modal, same as above (67)   --high
 modal styling confirm delete styling wont take --high
 
 
-invalid user name pw error
-need to clear out after log in  -- high altogether
-need to log in demo user
+
+need to clear out after log in  -- low by  itself
+
 ------
 
 
@@ -326,13 +309,12 @@ CREATE Spot
 button disabled if errors?   LOW
 **
 
-
 ------
 post a review
 
 **
 
-logged in user spot owener 38, 39 --LOW
+
 
 **
 
@@ -344,8 +326,6 @@ button disabled no stars or ratings (46)  -- LOW
 
 
 -----
-
-
 
 
 

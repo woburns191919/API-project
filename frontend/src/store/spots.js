@@ -83,7 +83,7 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   // console.log('RESPONSE', res)
   if (res.ok) {
     const data = await res.json();
-    console.log('data***', data)
+    // console.log('data***', data)
     dispatch(actionGetSpotDetails(data));
     return data;
   } else {
@@ -172,7 +172,7 @@ export const thunkSpotImageCreateSpot =
 
   function normalizerSpots(spots) {
     const normalSpotObj = {};
-    spots.Spots.forEach((spot) => (normalSpotObj[spot.id] = spot));
+    spots.Spots?.forEach((spot) => (normalSpotObj[spot.id] = spot));
     return normalSpotObj;
   }
 
@@ -220,12 +220,12 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
 
 
 export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
-  // console.log("entered review thunk");
+  console.log("entered review thunk");
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
   if (res.ok) {
     const data = await res.json();
     dispatch(actionGetReviewsBySpotId(data));
-    // console.log("data from thunk: ", data);
+    console.log("data from thunk: ", data);
     return data;
   }
 };

@@ -13,13 +13,13 @@ const ConfirmDelete = ( { reviewId, spotId } ) => {
 
   const dispatch = useDispatch();
 
-  console.log('reviewId', reviewId)
+  // console.log('reviewId', reviewId)
 
-  console.log('spotId', spotId)
+  // console.log('spotId', spotId)
 
   const handleDelete = async () => {
-    await dispatch(thunkReviewDelete(reviewId));
-    await dispatch(thunkGetReviewsBySpotId(spotId))
+    await dispatch(thunkReviewDelete(reviewId, spotId));
+    await dispatch(thunkGetReviewsBySpotId(spotId));
     closeModal();
   };
 
@@ -30,7 +30,7 @@ const ConfirmDelete = ( { reviewId, spotId } ) => {
     <div className="review-confirm-modal">
       <h5>Confirm Delete</h5>
       <p>Are you sure you want to remove this spot from the listings?</p>
-      <div className="yes-button-review-delete">
+      <div id="yes-button-review-delete-button">
       <button
       value={reviewId}
       onClick={handleDelete}

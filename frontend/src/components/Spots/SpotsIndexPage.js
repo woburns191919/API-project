@@ -34,7 +34,7 @@ console.log('spots', spots[1])
                   </div>
                   <div className="star-info">
                   <i className="fa fa-star"></i>
-                 {spotObj.avgRating > 0 ? spotObj.avgRating : 'new'}</div>
+                 {spotObj.avgRating > 0 ? spotObj.avgRating.toFixed(2) : 'new'}</div>
                 </div>
 
                 <div className="right-info"><b>${spotObj.price}</b> night</div>
