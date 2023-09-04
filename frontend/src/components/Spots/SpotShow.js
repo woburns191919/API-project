@@ -38,7 +38,7 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  // console.log("spot array", spotArr);
+  console.log("spot array", spotArr);
 
   // console.log("spot array from details page", spotArr);
 
@@ -126,19 +126,13 @@ const SpotShow = () => {
               : spotArr.numReviews === 0 ? <p>Be the first to post a review!</p> :
               "new"}
           </div>
-          <Link to="/reviews/current">
+         { (loggedInUser && spotArr.Owner.id !== loggedInUser.id) && <Link to="/reviews/current">
             <OpenModalButton
               buttonText="Post Your Review"
-              setShowModal={
-                // spotArr &&
-                // spotArr.Owner &&
-                // loggedInUser &&
-                // spotArr.Owner.id === loggedInUser.id
-                    false
-              }
+
               modalComponent={<ReviewForm spotId={spotId} />}
               />
-          </Link>
+          </Link>}
               {/* {console.log(' owner id', spotArr.Owner.id)
                }
                {console.log('loggedin user', loggedInUser.id)} */}

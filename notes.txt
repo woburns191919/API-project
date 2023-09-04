@@ -280,16 +280,23 @@ $ and city state length
 
 view ratings and reviews
 -----
-
+**
 If the review count is zero (there are no reviews yet for this spot), it should not show the centered dot or the review count (only the average star rating should be displayed)
-
+**
+**
 issue with preview image mixup
 
 decimal thing
 
-first post review order
+**
+
+**
 
 fix year issue with review
+
+**
+
+
 
 --------
 
@@ -301,14 +308,19 @@ tooltip
 
 -----
 CREATE Spot
-
+**
 button disabled if errors?
+**
 
 
 ------
 post a review
 
+**
+
 logged in user spot owener 38, 39
+
+**
 
 navigate away, no reroute
 
@@ -328,4 +340,5 @@ modal, same as above (67)
 style modals
 
 
+----
 

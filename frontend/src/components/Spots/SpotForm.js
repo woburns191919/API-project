@@ -85,8 +85,10 @@ const SpotForm = () => {
       // console.log(' from created spotimage*******', newImageArray)
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
       console.log("created spot id****", createdSpot.id);
-      if (!createdSpot.id) return null;
-      else {
+      if (!createdSpot.id) {
+       return null
+      } else {
+        
         // const spot = await dispatch(thunkSpotImageCreateSpot(imageObj, createdSpot.id))
         // imageObj.forEach(async (el) => await thunkSpotImageCreateSpot(el, createdSpot.id))
         for (let el of imageObj) {
@@ -282,7 +284,7 @@ const SpotForm = () => {
               className="most-boxes"
               required={true}
               type="url"
-              name="priview image URL"
+              name="preview image URL"
               placeholder="Priview Image URL"
               value={previewImage}
               onChange={(e) => {

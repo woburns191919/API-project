@@ -80,8 +80,10 @@ const actionPutEditSpot = (spot) => ({
 export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   // console.log('entered thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`);
+  // console.log('RESPONSE', res)
   if (res.ok) {
     const data = await res.json();
+    console.log('data***', data)
     dispatch(actionGetSpotDetails(data));
     return data;
   } else {

@@ -134,7 +134,7 @@ router.get("/", validatequery, async (req, res) => {
       },
       {
         model: SpotImage,
-        attributes: ["url"],
+        attributes: ["url", "preview"],
       },
     ],
     ...pagination,
@@ -145,9 +145,13 @@ router.get("/", validatequery, async (req, res) => {
     allSpotsList.push(spot.toJSON());
   });
   allSpotsList.forEach((spots) => {
-    spots.SpotImages.forEach((image) => {
-      spots.previewImage = image.url;
-    });
+
+      spots.SpotImages.forEach((image) => {
+
+       if (image.preview) spots.previewImage = image.url;
+      });
+
+
 
     let starSum = 0;
     spots.Reviews.forEach((reviews) => {
@@ -299,7 +303,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
       ownerId: req.user.id,
     },
   });
- 
+
 
   if (!officialOwner) {
     return res.status(404).json({

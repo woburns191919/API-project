@@ -14,7 +14,7 @@ const SpotsIndexPage = () => {
   useEffect(() => {
     dispatch(thunkGetAllSpots());
   }, [dispatch]);
-
+console.log('spots', spots[1])
   return (
     <>
       <main className="outer-wrapper">
