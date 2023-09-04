@@ -37,7 +37,7 @@ const ConfirmDelete = ( { reviewId, spotId } ) => {
       >Yes(Delete Review)
       </button>
       </div>
-      <div className="no-button-review-delete">
+      <div id="no-button-review-delete-button">
       <button
       onClick={closeModal}
       >No (Keep Review)</button>

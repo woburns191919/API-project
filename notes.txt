@@ -288,15 +288,9 @@ dots fixed
 tooltip --HIGH
 --------
 
-delete
-
-
-----
 
 -----
 modal styling confirm delete styling wont take --high
-
-
 
 need to clear out after log in  -- low by  itself
 
@@ -304,7 +298,8 @@ need to clear out after log in  -- low by  itself
 
 form inputs same size
 
-
+****
+reserve thing make sure span
 -----
 CREATE Spot
 **
@@ -316,11 +311,9 @@ post a review
 
 **
 
-
-
 **
 
-navigate away, no reroute
+navigate away, no reroute  ???
 
 star rating input -- LOW
 
@@ -328,9 +321,6 @@ button disabled no stars or ratings (46)  -- LOW
 
 
 -----
-
-
-
 cant center login button --low
 ------
 
