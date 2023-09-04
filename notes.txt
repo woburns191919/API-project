@@ -281,7 +281,7 @@ it should not show the centered dot or the review count    -- LOW
 
 **
 
-
+dots fixed 
 
 **
 
