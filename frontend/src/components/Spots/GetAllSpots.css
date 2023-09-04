@@ -1,23 +1,18 @@
+/* .body {
+  margin: 0 auto;
+} */
 
 
-.outer-wrapper {
-
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: fit-content;
-  margin: 0px;
-  justify-content: center;
-}
 
 
 .photo-container {
   display: flex;
-  width: 99%;
+  /* width: fit-content; */
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 10px;
- 
+  max-width: 1024px;
+
 }
 
 img {

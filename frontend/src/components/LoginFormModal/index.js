@@ -11,14 +11,7 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-
-
-  // useEffect(() => {
-  //   const errors = {}
-  //   if (credential.length < 4) errors.credential = "The provided credentials were invalid"
-  //   if (password.length < 6) errors.password = "The provided credentials were invalid"
-  //   setErrors(errors)
-  // }, [credential, password])
+  // const [modalContent, setModalContent] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,19 +22,18 @@ function LoginFormModal() {
         const data = await res.json();
         if (data && data.errors) {
           setErrors(data.errors);
+
         }
       });
   };
-
 
   return (
     <div className="modal">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
-
           <input
-          placeholder = "Username or Email"
+            placeholder="Username or Email"
             type="text"
             minLength="4"
             value={credential}
@@ -50,9 +42,8 @@ function LoginFormModal() {
           />
         </label>
         <label>
-      
           <input
-          placeholder="Password"
+            placeholder="Password"
             type="password"
             minLength="6"
             value={password}
@@ -60,15 +51,43 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && (
-          <p>{errors.credential}</p>
-        )}
-        <button type="submit"
-        disabled={credential.length < 4 || password.length < 6}
-        >Log In</button>
+        {errors && <p>{errors.message}</p>}
+        <button
+          type="submit"
+          disabled={credential.length < 4 || password.length < 6}
+        >
+          Log In
+        </button>
       </form>
+      <button
+      onClick={((e) => dispatch(sessionActions.login({
+        credential: 'Oblivion',
+        password: 'mrsquishy'
+
+      })
+      ).then(closeModal)
+      )}
+      >
+        demo user login
+      </button>
     </div>
   );
 }
 
 export default LoginFormModal;
+
+// useEffect(() => {
+//   const errors = {};
+//   if (credential.length < 4)
+//     errors.credential = "The provided credentials were invalid";
+//   if (password.length < 6)
+//     errors.password = "The provided credentials were invalid";
+//   setErrors(errors);
+// }, [credential, password]);
+
+// // setModalContent(null);
+// useEffect(() => {
+//   setCredential("");
+//   setPassword("");
+//   setErrors({});
+// }, []);

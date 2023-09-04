@@ -291,6 +291,8 @@ it should not show the centered dot or the review count    -- LOW
 decimal thing
 
 **
+for each error every now and then?
+
 
 **
 
@@ -308,17 +310,10 @@ modal, same as above (67)   --high
 
 ----
 
-
-
-
 -----
 modal styling confirm delete styling wont take --high
 
 
--------
-landing page
-
-------
 invalid user name pw error
 need to clear out after log in  -- high altogether
 need to log in demo user
@@ -360,13 +355,7 @@ cant center login button --low
 
 ----
 
-manage spots after clicking, modal should close --high
 
-
------
-modal styling confirm delete styling wont take --high
-
-----
 
 
 
