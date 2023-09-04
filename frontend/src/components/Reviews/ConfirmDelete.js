@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { thunkGetReviewsBySpotId, thunkGetSpotDetails } from "../../store/spots";
 import SpotShow from "../Spots/SpotShow";
 import "./Reviews.css"
+import "../Spots/SpotDelete.css"
 // import "../Spots/SpotDelete.css"
 
 const ConfirmDelete = ( { reviewId, spotId } ) => {
@@ -27,9 +28,9 @@ const ConfirmDelete = ( { reviewId, spotId } ) => {
 
   return (
     <>
-    <div className="review-confirm-modal">
+    <div id="delete-spot-confirm-modal">
       <h5>Confirm Delete</h5>
-      <p>Are you sure you want to remove this spot from the listings?</p>
+      <p id="delete-sure">Are you sure you want to remove this spot from the listings?</p>
       <div id="yes-button-review-delete-button">
       <button
       value={reviewId}

@@ -172,7 +172,7 @@ export const thunkSpotImageCreateSpot =
 
   function normalizerSpots(spots) {
     const normalSpotObj = {};
-    spots.Spots?.forEach((spot) => (normalSpotObj[spot.id] = spot));
+    spots?.Spots?.forEach((spot) => (normalSpotObj[spot.id] = spot));
     return normalSpotObj;
   }
 

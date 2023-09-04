@@ -287,10 +287,10 @@ dots fixed
 
 tooltip --HIGH
 --------
-
+numbers for name?
 
 -----
-modal styling confirm delete styling wont take --high
+
 
 need to clear out after log in  -- low by  itself
 

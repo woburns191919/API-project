@@ -39,6 +39,14 @@
 
  }
 
+ #review-confirm-modal {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+
+ }
+
  /* #yesbutton {
 
   background-color:red;

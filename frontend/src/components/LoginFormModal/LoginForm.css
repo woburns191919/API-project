@@ -10,8 +10,8 @@
 }
 
  #modal-content button {
-  border-left: 24px solid white;
-  border-right: 24px solid white;
+  /* border-left: 24px solid white;
+  border-right: 24px solid white; */
   border-top: none;
   border-bottom: none;
   width: 100px;
@@ -23,6 +23,15 @@
 
 }
 
+#login-modal button {
+border: 2px solid gray;
+display:flex;
+justify-content: center;
+align-items:center;
+}
+
+
+
 
 .modal form {
   display: flex;
@@ -33,7 +42,7 @@
 }
 
 .modal button {
-  width: 76%;
+  width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
