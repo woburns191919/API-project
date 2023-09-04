@@ -1,24 +1,24 @@
 #modal-content {
- display:flex;
- flex-direction:column;
- gap:8px;
- justify-content:center;
- align-items:center;
-}
-
-
-#modal-content textarea {
-  width:91%;
-}
-
-
-#modal-content h4 {
-  padding-top:10px;
-}
-
-#modal-content button {
-  /* padding-bottom:10px; */
   display:flex;
-  gap:10px;
+  flex-direction:column;
+  gap:8px;
+  justify-content:center;
+  align-items:center;
+ }
 
-}
+
+ #modal-content textarea {
+   width:91%;
+ }
+
+
+ #modal-content h4 {
+   padding-top:10px;
+ }
+
+ #modal-content button {
+   /* padding-bottom:10px; */
+   display:flex;
+   gap:10px;
+
+ }

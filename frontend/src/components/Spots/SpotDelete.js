@@ -28,15 +28,21 @@ console.log('is this running?')
 if (!spotId) return null;
 return (
   <>
+  {/* <div className="confirmdelete"> */}
   <h5>Confirm Delete</h5>
-  <h4>Are you sure you want to remove this spot from the listings?</h4>
+  {/* </div> */}
+  <h4 class="sure">Are you sure you want to remove this spot from the listings?</h4>
+  <div className="buttondiv">
   <button
+  className="yesbutton"
   onClick={handleDelete}
   >Yes(Delete Spot)
   </button>
   <button
+  className="nobutton"
   onClick={closeModal}
   >No (Keep Spot)</button>
+  </div>
   </>
 )
 }

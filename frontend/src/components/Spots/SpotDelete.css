@@ -1,0 +1,48 @@
+#modal-content{
+  height: 230px;
+
+}
+
+#modal-content .sure {
+  display:flex;
+  justify-content:center;
+  font-size:small;
+  font-weight:200;
+  height:10%;
+
+}
+
+
+#modal-content .yesbutton {
+ color:white;
+ background-color:red;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+
+
+
+}
+
+#modal-content button .nobutton {
+ color:white;
+ background-color:rgb(105, 102, 102);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+
+
+}
+
+.buttondiv {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding-bottom:30px;
+}
+
+#modal-content .confirmdelete {
+  display:flex;
+  flex-direction:column;
+  padding-top:40px;
+}

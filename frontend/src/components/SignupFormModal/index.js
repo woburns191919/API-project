@@ -44,7 +44,7 @@ function SignupFormModal() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h3>Sign Up</h3>
       <form onSubmit={handleSubmit}>
         <label>
           <input
@@ -107,6 +107,7 @@ function SignupFormModal() {
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button
+          className="sign-up-button"
           disabled={username.length < 4 || password.length < 6}
           type="submit"
         >
