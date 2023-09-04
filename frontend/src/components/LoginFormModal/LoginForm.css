@@ -1,5 +1,40 @@
 .modal {
-  height: 400px;
+  /* height: 400px;
   display: block;
+  flex-direction: column; */
+}
+
+
+#modal {
+  text-align: center
+}
+
+ #modal-content button {
+  border-left: 24px solid white;
+  border-right: 24px solid white;
+  border-top: none;
+  border-bottom: none;
+  width: 100px;
+  height: 30px;
+  display:flex;
+  color: black;
+  background-color: lightgray;
+  font-weight: 900;
+
+}
+
+
+.modal form {
+  display: flex;
   flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal button {
+  width: 76%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

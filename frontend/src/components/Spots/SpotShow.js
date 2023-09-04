@@ -128,7 +128,8 @@ const SpotShow = () => {
               : spotArr.numReviews === 0 ? <p>Be the first to post a review!</p> :
               "new"}
           </div>
-         { (loggedInUser && spotArr.Owner.id !== loggedInUser.id) && <Link to="/reviews/current">
+         { (loggedInUser && spotArr.Owner.id !== loggedInUser.id) &&
+         (reviewsArr && reviewsArr.length > 0) && <Link to="/reviews/current">
             <OpenModalButton
               buttonText="Post Your Review"
 
@@ -163,5 +164,7 @@ const SpotShow = () => {
 export default SpotShow;
 
 /*
-(reviewsArr && reviewsArr.length > 0 && reviewsArr.find(el => el.userId !== loggedInUser.id)) &&
+(reviewsArr && reviewsArr.length > 0 && reviewsArr.filter(el => el.userId !== loggedInUser.id) < 0) &&
+
+&& (reviewsArr.find(el => el.userId !== loggedInUser.id)  &&
 */

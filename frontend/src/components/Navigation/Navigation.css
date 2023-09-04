@@ -2,6 +2,10 @@
   display: none;
 }
 
+.profile-dropdown {
+  list-style-type: none;
+}
+
 .header-right {
   display: flex;
   align-items: center;

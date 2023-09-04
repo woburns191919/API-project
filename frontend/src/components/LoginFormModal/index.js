@@ -1,5 +1,5 @@
 // frontend/src/components/LoginFormModal/index.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -11,6 +11,14 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+
+  // useEffect(() => {
+  //   const errors = {}
+  //   if (credential.length < 4) errors.credential = "The provided credentials were invalid"
+  //   if (password.length < 6) errors.password = "The provided credentials were invalid"
+  //   setErrors(errors)
+  // }, [credential, password])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,13 +33,15 @@ function LoginFormModal() {
       });
   };
 
+
   return (
     <div className="modal">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Username or Email
+
           <input
+          placeholder = "Username or Email"
             type="text"
             minLength="4"
             value={credential}
@@ -40,8 +50,9 @@ function LoginFormModal() {
           />
         </label>
         <label>
-          Password
+      
           <input
+          placeholder="Password"
             type="password"
             minLength="6"
             value={password}

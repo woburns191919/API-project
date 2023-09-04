@@ -5,7 +5,7 @@ import { useModal, closeModal } from "../../context/Modal";
 import { useParams } from "react-router-dom"
 import { thunkCreateReview } from "../../store/reviews";
 import { useHistory } from "react-router-dom"
-
+import "./Reviews.css";
 
 
 // import "./LoginForm.css";
@@ -14,7 +14,7 @@ const ReviewForm = ({ spotId }) => {
   const history = useHistory()
   const { closeModal } = useModal()
   const [review, setReview] = useState('')
-  const [stars, setStars] = useState(1)
+  const [stars, setStars] = useState('')
   const dispatch = useDispatch();
   // const { spotId } = useParams()
   console.log('spotId from review form', spotId)
@@ -31,20 +31,21 @@ const ReviewForm = ({ spotId }) => {
     payload && spotId && await dispatch(thunkCreateReview(payload, spotId));
     closeModal();
   }
-
+  history.push(`/spots/${spotId}`)
   return (
 
   <>
   <h4>How was your stay?</h4>
 <label>
-    Leave your review here...
-  <input
+
+  <textarea
+  placeholder="Leave your review here..."
   type="textarea"
   value={review}
   onChange={(e) => {
     setReview(e.target.value)
   }}
-  />
+></textarea>
 </label>
 
   <div className="star-rating-input">

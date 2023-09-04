@@ -65,10 +65,10 @@ const SpotsManage = () => {
                   </NavLink>
                 </button>{" "}
                 {"   "}
-                <OpenModalButton
+               { <OpenModalButton
                   buttonText="Delete"
                   modalComponent={<SpotDelete spotId={currentSpotObj.id} />}
-                />
+                />  }
               </div>
             ))}
         </div>

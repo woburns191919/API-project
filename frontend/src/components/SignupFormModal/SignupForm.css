@@ -1,0 +1,6 @@
+#modal-content form {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
