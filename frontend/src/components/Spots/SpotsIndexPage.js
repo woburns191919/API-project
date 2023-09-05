@@ -4,6 +4,7 @@ import { thunkGetAllSpots, thunkGetReviewsBySpotId } from "../../store/spots";
 import "./GetAllSpots.css";
 import { Link } from 'react-router-dom';
 
+
 const SpotsIndexPage = () => {
   const spots = Object.values(
     useSelector((state) => (state.spots.allSpots ? state.spots.allSpots : []))
@@ -14,19 +15,16 @@ const SpotsIndexPage = () => {
   useEffect(() => {
     dispatch(thunkGetAllSpots());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(thunkGetReviewsBySpotId(spotId))
-  // })
-console.log('spots*******', spots[1])
   return (
     <>
       <main className="outer-wrapper">
         <div className="photo-container">
           {spots.map((spotObj, i) => (
 
-            <div key = {i} className="inner-container">
+            <div key = {i} className="hover-text inner-container">
+              {console.log('spot object******', spotObj)}
              <Link to={`/spots/${spotObj.id}`}>
+            <span className="tooltip-text"></span>
                <img src={`${spotObj.previewImage}`} />
 
 
@@ -53,3 +51,16 @@ console.log('spots*******', spots[1])
 };
 
 export default SpotsIndexPage;
+
+
+
+
+
+/*
+
+  //<Tooltip content={spotObj.name}/>
+
+  // useEffect(() => {
+  //   dispatch(thunkGetReviewsBySpotId(spotId))
+  // })
+*/
