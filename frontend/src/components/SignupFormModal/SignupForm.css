@@ -1,0 +1,23 @@
+#modal-content form {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+#modal-content .sign-up-button {
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+#modal-content > h3 {
+padding-top:20px;
+}
+
+
+.star-rating-input {
+  width:52%;
+  white-space:nowrap;
+}

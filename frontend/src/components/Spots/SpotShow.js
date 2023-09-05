@@ -28,7 +28,7 @@ const SpotShow = () => {
   const loggedInUser = useSelector(
     (state) => state.session && state.session.user
   );
-
+console.log('logged in user', loggedInUser)
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
@@ -38,9 +38,13 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  // console.log("spot array", spotArr);
+  console.log("spot array*******", spotArr);
+
+  let months = ["Placeholder", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 
   // console.log("spot array from details page", spotArr);
+  console.log('reviews array', reviewsArr)
 
   return (
     <>
@@ -93,7 +97,7 @@ const SpotShow = () => {
               </div>
               <div className="stars">
                 <i className="fa fa-star"></i>{" "}
-                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""}{" "}
+                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
                 &middot;
               </div>
               <div className="reviews">
@@ -116,9 +120,9 @@ const SpotShow = () => {
 
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-            <i className="fa fa-star"></i>{" "}
-            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating : ""} &middot;{" "}
-            {' '}
+            <i className="fa fa-star"></i>{" "} {" "}
+            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : "new"}{" "}
+            &middot; {" "}
             {spotArr.numReviews === 1
               ? spotArr.numReviews + " " + "Review"
               : spotArr.numReviews > 0 && spotArr.numReviews !== 1
@@ -126,37 +130,36 @@ const SpotShow = () => {
               : spotArr.numReviews === 0 ? <p>Be the first to post a review!</p> :
               "new"}
           </div>
-          <Link to="/reviews/current">
+         { (loggedInUser && spotArr.Owner.id !== loggedInUser.id) &&
+         (reviewsArr) && !(reviewsArr.find(el => el.userId === loggedInUser.id))
+          && <Link to="/reviews/current">
             <OpenModalButton
               buttonText="Post Your Review"
-              setShowModal={
-                // spotArr &&
-                // spotArr.Owner &&
-                // loggedInUser &&
-                // spotArr.Owner.id === loggedInUser.id
-                    false
-              }
+
               modalComponent={<ReviewForm spotId={spotId} />}
               />
-          </Link>
-              {/* {console.log(' owner id', spotArr.Owner.id)
-               }
-               {console.log('loggedin user', loggedInUser.id)} */}
+          </Link>}
 
           <div className="reviews-lower-text">
-          {reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
-              <div key={i}>
+          {
+
+          reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
+            <div key={i}>
+
                 <h3>{reviewsObj.User.firstName}</h3>
-                <h4>{reviewsObj.createdAt.slice(0, 7)}</h4>
+
+                <h4>{months[parseInt(reviewsObj.createdAt.slice(5, 7))]}, {reviewsObj.createdAt.slice(0, 4)}</h4>
+
                 <p>{reviewsObj.review}</p>
-                <OpenModalButton
+
+              { loggedInUser && loggedInUser.id === reviewsObj.userId && ( <OpenModalButton
                   buttonText="Delete"
                   modalComponent={
-                    <ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />
-                  }
-                />
+                    <ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />}
+                />)}
+
               </div>
-            ))}
+          ))}
           </div>
         </section>
       </main>
@@ -165,3 +168,11 @@ const SpotShow = () => {
 };
 
 export default SpotShow;
+
+/*
+(reviewsArr && reviewsArr.length > 0 && !reviewsArr.map(el => el.userId === loggedInUser.id)[0]) &&
+
+  {(reviewsArr && reviewsArr.length > 0 && !reviewsArr.map(el => el.userId === loggedInUser.id)[0])} &&
+
+&& (reviewsArr.find(el => el.userId !== loggedInUser.id) &&
+*/

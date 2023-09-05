@@ -59,7 +59,10 @@ function ProfileButton({ user }) {
             </div>
             <hr></hr>
             <div className="manage-spots-dropdown">
-              <Link to="/spots/current">Manage Spots</Link>
+              <Link
+              onClick={closeMenu}
+              to="/spots/current">Manage Spots</Link>
+
             </div>
             <hr></hr>
             <div className="logout-dropdown">
