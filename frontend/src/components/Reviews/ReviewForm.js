@@ -67,6 +67,7 @@ htmlFor="stars">
 
   </div>
     <button
+    disabled={review.length < 10 || !stars}
     onClick={(e) => handleSubmit(e)}
     >
       Submit Your Review
