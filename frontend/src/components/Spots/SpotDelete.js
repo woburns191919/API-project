@@ -1,11 +1,11 @@
-import { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import OpenModalButton from "../OpenModalButton";
-import { Link, NavLink, useParams, useHistory } from "react-router-dom";
-import { closeModal, useModal } from '../../context/Modal';
 
-import { thunkSpotDelete, thunkGetSpotDetails, thunkGetCurrentSpots } from "../../store/spots";
+import { useDispatch } from "react-redux";
+
+
+import { useModal } from '../../context/Modal';
+
+import { thunkSpotDelete, thunkGetCurrentSpots } from "../../store/spots";
 // import { closeModal } from "../context/Modal"
 import "./SpotDelete.css";
 

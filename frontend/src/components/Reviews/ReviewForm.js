@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { useModal, closeModal } from "../../context/Modal";
-import { useParams } from "react-router-dom"
+import { useModal } from "../../context/Modal";
+
 import { thunkCreateReview } from "../../store/reviews";
 import { useHistory } from "react-router-dom"
 import "./Reviews.css";
