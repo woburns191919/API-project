@@ -7,6 +7,7 @@ import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import SpotDelete from "./SpotDelete";
 import "./SpotsManage.css";
+import "./GetAllSpots.css";
 
 const SpotsManage = () => {
   // console.log('component rendered')
@@ -39,11 +40,21 @@ const SpotsManage = () => {
   return (
     <>
       <main className="outer-wrapper">
+        <header className="manage-create-current-spots">
+          <h3>Manage Your Spots</h3>
+        </header>
+        <section id="create-spot-for-manage">
+        {currentSpots.length === 0 && <button>
+              <NavLink to="/spots/new">Create a New Spot</NavLink>
+            </button>}
+        </section>
         <div className="photo-container">
           {currentSpots.length > 0 &&
             currentSpots.map((currentSpotObj, i) => (
+            // currentSpotObj.preview === true && (
               <div key={i} className="inner-Container">
                 <Link to={`/spots/${currentSpotObj.id}`}>
+
                   <img src={`${currentSpotObj.previewImage}`} />
 
                 <div className="info">
@@ -52,10 +63,12 @@ const SpotsManage = () => {
                       {currentSpotObj.city}, {"   "} {"   "}
                       {currentSpotObj.state}
                     </div>
-                    <div className="star-info">{currentSpotObj.avgRating > 0 && currentSpotObj.avgRating}</div>
+                    <div className="star-info">
+                    <i className="fa fa-star"></i>
+                      {currentSpotObj.avgRating > 0 ? currentSpotObj.avgRating.toFixed(2) : 'new '}</div>
                   </div>
-                  <div className="right-info">
-                    ${currentSpotObj.price} night
+                  <div className="right-info"><b>${currentSpotObj.price}</b>night
+
                   </div>
                 </div>
                   </Link>
