@@ -121,7 +121,7 @@ console.log('logged in user', loggedInUser)
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
             <i className="fa fa-star"></i>{" "} {" "}
-            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : "new"}{" "}
+            {spotArr.avgStarRating > 0 ? ((spotArr.avgStarRating)/spotArr.numReviews).toFixed(2) : "new"}{" "}
             &middot; {" "}
             {spotArr.numReviews === 1
               ? spotArr.numReviews + " " + "Review"

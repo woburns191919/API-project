@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetAllSpots } from "../../store/spots";
+import { thunkGetAllSpots, thunkGetReviewsBySpotId } from "../../store/spots";
 import "./GetAllSpots.css";
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,11 @@ const SpotsIndexPage = () => {
   useEffect(() => {
     dispatch(thunkGetAllSpots());
   }, [dispatch]);
-console.log('spots', spots[1])
+
+  // useEffect(() => {
+  //   dispatch(thunkGetReviewsBySpotId(spotId))
+  // })
+console.log('spots*******', spots[1])
   return (
     <>
       <main className="outer-wrapper">

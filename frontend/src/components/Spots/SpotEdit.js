@@ -233,6 +233,7 @@ const SpotEdit = () => {
               placeholder="Price per night (USD)"
               required={true}
               type="number"
+              min="0"
               name="base price"
               value={price}
               onChange={(e) => {

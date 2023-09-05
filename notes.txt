@@ -293,6 +293,16 @@ numbers for name?
 
 ------------- manage spots page ******* add button thing
 
+****
+PRICE ERROR NOT SHOWING ON CREATE SPOT
+ABLE TO PUT IN BAD DATA FOR CREATE SPOT
+STARS LOOKING CRAZY
+
+on render
+demo user can delete review
+post review css is weird
+post showing up in reverse order
+*****
 
 need to clear out after log in  -- low by  itself
 
