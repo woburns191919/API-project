@@ -41,6 +41,7 @@ function Navigation({ isLoaded }) {
         <div className="air-logo">
           <NavLink exact to="/">
             <i className="fa fa-house"></i>
+            <h6>Slick Spots</h6>
           </NavLink>
         </div>
         <div className="upper-right-nav-wrap">

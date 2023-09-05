@@ -20,6 +20,11 @@
   width: fit-content;
 }
 
+.air-logo > a {
+  text-decoration:none;
+  font-family:fantasy;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
