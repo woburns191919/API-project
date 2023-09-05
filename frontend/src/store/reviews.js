@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-import { thunkGetReviewsBySpotId } from "./spots";
+import { thunkGetReviewsBySpotId, thunkGetSpotDetails } from "./spots";
 
 //types
 
@@ -52,11 +52,11 @@ const actionReviewDelete = (review) => ({
 
 export const thunkCreateReview = (payload, spotId) => async (dispatch) => {
 
-  console.log('payload from Create Review thunk', payload)
+  // console.log('payload from Create Review thunk', payload)
 
-  console.log('spotId from Create Review thunk', spotId)
+  // console.log('spotId from Create Review thunk', spotId)
 
-  console.log('entering create review thunk')
+  // console.log('entering create review thunk')
 
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`,{
     method: "POST",
@@ -65,18 +65,19 @@ export const thunkCreateReview = (payload, spotId) => async (dispatch) => {
     },
     body: JSON.stringify(payload),
   });
-  console.log("res??", res);
+  // console.log("res??", res);
   if (!res.ok) {
     throw new Error();
   }
   const data = await res.json();
   dispatch(thunkGetReviewsBySpotId(spotId))
+  dispatch(thunkGetSpotDetails(spotId));
   return data
 };
 
 //delete reviews thunk
 
-export const thunkReviewDelete = (reviewId) => async (dispatch) => {
+export const thunkReviewDelete = (reviewId, spotId) => async (dispatch) => {
 
 const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: 'DELETE',
@@ -85,10 +86,13 @@ const res = await csrfFetch(`/api/reviews/${reviewId}`, {
   if (res.ok) {
     const data = await res.json();
     dispatch(actionReviewDelete(data))
+    dispatch(thunkGetSpotDetails(spotId))
+    // console.log('spot id', spotId)
+
     if (!data) {
       throw new Error('no data')
     }
-    console.log('data from delete review thunk', data)
+    // console.log('data from delete review thunk', data)
     return data;
   } else {
     throw new Error('no data')

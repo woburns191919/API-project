@@ -4,6 +4,9 @@ import { thunkReviewDelete } from "../../store/reviews";
 import { useParams } from "react-router-dom";
 import { thunkGetReviewsBySpotId, thunkGetSpotDetails } from "../../store/spots";
 import SpotShow from "../Spots/SpotShow";
+import "./Reviews.css"
+import "../Spots/SpotDelete.css"
+// import "../Spots/SpotDelete.css"
 
 const ConfirmDelete = ( { reviewId, spotId } ) => {
   // const { reviewId } = useParams();
@@ -11,13 +14,13 @@ const ConfirmDelete = ( { reviewId, spotId } ) => {
 
   const dispatch = useDispatch();
 
-  console.log('reviewId', reviewId)
+  // console.log('reviewId', reviewId)
 
-  console.log('spotId', spotId)
+  // console.log('spotId', spotId)
 
   const handleDelete = async () => {
-    await dispatch(thunkReviewDelete(reviewId));
-    await dispatch(thunkGetReviewsBySpotId(spotId))
+    await dispatch(thunkReviewDelete(reviewId, spotId));
+    await dispatch(thunkGetReviewsBySpotId(spotId));
     closeModal();
   };
 
@@ -25,16 +28,22 @@ const ConfirmDelete = ( { reviewId, spotId } ) => {
 
   return (
     <>
+    <div id="delete-spot-confirm-modal">
       <h5>Confirm Delete</h5>
-      <h4>Are you sure you want to remove this spot from the listings?</h4>
+      <p id="delete-sure">Are you sure you want to remove this spot from the listings?</p>
+      <div id="yes-button-review-delete-button">
       <button
       value={reviewId}
       onClick={handleDelete}
       >Yes(Delete Review)
       </button>
+      </div>
+      <div id="no-button-review-delete-button">
       <button
       onClick={closeModal}
       >No (Keep Review)</button>
+      </div>
+      </div>
     </>
   );
 };

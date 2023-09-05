@@ -262,70 +262,120 @@ import { thunkPutEditSpot} from "../../store/spots";
 
 
 
-
-
-random 404 that just pops up? at logout
-
-
-
-random for each type error on refreshing
-
-
 ------
 styling issue
 ------
-edit page vs create
+
 $ and city state length
 
 
 view ratings and reviews
 -----
+**
+If the review count is zero (there are no reviews yet for this spot),
+it should not show the centered dot or the review count    -- LOW
+(only the average star rating should be displayed)
+**
+**
 
-If the review count is zero (there are no reviews yet for this spot), it should not show the centered dot or the review count (only the average star rating should be displayed)
 
-issue with preview image mixup
+**
 
-decimal thing
+dots fixed
 
-first post review order
+**
 
-fix year issue with review
-
+tooltip --HIGH
 --------
-
-
--------
-landing page
-
-tooltip
+numbers for name?
 
 -----
+
+------------- manage spots page ******* add button thing
+
+
+need to clear out after log in  -- low by  itself
+
+------
+
+form inputs same size
+
+****
+reserve thing make sure span
+-----
 CREATE Spot
-
-button disabled if errors?
-
+**
+button disabled if errors?   LOW
+**
 
 ------
 post a review
 
-logged in user spot owener 38, 39
+**
 
-navigate away, no reroute
+**
 
-star rating input
+navigate away, no reroute  ???
 
-button disabled no stars or ratings (46)
+star rating input -- LOW
+
+button disabled no stars or ratings (46)  -- LOW
 
 
 -----
-delete
-
-modal, same as above (67)
-
+cant center login button --low
+------
 
 
---
-style modals
+----
 
 
 
+
+
+
+
+
+
+
+from Reviews.className
+
+#modal-content {
+ display:flex;
+ flex-direction:column;
+ gap:8px;
+ justify-content:center;
+ align-items:center;
+}
+
+
+#modal-content textarea {
+  width:91%;
+}
+
+
+#modal-content h4 {
+  padding-top:10px;
+}
+
+#modal-content button {
+  /* padding-bottom:10px; */
+  display:flex;
+  gap:10px;
+
+}
+
+
+
+
+
+
+for review button vis
+  {reviewsArr.length > 0 && !(reviewsArr.find(el => el.userId === loggedInUser.id)) &&
+         <Link to="/reviews/current">
+            <OpenModalButton
+              buttonText="Post Your Review"
+
+              modalComponent={<ReviewForm spotId={spotId} />}
+              />
+          </Link>}
