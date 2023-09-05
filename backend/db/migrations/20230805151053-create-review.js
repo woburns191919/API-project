@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false
       },
       stars: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.INTEGER,
         allownull: false
       },
       createdAt: {
