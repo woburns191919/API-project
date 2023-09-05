@@ -36,6 +36,20 @@ const SpotForm = () => {
     alert("You must be logged in to create a spot!");
     history.push("/");
   }
+
+
+  // useEffect(() => {
+  //   const errors = {};
+  //   if (lat > 90) {
+  //     errors.lat = 'not lat'
+  //     console.log('errors obj?', errors.lat)
+  // }
+  //   if (errors.lng) console.log('errors obj?', errors)
+  //   setValidationErrors(errors);
+  // }, [lat, lng]);
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -97,10 +111,7 @@ const SpotForm = () => {
     }
   };
 
-  //   useEffect(() => {
-  //   const errors = {};
-  //   setValidationErrors(errors);
-  // }, []);
+
 
   // if (!createdSpot) return null;
 
@@ -176,7 +187,9 @@ const SpotForm = () => {
               <input
                 placeholder="Latitude"
                 required={true}
-                type="text"
+                min="-90"
+                max="90"
+                type="number"
                 name="latitude"
                 value={lat}
                 onChange={(e) => setLat(e.target.value)}
@@ -187,9 +200,11 @@ const SpotForm = () => {
             <label>
               Longitude <br></br>
               <input
+                min="-180"
+                max="180"
                 placeholder="Longitude"
                 required={true}
-                type="text"
+                type="number"
                 name="longitude"
                 value={lng}
                 onChange={(e) => setLng(e.target.value)}
@@ -254,6 +269,7 @@ const SpotForm = () => {
               placeholder="Price per night (USD)"
               required={true}
               type="number"
+              min="0"
               name="base price"
               value={price}
               onChange={(e) => {
@@ -288,7 +304,7 @@ const SpotForm = () => {
             <input
               placeholder="Image URL"
               className="most-boxes"
-              required={true}
+              // required={true}
               type="url"
               name="image URL"
               value={smallImage1}
@@ -336,7 +352,9 @@ const SpotForm = () => {
 
         <hr></hr>
         <div className="button-div">
-          <button type="submit">Create Spot</button>
+          <button
+
+          type="submit">Create Spot</button>
         </div>
       </form>
     </main>
