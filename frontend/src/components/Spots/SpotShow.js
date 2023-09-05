@@ -13,6 +13,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
+// import "./Modal.css"
 
 const SpotShow = () => {
 

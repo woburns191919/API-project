@@ -1,3 +1,47 @@
+
+render bugs:
+reviews out of order
+average miscalculating
+css for confirm delete modal off
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 make sure country is showing on details page
 
 
