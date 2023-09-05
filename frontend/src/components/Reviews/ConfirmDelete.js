@@ -1,9 +1,9 @@
-import { closeModal, useModal } from "../../context/Modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useModal } from "../../context/Modal";
+import { useDispatch } from "react-redux";
 import { thunkReviewDelete } from "../../store/reviews";
-import { useParams } from "react-router-dom";
+
 import { thunkGetReviewsBySpotId, thunkGetSpotDetails } from "../../store/spots";
-import SpotShow from "../Spots/SpotShow";
+
 import "./Reviews.css"
 import "../Spots/SpotDelete.css"
 // import "../Spots/SpotDelete.css"
