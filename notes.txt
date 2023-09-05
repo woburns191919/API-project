@@ -285,7 +285,7 @@ dots fixed
 
 **
 
-tooltip --HIGH
+
 --------
 numbers for name?
 

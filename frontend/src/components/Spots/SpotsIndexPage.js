@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllSpots, thunkGetReviewsBySpotId } from "../../store/spots";
 import "./GetAllSpots.css";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 const SpotsIndexPage = () => {
   const spots = Object.values(
@@ -20,28 +19,31 @@ const SpotsIndexPage = () => {
       <main className="outer-wrapper">
         <div className="photo-container">
           {spots.map((spotObj, i) => (
+            <div  key={i} className="inner-container">
+              <Link to={`/spots/${spotObj.id}`}>
+                <img
+                title={spotObj.name}
+                src={`${spotObj.previewImage}`} />
 
-            <div key = {i} className="hover-text inner-container">
-              {console.log('spot object******', spotObj)}
-             <Link to={`/spots/${spotObj.id}`}>
-            <span className="tooltip-text"></span>
-               <img src={`${spotObj.previewImage}`} />
-
-
-              <div className="info">
-                <div className="left-info">
-                  <div className="city-state">
-                    {spotObj.city}, {"   "} {"   "}
-                    {spotObj.state}
+                <div className="info">
+                  <div className="left-info">
+                    <div className="city-state">
+                      {spotObj.city}, {"   "} {"   "}
+                      {spotObj.state}
+                    </div>
+                    <div className="star-info">
+                      <i className="fa fa-star"></i>
+                      {spotObj.avgRating > 0
+                        ? spotObj.avgRating.toFixed(2)
+                        : "new"}
+                    </div>
                   </div>
-                  <div className="star-info">
-                  <i className="fa fa-star"></i>
-                 {spotObj.avgRating > 0 ? spotObj.avgRating.toFixed(2) : 'new'}</div>
-                </div>
 
-                <div className="right-info"><b>${spotObj.price}</b> night</div>
-              </div>
-            </Link>
+                  <div className="right-info">
+                    <b>${spotObj.price}</b> night
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
@@ -51,10 +53,6 @@ const SpotsIndexPage = () => {
 };
 
 export default SpotsIndexPage;
-
-
-
-
 
 /*
 
