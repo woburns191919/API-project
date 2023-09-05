@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/woburns191919/Slick-Spots/issues"
   },
-  "homepage": "https://github.com/woburns191919/Slick-Spots#readme"
+  "homepage": "https://github.com/woburns191919/Slick-Spots#readme",
+  "dependencies": {
+    "react-tooltip": "^5.21.1"
+  }
 }
