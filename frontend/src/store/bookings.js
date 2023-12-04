@@ -36,16 +36,28 @@ export const thunkGetUserBookings = () => async (dispatch) => {
   }
 };
 
-export const thunkCreateBooking = (bookingData) => async (dispatch) => {
-  const response = await csrfFetch('/api/bookings', {
+export const thunkCreateBooking = (bookingPayload) => async (dispatch) => {
+
+  const { spotId, startDate, endDate, userId } = bookingPayload;
+
+  const res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(bookingData),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userId,
+      startDate,
+      endDate,
+    }),
   });
-  if (response.ok) {
-    const booking = await response.json();
+
+  console.log('res from boooking', res)
+
+  if (res.ok) {
+    const booking = await res.json();
     dispatch(actionCreateBooking(booking));
-    console.log('booking from store', booking)
+    console.log('booking from store*****', booking)
     return booking;
   }
 };
