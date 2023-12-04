@@ -9,6 +9,7 @@ import SpotForm from "./components/Spots/SpotForm";
 import SpotsManage from "./components/Spots/SpotsManage";
 import SpotEdit from "./components/Spots/SpotEdit";
 import SpotDelete from "./components/Spots/SpotDelete";
+import BookingManage from "./components/Spots/BookingManage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ function App() {
       {isLoaded && (
         <Switch>
           <Switch>
-
             <Route exact path="/">
               <SpotsIndexPage />
             </Route>
@@ -41,6 +41,9 @@ function App() {
             </Route>
             <Route exact path="/spots/:spotId">
               <SpotShow />
+            </Route>
+            <Route exact path="/bookings/manage">
+              <BookingManage />
             </Route>
           </Switch>
         </Switch>
