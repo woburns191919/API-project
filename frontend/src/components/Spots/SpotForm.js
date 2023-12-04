@@ -31,6 +31,9 @@ const SpotForm = () => {
   const [smallImage3, setSmallImage3] = useState("");
   const [smallImage4, setSmallImage4] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
+  const [startDate, setStartDate] = useState('');
+
+
 
   if (!user) {
     alert("You must be logged in to create a spot!");
