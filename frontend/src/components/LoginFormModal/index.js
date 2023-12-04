@@ -48,9 +48,16 @@ function LoginFormModal() {
     textTransform: "uppercase"
   };
 
+  const demoStyle = {
+    color:"blue",
+    backgroundColor: "none",
+    border: "none"
+  }
+
   const errorStyle = {
     color: "red",
-    fontSize: "0.9em"
+    fontSize: "0.9em",
+    cursor: "pointer"
   };
 
 
@@ -104,7 +111,7 @@ function LoginFormModal() {
         </button>
       </form>
       <button
-        style={buttonStyle}
+        style={demoStyle}
         onClick={((e) => dispatch(sessionActions.login({
           credential: 'Oblivion',
           password: 'mrsquishy'
