@@ -13,13 +13,14 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
+import BookingForm from "./BookingForm";
 // import "./Modal.css"
 
 const SpotShow = () => {
-
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const { spotId } = useParams();
+  const [showBookingForm, setShowBookingForm] = useState(false);
 
   const spotArr = useSelector((state) =>
     state.spots.singleSpot ? state.spots.singleSpot : []
@@ -29,7 +30,7 @@ const SpotShow = () => {
   const loggedInUser = useSelector(
     (state) => state.session && state.session.user
   );
-console.log('logged in user', loggedInUser)
+  console.log("logged in user", loggedInUser);
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
@@ -41,11 +42,24 @@ console.log('logged in user', loggedInUser)
   if (!spotArr.SpotImages) return null;
   console.log("spot array*******", spotArr);
 
-  let months = ["Placeholder", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
+  let months = [
+    "Placeholder",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   // console.log("spot array from details page", spotArr);
-  console.log('reviews array', reviewsArr)
+  console.log("reviews array", reviewsArr);
 
   return (
     <>
@@ -98,7 +112,9 @@ console.log('logged in user', loggedInUser)
               </div>
               <div className="stars">
                 <i className="fa fa-star"></i>{" "}
-                {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
+                {spotArr.avgStarRating > 0
+                  ? spotArr.avgStarRating.toFixed(2)
+                  : ""}{" "}
                 &middot;
               </div>
               <div className="reviews">
@@ -111,8 +127,19 @@ console.log('logged in user', loggedInUser)
             </div>
             <div className="bottom-price-star-review-wrapper">
               <button
-              onClick={() => alert("Feature coming soon")}
-              className="reserve">Reserve</button>
+                onClick={() => setShowBookingForm(true)}
+                className="reserve"
+              >
+                Reserve
+              </button>
+              {showBookingForm && (
+                <div className="booking-form-modal">
+                  <BookingForm spotId={spotId} />
+                  <button onClick={() => setShowBookingForm(false)}>
+                    Close
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -121,46 +148,62 @@ console.log('logged in user', loggedInUser)
 
         <section className="reviews-lower">
           <div className="reviews-lower-stars-number">
-            <i className="fa fa-star"></i>{" "} {" "}
-            {spotArr.avgStarRating > 0 ? (spotArr.avgStarRating.toFixed(2)) : "new"}{" "}
-            &middot; {" "}
-            {spotArr.numReviews === 1
-              ? spotArr.numReviews + " " + "Review"
-              : spotArr.numReviews > 0 && spotArr.numReviews !== 1
-              ? spotArr.numReviews + " " + "Reviews"
-              : spotArr.numReviews === 0 ? <p>Be the first to post a review!</p> :
-              "new"}
+            <i className="fa fa-star"></i>{" "}
+            {spotArr.avgStarRating > 0
+              ? spotArr.avgStarRating.toFixed(2)
+              : "new"}{" "}
+            &middot;{" "}
+            {spotArr.numReviews === 1 ? (
+              spotArr.numReviews + " " + "Review"
+            ) : spotArr.numReviews > 0 && spotArr.numReviews !== 1 ? (
+              spotArr.numReviews + " " + "Reviews"
+            ) : spotArr.numReviews === 0 ? (
+              <p>Be the first to post a review!</p>
+            ) : (
+              "new"
+            )}
           </div>
-         { (loggedInUser && spotArr.Owner.id !== loggedInUser.id) &&
-         (reviewsArr) && !(reviewsArr.find(el => el.userId === loggedInUser.id))
-          && <Link to="/reviews/current">
-            <OpenModalButton
-              buttonText="Post Your Review"
-
-              modalComponent={<ReviewForm spotId={spotId} />}
-              />
-          </Link>}
+          {loggedInUser &&
+            spotArr.Owner.id !== loggedInUser.id &&
+            reviewsArr &&
+            !reviewsArr.find((el) => el.userId === loggedInUser.id) && (
+              <Link to="/reviews/current">
+                <OpenModalButton
+                  buttonText="Post Your Review"
+                  modalComponent={<ReviewForm spotId={spotId} />}
+                />
+              </Link>
+            )}
 
           <div className="reviews-lower-text">
-          {
+            {reviewsArr &&
+              reviewsArr
+                .concat()
+                .reverse()
+                .map((reviewsObj, i) => (
+                  <div key={i}>
+                    <h3>{reviewsObj.User.firstName}</h3>
 
-          reviewsArr && reviewsArr.concat().reverse().map((reviewsObj, i) => (
-            <div key={i}>
+                    <h4>
+                      {months[parseInt(reviewsObj.createdAt.slice(5, 7))]},{" "}
+                      {reviewsObj.createdAt.slice(0, 4)}
+                    </h4>
 
-                <h3>{reviewsObj.User.firstName}</h3>
+                    <p>{reviewsObj.review}</p>
 
-                <h4>{months[parseInt(reviewsObj.createdAt.slice(5, 7))]}, {reviewsObj.createdAt.slice(0, 4)}</h4>
-
-                <p>{reviewsObj.review}</p>
-
-              { loggedInUser && loggedInUser.id === reviewsObj.userId && ( <OpenModalButton
-                  buttonText="Delete"
-                  modalComponent={
-                    <ConfirmDelete reviewId={reviewsObj.id} spotId={spotId} />}
-                />)}
-
-              </div>
-          ))}
+                    {loggedInUser && loggedInUser.id === reviewsObj.userId && (
+                      <OpenModalButton
+                        buttonText="Delete"
+                        modalComponent={
+                          <ConfirmDelete
+                            reviewId={reviewsObj.id}
+                            spotId={spotId}
+                          />
+                        }
+                      />
+                    )}
+                  </div>
+                ))}
           </div>
         </section>
       </main>
