@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetUserBookings } from "../../store/bookings";
+import { Link } from "react-router-dom";
 import "./SpotsManage.css";
 import "./GetAllSpots.css";
 
@@ -12,7 +13,7 @@ const BookingManage = () => {
     dispatch(thunkGetUserBookings());
   }, [dispatch]);
 
-  // console.log('bookings from store', userBookings?.Bookings[0].id)
+  console.log('userBookings***', userBookings?.Bookings[0].Spot.previewImage)
 
   return (
     <main className="outer-wrapper">
@@ -21,13 +22,20 @@ const BookingManage = () => {
       </header>
       <div className="photo-container">
         {userBookings?.Bookings && userBookings.Bookings.length > 0 ? (
-          userBookings.Bookings.map((booking, index) => (
-            <div key={index} className="inner-Container">
+          userBookings.Bookings.map((booking, i) => (
+            <div key={i} className="inner-Container">
+
+              {booking.Spot && booking.Spot.previewImage && (
+                <Link to={`/spots/${booking.Spot.id}`}>
+                  <img src={booking.Spot.previewImage} alt={`Spot ${booking.Spot.id}`} />
+                </Link>
+              )}
               <div className="booking-info">
                 <div>Booking ID: {booking.id}</div>
                 <div>Spot ID: {booking.spotId}</div>
                 <div>Start Date: {booking.startDate}</div>
                 <div>End Date: {booking.endDate}</div>
+
               </div>
             </div>
           ))
