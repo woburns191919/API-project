@@ -31,8 +31,6 @@ const BookingManage = () => {
                 </Link>
               )}
               <div className="booking-info">
-                <div>Booking ID: {booking.id}</div>
-                <div>Spot ID: {booking.spotId}</div>
                 <div>Start Date: {booking.startDate}</div>
                 <div>End Date: {booking.endDate}</div>
 
