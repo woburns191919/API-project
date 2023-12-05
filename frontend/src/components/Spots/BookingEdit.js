@@ -1,41 +1,38 @@
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { thunkGetBookingDetails, thunkUpdateBooking } from "../../store/bookings";
+import { thunkUpdateBooking } from "../../store/bookings";
 import "./form.css";
 
 const BookingEdit = () => {
+  const { bookingId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { bookingId } = useParams();
+  const userBookings = useSelector((state) => state.bookings.userBookings);
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const bookingDetails = useSelector((state) => state.bookings[bookingId]);
 
   useEffect(() => {
-    if (!bookingDetails) {
-      dispatch(thunkGetBookingDetails(bookingId));
-    } else {
-      setStartDate(bookingDetails.startDate);
-      setEndDate(bookingDetails.endDate);
+    const booking = userBookings?.Bookings?.find(b => b.id === parseInt(bookingId));
+    if (booking) {
+      setStartDate(booking.startDate);
+      setEndDate(booking.endDate);
     }
-  }, [dispatch, bookingId, bookingDetails]);
+  }, [userBookings, bookingId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedBooking = {
-      bookingId,
-      startDate,
-      endDate,
-    };
-    const editedBooking = await dispatch(thunkUpdateBooking(updatedBooking, bookingId));
-    if (editedBooking.id) {
-      history.push(`/bookings/${editedBooking.id}`);
-    } else {
-      return null;
+    if (!bookingId) {
+      console.error('Booking ID is undefined');
+      return;
     }
+    const updatedBooking = { startDate, endDate };
+    await dispatch(thunkUpdateBooking(updatedBooking, bookingId));
+    history.push("/bookings/manage");
   };
+
+
 
   return (
     <main className="form-wrapper">

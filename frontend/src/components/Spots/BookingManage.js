@@ -7,7 +7,6 @@ import BookingDelete from "./BookingDelete";
 import "./SpotsManage.css";
 import "./GetAllSpots.css";
 
-
 const BookingManage = () => {
   const dispatch = useDispatch();
   const userBookings = useSelector((state) => state.bookings.userBookings);
@@ -39,6 +38,10 @@ const BookingManage = () => {
                   </div>
                   <div className="right-info">
                     <b>${booking.Spot.price}</b> night
+                  </div>
+                  <div className="booking-dates">
+                    <p>Start Date: {booking.startDate}</p>
+                    <p>End Date: {booking.endDate}</p>
                   </div>
                 </div>
               </Link>
