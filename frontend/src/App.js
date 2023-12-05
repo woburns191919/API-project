@@ -10,6 +10,7 @@ import SpotsManage from "./components/Spots/SpotsManage";
 import SpotEdit from "./components/Spots/SpotEdit";
 import SpotDelete from "./components/Spots/SpotDelete";
 import BookingManage from "./components/Spots/BookingManage";
+import BookingEdit from "./components/Spots/BookingEdit";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,29 +24,15 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Switch>
-            <Route exact path="/">
-              <SpotsIndexPage />
-            </Route>
-            <Route exact path="/spots/new">
-              <SpotForm />
-            </Route>
-            <Route exact path="/spots/edit/:spotId">
-              <SpotEdit />
-            </Route>
-            <Route exact path="/spots/delete/:spotId">
-              <SpotDelete />
-            </Route>
-            <Route exact path="/spots/current">
-              <SpotsManage />
-            </Route>
-            <Route exact path="/spots/:spotId">
-              <SpotShow />
-            </Route>
-            <Route exact path="/bookings/manage">
-              <BookingManage />
-            </Route>
-          </Switch>
+          <Route exact path="/" component={SpotsIndexPage} />
+          <Route exact path="/spots/new" component={SpotForm} />
+          <Route exact path="/spots/edit/:spotId" component={SpotEdit} />
+          <Route exact path="/spots/delete/:spotId" component={SpotDelete} />
+          <Route exact path="/spots/current" component={SpotsManage} />
+          <Route exact path="/spots/:spotId" component={SpotShow} />
+          <Route exact path="/bookings/manage" component={BookingManage} />
+          <Route path="/bookings/edit/:bookingId" component={BookingEdit} />
+
         </Switch>
       )}
     </>

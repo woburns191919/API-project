@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateBooking } from '../../store/bookings';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import "./BookingForm.css"
 
 const BookingForm = () => {
@@ -10,8 +12,8 @@ const BookingForm = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const sessionUser = useSelector((state) => state.session.user);
+  const history = useHistory();
 
-  console.log('spot id from form**', spotId)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ const BookingForm = () => {
     try {
       const createdBooking = await dispatch(thunkCreateBooking(bookingPayload));
       if (createdBooking) {
+        history.push('/bookings/manage');
         // Handle successful booking creation
         // Redirect or show success message
       }

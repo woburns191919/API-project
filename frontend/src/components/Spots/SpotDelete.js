@@ -23,7 +23,7 @@ const SpotDelete = ({ spotId }) => {
 //   useEffect(() => {
 //     dispatch(thunkSpotDelete(spotId)).then(data => console.log('deleted', data))
 // }, [dispatch])
-console.log('is this running?')
+
 
 if (!spotId) return null;
 return (
