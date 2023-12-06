@@ -28,8 +28,12 @@ function generateBooking(spotId, userId) {
 module.exports = {
   async up (queryInterface, Sequelize) {
     const bookings = [];
-    for (let spotId = 1; spotId <= 28; spotId++) {
-      for (let userId = 1; userId <= 7; userId++) {
+    const maxBookingsPerUser = 5; // Maximum number of bookings a user can have
+
+    for (let userId = 1; userId <= 7; userId++) {
+      const userBookingsCount = Math.floor(Math.random() * maxBookingsPerUser) + 1; // Random number of bookings for each user
+      for (let i = 0; i < userBookingsCount; i++) {
+        const spotId = Math.floor(Math.random() * 28) + 1; // Randomly select a spot for each booking
         bookings.push(generateBooking(spotId, userId));
       }
     }
