@@ -18,3 +18,17 @@
 .photo-container{
   margin: 0px;
 }
+
+/* SpotsManage.css */
+
+.booking-action-button {
+  background-color: #ff5a5f; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}

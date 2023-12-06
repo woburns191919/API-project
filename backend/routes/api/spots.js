@@ -16,6 +16,8 @@ const {
   SpotImage,
   ReviewImage,
 } = require("../../db/models");
+
+
 const router = express.Router();
 
 const { check, query } = require("express-validator");
