@@ -1,63 +1,44 @@
 'use strict';
 
-const { Booking } = require('../models')
-
+const { Booking } = require('../models');
 
 let options = {};
 if (process.env.NODE_ENV === "production") {
   options.schema = process.env.SCHEMA;
 }
 
+// Function to generate a random date within a range
+function randomDate(start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
 
-/** @type {import('sequelize-cli').Migration} */
+// Function to generate a booking
+function generateBooking(spotId, userId) {
+  const startDate = randomDate(new Date(2023, 0, 1), new Date(2023, 11, 31));
+  const endDate = new Date(startDate.getTime() + (Math.floor(Math.random() * 7) + 1) * 24 * 60 * 60 * 1000); // Add 1-7 days
+
+  return {
+    spotId,
+    userId,
+    startDate: startDate.toISOString().split('T')[0], // Format as 'YYYY-MM-DD'
+    endDate: endDate.toISOString().split('T')[0]
+  };
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-   await Booking.bulkCreate([
-    {
-      spotId: 1,
-      userId: 1,
-      startDate: '2023-08-18',
-      endDate: '2023-08-20'
-    },
-    {
-      spotId: 2,
-      userId: 2,
-      startDate: '2023-09-18',
-      endDate: '2023-09-20'
-    },
-    {
-      spotId: 3,
-      userId: 3,
-      startDate: '2023-10-20',
-      endDate: '2023-10-24'
-    },
-    {
-      spotId: 1,
-      userId: 2,
-      startDate: '2023-07-10',
-      endDate: '2023-07-12'
-    },
-   ], { validate: true }
-   );
+    const bookings = [];
+    for (let spotId = 1; spotId <= 28; spotId++) {
+      for (let userId = 1; userId <= 7; userId++) {
+        bookings.push(generateBooking(spotId, userId));
+      }
+    }
+
+    await Booking.bulkCreate(bookings, { validate: true });
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-    options.tableName = "Bookings"
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(
-      options,
-      {
-        startDate: {
-          [Op.in]: ['2023-08-18', '2023-09-18', '2023-10-20', '2023-07-10'],
-        },
-      },
-      {}
-    );
+    options.tableName = "Bookings";
+    return queryInterface.bulkDelete(options, null, {});
   },
 };
