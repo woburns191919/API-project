@@ -13,8 +13,8 @@ function generateSpot(ownerId) {
   return {
     ownerId,
     address: `Generated Address for Owner ${ownerId}`,
-    city: "Generated City",
-    state: "Generated State",
+    city: "City",
+    state: "State",
     country: "United States of America",
     lat: Math.random() * 90,
     lng: Math.random() * 180,
