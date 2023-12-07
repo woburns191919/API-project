@@ -1,0 +1,60 @@
+.spot-card-manage {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+  background-color: white;
+}
+
+.spot-card-manage:hover {
+  transform: translateY(-5px);
+}
+
+.spot-link-manage {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.spot-image-manage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.spot-info-manage {
+  padding: 10px;
+}
+
+.spot-location-manage, .spot-rating-manage, .spot-price-manage {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.spot-rating-manage {
+  color: #FF385C;
+  font-weight: bold;
+}
+
+.spot-price-manage {
+  font-weight: bold;
+}
+
+.spot-actions-manage {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.booking-action-button {
+  background-color: #FF5A5F;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
