@@ -1,17 +1,17 @@
-/* Styles for the main wrapper of the SpotsManage component */
+
 .outer-wrapper {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Styles for the header section in the SpotsManage component */
+
 .manage-create-current-spots {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Styles for the 'Create a New Spot' button */
+
 .create-new-spot-button {
   display: block;
   background-color: #FF5A5F;
@@ -25,28 +25,28 @@
   cursor: pointer;
 }
 
-/* Styles for the container holding the SpotCardManage components */
+
 .photo-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns layout */
-  gap: 20px; /* Space between cards */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
-/* Responsive design adjustments */
+
 @media (max-width: 1024px) {
   .photo-container {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns layout for smaller screens */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .photo-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns layout for tablet screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
   .photo-container {
-    grid-template-columns: 1fr; /* 1 column layout for mobile screens */
+    grid-template-columns: 1fr; 
   }
 }

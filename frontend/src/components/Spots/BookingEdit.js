@@ -2,7 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { thunkUpdateBooking } from "../../store/bookings";
-import "./form.css";
+import "./BookingEdit.css";
 
 const BookingEdit = () => {
   const { bookingId } = useParams();

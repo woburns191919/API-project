@@ -51,7 +51,7 @@
 }
 
 .small-photo-container {
-  flex: 1; /* Half of the parent flex container */
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr 1fr;
@@ -68,7 +68,7 @@
 
 
 .reservation-box {
-  width: 300px; /* Fixed width for reservation box */
+  width: 300px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
@@ -80,14 +80,14 @@
 .booking-options {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adjust gap as per design */
+  gap: 10px;
   margin-bottom: 15px;
 }
 
 .booking-options input {
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ddd; /* Example styling, adjust as needed */
+  border: 1px solid #ddd; 
 }
 
 

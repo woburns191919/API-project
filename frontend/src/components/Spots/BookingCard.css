@@ -41,7 +41,7 @@
   display: flex;
   justify-content: space-around;
   padding: 10px;
-  background-color: #f7f7f7; /* Light grey background for the actions area */
+  background-color: #f7f7f7; 
 }
 
 .booking-action-button, .booking-cancel-button {
@@ -60,7 +60,7 @@
 }
 
 .booking-cancel-button {
-  background-color: #FF5A5F; 
+  background-color: #FF5A5F;
   color: white;
   border: none;
 }
