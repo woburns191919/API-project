@@ -8,6 +8,7 @@ const bookingsRouter = require('./bookings.js');
 const spotImagesRouter = require('./spotImages.js');
 const reviewImagesRouter = require('./reviewImages.js');
 
+
 const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
 
@@ -29,6 +30,8 @@ router.use('/bookings', bookingsRouter);
 router.use('/spot-images', spotImagesRouter);
 
 router.use('/review-images', reviewImagesRouter);
+
+
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
