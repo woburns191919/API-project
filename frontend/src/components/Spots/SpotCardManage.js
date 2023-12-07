@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import SpotDelete from "./SpotDelete";
-import "./SpotCardManage.css"; // A separate CSS file for this component
+import "./SpotCardManage.css"; 
 
 const SpotCardManage = ({ spot }) => {
 
