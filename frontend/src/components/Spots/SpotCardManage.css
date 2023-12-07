@@ -49,8 +49,8 @@
   gap: 10px;
 }
 
-.booking-action-button {
-  background-color: #FF5A5F;
+.update-action-button {
+  background-color: #6e8695;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -58,3 +58,4 @@
   text-decoration: none;
   cursor: pointer;
 }
+

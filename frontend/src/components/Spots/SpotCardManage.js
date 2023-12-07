@@ -5,6 +5,17 @@ import SpotDelete from "./SpotDelete";
 import "./SpotCardManage.css"; // A separate CSS file for this component
 
 const SpotCardManage = ({ spot }) => {
+
+  const cancelBtnStyles = {
+    backgroundColor: '#FF5A5F',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+  };
   return (
     <div className="spot-card-manage">
       <Link to={`/spots/${spot.id}`} className="spot-link-manage">
@@ -19,9 +30,10 @@ const SpotCardManage = ({ spot }) => {
         </div>
       </Link>
       <div className="spot-actions-manage">
-        <NavLink to={`/spots/edit/${spot.id}`} className="booking-action-button">Update</NavLink>
+        <NavLink to={`/spots/edit/${spot.id}`} className="update-action-button">Update</NavLink>
         <OpenModalButton
           buttonText="Delete"
+          style={cancelBtnStyles}
           modalComponent={<SpotDelete spotId={spot.id} />}
         />
       </div>

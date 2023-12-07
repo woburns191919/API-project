@@ -3,6 +3,7 @@
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease-in-out;
+  background-color: white;
 }
 
 .booking-card:hover {
@@ -24,22 +25,42 @@
 
 .booking-info {
   padding: 10px;
-  background-color: white;
 }
 
-.booking-location {
-  font-size: 14px;
-  color: #333;
-}
-
-/* Since 'spot-rating' is specific to SpotCard, we replace it with 'booking-dates' for BookingCard */
-.booking-dates {
+.booking-location, .booking-dates, .booking-price {
   font-size: 14px;
   color: #333;
 }
 
 .booking-price {
-  font-size: 16px;
   font-weight: bold;
   color: #FF385C;
+}
+
+.booking-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #f7f7f7; /* Light grey background for the actions area */
+}
+
+.booking-action-button, .booking-cancel-button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.booking-action-button {
+  background-color: #6e8695;
+  color: white;
+}
+
+.booking-cancel-button {
+  background-color: #FF5A5F; 
+  color: white;
+  border: none;
 }

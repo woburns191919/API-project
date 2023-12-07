@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetUserBookings } from "../../store/bookings";
-import BookingCard from "./BookingCard"; // Assuming you've created this component
-import "./BookingManage.css"; // This is where your CSS for BookingManage will go
+import BookingCard from "./BookingCard"; 
+import "./BookingManage.css";
 
 const BookingManage = () => {
   const dispatch = useDispatch();
