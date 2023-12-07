@@ -4,7 +4,7 @@ import {
   thunkGetSpotDetails,
   thunkGetReviewsBySpotId,
 } from "../../store/spots";
-import { thunkCreateBooking } from "../../store/bookings"
+import { thunkCreateBooking } from "../../store/bookings";
 
 import { Link, useHistory } from "react-router-dom";
 import "./GetAllSpots.css";
@@ -22,11 +22,10 @@ const SpotShow = () => {
   const [showBookingForm, setShowBookingForm] = useState(false);
   const spot = useSelector((state) => state.spots.singleSpot || {});
   const spotImages = spot.SpotImages || [];
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
-
 
   const spotArr = useSelector((state) =>
     state.spots.singleSpot ? state.spots.singleSpot : []
@@ -75,13 +74,12 @@ const SpotShow = () => {
     try {
       const createdBooking = await dispatch(thunkCreateBooking(bookingPayload));
       if (createdBooking) {
-        history.push('/bookings/manage');
+        history.push("/bookings/manage");
       }
     } catch (error) {
       console.error(error);
     }
   };
-
 
   return (
     <main className="outer-wrapper">
@@ -109,17 +107,32 @@ const SpotShow = () => {
       </div>
 
       <div className="reservation-box">
-        <div className="price-info">
-          <b>${spotArr.price}</b> per night
+        <div className="reservation-content">
+          <div className="price-info">
+            <b>${spotArr.price}</b> per night
+          </div>
+
+          <div className="booking-options">
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              placeholder="Check-in"
+              required
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              placeholder="Check-out"
+              required
+            />
+          </div>
+
+          <button onClick={handleReserveClick} className="reserve-button">
+            Reserve
+          </button>
         </div>
-
-
-        <div className="booking-options">
-          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} placeholder="Check-in" required />
-          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="Check-out" required />
-        </div>
-
-        <button onClick={handleReserveClick} className="reserve-button">Reserve</button>
       </div>
 
       <section className="lower-spot-show">
