@@ -70,6 +70,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+  width: 300px; 
 }
 
 
@@ -129,4 +130,15 @@
 .star-rating {
   color: #FF385C;
   margin-right: 5px;
+}
+
+
+.content-and-reservation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.content-wrapper {
+  flex: 1;
 }

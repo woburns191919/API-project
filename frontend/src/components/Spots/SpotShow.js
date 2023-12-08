@@ -86,6 +86,7 @@ const SpotShow = () => {
       <div className="spot-name">{spot.name}</div>
 
       <div className="spot-photo-wrapper">
+      <div className="content-and-reservation-wrapper">
         <div className="content-wrapper">
           <div className="parent-flex">
             <div className="big-photo-container">
@@ -112,6 +113,7 @@ const SpotShow = () => {
                 ))}
             </div>
           </div>
+        </div>
         </div>
       </div>
 
@@ -158,7 +160,7 @@ const SpotShow = () => {
         </div>
         <div className="price-star-review-wrapper">
           <div className="top-price-star-review-wrapper">
-           
+
             <div className="stars">
               <i className="fa fa-star"></i>{" "}
               {spotArr.avgStarRating > 0
