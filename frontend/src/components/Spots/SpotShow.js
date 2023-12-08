@@ -96,18 +96,29 @@ const SpotShow = () => {
                 ))}
             </div>
             <div className="small-photo-container">
-  {spotImages
-    .filter((img) => !img.preview)
-    .map((img, i) => (
-      <img
-        key={i}
-        src={img.url}
-        alt=""
-        style={{ width: "100%", height: "245px", objectFit: "cover" }}
-      />
-    ))}
-</div>
+              {spotImages
+                .filter((img) => !img.preview)
+                .map((img, i) => (
+                  <img
+                    key={i}
+                    src={img.url}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "245px",
+                      objectFit: "cover",
+                    }}
+                  />
+                ))}
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div className="spot-info-box">
+      <p className="description">{spotArr.description}</p>
+        <div className="host-name">
+          Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
         </div>
       </div>
 
