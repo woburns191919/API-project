@@ -153,16 +153,12 @@ const SpotShow = () => {
 
       <section className="lower-spot-show">
         <div className="description">
-          <h2>
-            Hosted by {spotArr.Owner.firstName} {"  "} {spotArr.Owner.lastName}
-          </h2>
-          <p className="description">{spotArr.description}</p>
+
+
         </div>
         <div className="price-star-review-wrapper">
           <div className="top-price-star-review-wrapper">
-            <div className="night">
-              <b>${spotArr.price}</b> night
-            </div>
+           
             <div className="stars">
               <i className="fa fa-star"></i>{" "}
               {spotArr.avgStarRating > 0
