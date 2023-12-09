@@ -132,7 +132,7 @@ const SpotForm = () => {
   return (
     <main className="form-wrapper">
       {formError && <div className="error-message">{formError}</div>}
-      <form className="spot-form" onSubmit={handleSubmit}>
+      <form className="spot-form" onSubmit={handleSubmit} style={{marginTop: '70%'}}>
         <h3>Create a new Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
