@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 2px solid gray;
+  border: .5px solid gray;
   border-radius: 30%;
   padding: 10px;
 
@@ -18,20 +18,33 @@
 
 .air-logo {
   width: fit-content;
+  display:flex;
+  gap:10px;
+}
+.air-logo .active {
+  display: flex;
+  gap: 10px;
+}
+.air-logo a {
+  color: #FF385C;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
 }
 
-.air-logo > a {
-  text-decoration:none;
-  font-family:fantasy;
+.air-logo i {
+  color: #FF385C;
 }
 
 .header {
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 15px;
-  padding-left:40px;
-  padding-right: 40px;
+  padding: 0 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .style {
@@ -43,16 +56,12 @@
   gap:5px;
 }
 
-.sign-up {
+.profileButton, .create-spot-in-manage-spots a {
+  color: #484848;
+  padding: 8px 15px;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
-.sign-up li {
-}
-
-.sign-up ul {
-}
-
-
-
-.create-spot-in-manage-spots {
-
+.profileButton:hover, .create-spot-in-manage-spots button:hover {
+  background-color: darken(#FF385C, 10%);
 }

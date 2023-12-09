@@ -13,7 +13,7 @@ const SpotForm = () => {
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  // console.log('current user****', user)
+
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -31,6 +31,10 @@ const SpotForm = () => {
   const [smallImage3, setSmallImage3] = useState("");
   const [smallImage4, setSmallImage4] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
+  const [startDate, setStartDate] = useState('');
+  const [formError, setFormError] = useState("");
+
+
 
   if (!user) {
     alert("You must be logged in to create a spot!");
@@ -38,20 +42,30 @@ const SpotForm = () => {
   }
 
 
-  // useEffect(() => {
-  //   const errors = {};
-  //   if (lat > 90) {
-  //     errors.lat = 'not lat'
-  //     console.log('errors obj?', errors.lat)
-  // }
-  //   if (errors.lng) console.log('errors obj?', errors)
-  //   setValidationErrors(errors);
-  // }, [lat, lng]);
+  const validateInputs = () => {
+    const errors = {};
+    if (!description || description.length < 30) {
+      errors.description = "Description must be at least 30 characters long.";
+    }
+    if (!lat || lat < -90 || lat > 90) {
+      errors.lat = "Latitude must be between -90 and 90.";
+    }
+    if (!lng || lng < -180 || lng > 180) {
+      errors.lng = "Longitude must be between -180 and 180.";
+    }
 
+    return errors;
+  };
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const errors = validateInputs();
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
 
     const payload = {
       address,
@@ -107,7 +121,7 @@ const SpotForm = () => {
         history.push(`/spots/${createdSpot.id}`);
       }
     } catch (error) {
-      console.log(error);
+      setFormError(error.message || "An error occurred while creating the spot.");
     }
   };
 
@@ -117,7 +131,8 @@ const SpotForm = () => {
 
   return (
     <main className="form-wrapper">
-      <form className="spot-form" onSubmit={handleSubmit}>
+      {formError && <div className="error-message">{formError}</div>}
+      <form className="spot-form" onSubmit={handleSubmit} style={{marginTop: '70%'}}>
         <h3>Create a new Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
@@ -219,6 +234,7 @@ const SpotForm = () => {
               Mention the best features of your space, any special amentities
               like fast wifi or parking, and what you love about the
               neighborhood.
+          {validationErrors.description && <div className="error-message">{validationErrors.description}</div>}
             </p>
             <div className="textareadiv">
               <textarea

@@ -1,6 +1,6 @@
 'use strict';
 
-const { Review } = require('../models')
+const { Review } = require('../models');
 
 let options = {};
 if (process.env.NODE_ENV === "production") {
@@ -8,188 +8,60 @@ if (process.env.NODE_ENV === "production") {
 }
 
 
-/** @type {import('sequelize-cli').Migration} */
+const reviewStarts = [
+  "Had a great time",
+  "My experience was",
+  "I found the place"
+];
+const reviewMiddles = [
+  "and would definitely come back",
+  "but had a few issues",
+  "and wouldn't recommend it",
+  "exceeding my expectations",
+  "nothing special"
+];
+const reviewEnds = [
+  "Overall, a fantastic stay!",
+  "Could be better.",
+  "Wouldn't go back.",
+  "Highly recommend it!",
+  "It was just okay."
+];
+
+// Function to generate a random review
+function generateReview(spotId, userId) {
+  // Combine parts of the review randomly
+  const randomReview = [
+    reviewStarts[Math.floor(Math.random() * reviewStarts.length)],
+    reviewMiddles[Math.floor(Math.random() * reviewMiddles.length)],
+    reviewEnds[Math.floor(Math.random() * reviewEnds.length)]
+  ].join(' ');
+
+  return {
+    spotId,
+    userId,
+    review: randomReview,
+    stars: Math.floor(Math.random() * 5) + 1
+  };
+}
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-   await Review.bulkCreate([
-    {
-      spotId: 1,
-      userId: 2,
-      review: "It was great! I watched movies in the jazucci, clearly.",
-      stars: 4
-    },
-    {
-      spotId: 2,
-      userId: 2,
-      review: "It was okay. Though I watched movies in the jacuzzi, I wasn't feeling it for some reason.",
-      stars: 3
-    },
-    {
-      spotId: 3,
-      userId: 1,
-      review: "It was not good; however, I wrote 'Infinite Jest' there.",
-      stars: 5
-    },
-    {
-      spotId: 4,
-      userId: 3,
-      review: "It was not that good. I just wrote more good books after the bad stay.",
-      stars: 2
-    },
-    {
-      spotId: 5,
-      userId: 3,
-      review: "It was not that good. I did not write any books there.",
-      stars: 2
-    },
-    {
-      spotId: 5,
-      userId: 1,
-      review: "Too many sub-marine creatures lurking on auto-pilot at extreme depths--not for me.",
-      stars: 2
-    },
-    {
-      spotId: 4,
-      userId: 2,
-      review: "The t-bone and welche's grape was what I ate.",
-      stars: 5
-    },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 1,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 3,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 4,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-    // {
-    //   spotId: 5,
-    //   userId: 3,
-    //   review: "It was not that good",
-    //   stars: 2
-    // },
-   ], { validate: true }
-   );
+    const reviews = [];
+    for (let spotId = 1; spotId <= 28; spotId++) {
+      for (let userId = 1; userId <= 7; userId++) {
+        // Randomly decide whether a user leaves a review for a spot
+        if (Math.random() > 0.3) { // 70% chance of leaving a review
+          reviews.push(generateReview(spotId, userId));
+        }
+      }
+    }
 
+    await Review.bulkCreate(reviews, { validate: true });
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-     options.tableName = "Reviews"
-     return queryInterface.bulkDelete(
-       options,
-       {
-         spotId: [1, 2, 3, 4, 5]
-       },
-       {}
-     );
-   },
- };
+    options.tableName = "Reviews";
+    return queryInterface.bulkDelete(options, null, {});
+  },
+};

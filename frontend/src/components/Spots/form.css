@@ -1,89 +1,111 @@
-.most-boxes {
-  width: 136%;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.same-line-citystate {
-  width: 100%;
+
+.form-wrapper {
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: #f7f7f7;
+  min-height: 80vh;
+}
+
+
+.spot-form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 590px;
+
+}
+.spot-form h3, h4 {
+  color: #FF385C;
+  margin-bottom: 10px;
+}
+
+.spot-form p {
+  color: #484848;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+.spot-form input, .spot-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.spot-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #484848;
+}
+
+/* Button styling */
+.button-div button {
+  background-color: #FF385C;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-div button:hover {
+  background-color: #FF5A5F;
+}
+
+
+.citystatebox, .latlngbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.citystatebox div, .latlngbox div {
+  width: 48%;
 }
 
 .latlngbox {
   display: flex;
-  width: 121%;
-  gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.spot-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.citystatebox {
-  display: flex;
-  width: 121%;
-  gap: 10px;
+.latlngbox > div {
+  width: 48%;
 }
 
 
- * {
-  font-family:'Courier New', Courier, monospace;
-
+.spot-form input, .spot-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-a {
-  font-family:Arial, Helvetica, sans-serif;
-}
 
-textarea {
-  width: 130%;
-  height: 100px;
-}
 
-.basepricebox p {
- width: 146%;
-}
 
-.basepricebox input {
-  width: 128%;
-}
+@media (max-width: 768px) {
+  .citystatebox, .latlngbox {
+    flex-direction: column;
+  }
 
-.titlebox p {
-  width: 131%;
-}
-
-h4 {
-  width: 120%;
-}
-
-.photo-input-box p {
-  width: 134%;
-}
-
-.outer-input-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.outer-input-wrapper p {
-  width: 135%;
-}
-
-.form-top-info {
-  width: 110%;
-}
-
-.textarea-description p {
-  width: 125%;
-}
-
-.button-div {
-  width: 131%;
-  display: flex;
-  justify-content: center;
-}
-
-.form-wrapper {
-  height: fit-content;
+  .citystatebox div, .latlngbox div {
+    width: 100%;
+  }
 }

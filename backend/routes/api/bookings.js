@@ -13,7 +13,6 @@ const router = express.Router();
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
-
 router.get("/current", requireAuth, async (req, res) => {
   const bookings = await Booking.findAll({
     where: {
@@ -26,9 +25,7 @@ router.get("/current", requireAuth, async (req, res) => {
       },
       include: {
         model: SpotImage,
-        attributes: {
-          exclude: ["id", "spotId", "preview", "createdAt", "updatedAt"],
-        },
+        attributes: ["url", "preview"],
       },
     },
   });
@@ -38,9 +35,11 @@ router.get("/current", requireAuth, async (req, res) => {
     bookingsArr.push(bookingsObj.toJSON());
   });
   bookingsArr.forEach((bookingsObj) => {
-    bookingsObj.Spot.previewImage = bookingsObj.Spot.SpotImages[0].url;
+    const previewImage = bookingsObj.Spot.SpotImages.find(img => img.preview)?.url;
+    bookingsObj.Spot.previewImage = previewImage || '';
     delete bookingsObj.Spot.SpotImages;
   });
+
   return res.json({ Bookings: bookingsArr });
 });
 
@@ -75,18 +74,17 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     return res.json({
       message: "Bad Request",
       errors: {
-        endDate: "endDate cannot come before startDate",
+        endDate: "End date cannot come before start date",
       },
     });
   }
-
 
   const bookingslist = await Booking.findAll({
     where: {
       spotId: currentBooking.spotId,
       id: {
-        [Op.ne]: currentBooking.id
-      }
+        [Op.ne]: currentBooking.id,
+      },
     },
   });
 
@@ -97,7 +95,6 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
   });
   let errors = {};
   bookingsListArr.forEach((existingBookingObj) => {
-
     if (
       startDate >= existingBookingObj.startDate &&
       startDate <= existingBookingObj.endDate
@@ -114,29 +111,27 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       // errors.message = "Sorry, this spot is already booked for the specified dates"
       errors.endDate = "End date conflicts with an existing booking";
     }
-});
-// ----end compare array
-
-if (Object.keys(errors).length > 0) {
-  res.status(errors.status);
-  delete errors.status;
-  return res.json({
-    message: "Sorry, this spot is already booked for the specified dates",
-    errors: errors,
   });
-}
+  // ----end compare array
+
+  if (Object.keys(errors).length > 0) {
+    res.status(errors.status);
+    delete errors.status;
+    return res.json({
+      message: "Sorry, this spot is already booked for the specified dates",
+      errors: errors,
+    });
+  }
   await currentBooking.update({
-  startDate,
-  endDate
-})
-  await currentBooking.save()
-  res.status(200)
-  return res.json(currentBooking)
-
-
+    startDate,
+    endDate,
+  });
+  await currentBooking.save();
+  res.status(200);
+  return res.json(currentBooking);
 });
 
-router.delete('/:bookingId', requireAuth, async (req, res) => {
+router.delete("/:bookingId", requireAuth, async (req, res) => {
   const currentBooking = await Booking.findByPk(req.params.bookingId);
 
   if (!currentBooking) {
@@ -155,23 +150,21 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
   const today = new Date().toJSON().slice(0, 10);
 
-  const currentBookingObj = currentBooking.toJSON()
-  if (today >= currentBookingObj.startDate && today <= currentBookingObj.endDate) {
-    res.status(403)
-    return res.json(
-      {
-        message: "Bookings that have been started can't be deleted"
-      }
-    )
+  const currentBookingObj = currentBooking.toJSON();
+  if (
+    today >= currentBookingObj.startDate &&
+    today <= currentBookingObj.endDate
+  ) {
+    res.status(403);
+    return res.json({
+      message: "Bookings that have been started can't be deleted",
+    });
   }
 
-  await currentBooking.destroy()
-  return res.json(
-    {
-      message: "Successfully deleted"
-    }
-  )
-
-})
+  await currentBooking.destroy();
+  return res.json({
+    message: "Successfully deleted",
+  });
+});
 
 module.exports = router;

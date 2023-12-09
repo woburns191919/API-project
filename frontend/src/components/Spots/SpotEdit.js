@@ -24,8 +24,9 @@ const SpotEdit = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [name, setName] = useState("");
+  const [errors, setErrors] = useState({});
 
-  console.log("current user", user);
+
 
   if (!user) {
     alert("You must be logged in to edit a spot!");
@@ -50,15 +51,10 @@ const SpotEdit = () => {
 
   console.log("country", country);
 
-  // useEffect(() => {
-  //   dispatch(thunkPutEditSpot(spotId))
-  // }, [dispatch])
-
-  // const foundSpot = useSelector((state) =>
-  // console.log("state from edit get", state)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
     const updatedSpot = {
       spotId,
       country,
@@ -71,21 +67,30 @@ const SpotEdit = () => {
       price,
       name,
     };
-    // const hasData = await dispatch(thunkPutEditSpot(updatedSpot))
-    // if (hasData.id) history.push(`/spots/${spotId}`)
+
 
     if (!updatedSpot.spotId) return null;
-    const editedSpot = await dispatch(thunkPutEditSpot(updatedSpot, spotId));
-    if (editedSpot.id) {
-      history.push(`/spots/${editedSpot.id}`);
-    } else {
-      return null;
+    try {
+      const editedSpot = await dispatch(thunkPutEditSpot(updatedSpot, spotId));
+      if (editedSpot.id) {
+        history.push(`/spots/${editedSpot.id}`);
+      } else {
+        // Handle case where there is no error but spot does not update
+        setErrors({ message: "Unable to update the spot. Please try again." });
+      }
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        setErrors(error.response.data.errors);
+      } else {
+        setErrors({ message: "An error occurred. Please try again." });
+      }
     }
   };
 
+
   return (
     <main className="form-wrapper">
-      <form className="spot-form" onSubmit={handleSubmit}>
+      <form className="spot-form" onSubmit={handleSubmit}style={{marginTop: '35%'}}>
         <h3>Update your Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
@@ -243,6 +248,9 @@ const SpotEdit = () => {
           </label>
         </div>
         <hr></hr>
+        {Object.values(errors).map((error, idx) => (
+          <div key={idx} className="error-message">{error}</div>
+        ))}
         <div className="button-div">
           <button type="submit">Update Your Spot</button>
         </div>

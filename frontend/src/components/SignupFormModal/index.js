@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
-import "./SignupForm.css";
+// import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -17,87 +17,155 @@ function SignupFormModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
-        sessionActions.signup({
-          email,
-          username,
-          firstName,
-          lastName,
-          password,
-        })
-      )
-        .then(closeModal)
-        .catch(async (res) => {
+
+    // Clear previous errors
+    setErrors({});
+
+    // Only proceed if password and confirmPassword match
+    if (password !== confirmPassword) {
+      setErrors({ confirmPassword: "Confirm Password must match Password" });
+      return;
+    }
+
+    dispatch(
+      sessionActions.signup({
+        email,
+        username,
+        firstName,
+        lastName,
+        password,
+      })
+    )
+      .then(closeModal)
+      .catch(async (res) => {
+        if (res.status >= 400 && res.status < 600) {
           const data = await res.json();
           if (data && data.errors) {
             setErrors(data.errors);
+          } else {
+            // Generic error if response format is unexpected
+            setErrors({ message: "An error occurred. Please try again." });
           }
-        });
-    }
-    return setErrors({
-      confirmPassword:
-        "Confirm Password field must be the same as the Password field",
-    });
+        }
+      });
+  };
+
+  const formStyle = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    margin: "5px 0",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    boxSizing: "border-box",
+  };
+
+  const buttonStyle = {
+    backgroundColor: "#FF385C",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    marginTop: "10px",
+  };
+
+  const errorMessageStyle = {
+    color: "red",
+    fontSize: "0.8em",
+    alignSelf: "flex-start",
+  };
+
+  const headingStyle = {
+    color: "#484848",
+    textAlign: "center",
+    marginBottom: "20px",
   };
 
   return (
     <>
-      <h3>Sign Up</h3>
-      <form onSubmit={handleSubmit}>
+      <h3 style={headingStyle}>Sign Up</h3>
+      <form onSubmit={handleSubmit} style={formStyle}>
         <label>
           <input
+            style={inputStyle}
             placeholder="Email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          {errors.email && <p style={errorMessageStyle}>{errors.email}</p>}
         </label>
-        {errors.email && <p>{errors.email}</p>}
+
         <label>
           <input
+            style={inputStyle}
             placeholder="Username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
+          {errors.username && (
+            <p style={errorMessageStyle}>{errors.username}</p>
+          )}
         </label>
-        {errors.username && <p>{errors.username}</p>}
+
         <label>
           <input
+            style={inputStyle}
             placeholder="First Name"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
+          {errors.firstName && (
+            <p style={errorMessageStyle}>{errors.firstName}</p>
+          )}
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+
         <label>
           <input
+            style={inputStyle}
             placeholder="Last Name"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
           />
+          {errors.lastName && (
+            <p style={errorMessageStyle}>{errors.lastName}</p>
+          )}
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+
         <label>
           <input
+            style={inputStyle}
             placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {errors.password && (
+            <p style={errorMessageStyle}>{errors.password}</p>
+          )}
         </label>
-        {errors.password && <p>{errors.password}</p>}
+
         <label>
           <input
+            style={inputStyle}
             placeholder="Confirm Password"
             type="password"
             value={confirmPassword}
@@ -105,10 +173,14 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {Object.keys(errors).map((key, idx) => (
+          <div key={idx} className="error-message" >
+            {errors[key]}
+          </div>
+        ))}
         <button
-          className="sign-up-button"
-          disabled={username.length < 4 || password.length < 6}
+          style={buttonStyle}
+          // disabled={username.length < 4 || password.length < 6}
           type="submit"
         >
           Sign Up

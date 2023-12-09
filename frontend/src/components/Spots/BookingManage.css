@@ -1,11 +1,10 @@
-
-.spots-index-page {
+.bookings-index-page {
   display: flex;
   justify-content: center;
   padding: 20px;
 }
 
-.spots-container {
+.bookings-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;

@@ -1,135 +1,16 @@
-/*
-.body {
-  margin: 0 auto;
-} */
-
 .outer-wrapper {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  width: 92%;
-  margin: 0px;
-  padding: 60px;
-}
-
-
-.small-photo-container {
-  width: 72%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  height: 71%;
-}
-
-.small-photo-container img {
-
-}
-
-.parent-flex {
-  display: flex;
-  gap:10px;
-}
-
-
-
-/* .big-photo-inner-box {
-  height: 159%;
-} */
-
-.city-state-country {
-  padding: 17px;
-}
-.spot-show-photo-container {
-
-  display: flex;
-  width: 92%;
-  flex-wrap: wrap;
   margin: 0 auto;
-  gap: 10px;
-  padding: 10px;
-  flex-direction: column;
+  padding: 60px;
+  max-width: 900px;
 }
 
-.price-star-review-wrapper {
-  padding-top: 10px;
-  width: 52%;
-  position: sticky;
-  background: white;
-  border: .5px solid gray
-}
-
-
-/* .big-photo-container {
-  width: 66%
-} */
-
-/* .big-photo {
-  width: 131%;
-  height: 90%;
-  border-top-left-radius: 4%;
-  border-bottom-left-radius: 4%;
-
-} */
-
-.big-photo {
-  width:100%;
-  height:100%;
-}
-
-.small-photo-container{
-     width: 72%;
-    height: 88%;
-}
-
-
-
-
-img {
- border-radius: 0px;
-
-}
-
-.description {
-  width: 100%;
-}
-
-
-.lower-spot-show{
-
+.content-wrapper {
   display: flex;
-  justify-content: space-between;
-  width: 94%;
-  font-family: sans-serif;
-  padding-top:20px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-
-
-.top-price-star-review-wrapper{
-  font-family: sans-serif;
-  white-space:nowrap;
-
-}
-
-
-
-.bottom-price-star-review-wrapper {
-  font-family: sans-serif;
-}
-
-.reserve {
-  font-family: sans-serif;
-  height: 48px;
-  background-color: #b33636;
-  color: white;
-  border-radius: 10%
-}
-
-
-.reviews-lower {
-  font-family: fantasy;
-  padding: 5px;
-}
-
 
 .spot-name {
   font-family: sans-serif;
@@ -138,31 +19,126 @@ img {
   padding-bottom: 10px;
 }
 
-
 .spot-photo-wrapper {
-  font-weight: 100;
-  font-family: sans-serif;
-  text-decoration: underline;
-  padding-bottom: 10px;
+  flex: 1;
+
 }
 
-
-
-.city-state-country {
-
-  font-family: sans-serif;
-  /* padding-left: 90px; */
-  text-decoration: underline;
-  font-weight: 200;
+/* Parent container holding all images */
+.parent-flex {
+  display: flex;
+  gap: 10px;
+  height: 500px; /* Adjust height as needed */
 }
 
-
+/* Container for the large preview image */
 .big-photo-container {
-  width: 66%;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.big-photo-container > img {
+.big-photo-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 
-  height: 413px;
+/* Container for the smaller images */
+.small-photo-container {
+  width: 50%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
 
+.small-photo-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+.reservation-box {
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  width: 300px; 
+}
+
+
+.booking-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.booking-options input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+
+.price-info {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.booking-options {
+
+  margin-bottom: 15px;
+}
+
+.reserve-button {
+  background-color: #FF385C;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+/* New box for spot info */
+.spot-info-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+/* Enhanced typography for host and price */
+.spot-info-box .host-name, .spot-info-box .price-per-night {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Star rating styling */
+.star-rating {
+  color: #FF385C;
+  margin-right: 5px;
+}
+
+
+.content-and-reservation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.content-wrapper {
+  flex: 1;
 }

@@ -1,28 +1,50 @@
-.profile-dropdown {
+/* ProfileButton.css */
+
+.profileButtonContainer {
+  position: relative;
+}
+
+.profileButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #484848;
+}
+
+.dropdownMenu {
   position: absolute;
-  right: 1%;
-  border: 0.1px solid gray;
-  padding: 13px;
-  width: 210px;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  width: 200px;
+  display: none;
+  text-decoration: none;
+}
+
+.showDropdown {
+  display: block;
+}
+
+.dropdownItem {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #484848;
+  text-decoration: none;
+  list-style: none !important;
+}
+
+.logoutButton {
+  background-color: #FF385C;
+  color: white;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  margin: 1.5%;
-  border-radius: 4%;
-  overflow: scroll;
+  border-radius: 4px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 100%;
 }
-
-.username-email-dropdown {
-
-}
-
-
-/*
-
-outer wrapper
-position relative
-
-
-
-*/

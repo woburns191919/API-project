@@ -16,6 +16,8 @@ const {
   SpotImage,
   ReviewImage,
 } = require("../../db/models");
+
+
 const router = express.Router();
 
 const { check, query } = require("express-validator");
@@ -554,7 +556,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       return res.json({
         message: "Bad Request",
         errors: {
-          endDate: "endDate cannot be on or before startDate",
+          endDate: "End date cannot be on or before start date",
         },
       });
     }
