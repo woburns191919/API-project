@@ -526,3 +526,11 @@ overflow for profile button
 
 fix reservation style
 write actual descriptions, give actual titles
+nav bar diff home spaces
+
+noticed in production
+
+booking error needs to be in red
+spot pics not showing up manage bookings
+create bookings --says forbidden if owner books own place
+
