@@ -4,6 +4,12 @@ const GET_USER_BOOKINGS = '/bookings/get_user_bookings';
 const CREATE_BOOKING = '/bookings/create_booking';
 const UPDATE_BOOKING = '/bookings/update_booking';
 const DELETE_BOOKING = '/bookings/delete_booking';
+const SET_BOOKING_ERROR = 'bookings/set_error';
+
+export const actionSetBookingError = (error) => ({
+  type: SET_BOOKING_ERROR,
+  error,
+});
 
 
 const actionGetUserBookings = (bookings) => ({
@@ -37,41 +43,53 @@ export const thunkGetUserBookings = () => async (dispatch) => {
 };
 
 export const thunkCreateBooking = (bookingPayload) => async (dispatch) => {
-
   const { spotId, startDate, endDate, userId } = bookingPayload;
 
-  const res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      userId,
-      startDate,
-      endDate,
-    }),
-  });
+  try {
+    const res = await csrfFetch(`/api/spots/${spotId}/bookings`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId,
+        startDate,
+        endDate,
+      }),
+    });
 
-  console.log('res from boooking', res)
-
-  if (res.ok) {
-    const booking = await res.json();
-    dispatch(actionCreateBooking(booking));
-    console.log('booking from store*****', booking)
-    return booking;
+    if (res.ok) {
+      const booking = await res.json();
+      dispatch(actionCreateBooking(booking));
+      return booking;
+    } else {
+      throw res;
+    }
+  } catch (err) {
+    const error = await err.json();
+    dispatch(actionSetBookingError(error));
   }
 };
 
 export const thunkUpdateBooking = (bookingData, bookingId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
-    method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(bookingData),
-  });
-  if (response.ok) {
-    const booking = await response.json();
-    dispatch(actionUpdateBooking(booking));
-    return booking;
+  try {
+    const res = await csrfFetch(`/api/bookings/${bookingId}`, {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(bookingData),
+    });
+
+    if (res.ok) {
+      const booking = await res.json();
+      dispatch(actionUpdateBooking(booking));
+      return booking;
+    } else {
+      throw res; // Throw the response object to be caught in the calling component
+    }
+  } catch (err) {
+    const error = await err.json();
+    dispatch(actionSetBookingError(error));
+    throw error; // Re-throw the error for the calling component to handle
   }
 };
 
@@ -86,20 +104,25 @@ export const thunkDeleteBooking = (bookingId) => async (dispatch) => {
 };
 
 
-const initialState = {};
+const initialState = {
+  userBookings: {},
+  bookingError: null, // Add an initial state for booking errors
+};
 
 const bookingReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_BOOKINGS:
       return { ...state, userBookings: action.bookings };
     case CREATE_BOOKING:
-      return { ...state, [action.booking.id]: action.booking };
+      return { ...state, [action.booking.id]: action.booking, bookingError: null };
     case UPDATE_BOOKING:
-      return { ...state, [action.booking.id]: action.booking };
+      return { ...state, [action.booking.id]: action.booking, bookingError: null };
     case DELETE_BOOKING:
       const newState = { ...state };
       delete newState[action.bookingId];
-      return newState;
+      return { ...newState, bookingError: null };
+    case SET_BOOKING_ERROR:
+      return { ...state, bookingError: action.error }; // Handle setting the booking error
     default:
       return state;
   }

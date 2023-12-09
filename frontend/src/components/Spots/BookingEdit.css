@@ -1,10 +1,18 @@
 
+
+.error-message {
+  color: red;      
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
 .form-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  height: 100vh; 
+  height: 100vh;
 }
 
 .booking-form {

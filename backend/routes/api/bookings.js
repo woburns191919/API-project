@@ -36,7 +36,7 @@ router.get("/current", requireAuth, async (req, res) => {
   });
   bookingsArr.forEach((bookingsObj) => {
     const previewImage = bookingsObj.Spot.SpotImages.find(img => img.preview)?.url;
-    bookingsObj.Spot.previewImage = previewImage || ''; 
+    bookingsObj.Spot.previewImage = previewImage || '';
     delete bookingsObj.Spot.SpotImages;
   });
 
@@ -74,7 +74,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
     return res.json({
       message: "Bad Request",
       errors: {
-        endDate: "endDate cannot come before startDate",
+        endDate: "End date cannot come before start date",
       },
     });
   }

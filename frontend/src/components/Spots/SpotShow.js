@@ -35,6 +35,11 @@ const SpotShow = () => {
   const loggedInUser = useSelector(
     (state) => state.session && state.session.user
   );
+  const bookingError = useSelector((state) => state.bookings.bookingError);
+
+
+
+
   console.log("logged in user", loggedInUser);
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
@@ -81,6 +86,20 @@ const SpotShow = () => {
     }
   };
 
+  const renderErrorMessages = () => {
+    if (bookingError && bookingError.errors) {
+      return Object.keys(bookingError.errors).map((key, index) => (
+        <div key={index} className="error-message">
+          {bookingError.errors[key]}
+        </div>
+      ));
+    } else if (bookingError) {
+      return <div className="error-message">{bookingError.message}</div>;
+    }
+    return null;
+  };
+
+
   return (
     <main className="outer-wrapper">
       <div className="spot-name">{spot.name}</div>
@@ -124,7 +143,10 @@ const SpotShow = () => {
         </div>
       </div>
 
+
+
       <div className="reservation-box">
+      {renderErrorMessages()}
         <div className="reservation-content">
           <div className="price-info">
             <b>${spotArr.price}</b> per night
