@@ -523,6 +523,6 @@ description needs overflow
 be first to post review shouldnt show up if youre the creator of the spot and button is disabled
 form size takes up whole length
 overflow for profile button
-remove authors i know
+
 fix reservation style
 write actual descriptions, give actual titles

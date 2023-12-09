@@ -11,20 +11,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 50px;
   background-color: #f7f7f7;
+  min-height: 80vh;
 }
 
 
 .spot-form {
   background-color: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
 }
-
 .spot-form h3, h4 {
   color: #FF385C;
   margin-bottom: 10px;
@@ -76,6 +76,27 @@
 .citystatebox div, .latlngbox div {
   width: 48%;
 }
+
+.latlngbox {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.latlngbox > div {
+  width: 48%;
+}
+
+
+.spot-form input, .spot-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px; 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
 
 
 @media (max-width: 768px) {
