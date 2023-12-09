@@ -105,14 +105,15 @@ export const thunkSpotCreateSpot = (payload) => async (dispatch) => {
     },
     body: JSON.stringify(payload),
   });
-  console.log("res??", res);
-  if (!res.ok) {
-    throw new Error();
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionCreateSpot(data));
+    return data;
+  } else {
+    const error = await res.json();
+    throw error; // Throw the error to be caught in the component
   }
-  const data = await res.json();
-  dispatch(actionCreateSpot(data));
-  console.log("data at bottom of thunk 1", data);
-  return data;
 };
 
 // thunk for create spot image

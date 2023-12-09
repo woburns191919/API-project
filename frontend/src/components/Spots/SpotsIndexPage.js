@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkGetAllSpots, thunkGetReviewsBySpotId } from "../../store/spots";
+import { thunkGetAllSpots } from "../../store/spots";
+import SpotCard from "./SpotCard";
 import "./GetAllSpots.css";
-import { Link } from "react-router-dom";
 
 const SpotsIndexPage = () => {
   const spots = Object.values(
@@ -14,51 +14,15 @@ const SpotsIndexPage = () => {
   useEffect(() => {
     dispatch(thunkGetAllSpots());
   }, [dispatch]);
+  console.log('spots?***', spots)
+
   return (
-    <>
-      <main className="outer-wrapper">
-        <div className="photo-container">
-          {spots.map((spotObj, i) => (
-            <div  key={i} className="inner-container">
-              <Link to={`/spots/${spotObj.id}`}>
-                <img
-                title={spotObj.name}
-                src={`${spotObj.previewImage}`} />
-
-                <div className="info">
-                  <div className="left-info">
-                    <div className="city-state">
-                      {spotObj.city}, {"   "} {"   "}
-                      {spotObj.state}
-                    </div>
-                    <div className="star-info">
-                      <i className="fa fa-star"></i>
-                      {spotObj.avgRating > 0
-                        ? spotObj.avgRating.toFixed(2)
-                        : "new"}
-                    </div>
-                  </div>
-
-                  <div className="right-info">
-                    <b>${spotObj.price}</b> night
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </main>
-    </>
+    <main className="spots-index-page">
+      <div className="spots-container">
+        {spots?.map((spot, i) => <SpotCard key={i} spot={spot} />)}
+      </div>
+    </main>
   );
 };
 
 export default SpotsIndexPage;
-
-/*
-
-  //<Tooltip content={spotObj.name}/>
-
-  // useEffect(() => {
-  //   dispatch(thunkGetReviewsBySpotId(spotId))
-  // })
-*/

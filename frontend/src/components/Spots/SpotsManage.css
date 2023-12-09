@@ -1,34 +1,52 @@
-#modal-content {
-  height: 200px;
-  width: 200px;
+
+.outer-wrapper {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 
-#modal-content button {
-  width:200px;
-  height: 30px;
-}
-
-.photo-container a {
-  text-decoration: none;
-  color: gray;
+.manage-create-current-spots {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 
-.photo-container{
-  margin: 0px;
-}
-
-/* SpotsManage.css */
-
-.booking-action-button {
-  background-color: #ff5a5f; 
+.create-new-spot-button {
+  display: block;
+  background-color: #FF5A5F;
   color: white;
-  border: none;
+  text-align: center;
   padding: 10px 20px;
-  margin: 5px;
   border-radius: 5px;
   text-decoration: none;
-  display: inline-block;
+  margin: 10px auto;
+  width: max-content;
   cursor: pointer;
+}
+
+
+.photo-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+
+@media (max-width: 1024px) {
+  .photo-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .photo-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-container {
+    grid-template-columns: 1fr; 
+  }
 }
