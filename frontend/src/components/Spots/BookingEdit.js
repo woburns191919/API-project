@@ -47,7 +47,7 @@ const BookingEdit = () => {
     <main className="form-wrapper">
       <form className="booking-form" onSubmit={handleSubmit}>
         <h3>Edit Your Booking</h3>
-       {error && <div className="error-message">{error}</div>}
+       {error && <div className="errorStyle">{error}</div>}
         <label>
           Start Date
           <input

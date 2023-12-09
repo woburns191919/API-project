@@ -17,70 +17,78 @@ function SignupFormModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
-        sessionActions.signup({
-          email,
-          username,
-          firstName,
-          lastName,
-          password,
-        })
-      )
-        .then(closeModal)
-        .catch(async (res) => {
+
+    // Clear previous errors
+    setErrors({});
+
+    // Only proceed if password and confirmPassword match
+    if (password !== confirmPassword) {
+      setErrors({ confirmPassword: "Confirm Password must match Password" });
+      return;
+    }
+
+    dispatch(
+      sessionActions.signup({
+        email,
+        username,
+        firstName,
+        lastName,
+        password,
+      })
+    )
+      .then(closeModal)
+      .catch(async (res) => {
+        if (res.status >= 400 && res.status < 600) {
           const data = await res.json();
           if (data && data.errors) {
             setErrors(data.errors);
+          } else {
+            // Generic error if response format is unexpected
+            setErrors({ message: "An error occurred. Please try again." });
           }
-        });
-    }
-    return setErrors({
-      confirmPassword:
-        "Confirm Password field must be the same as the Password field",
-    });
+        }
+      });
   };
 
   const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    alignItems: 'center',
-    justifyContent: 'center'
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   const inputStyle = {
-    width: '100%',
-    padding: '10px',
-    margin: '5px 0',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    boxSizing: 'border-box'
+    width: "100%",
+    padding: "10px",
+    margin: "5px 0",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    boxSizing: "border-box",
   };
 
   const buttonStyle = {
-    backgroundColor: '#FF385C', // Airbnb's brand color
-    color: 'white',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    marginTop: '10px'
+    backgroundColor: "#FF385C",
+    color: "white",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    marginTop: "10px",
   };
 
   const errorMessageStyle = {
-    color: 'red',
-    fontSize: '0.8em',
-    alignSelf: 'flex-start'
+    color: "red",
+    fontSize: "0.8em",
+    alignSelf: "flex-start",
   };
 
   const headingStyle = {
-    color: '#484848',
-    textAlign: 'center',
-    marginBottom: '20px'
+    color: "#484848",
+    textAlign: "center",
+    marginBottom: "20px",
   };
 
   return (
@@ -108,7 +116,9 @@ function SignupFormModal() {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          {errors.username && <p style={errorMessageStyle}>{errors.username}</p>}
+          {errors.username && (
+            <p style={errorMessageStyle}>{errors.username}</p>
+          )}
         </label>
 
         <label>
@@ -120,7 +130,9 @@ function SignupFormModal() {
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-          {errors.firstName && <p style={errorMessageStyle}>{errors.firstName}</p>}
+          {errors.firstName && (
+            <p style={errorMessageStyle}>{errors.firstName}</p>
+          )}
         </label>
 
         <label>
@@ -132,7 +144,9 @@ function SignupFormModal() {
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-          {errors.lastName && <p style={errorMessageStyle}>{errors.lastName}</p>}
+          {errors.lastName && (
+            <p style={errorMessageStyle}>{errors.lastName}</p>
+          )}
         </label>
 
         <label>
@@ -144,7 +158,9 @@ function SignupFormModal() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {errors.password && <p style={errorMessageStyle}>{errors.password}</p>}
+          {errors.password && (
+            <p style={errorMessageStyle}>{errors.password}</p>
+          )}
         </label>
 
         <label>
@@ -156,12 +172,15 @@ function SignupFormModal() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          {errors.confirmPassword && <p style={errorMessageStyle}>{errors.confirmPassword}</p>}
         </label>
-
+        {Object.keys(errors).map((key, idx) => (
+          <div key={idx} className="error-message" >
+            {errors[key]}
+          </div>
+        ))}
         <button
           style={buttonStyle}
-          disabled={username.length < 4 || password.length < 6}
+          // disabled={username.length < 4 || password.length < 6}
           type="submit"
         >
           Sign Up

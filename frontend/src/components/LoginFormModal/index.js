@@ -63,20 +63,29 @@ function LoginFormModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({});
+    setErrors({}); // Clear previous errors
+
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-
+        if (res.status >= 400 && res.status < 600) {
+          const data = await res.json();
+          if (data && data.errors) {
+            setErrors(data.errors); // Set the errors from response
+          } else {
+            // Handle the case where the error response does not have the expected format
+            setErrors({ message: 'An error occurred. Please try again.' });
+          }
         }
       });
   };
 
+
   return (
     <div id="login-modal" style={modalStyle}>
+       {Object.values(errors).map((error, idx) => (
+    <div key={idx} style={errorStyle}>{error}</div>
+  ))}
       <h1>Log In</h1>
       <form onSubmit={handleSubmit} style={formStyle}>
         <label>
@@ -101,7 +110,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors && <p style={errorStyle}>{errors.message}</p>}
+     
         <button
           style={buttonStyle}
           type="submit"

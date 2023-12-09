@@ -515,3 +515,11 @@ for review button vis
               modalComponent={<ReviewForm spotId={spotId} />}
               />
           </Link>}
+
+
+-----------------
+
+description needs overflow
+be first to post review shouldnt show up if youre the creator of the spot and button is disabled
+form size takes up whole length
+overflow for profile button 
