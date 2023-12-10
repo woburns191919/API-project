@@ -16,22 +16,24 @@
 
 }
 
-.air-logo {
+/* .air-logo > .fa {
   width: fit-content;
   display:flex;
-  gap:10px;
-}
+  padding-right:10px;
+} */
 .air-logo .active {
   display: flex;
   gap: 10px;
 }
 .air-logo a {
+
   color: #FF385C;
   text-decoration: none;
   font-weight: bold;
   font-size: 22px;
   display: flex;
   align-items: center;
+  gap:10px;
 }
 
 .air-logo i {

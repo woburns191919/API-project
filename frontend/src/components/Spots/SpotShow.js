@@ -37,9 +37,6 @@ const SpotShow = () => {
   );
   const bookingError = useSelector((state) => state.bookings.bookingError);
 
-
-
-
   console.log("logged in user", loggedInUser);
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
@@ -99,54 +96,51 @@ const SpotShow = () => {
     return null;
   };
 
-
   return (
     <main className="outer-wrapper">
       <div className="spot-name">{spot.name}</div>
 
       <div className="spot-photo-wrapper">
-      <div className="content-and-reservation-wrapper">
-        <div className="content-wrapper">
-          <div className="parent-flex">
-            <div className="big-photo-container">
-              {spotImages
-                .filter((img) => img.preview)
-                .map((img, i) => (
-                  <img key={i} className="big-photo" src={img.url} alt="" />
-                ))}
-            </div>
-            <div className="small-photo-container">
-              {spotImages
-                .filter((img) => !img.preview)
-                .map((img, i) => (
-                  <img
-                    key={i}
-                    src={img.url}
-                    alt=""
-                    style={{
-                      width: "100%",
-                      height: "245px",
-                      objectFit: "cover",
-                    }}
-                  />
-                ))}
+        <div className="content-and-reservation-wrapper">
+          <div className="content-wrapper">
+            <div className="parent-flex">
+              <div className="big-photo-container">
+                {spotImages
+                  .filter((img) => img.preview)
+                  .map((img, i) => (
+                    <img key={i} className="big-photo" src={img.url} alt="" />
+                  ))}
+              </div>
+              <div className="small-photo-container">
+                {spotImages
+                  .filter((img) => !img.preview)
+                  .map((img, i) => (
+                    <img
+                      key={i}
+                      src={img.url}
+                      alt=""
+                      style={{
+                        width: "100%",
+                        height: "245px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ))}
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
 
       <div className="spot-info-box">
-      <p className="description">{spotArr.description}</p>
+        <p className="description">{spotArr.description}</p>
         <div className="host-name">
           Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
         </div>
       </div>
 
-
-
       <div className="reservation-box">
-      {renderErrorMessages()}
+        {renderErrorMessages()}
         <div className="reservation-content">
           <div className="price-info">
             <b>${spotArr.price}</b> per night
@@ -173,33 +167,28 @@ const SpotShow = () => {
             Reserve
           </button>
         </div>
-      </div>
-
-      <section className="lower-spot-show">
-        <div className="description">
-
-
-        </div>
-        <div className="price-star-review-wrapper">
-          <div className="top-price-star-review-wrapper">
-
-            <div className="stars">
-              <i className="fa fa-star"></i>{" "}
-              {spotArr.avgStarRating > 0
-                ? spotArr.avgStarRating.toFixed(2)
-                : ""}{" "}
-              &middot;
-            </div>
-            <div className="reviews">
-              {spotArr.numReviews == 1
-                ? spotArr.numReviews + " " + "Review"
-                : spotArr.numReviews > 0 && spotArr.numReviews !== 1
-                ? spotArr.numReviews + " " + "Reviews"
-                : "new"}
+        <div className="lower-spot-show">
+          <div className="description"></div>
+          <div className="price-star-review-wrapper">
+            <div className="top-price-star-review-wrapper">
+              <div className="stars">
+                <i className="fa fa-star"></i>{" "}
+                {spotArr.avgStarRating > 0
+                  ? spotArr.avgStarRating.toFixed(2)
+                  : ""}{" "}
+                &middot;
+              </div>
+              <div className="reviews">
+                {spotArr.numReviews == 1
+                  ? spotArr.numReviews + " " + "Review"
+                  : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+                  ? spotArr.numReviews + " " + "Reviews"
+                  : "new"}
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       <hr />
 

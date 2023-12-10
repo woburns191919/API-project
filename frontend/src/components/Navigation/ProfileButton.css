@@ -35,6 +35,7 @@
   color: #484848;
   text-decoration: none;
   list-style: none !important;
+  overflow-wrap: break-word;
 }
 
 .logoutButton {
