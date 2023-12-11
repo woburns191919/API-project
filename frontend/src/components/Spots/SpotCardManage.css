@@ -44,7 +44,7 @@
 
 .spot-actions-manage {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 10px;
   gap: 10px;
 }
@@ -58,4 +58,3 @@
   text-decoration: none;
   cursor: pointer;
 }
-
