@@ -522,7 +522,7 @@ for review button vis
 description needs overflow
 be first to post review shouldnt show up if youre the creator of the spot and button is disabled
 
-overflow for profile button
+
 
 fix reservation style
 write actual descriptions, give actual titles
@@ -531,6 +531,6 @@ if spot description is too big, we get generic error
 
 noticed in production
 
+
+manage spots not showing up, some bookings not showing up
 booking error needs to be in red
-spot pics not showing up manage bookings
-create bookings --says forbidden if owner books own place
