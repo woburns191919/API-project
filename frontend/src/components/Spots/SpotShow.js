@@ -133,13 +133,19 @@ const SpotShow = () => {
       </div>
 
       <div className="spot-info-box">
-        <p className="description">{spotArr.description}</p>
-        <div className="host-name">
-          Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
+        <div className="host-info">
+         
+          <div>
+            <div className="host-name">
+              Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
+            </div>
+            <p className="host-bio">{spotArr.Owner.bio}</p>
+          </div>
         </div>
+        <p className="description">{spotArr.description}</p>
       </div>
       <div className="lower-info-wrapper">
-      <div className="top-price-star-review-wrapper">
+        <div className="top-price-star-review-wrapper">
           <div className="stars">
             <i className="fa fa-star"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
@@ -186,7 +192,6 @@ const SpotShow = () => {
             <div className="price-star-review-wrapper"></div>
           </div>
         </div>
-
       </div>
 
       <hr />

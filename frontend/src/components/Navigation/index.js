@@ -48,7 +48,7 @@ function Navigation({ isLoaded }) {
         <div className="create-spot-in-manage-spots">
           {sessionUser && (
             <button>
-              <NavLink to="/spots/new">Create a New Spot</NavLink>
+              <NavLink to="/spots/new">Rent Your Home</NavLink>
             </button>
           )}
         </div>
@@ -68,16 +68,3 @@ function Navigation({ isLoaded }) {
 }
 
 export default Navigation;
-
-/*
-  <div className="create-spot-in-manage-spots">
-        {sessionUser &&
-       <button>
-          <Link to="/spots">
-               Create a New Spot
-             </Link>
-          </button>
-          }
-
-      </div>
-*/

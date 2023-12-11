@@ -21,7 +21,6 @@
 
 .spot-photo-wrapper {
   flex: 1;
-
 }
 
 /* Parent container holding all images */
@@ -62,7 +61,6 @@
   height: 100%;
 }
 
-
 .reservation-box {
   width: 300px;
   background-color: white;
@@ -72,7 +70,6 @@
   flex-shrink: 0;
   width: 300px;
 }
-
 
 .booking-options {
   display: flex;
@@ -87,19 +84,17 @@
   border: 1px solid #ddd;
 }
 
-
 .price-info {
   font-size: 20px;
   margin-bottom: 15px;
 }
 
 .booking-options {
-
   margin-bottom: 15px;
 }
 
 .reserve-button {
-  background-color: #FF385C;
+  background-color: #ff385c;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -108,27 +103,19 @@
   width: 100%;
 }
 
-
-/* New box for spot info */
 .spot-info-box {
   display: flex;
   flex-direction: column;
 
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
 
-/* Enhanced typography for host and price */
-.spot-info-box .host-name, .spot-info-box .price-per-night {
-  font-size: 18px;
-  font-weight: bold;
-}
-
 .lower-info-wrapper {
-  display:flex;
-  justify-content:flex-end;
+  display: flex;
+  justify-content: flex-end;
   gap: 50%;
 }
 
@@ -139,17 +126,14 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
-  height:fit-content;
+  height: fit-content;
   width: fit-content;
-
 }
 
-/* Star rating styling */
 .star-rating {
-  color: #FF385C;
+  color: #ff385c;
   margin-right: 5px;
 }
-
 
 .content-and-reservation-wrapper {
   display: flex;
@@ -159,4 +143,53 @@
 
 .content-wrapper {
   flex: 1;
+}
+
+.spot-info-box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.host-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.host-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.host-bio {
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: 1em;
+  color: #333;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .host-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .host-profile-picture {
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 0.9em;
+  }
 }
