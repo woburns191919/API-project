@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,26 +5,27 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-
 .form-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px;
-  background-color: #f7f7f7;
-  min-height: 80vh;
+  padding: 20px;
+  background-color:white;
+  min-height: 100vh;
 }
-
 
 .spot-form {
   background-color: white;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 590px;
-
+  margin: 0 auto; /* Center the form horizontally */
+  /* margin-top:1100px; */
 }
+
+
 .spot-form h3, h4 {
   color: #FF385C;
   margin-bottom: 10px;
@@ -99,13 +99,14 @@
 
 
 
-
-@media (max-width: 768px) {
-  .citystatebox, .latlngbox {
-    flex-direction: column;
+/*
+@media (max-width: 600px) {
+  .form-wrapper {
+    padding: 10px;
   }
 
-  .citystatebox div, .latlngbox div {
+  .spot-form {
+    margin-top: 140px;
     width: 100%;
   }
-}
+} */
