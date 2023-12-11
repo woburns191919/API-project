@@ -90,7 +90,7 @@ const SpotEdit = () => {
 
   return (
     <main className="form-wrapper">
-      <form className="spot-form" onSubmit={handleSubmit}style={{marginTop: '35%'}}>
+      <form className="spot-form" onSubmit={handleSubmit}style={{marginTop: '60%'}}>
         <h3>Update your Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
