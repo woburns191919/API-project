@@ -58,12 +58,36 @@
   gap:5px;
 }
 
-.profileButton, .create-spot-in-manage-spots a {
+.profileButton {
   color: #484848;
   padding: 8px 15px;
   text-decoration: none;
   transition: color 0.3s ease;
 }
-.profileButton:hover, .create-spot-in-manage-spots button:hover {
+.profileButton:hover {
   background-color: darken(#FF385C, 10%);
+}
+
+.create-spot-in-manage-spots button {
+  background-color: #FF385C;
+  color: rgb(25, 19, 19);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-spot-in-manage-spots button:hover {
+  background-color: #e03147;
+}
+
+.create-spot-in-manage-spots a {
+  text-decoration: none;
+  color: white;
+  display: block;
 }
