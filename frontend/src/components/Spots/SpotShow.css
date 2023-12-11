@@ -113,7 +113,7 @@
 .spot-info-box {
   display: flex;
   flex-direction: column;
-  background-color: #f7f7f7;
+
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -124,6 +124,24 @@
 .spot-info-box .host-name, .spot-info-box .price-per-night {
   font-size: 18px;
   font-weight: bold;
+}
+
+.lower-info-wrapper {
+  display:flex;
+  justify-content:flex-end;
+  gap: 50%;
+}
+
+.top-price-star-review-wrapper {
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  height:fit-content;
+  width: fit-content;
+
 }
 
 /* Star rating styling */

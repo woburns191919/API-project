@@ -138,56 +138,55 @@ const SpotShow = () => {
           Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
         </div>
       </div>
-
-      <div className="reservation-box">
-        {renderErrorMessages()}
-        <div className="reservation-content">
-          <div className="price-info">
-            <b>${spotArr.price}</b> per night
+      <div className="lower-info-wrapper">
+      <div className="top-price-star-review-wrapper">
+          <div className="stars">
+            <i className="fa fa-star"></i>{" "}
+            {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
+            &middot;
           </div>
-
-          <div className="booking-options">
-            <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-              placeholder="Check-in"
-              required
-            />
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              placeholder="Check-out"
-              required
-            />
+          <div className="reviews">
+            {spotArr.numReviews == 1
+              ? spotArr.numReviews + " " + "Review"
+              : spotArr.numReviews > 0 && spotArr.numReviews !== 1
+              ? spotArr.numReviews + " " + "Reviews"
+              : "new"}
           </div>
-
-          <button onClick={handleReserveClick} className="reserve-button">
-            Reserve
-          </button>
         </div>
-        <div className="lower-spot-show">
-          <div className="description"></div>
-          <div className="price-star-review-wrapper">
-            <div className="top-price-star-review-wrapper">
-              <div className="stars">
-                <i className="fa fa-star"></i>{" "}
-                {spotArr.avgStarRating > 0
-                  ? spotArr.avgStarRating.toFixed(2)
-                  : ""}{" "}
-                &middot;
-              </div>
-              <div className="reviews">
-                {spotArr.numReviews == 1
-                  ? spotArr.numReviews + " " + "Review"
-                  : spotArr.numReviews > 0 && spotArr.numReviews !== 1
-                  ? spotArr.numReviews + " " + "Reviews"
-                  : "new"}
-              </div>
+        <div className="reservation-box">
+          {renderErrorMessages()}
+          <div className="reservation-content">
+            <div className="price-info">
+              <b>${spotArr.price}</b> per night
             </div>
+
+            <div className="booking-options">
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                placeholder="Check-in"
+                required
+              />
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                placeholder="Check-out"
+                required
+              />
+            </div>
+
+            <button onClick={handleReserveClick} className="reserve-button">
+              Reserve
+            </button>
+          </div>
+          <div className="lower-spot-show">
+            <div className="description"></div>
+            <div className="price-star-review-wrapper"></div>
           </div>
         </div>
+
       </div>
 
       <hr />
