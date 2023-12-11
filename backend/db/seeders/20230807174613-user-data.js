@@ -43,11 +43,11 @@ const users = [
     "Nutting"
   ),
   generateUser(
-    "arrangedmarriages@gmail.com",
-    "arrangedmarriages",
+    "anotherwriter@gmail.com",
+    "anotherwriter",
     "before",
-    "Chitra",
-    "Divakaruni"
+    "Anonymous",
+    "Writer"
   ),
   generateUser(
     "therethere@gmail.com",

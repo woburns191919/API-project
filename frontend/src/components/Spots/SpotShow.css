@@ -23,7 +23,7 @@
   flex: 1;
 }
 
-/* Parent container holding all images */
+
 .parent-flex {
   display: flex;
   gap: 10px;
