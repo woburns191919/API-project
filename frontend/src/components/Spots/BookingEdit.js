@@ -14,6 +14,14 @@ const BookingEdit = () => {
   const [endDate, setEndDate] = useState("");
   const [error, setError] = useState("");
 
+  const errorStyle = {
+    color: 'red',
+    textAlign: 'center',
+    padding: '10px',
+    margin: '10px 0',
+
+  };
+
   useEffect(() => {
     const booking = userBookings?.Bookings?.find(
       (b) => b.id === parseInt(bookingId)
@@ -47,7 +55,7 @@ const BookingEdit = () => {
     <main className="form-wrapper">
       <form className="booking-form" onSubmit={handleSubmit}>
         <h3>Edit Your Booking</h3>
-       {error && <div className="errorStyle">{error}</div>}
+        {error && <div style={errorStyle}>{error}</div>}
         <label>
           Start Date
           <input
