@@ -168,14 +168,22 @@ function getSpotName(city) {
   }
 }
 
+function generateStreetAddress() {
+  const streetNames = ["Main St", "Oak St", "Pine St", "Maple Ave", "Cedar Ln", "Elm St", "Willow Dr", "Park Ave", "Sunset Blvd", "River Rd"];
+  const streetNumber = Math.floor(Math.random() * 1000) + 100;
+  const streetName = streetNames[Math.floor(Math.random() * streetNames.length)];
+  return `${streetNumber} ${streetName}`;
+}
+
 function generateSpot(ownerId) {
   const { city, state, lat, lng } = getRandomElement(locations);
   const description = getSpotDescription(city);
   const name = getSpotName(city);
+  const address = `${generateStreetAddress()}, ${city}, ${state}`;
 
   return {
     ownerId,
-    address: `Generated Address for Owner ${ownerId}`,
+    address,
     city,
     state,
     country: "United States of America",
@@ -186,6 +194,9 @@ function generateSpot(ownerId) {
     price: Math.floor(Math.random() * 500) + 100,
   };
 }
+
+
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     const spots = [];
