@@ -534,3 +534,10 @@ noticed in production
 
 manage spots not showing up, some bookings not showing up
 booking error needs to be in red
+
+
+
+------------
+change 'generated address'
+
+
