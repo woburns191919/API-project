@@ -134,7 +134,7 @@ const SpotShow = () => {
 
       <div className="spot-info-box">
         <div className="host-info">
-         
+
           <div>
             <div className="host-name">
               Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
@@ -149,7 +149,7 @@ const SpotShow = () => {
           <div className="stars">
             <i className="fa fa-star"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
-            &middot;
+          
           </div>
           <div className="reviews">
             {spotArr.numReviews == 1
