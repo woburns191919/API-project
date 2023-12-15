@@ -12,12 +12,11 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-
   const modalStyle = {
     backgroundColor: "white",
     borderRadius: "12px",
     padding: "20px",
-    boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)"
+    boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
   };
 
   const formStyle = {
@@ -25,7 +24,7 @@ function LoginFormModal() {
     flexDirection: "column",
     gap: "15px",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   };
 
   const inputStyle = {
@@ -34,7 +33,7 @@ function LoginFormModal() {
     margin: "5px 0",
     border: "1px solid #ddd",
     borderRadius: "4px",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   };
 
   const buttonStyle = {
@@ -45,25 +44,24 @@ function LoginFormModal() {
     borderRadius: "4px",
     cursor: "pointer",
     fontWeight: "bold",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   };
 
   const demoStyle = {
-    color:"blue",
+    color: "blue",
     backgroundColor: "none",
-    border: "none"
-  }
+    border: "none",
+  };
 
   const errorStyle = {
     color: "red",
     fontSize: "0.9em",
-    cursor: "pointer"
+    cursor: "pointer",
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({}); // Clear previous errors
+    setErrors({});
 
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
@@ -71,21 +69,21 @@ function LoginFormModal() {
         if (res.status >= 400 && res.status < 600) {
           const data = await res.json();
           if (data && data.errors) {
-            setErrors(data.errors); // Set the errors from response
+            setErrors(data.errors);
           } else {
-            // Handle the case where the error response does not have the expected format
-            setErrors({ message: 'An error occurred. Please try again.' });
+            setErrors({ message: "An error occurred. Please try again." });
           }
         }
       });
   };
 
-
   return (
     <div id="login-modal" style={modalStyle}>
-       {Object.values(errors).map((error, idx) => (
-    <div key={idx} style={errorStyle}>{error}</div>
-  ))}
+      {Object.values(errors).map((error, idx) => (
+        <div key={idx} style={errorStyle}>
+          {error}
+        </div>
+      ))}
       <h1>Log In</h1>
       <form onSubmit={handleSubmit} style={formStyle}>
         <label>
@@ -110,7 +108,7 @@ function LoginFormModal() {
             required
           />
         </label>
-     
+
         <button
           style={buttonStyle}
           type="submit"
@@ -121,11 +119,14 @@ function LoginFormModal() {
       </form>
       <button
         style={demoStyle}
-        onClick={((e) => dispatch(sessionActions.login({
-          credential: 'Oblivion',
-          password: 'mrsquishy'
-        })
-        ).then(closeModal))}
+        onClick={(e) =>
+          dispatch(
+            sessionActions.login({
+              credential: "Oblivion",
+              password: "mrsquishy",
+            })
+          ).then(closeModal)
+        }
       >
         Demo User Login
       </button>
@@ -134,18 +135,3 @@ function LoginFormModal() {
 }
 
 export default LoginFormModal;
-// useEffect(() => {
-//   const errors = {};
-//   if (credential.length < 4)
-//     errors.credential = "The provided credentials were invalid";
-//   if (password.length < 6)
-//     errors.password = "The provided credentials were invalid";
-//   setErrors(errors);
-// }, [credential, password]);
-
-// // setModalContent(null);
-// useEffect(() => {
-//   setCredential("");
-//   setPassword("");
-//   setErrors({});
-// }, []);

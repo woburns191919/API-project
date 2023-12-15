@@ -1,25 +1,24 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton"; // Import if you use modal for delete confirmation
-import BookingDelete from "./BookingDelete"; // Assuming you have a component for deleting a booking
+import OpenModalButton from "../OpenModalButton";
+import BookingDelete from "./BookingDelete";
 import "./BookingCard.css";
 
 const BookingCard = ({ booking }) => {
-  // Function to format date
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   const cancelBtnStyles = {
-    backgroundColor: '#FF5A5F',
-    color: 'white',
-    border: 'none',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    textDecoration: 'none',
-    cursor: 'pointer',
-    fontWeight: 'bold',
+    backgroundColor: "#FF5A5F",
+    color: "white",
+    border: "none",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    textDecoration: "none",
+    cursor: "pointer",
+    fontWeight: "bold",
   };
 
   return (
@@ -56,7 +55,6 @@ const BookingCard = ({ booking }) => {
           buttonText="Cancel"
           modalComponent={<BookingDelete bookingId={booking.id} />}
           style={cancelBtnStyles}
-         
         />
       </div>
     </div>

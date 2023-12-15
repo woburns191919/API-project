@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-// import { createSpot } from '../../store/spots';
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   thunkSpotCreateSpot,
@@ -109,7 +109,7 @@ const SpotForm = () => {
 
     try {
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
-      console.log("created spot id****", createdSpot.id);
+      
       if (!createdSpot.id) {
         return null;
       } else {
@@ -117,7 +117,6 @@ const SpotForm = () => {
           await dispatch(thunkSpotImageCreateSpot(el, createdSpot.id));
         }
 
-        // setValidationErrors();
         history.push(`/spots/${createdSpot.id}`);
       }
     } catch (error) {
@@ -127,7 +126,6 @@ const SpotForm = () => {
 
 
 
-  // if (!createdSpot) return null;
 
   return (
     <main className="form-wrapper">
@@ -148,7 +146,7 @@ const SpotForm = () => {
             className="most-boxes"
             type="text"
             required={true}
-            // name="country"
+
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
@@ -320,7 +318,7 @@ const SpotForm = () => {
             <input
               placeholder="Image URL"
               className="most-boxes"
-              // required={true}
+              required={true}
               type="url"
               name="image URL"
               value={smallImage1}

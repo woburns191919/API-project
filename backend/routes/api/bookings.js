@@ -35,7 +35,7 @@ router.get("/current", requireAuth, async (req, res) => {
     bookingsArr.push(bookingsObj.toJSON());
   });
   bookingsArr.forEach((bookingsObj) => {
-    console.log('Spot ID:', bookingsObj.Spot.id, 'Spot Images:', bookingsObj.Spot.SpotImages);
+
     const previewImage = bookingsObj.Spot.SpotImages.find(img => img.preview)?.url;
     bookingsObj.Spot.previewImage = previewImage || bookingsObj.Spot.SpotImages[0]?.url;
     delete bookingsObj.Spot.SpotImages;
@@ -101,7 +101,7 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
       startDate <= existingBookingObj.endDate
     ) {
       errors.status = 403;
-      // errors.message = "Sorry, this spot is already booked for the specified dates"
+      errors.message = "Sorry, this spot is already booked for the specified dates"
       errors.startDate = "Start date conflicts with an existing booking";
     } //3                  //5          //3                    //1
     if (

@@ -37,7 +37,7 @@ const SpotShow = () => {
   );
   const bookingError = useSelector((state) => state.bookings.bookingError);
 
-  console.log("logged in user", loggedInUser);
+
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
@@ -47,7 +47,7 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-  console.log("spot array*******", spotArr);
+
 
   let months = [
     "Placeholder",
@@ -134,7 +134,7 @@ const SpotShow = () => {
 
       <div className="spot-info-box">
         <div className="host-info">
-         
+
           <div>
             <div className="host-name">
               Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
@@ -149,7 +149,7 @@ const SpotShow = () => {
           <div className="stars">
             <i className="fa fa-star"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
-            &middot;
+
           </div>
           <div className="reviews">
             {spotArr.numReviews == 1

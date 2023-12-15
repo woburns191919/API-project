@@ -4,19 +4,15 @@ import { thunkReviewDelete } from "../../store/reviews";
 
 import { thunkGetReviewsBySpotId, thunkGetSpotDetails } from "../../store/spots";
 
-// import "./Reviews.css"
-// import "../Spots/SpotDelete.css"
-// import "../Spots/SpotDelete.css"
+
 
 const ConfirmDelete = ( { reviewId, spotId } ) => {
-  // const { reviewId } = useParams();
+
   const { closeModal } = useModal();
 
   const dispatch = useDispatch();
 
-  // console.log('reviewId', reviewId)
 
-  // console.log('spotId', spotId)
 
   const modalContainerStyle = {
     backgroundColor: 'white',

@@ -18,10 +18,8 @@ function SignupFormModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Clear previous errors
     setErrors({});
 
-    // Only proceed if password and confirmPassword match
     if (password !== confirmPassword) {
       setErrors({ confirmPassword: "Confirm Password must match Password" });
       return;
@@ -43,7 +41,6 @@ function SignupFormModal() {
           if (data && data.errors) {
             setErrors(data.errors);
           } else {
-            // Generic error if response format is unexpected
             setErrors({ message: "An error occurred. Please try again." });
           }
         }
@@ -174,15 +171,11 @@ function SignupFormModal() {
           />
         </label>
         {Object.keys(errors).map((key, idx) => (
-          <div key={idx} className="error-message" >
+          <div key={idx} className="error-message">
             {errors[key]}
           </div>
         ))}
-        <button
-          style={buttonStyle}
-          // disabled={username.length < 4 || password.length < 6}
-          type="submit"
-        >
+        <button style={buttonStyle} type="submit">
           Sign Up
         </button>
       </form>

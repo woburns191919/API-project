@@ -5,18 +5,16 @@ import { useModal } from "../../context/Modal";
 
 import { thunkCreateReview } from "../../store/reviews";
 import { useHistory } from "react-router-dom"
-// import "./Reviews.css";
+import "./Reviews.css"
 
-
-// import "./LoginForm.css";
 
 
 const ReviewForm = ({ spotId }) => {
   const history = useHistory()
   const { closeModal } = useModal()
   const [review, setReview] = useState('')
-  const [stars, setStars] = useState('')
   const dispatch = useDispatch();
+  const [stars, setStars] = useState(0);
 
 
   const formContainerStyle = {
@@ -66,7 +64,25 @@ const headingStyle = {
 };
 
 
+const renderStars = () => {
+  let starsArray = [];
+  for (let i = 1; i <= 5; i++) {
+    starsArray.push(
+      <i
+        key={i}
+        className={`fa fa-star ${i <= stars ? "active-star" : "inactive-star"}`}
+        onClick={() => handleStarClick(i)}
+      />
+    );
+  }
+  return starsArray;
+};
 
+
+
+const handleStarClick = (starValue) => {
+  setStars(starValue);
+};
 
 
 
@@ -82,7 +98,7 @@ const headingStyle = {
     payload && spotId && await dispatch(thunkCreateReview(payload, spotId));
     closeModal();
   }
-  history.push(`/spots/${spotId}`)
+
   return (
     <div style={formContainerStyle}>
       <h4 style={headingStyle}>How was your stay?</h4>
@@ -90,7 +106,7 @@ const headingStyle = {
       <label name="stars" htmlFor="stars">
         <textarea
           style={textareaStyle}
-          placeholder="Leave your review here..."
+          placeholder="Leave your review here (at least 10 characters)..."
           type="textarea"
           value={review}
           onChange={(e) => setReview(e.target.value)}
@@ -98,18 +114,12 @@ const headingStyle = {
       </label>
 
       <div className="star-rating-input">
-        <label>
-          <input
-            style={starInputStyle}
-            type="number"
-            value={stars}
-            onChange={(e) => setStars(e.target.value)}
-          />
-        </label>{' '}Stars
+        {renderStars()}
       </div>
 
       <button
         style={buttonStyle}
+        hidden={review.length < 10 || !stars}
         disabled={review.length < 10 || !stars}
         onClick={(e) => handleSubmit(e)}
       >

@@ -15,11 +15,10 @@ const BookingEdit = () => {
   const [error, setError] = useState("");
 
   const errorStyle = {
-    color: 'red',
-    textAlign: 'center',
-    padding: '10px',
-    margin: '10px 0',
-
+    color: "red",
+    textAlign: "center",
+    padding: "10px",
+    margin: "10px 0",
   };
 
   useEffect(() => {

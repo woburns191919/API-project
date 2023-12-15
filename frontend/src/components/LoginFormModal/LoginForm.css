@@ -1,37 +1,24 @@
-.modal {
-  /* height: 400px;
-  display: block;
-  flex-direction: column; */
-}
-
-
 #modal {
-  text-align: center
+  text-align: center;
 }
 
- #modal-content button {
-  /* border-left: 24px solid white;
-  border-right: 24px solid white; */
+#modal-content button {
   border-top: none;
   border-bottom: none;
   width: 100px;
   height: 30px;
-  display:flex;
+  display: flex;
   color: black;
   background-color: lightgray;
   font-weight: 900;
-
 }
 
 #login-modal button {
-border: 2px solid gray;
-display:flex;
-justify-content: center;
-align-items:center;
+  border: 2px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-
-
 
 .modal form {
   display: flex;
@@ -43,7 +30,7 @@ align-items:center;
 
 .modal button {
   width: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

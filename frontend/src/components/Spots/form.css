@@ -21,8 +21,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 590px;
-  margin: 0 auto; /* Center the form horizontally */
-  /* margin-top:1100px; */
+  margin: 0 auto;
+
 }
 
 
@@ -53,7 +53,7 @@
   color: #484848;
 }
 
-/* Button styling */
+
 .button-div button {
   background-color: #FF385C;
   color: white;
@@ -98,15 +98,3 @@
 }
 
 
-
-/*
-@media (max-width: 600px) {
-  .form-wrapper {
-    padding: 10px;
-  }
-
-  .spot-form {
-    margin-top: 140px;
-    width: 100%;
-  }
-} */
