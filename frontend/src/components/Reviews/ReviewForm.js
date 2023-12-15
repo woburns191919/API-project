@@ -79,7 +79,7 @@ const headingStyle = {
     payload && spotId && await dispatch(thunkCreateReview(payload, spotId));
     closeModal();
   }
-  history.push(`/spots/${spotId}`)
+
   return (
     <div style={formContainerStyle}>
       <h4 style={headingStyle}>How was your stay?</h4>
