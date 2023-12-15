@@ -66,18 +66,19 @@ export default function reviewReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GETREVIEWSBYSPOTID:
-      newState = { ...state, spot: {} };
-      newState.spot = action.reviews;
+      newState = { ...state, spot: action.reviews };
       return newState;
     case CREATEREVIEW:
-      newState = { ...state, [action.review.id]: action.review };
+      newState = { ...state, spot: { ...state.spot, [action.review.id]: action.review } };
       return newState;
     case REVIEWDELETE:
       newState = { ...state, spot: { ...state.spot } };
-     
-      delete newState.spot[action.id];
-      return state;
+      if (newState.spot[action.review.id]) {
+        delete newState.spot[action.review.id];
+      }
+      return newState;
     default:
       return state;
   }
 }
+
