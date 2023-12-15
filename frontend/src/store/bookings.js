@@ -84,12 +84,12 @@ export const thunkUpdateBooking = (bookingData, bookingId) => async (dispatch) =
       dispatch(actionUpdateBooking(booking));
       return booking;
     } else {
-      throw res; // Throw the response object to be caught in the calling component
+      throw res;
     }
   } catch (err) {
     const error = await err.json();
     dispatch(actionSetBookingError(error));
-    throw error; // Re-throw the error for the calling component to handle
+    throw error;
   }
 };
 
@@ -106,7 +106,7 @@ export const thunkDeleteBooking = (bookingId) => async (dispatch) => {
 
 const initialState = {
   userBookings: {},
-  bookingError: null, // Add an initial state for booking errors
+  bookingError: null,
 };
 
 const bookingReducer = (state = initialState, action) => {
@@ -122,7 +122,7 @@ const bookingReducer = (state = initialState, action) => {
       delete newState[action.bookingId];
       return { ...newState, bookingError: null };
     case SET_BOOKING_ERROR:
-      return { ...state, bookingError: action.error }; // Handle setting the booking error
+      return { ...state, bookingError: action.error }; 
     default:
       return state;
   }

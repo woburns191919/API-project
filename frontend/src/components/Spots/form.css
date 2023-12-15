@@ -22,7 +22,7 @@
   width: 100%;
   max-width: 590px;
   margin: 0 auto;
-  /* margin-top:1100px; */
+
 }
 
 
@@ -98,15 +98,3 @@
 }
 
 
-
-/*
-@media (max-width: 600px) {
-  .form-wrapper {
-    padding: 10px;
-  }
-
-  .spot-form {
-    margin-top: 140px;
-    width: 100%;
-  }
-} */

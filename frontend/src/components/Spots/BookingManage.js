@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetUserBookings } from "../../store/bookings";
-import BookingCard from "./BookingCard"; 
+import BookingCard from "./BookingCard";
 import "./BookingManage.css";
 
 const BookingManage = () => {
@@ -16,7 +16,9 @@ const BookingManage = () => {
     <main className="bookings-index-page">
       <div className="bookings-container">
         {userBookings?.Bookings && userBookings.Bookings.length > 0 ? (
-          userBookings.Bookings.map((booking, i) => <BookingCard key={i} booking={booking} />)
+          userBookings.Bookings.map((booking, i) => (
+            <BookingCard key={i} booking={booking} />
+          ))
         ) : (
           <p>No bookings found.</p>
         )}

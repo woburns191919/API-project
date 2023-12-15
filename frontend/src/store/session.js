@@ -1,4 +1,4 @@
-// frontend/src/store/session.js
+
 import { csrfFetch } from "./csrf";
 
 const SET_USER = "session/setUser";
@@ -84,7 +84,7 @@ export const restoreUser = () => async (dispatch) => {
 
 
 export const getAllSpots = () => async(dispatch) => {
-  
+
 }
 
 export default sessionReducer;

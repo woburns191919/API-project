@@ -3,16 +3,13 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./form.css";
-// import "./edit-form.css";
 
 const SpotEdit = () => {
-  console.log("rendering spot edit");
+
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const { spotId } = useParams();
-
-  // console.log("spot id***", spotId);
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
@@ -26,8 +23,6 @@ const SpotEdit = () => {
   const [name, setName] = useState("");
   const [errors, setErrors] = useState({});
 
-
-
   if (!user) {
     alert("You must be logged in to edit a spot!");
     history.push("/");
@@ -35,7 +30,7 @@ const SpotEdit = () => {
 
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId)).then((data) => {
-      console.log("data from before", data);
+
       setCountry(data.country);
       setAddress(data.address);
       setCity(data.city);
@@ -43,14 +38,13 @@ const SpotEdit = () => {
       setLat(data.lat);
       setLng(data.lng);
       setDescription(data.description);
-      // setTitle(data.title);
+
       setPrice(data.price);
       setName(data.name);
     });
   }, [dispatch, spotId]);
 
-  console.log("country", country);
-
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,14 +62,12 @@ const SpotEdit = () => {
       name,
     };
 
-
     if (!updatedSpot.spotId) return null;
     try {
       const editedSpot = await dispatch(thunkPutEditSpot(updatedSpot, spotId));
       if (editedSpot.id) {
         history.push(`/spots/${editedSpot.id}`);
       } else {
-        // Handle case where there is no error but spot does not update
         setErrors({ message: "Unable to update the spot. Please try again." });
       }
     } catch (error) {
@@ -87,10 +79,13 @@ const SpotEdit = () => {
     }
   };
 
-
   return (
     <main className="form-wrapper">
-      <form className="spot-form" style={{marginTop:'700px'}}onSubmit={handleSubmit}>
+      <form
+        className="spot-form"
+        style={{ marginTop: "700px" }}
+        onSubmit={handleSubmit}
+      >
         <h3>Update your Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
@@ -106,7 +101,6 @@ const SpotEdit = () => {
             className="most-boxes"
             type="text"
             required={true}
-            // name="country"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
@@ -249,7 +243,9 @@ const SpotEdit = () => {
         </div>
         <hr></hr>
         {Object.values(errors).map((error, idx) => (
-          <div key={idx} className="error-message">{error}</div>
+          <div key={idx} className="error-message">
+            {error}
+          </div>
         ))}
         <div className="button-div">
           <button type="submit">Update Your Spot</button>

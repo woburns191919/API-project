@@ -1,7 +1,5 @@
 import { csrfFetch } from "./csrf";
 
-//types
-
 const GETALLSPOTS = "/spots/get_all_spots";
 
 const GETSPOTDETAILS = "/spots/get_spot_details";
@@ -16,74 +14,54 @@ const GETCURRENTSPOTS = "/spots_get_current_spots";
 
 const PUTEDITSPOT = "/spots/put_edit_spot";
 
-const SPOTDELETE = "/spots/delete_spot"
+const SPOTDELETE = "/spots/delete_spot";
 
 const actionGetReviewsBySpotId = (reviews) => ({
   type: GETREVIEWSBYSPOTID,
   reviews,
 });
 
-//actions
-
 const actionSpotImageCreateSpot = (images) => ({
   type: SPOTIMAGECREATESPOT,
   images,
 });
-//GetAllSpot action
 
 const actionGetSpots = (spots) => ({
   type: GETALLSPOTS,
   spots,
 });
 
-//GetSpotDetails action
-
 const actionGetSpotDetails = (spot) => ({
   type: GETSPOTDETAILS,
   spot,
 });
-
-//create spot action
 
 const actionCreateSpot = (form) => ({
   type: CREATESPOT,
   form,
 });
 
-// get current spots action
-
 const actionGetCurrentSpots = (spots) => ({
   type: GETCURRENTSPOTS,
   spots,
 });
 
-//delete spot action
-
 const actionSpotDelete = (spot) => ({
   type: SPOTDELETE,
-  spot
-
-})
-
-
-//edit put spot action
+  spot,
+});
 
 const actionPutEditSpot = (spot) => ({
   type: PUTEDITSPOT,
-  spot
-})
-
-
-
-//GetSpotDetails thunk
+  spot,
+});
 
 export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
-  // console.log('entered thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`);
-  // console.log('RESPONSE', res)
+
   if (res.ok) {
     const data = await res.json();
-    // console.log('data***', data)
+
     dispatch(actionGetSpotDetails(data));
     return data;
   } else {
@@ -91,12 +69,8 @@ export const thunkGetSpotDetails = (spotId) => async (dispatch) => {
   }
 };
 
-//thunk for create spot
-
 export const thunkSpotCreateSpot = (payload) => async (dispatch) => {
   if (!payload) return null;
-  console.log("form***", payload);
-  console.log("entered create spot thunk");
 
   const res = await csrfFetch("/api/spots", {
     method: "POST",
@@ -112,15 +86,12 @@ export const thunkSpotCreateSpot = (payload) => async (dispatch) => {
     return data;
   } else {
     const error = await res.json();
-    throw error; // Throw the error to be caught in the component
+    throw error;
   }
 };
 
-// thunk for create spot image
-
 export const thunkSpotImageCreateSpot =
   (imageData, spotId) => async (dispatch) => {
-    console.log("entering thunk 2");
     const res = await csrfFetch(`/api/spots/${spotId}/images`, {
       method: "POST",
       headers: {
@@ -132,114 +103,97 @@ export const thunkSpotImageCreateSpot =
       throw new Error();
     }
     const data = await res.json();
-    console.log("data from thunk 2", data);
+
     dispatch(actionSpotImageCreateSpot(data));
     return data;
   };
 
-  //thunk for get current spots
+export const thunkGetCurrentSpots = () => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/current`);
 
-  export const thunkGetCurrentSpots = () => async (dispatch) => {
-    // console.log("entering thunk for get current spots");
-    const res = await csrfFetch(`/api/spots/current`);
-    // console.log('res from current spot thunk', res)
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(actionGetCurrentSpots(normalizerSpots(data)));
-      // console.log('data from cur spot thunk', data)
-      if (!data) {
-        return null
-      }
-      return data;
-    } else {
-      console.warn("error: ", res);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(actionGetCurrentSpots(normalizerSpots(data)));
+
+    if (!data) {
+      return null;
     }
-  };
-
-  //GetAllSpots thunk
-  export const thunkGetAllSpots = () => async (dispatch) => {
-    const res = await csrfFetch("/api/spots");
-    if (res.ok) {
-      const data = await res.json();
-      console.log('thunk spot all', data)
-      dispatch(actionGetSpots(normalizerSpots(data)));
-      return data;
-    } else {
-      console.warn("error: ", res);
-    }
-  };
-
-  //GetAllSpots normalizer
-
-  function normalizerSpots(spots) {
-    const normalSpotObj = {};
-    spots?.Spots?.forEach((spot) => (normalSpotObj[spot.id] = spot));
-    return normalSpotObj;
+    return data;
+  } else {
+    console.warn("error: ", res);
   }
+};
 
-//thunk PUT for edit spot
+export const thunkGetAllSpots = () => async (dispatch) => {
+  const res = await csrfFetch("/api/spots");
+  if (res.ok) {
+    const data = await res.json();
+
+    dispatch(actionGetSpots(normalizerSpots(data)));
+    return data;
+  } else {
+    console.warn("error: ", res);
+  }
+};
+
+function normalizerSpots(spots) {
+  const normalSpotObj = {};
+  spots?.Spots?.forEach((spot) => (normalSpotObj[spot.id] = spot));
+  return normalSpotObj;
+}
 
 export const thunkPutEditSpot = (spotData, spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(spotData),
-    });
-    if (!res.ok) {
-      throw new Error();
-    }
-    const data = await res.json();
-    // console.log("data from edit thunk", data);
-    dispatch(actionPutEditSpot(data.id));
-    //  dispatch(thunkGetSpotDetails(spotId))
-    return data;
-  };
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(spotData),
+  });
+  if (!res.ok) {
+    throw new Error();
+  }
+  const data = await res.json();
 
+  dispatch(actionPutEditSpot(data.id));
 
-//thunk for deleting a spot
+  return data;
+};
 
 export const thunkSpotDelete = (spotId) => async (dispatch) => {
-  // console.log('entered delete thunk')
   const res = await csrfFetch(`/api/spots/${spotId}`, {
-    method: 'DELETE',
-  })
-  console.log('res from delete thunk', res)
+    method: "DELETE",
+  });
+
   if (res.ok) {
     const data = await res.json();
-    dispatch(actionSpotDelete(data))
+    dispatch(actionSpotDelete(data));
     if (!data) {
-      throw new Error('no data')
+      throw new Error("no data");
     }
-    console.log('data from delete thunk', data)
+
     return data;
   } else {
-    throw new Error('no data')
+    throw new Error("no data");
   }
-}
-
+};
 
 export const thunkGetReviewsBySpotId = (spotId) => async (dispatch) => {
-  console.log("entered review thunk");
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
   if (res.ok) {
     const data = await res.json();
     dispatch(actionGetReviewsBySpotId(data));
-    console.log("data from thunk: ", data);
+
     return data;
   }
 };
-
-//reducer
 
 let initialState = { allSpots: {}, singleSpot: {}, spot: {}, user: {} };
 export default function spotReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GETALLSPOTS:
-      // console.log("current dot spots payload***", action.spots);
-      newState = { ...state, allSpots: {} }; //box
+      newState = { ...state, allSpots: {} };
       newState.allSpots = action.spots;
       return newState;
     case GETSPOTDETAILS:
@@ -251,26 +205,23 @@ export default function spotReducer(state = initialState, action) {
       newState.spot = action.reviews;
       return newState;
     case CREATESPOT:
-      console.log('action from create spot', action)
       newState = { ...state, [action.form.id]: action.form };
-      return newState
+      return newState;
     case SPOTIMAGECREATESPOT:
       newState = { ...state, singleSpot: {} };
-      return newState
+      return newState;
     case GETCURRENTSPOTS:
-      // dont forget normalizer again
       newState = { ...state, allSpots: {} };
       newState.allSpots = action.spots;
       return newState;
     case PUTEDITSPOT:
-      // console.log('action from put edit', action)
       newState = { ...state, singleSpot: {} };
-      newState.singleSpot = action.spot
-      return newState
+      newState.singleSpot = action.spot;
+      return newState;
     case SPOTDELETE:
-      newState = { ...state, allSpots: { ...state.allSpots }}
-      console.log('newstate allspots', newState.allSpots)
-      delete newState.allSpots[action.id]
+      newState = { ...state, allSpots: { ...state.allSpots } };
+
+      delete newState.allSpots[action.id];
       return newState;
     default:
       return state;

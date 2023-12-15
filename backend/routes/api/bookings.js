@@ -35,7 +35,7 @@ router.get("/current", requireAuth, async (req, res) => {
     bookingsArr.push(bookingsObj.toJSON());
   });
   bookingsArr.forEach((bookingsObj) => {
-    console.log('Spot ID:', bookingsObj.Spot.id, 'Spot Images:', bookingsObj.Spot.SpotImages);
+   
     const previewImage = bookingsObj.Spot.SpotImages.find(img => img.preview)?.url;
     bookingsObj.Spot.previewImage = previewImage || bookingsObj.Spot.SpotImages[0]?.url;
     delete bookingsObj.Spot.SpotImages;

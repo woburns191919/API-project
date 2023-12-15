@@ -5,10 +5,7 @@ import { useModal } from "../../context/Modal";
 
 import { thunkCreateReview } from "../../store/reviews";
 import { useHistory } from "react-router-dom"
-// import "./Reviews.css";
 
-
-// import "./LoginForm.css";
 
 
 const ReviewForm = ({ spotId }) => {
