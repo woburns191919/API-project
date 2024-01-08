@@ -16,7 +16,7 @@ import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
 import SpotDelete from "./SpotDelete";
 import BookingForm from "./BookingForm";
-import LoginFormModal from "../LoginFormModal"
+import LoginFormModal from "../LoginFormModal";
 
 const SpotShow = () => {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const SpotShow = () => {
   const spotImages = spot.SpotImages || [];
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [bookingDateError, setBookingDateError] = useState("");
   const sessionUser = useSelector((state) => state.session.user);
   const history = useHistory();
 
@@ -65,9 +66,6 @@ const SpotShow = () => {
     "December",
   ];
 
-
-
-
   const isOwner =
     sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
 
@@ -81,6 +79,10 @@ const SpotShow = () => {
   };
 
   const handleReserveClick = async () => {
+    if (!startDate || !endDate) {
+      setBookingDateError("You must choose both a start and end date.");
+      return;
+    }
     const bookingPayload = {
       spotId,
       userId: sessionUser.id,
@@ -174,13 +176,12 @@ const SpotShow = () => {
         </div>
         <div className="reservation-box">
           {renderErrorMessages()}
-          {!sessionUser && !isOwner &&
+          {!sessionUser && !isOwner && (
             <OpenModalButton
-            buttonText="Log In to Reserve"
-            modalComponent={<LoginFormModal />}
-         
-          />
-          }
+              buttonText="Log In to Reserve"
+              modalComponent={<LoginFormModal />}
+            />
+          )}
           {!isOwner && sessionUser && (
             <div className="reservation-content">
               <div className="price-info">
@@ -191,7 +192,10 @@ const SpotShow = () => {
                 <input
                   type="date"
                   value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  onChange={(e) => {
+                    setStartDate(e.target.value);
+                    setBookingDateError("");
+                  }}
                   min={getTodayDate()}
                   placeholder="Check-in"
                   required
@@ -209,6 +213,9 @@ const SpotShow = () => {
               <button onClick={handleReserveClick} className="reserve-button">
                 Reserve
               </button>
+              {bookingDateError && (
+                <div className="error-message">{bookingDateError}</div>
+              )}
             </div>
           )}
           {isOwner && (
