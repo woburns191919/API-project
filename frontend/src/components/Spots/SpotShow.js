@@ -65,6 +65,15 @@ const SpotShow = () => {
     "December",
   ];
 
+  const getTodayDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
   const handleReserveClick = async () => {
     const bookingPayload = {
       spotId,
@@ -167,21 +176,24 @@ const SpotShow = () => {
             </div>
 
             <div className="booking-options">
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                placeholder="Check-in"
-                required
-              />
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                placeholder="Check-out"
-                required
-              />
-            </div>
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              min={getTodayDate()}
+              placeholder="Check-in"
+              required
+            />
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              min={startDate || getTodayDate()}
+              placeholder="Check-out"
+              required
+            />
+          </div>
+
 
             <button onClick={handleReserveClick} className="reserve-button">
               Reserve

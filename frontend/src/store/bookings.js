@@ -122,7 +122,7 @@ const bookingReducer = (state = initialState, action) => {
       delete newState[action.bookingId];
       return { ...newState, bookingError: null };
     case SET_BOOKING_ERROR:
-      return { ...state, bookingError: action.error }; 
+      return { ...state, bookingError: action.error };
     default:
       return state;
   }
