@@ -21,6 +21,11 @@ const BookingEdit = () => {
     margin: "10px 0",
   };
 
+  const navigateToManageBookings = () => {
+    history.push("/bookings/manage");
+  };
+
+
   useEffect(() => {
     const booking = userBookings?.Bookings?.find(
       (b) => b.id === parseInt(bookingId)
@@ -54,6 +59,14 @@ const BookingEdit = () => {
     <main className="form-wrapper">
       <form className="booking-form" onSubmit={handleSubmit}>
         <h3>Edit Your Booking</h3>
+        {error && (
+          <div style={errorStyle}>
+           
+            <button onClick={navigateToManageBookings} className="navigate-back-button">
+              Back to Manage Bookings
+            </button>
+          </div>
+        )}
         {error && <div style={errorStyle}>{error}</div>}
         <label>
           Start Date

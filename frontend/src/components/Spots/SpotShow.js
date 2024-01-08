@@ -6,7 +6,7 @@ import {
 } from "../../store/spots";
 import { thunkCreateBooking } from "../../store/bookings";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, NavLink } from "react-router-dom";
 import "./GetAllSpots.css";
 import "./SpotShow.css";
 import { useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
+import SpotDelete from "./SpotDelete";
 import BookingForm from "./BookingForm";
 
 const SpotShow = () => {
@@ -37,7 +38,6 @@ const SpotShow = () => {
   );
   const bookingError = useSelector((state) => state.bookings.bookingError);
 
-
   useEffect(() => {
     dispatch(thunkGetSpotDetails(spotId));
   }, [dispatch]);
@@ -47,7 +47,6 @@ const SpotShow = () => {
   }, [dispatch]);
 
   if (!spotArr.SpotImages) return null;
-
 
   let months = [
     "Placeholder",
@@ -64,6 +63,18 @@ const SpotShow = () => {
     "November",
     "December",
   ];
+
+  const isOwner =
+    sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
+
+  const getTodayDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+
+    return yyyy + "-" + mm + "-" + dd;
+  };
 
   const handleReserveClick = async () => {
     const bookingPayload = {
@@ -134,7 +145,6 @@ const SpotShow = () => {
 
       <div className="spot-info-box">
         <div className="host-info">
-
           <div>
             <div className="host-name">
               Hosted by {spotArr.Owner.firstName} {spotArr.Owner.lastName}
@@ -149,7 +159,6 @@ const SpotShow = () => {
           <div className="stars">
             <i className="fa fa-star"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
-
           </div>
           <div className="reviews">
             {spotArr.numReviews == 1
@@ -161,32 +170,44 @@ const SpotShow = () => {
         </div>
         <div className="reservation-box">
           {renderErrorMessages()}
-          <div className="reservation-content">
-            <div className="price-info">
-              <b>${spotArr.price}</b> per night
-            </div>
+          {!isOwner && (
+            <div className="reservation-content">
+              <div className="price-info">
+                <b>${spotArr.price}</b> per night
+              </div>
 
-            <div className="booking-options">
-              <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                placeholder="Check-in"
-                required
-              />
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                placeholder="Check-out"
-                required
-              />
-            </div>
+              <div className="booking-options">
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  min={getTodayDate()}
+                  placeholder="Check-in"
+                  required
+                />
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  min={startDate || getTodayDate()}
+                  placeholder="Check-out"
+                  required
+                />
+              </div>
 
-            <button onClick={handleReserveClick} className="reserve-button">
-              Reserve
-            </button>
-          </div>
+              <button onClick={handleReserveClick} className="reserve-button">
+                Reserve
+              </button>
+            </div>
+          )}
+          {isOwner && (
+            <div className="owner-management-box">
+              <NavLink to={`/spots/current`} className="manage-spot-button">
+                Manage your spot
+              </NavLink>
+            </div>
+          )}
+
           <div className="lower-spot-show">
             <div className="description"></div>
             <div className="price-star-review-wrapper"></div>
