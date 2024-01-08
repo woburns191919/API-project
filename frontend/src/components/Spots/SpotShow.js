@@ -16,6 +16,7 @@ import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
 import SpotDelete from "./SpotDelete";
 import BookingForm from "./BookingForm";
+import LoginFormModal from "../LoginFormModal"
 
 const SpotShow = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,9 @@ const SpotShow = () => {
     "November",
     "December",
   ];
+
+
+
 
   const isOwner =
     sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
@@ -170,7 +174,14 @@ const SpotShow = () => {
         </div>
         <div className="reservation-box">
           {renderErrorMessages()}
-          {!isOwner && (
+          {!sessionUser && !isOwner &&
+            <OpenModalButton
+            buttonText="Log In to Reserve"
+            modalComponent={<LoginFormModal />}
+         
+          />
+          }
+          {!isOwner && sessionUser && (
             <div className="reservation-content">
               <div className="price-info">
                 <b>${spotArr.price}</b> per night
