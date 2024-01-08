@@ -231,7 +231,21 @@
 }
 
 .manage-spot-button:hover {
-  background-color: #FF787D; 
+  background-color: #FF787D;
+}
+
+.reservation-box > button {
+  display: inline-block;
+  background-color: #FF5A5F;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 
