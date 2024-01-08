@@ -6,7 +6,7 @@ import {
 } from "../../store/spots";
 import { thunkCreateBooking } from "../../store/bookings";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, NavLink } from "react-router-dom";
 import "./GetAllSpots.css";
 import "./SpotShow.css";
 import { useParams } from "react-router-dom";
@@ -203,14 +203,17 @@ const SpotShow = () => {
             </button>
           </div>}
           {isOwner && (
-  <div className="owner-section">
-    <h3>Manage Your Spot</h3>
-    <p>As the owner, you can't book this spot, but you can manage it here.</p>
-    <button onClick={() => {/* navigate to edit page */}}>Edit Spot Details</button>
-    <button onClick={() => {/* navigate to bookings page */}}>View Bookings</button>
-    <button onClick={() => {/* navigate to reviews page */}}>Respond to Reviews</button>
-  </div>
-)}
+        <div className="owner-management-box">
+          {/* <h3>Manage Your Spot</h3>
+          <p>Check out how your spot is doing and update your listing details.</p> */}
+
+<NavLink to={`/spots/current`} className="manage-spot-button">
+            Manage your spot
+          </NavLink>
+
+        </div>
+      )}
+
 
           <div className="lower-spot-show">
             <div className="description"></div>
