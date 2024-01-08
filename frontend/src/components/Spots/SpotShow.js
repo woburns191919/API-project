@@ -6,7 +6,7 @@ import {
 } from "../../store/spots";
 import { thunkCreateBooking } from "../../store/bookings";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, NavLink } from "react-router-dom";
 import "./GetAllSpots.css";
 import "./SpotShow.css";
 import { useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
+import SpotDelete from "./SpotDelete";
 import BookingForm from "./BookingForm";
 
 const SpotShow = () => {
@@ -64,6 +65,8 @@ const SpotShow = () => {
     "November",
     "December",
   ];
+
+  const isOwner = sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
 
   const getTodayDate = () => {
     const today = new Date();
@@ -170,7 +173,7 @@ const SpotShow = () => {
         </div>
         <div className="reservation-box">
           {renderErrorMessages()}
-          <div className="reservation-content">
+          {!isOwner && <div className="reservation-content">
             <div className="price-info">
               <b>${spotArr.price}</b> per night
             </div>
@@ -198,7 +201,20 @@ const SpotShow = () => {
             <button onClick={handleReserveClick} className="reserve-button">
               Reserve
             </button>
-          </div>
+          </div>}
+          {isOwner && (
+        <div className="owner-management-box">
+          {/* <h3>Manage Your Spot</h3>
+          <p>Check out how your spot is doing and update your listing details.</p> */}
+
+<NavLink to={`/spots/current`} className="manage-spot-button">
+            Manage your spot
+          </NavLink>
+
+        </div>
+      )}
+
+
           <div className="lower-spot-show">
             <div className="description"></div>
             <div className="price-star-review-wrapper"></div>
