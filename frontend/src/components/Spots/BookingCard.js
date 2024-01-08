@@ -10,6 +10,13 @@ const BookingCard = ({ booking }) => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const isPastBooking = (endDate) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const end = new Date(endDate);
+    return end < today;
+  };
+
   const cancelBtnStyles = {
     backgroundColor: "#FF5A5F",
     color: "white",
@@ -44,21 +51,27 @@ const BookingCard = ({ booking }) => {
           </div>
         </div>
       </Link>
-      <div className="booking-actions">
-        <NavLink
-          to={`/bookings/edit/${booking.id}`}
-          className="booking-action-button"
-        >
-          Update
-        </NavLink>
-        <OpenModalButton
-          buttonText="Cancel"
-          modalComponent={<BookingDelete bookingId={booking.id} />}
-          style={cancelBtnStyles}
-        />
-      </div>
+      {!isPastBooking(booking.endDate) && (
+        <div className="booking-actions">
+          <NavLink
+            to={`/bookings/edit/${booking.id}`}
+            className="booking-action-button"
+          >
+            Update
+          </NavLink>
+          <OpenModalButton
+            buttonText="Cancel"
+            modalComponent={<BookingDelete bookingId={booking.id} />}
+            style={cancelBtnStyles}
+          />
+        </div>
+      )}
+      {isPastBooking(booking.endDate) && (
+        <p className="past-booking-message">This booking has ended and cannot be modified.</p>
+      )}
     </div>
   );
 };
+
 
 export default BookingCard;
