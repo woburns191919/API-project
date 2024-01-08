@@ -21,6 +21,18 @@ const BookingEdit = () => {
     margin: "10px 0",
   };
 
+  const getTodayDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+
+    return yyyy + "-" + mm + "-" + dd;
+  };
+
+
+
+
   const navigateToManageBookings = () => {
     history.push("/bookings/manage");
   };
@@ -61,7 +73,7 @@ const BookingEdit = () => {
         <h3>Edit Your Booking</h3>
         {error && (
           <div style={errorStyle}>
-           
+
             <button onClick={navigateToManageBookings} className="navigate-back-button">
               Back to Manage Bookings
             </button>
@@ -72,6 +84,7 @@ const BookingEdit = () => {
           Start Date
           <input
             type="date"
+            min={getTodayDate()}
             required
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
@@ -81,6 +94,7 @@ const BookingEdit = () => {
           End Date
           <input
             type="date"
+            min={startDate || getTodayDate()}
             required
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}

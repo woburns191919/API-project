@@ -3,3 +3,6 @@ issues
 on edit booking, make it so where past dates are grayed out
 
 login reservation fix
+
+pointer clicker thing on login
+
