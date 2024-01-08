@@ -44,7 +44,7 @@ const SpotEdit = () => {
     });
   }, [dispatch, spotId]);
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
