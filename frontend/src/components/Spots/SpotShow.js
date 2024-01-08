@@ -14,6 +14,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewForm from "../Reviews/ReviewForm";
 import ConfirmDelete from "../Reviews/ConfirmDelete";
 import { useState } from "react";
+import SpotDelete from "./SpotDelete";
 import BookingForm from "./BookingForm";
 
 const SpotShow = () => {
@@ -64,6 +65,8 @@ const SpotShow = () => {
     "November",
     "December",
   ];
+
+  const isOwner = sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
 
   const getTodayDate = () => {
     const today = new Date();
@@ -170,7 +173,7 @@ const SpotShow = () => {
         </div>
         <div className="reservation-box">
           {renderErrorMessages()}
-          <div className="reservation-content">
+          {!isOwner && <div className="reservation-content">
             <div className="price-info">
               <b>${spotArr.price}</b> per night
             </div>
@@ -198,7 +201,17 @@ const SpotShow = () => {
             <button onClick={handleReserveClick} className="reserve-button">
               Reserve
             </button>
-          </div>
+          </div>}
+          {isOwner && (
+  <div className="owner-section">
+    <h3>Manage Your Spot</h3>
+    <p>As the owner, you can't book this spot, but you can manage it here.</p>
+    <button onClick={() => {/* navigate to edit page */}}>Edit Spot Details</button>
+    <button onClick={() => {/* navigate to bookings page */}}>View Bookings</button>
+    <button onClick={() => {/* navigate to reviews page */}}>Respond to Reviews</button>
+  </div>
+)}
+
           <div className="lower-spot-show">
             <div className="description"></div>
             <div className="price-star-review-wrapper"></div>
