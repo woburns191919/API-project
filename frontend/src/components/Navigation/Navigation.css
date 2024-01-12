@@ -55,7 +55,9 @@
 .upper-right-nav-wrap {
   display: flex;
   align-items: center;
-  gap:5px;
+  justify-content:space-between;
+  gap:17px;
+
 }
 
 .profileButton {
@@ -88,6 +90,10 @@
 
 .create-spot-in-manage-spots a {
   text-decoration: none;
-  color: white;
+  color: rgb(34, 34, 34);
   display: block;
+}
+
+.globe {
+
 }

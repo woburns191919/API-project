@@ -5,6 +5,8 @@ import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+
+
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -47,11 +49,13 @@ function Navigation({ isLoaded }) {
         <div className="upper-right-nav-wrap">
         <div className="create-spot-in-manage-spots">
           {sessionUser && (
-            <button>
-              <NavLink to="/spots/new">Rent Your Home</NavLink>
-            </button>
+             <NavLink to="/spots/new" className="rent-home-link">Rent Your Home</NavLink>
           )}
         </div>
+        <div className="globe">
+        <i class="fa fa-globe"></i>
+        </div>
+
         <div className="header-right">
           <div className="list-icon">
             <i className="fa fa-list"></i>
