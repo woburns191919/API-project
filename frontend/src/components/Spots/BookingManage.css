@@ -11,3 +11,9 @@
   margin: 0 auto;
   padding:60px;
 }
+
+.bookings-index-page {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}

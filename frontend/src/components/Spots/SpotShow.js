@@ -114,7 +114,7 @@ const SpotShow = () => {
   };
 
   return (
-    <main className="outer-wrapper">
+    <main className="spot-show-outer-wrapper">
       <div className="spot-name">{spot.name}</div>
 
       <div className="spot-photo-wrapper">

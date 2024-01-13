@@ -1,9 +1,9 @@
-.outer-wrapper {
-  display: flex;
-  flex-direction: column;
+.spot-show-outer-wrapper {
   margin: 0 auto;
-  padding: 60px;
- 
+  padding-left: 210px;
+  padding-right: 210px;
+  padding-top: 20px;
+
 }
 
 .content-wrapper {
