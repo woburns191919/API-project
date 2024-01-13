@@ -58,6 +58,10 @@
 }
 
 
+.button-div {
+  margin-top:20px
+}
+
 .button-div button {
   background-color: #FF385C;
   color: white;
