@@ -34,7 +34,7 @@ const SpotCardManage = ({ spot }) => {
             </div>
           </div>
           <div className="spot-price-manage">
-            <span className="price-amount-manage">${spot.price}</span> per night
+            <span className="price-amount-manage">${spot.price}</span> night
           </div>
         </div>
       </Link>

@@ -73,6 +73,7 @@
   border-radius: 999px;
   padding: 8px 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family:Montserrat;
 }
 
 .nav-item {
@@ -148,6 +149,7 @@
   text-decoration: none;
   color: rgb(34, 34, 34);
   display: block;
+  font-family:Montserrat;
 }
 
 .globe {

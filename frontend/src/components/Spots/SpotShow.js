@@ -185,7 +185,7 @@ const SpotShow = () => {
           {!isOwner && sessionUser && (
             <div className="reservation-content">
               <div className="price-info">
-                <b>${spotArr.price}</b> per night
+                <b>${spotArr.price}</b> night
               </div>
 
               <div className="booking-options">
@@ -221,7 +221,7 @@ const SpotShow = () => {
           {isOwner && (
             <div className="owner-management-box">
               <NavLink to={`/spots/current`} className="manage-spot-button">
-                Manage your spot
+                Manage your spots
               </NavLink>
             </div>
           )}

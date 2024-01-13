@@ -109,7 +109,7 @@ const SpotForm = () => {
 
     try {
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
-      
+
       if (!createdSpot.id) {
         return null;
       } else {
@@ -128,9 +128,10 @@ const SpotForm = () => {
 
 
   return (
-    <main className="form-wrapper">
+    <main className="outer-wrapper">
+      <div className="form-wrapper">
       {formError && <div className="error-message">{formError}</div>}
-      <form className="spot-form" onSubmit={handleSubmit} style={{marginTop:'1100px'}} >
+      <form className="spot-form" onSubmit={handleSubmit} >
         <h3>Create a new Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
@@ -371,6 +372,7 @@ const SpotForm = () => {
           type="submit">Create Spot</button>
         </div>
       </form>
+      </div>
     </main>
   );
 };
