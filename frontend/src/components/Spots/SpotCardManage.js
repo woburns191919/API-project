@@ -34,20 +34,26 @@ const SpotCardManage = ({ spot }) => {
             </div>
           </div>
           <div className="spot-price-manage">
-            <span className="price-amount-manage">${spot.price}
-            </span> per night
+            <span className="price-amount-manage">${spot.price}</span> per night
           </div>
         </div>
       </Link>
       <div className="spot-actions-manage">
-        <NavLink to={`/spots/edit/${spot.id}`} className="update-action-button">
-          Update
-        </NavLink>
-        <OpenModalButton
-          buttonText="Delete"
-          style={cancelBtnStyles}
-          modalComponent={<SpotDelete spotId={spot.id} />}
-        />
+        <div className="spot-manage-update-box">
+          <NavLink
+            to={`/spots/edit/${spot.id}`}
+            className="update-action-button"
+          >
+            Update
+          </NavLink>
+        </div>
+        <div className="spot-manage-cancel-box">
+          <OpenModalButton
+            buttonText="Delete"
+            style={cancelBtnStyles}
+            modalComponent={<SpotDelete spotId={spot.id} />}
+          />
+        </div>
       </div>
     </div>
   );
