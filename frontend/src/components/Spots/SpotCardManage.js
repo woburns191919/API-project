@@ -30,7 +30,7 @@ const SpotCardManage = ({ spot }) => {
             </div>
             <div className="spot-rating-manage">
               <i className="fa fa-star"></i>
-              {spot.avgRating > 0 ? spot.avgRating.toFixed(2) : "new"}
+              {spot.avgRating > 0 ? spot.avgRating.toFixed(2) : "No reviews yet"}
             </div>
           </div>
           <div className="spot-price-manage">
