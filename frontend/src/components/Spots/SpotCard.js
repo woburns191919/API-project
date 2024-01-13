@@ -18,7 +18,8 @@ const SpotCard = ({ spot }) => {
             </div>
           </div>
           <div className="spot-price">
-            <b>${spot.price}</b> per night
+            <span className="price-amount">${spot.price}
+            </span>per night
           </div>
         </div>
       </Link>
