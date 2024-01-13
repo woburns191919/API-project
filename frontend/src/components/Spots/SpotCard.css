@@ -3,6 +3,7 @@
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease-in-out;
+  
 }
 
 .spot-card:hover {
@@ -16,7 +17,7 @@
 
 .spot-image {
   width: 100%;
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
   display: block;
   border-radius: 7px;
@@ -30,10 +31,22 @@
 .spot-location {
   font-size: 14px;
   color: #333;
+  font-weight:600;
 }
 
-.spot-rating, .spot-price {
+/* .spot-rating, .spot-price {
   font-size: 16px;
   font-weight: bold;
   color: #FF385C;
+} */
+
+.spot-rating {
+  font-size: 14px;
+  font-weight: lighter;
+  color: black;
+  display:flex;
+}
+
+.location-rating-box {
+  display:flex;
 }
