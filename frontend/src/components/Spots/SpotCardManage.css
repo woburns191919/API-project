@@ -1,5 +1,5 @@
 .spot-card-manage {
-  border-radius: 10px;
+
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
 }
@@ -33,14 +33,28 @@
 }
 
 
-.spot-location-manage, .spot-rating-manage, .spot-price-manage {
+/* .spot-location-manage, .spot-rating-manage, .spot-price-manage {
   font-size: 14px;
   margin: 5px 0;
+  font-family: Montserrat;
+} */
+
+.spot-location-manage {
+  font-size: 14px;
+  color: rgb(91, 88, 88);
+  font-weight:600;
+  font-family:Montserrat;
 }
 
 .spot-rating-manage {
   color: black;
   display:flex;
+}
+
+.spot-price-manage {
+  font-size: 14px;
+  color: rgb(91, 88, 88);
+  font-family:Montserrat;
 }
 
 .spot-info-manage-box {
@@ -86,16 +100,3 @@
   background-color: red;
   border-radius:none;
 }
-
-
-
-
-/* .update-action-button {
-  background-color: #6e8695;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-} */

@@ -29,20 +29,25 @@
 }
 
 .price-amount {
+  font-size: 14px;
+  color: rgb(91, 88, 88);
   font-weight:600;
+  font-family:Montserrat;
+}
+
+.spot-price {
+  font-size: 14px;
+  color: rgb(91, 88, 88);
+  font-family:Montserrat;
 }
 
 .spot-location {
   font-size: 14px;
-  color: #333;
+  color: rgb(91, 88, 88);
   font-weight:600;
+  font-family:Montserrat;
 }
 
-/* .spot-rating, .spot-price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #FF385C;
-} */
 
 .spot-rating {
   font-size: 14px;
