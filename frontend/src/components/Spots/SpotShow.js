@@ -174,62 +174,61 @@ const SpotShow = () => {
               : "No reviews yet"}
           </div>
         </div>
-        <div className="reservation-box">
-          {renderErrorMessages()}
-          {!sessionUser && !isOwner && (
+
+        {renderErrorMessages()}
+        {!sessionUser && !isOwner ? (
+          <div className="reservation-box">
             <OpenModalButton
               buttonText="Log In to Reserve"
               modalComponent={<LoginFormModal />}
             />
-          )}
-          {!isOwner && sessionUser && (
-            <div className="reservation-content">
-              <div className="price-info">
-                <b>${spotArr.price}</b> night
-              </div>
-
-              <div className="booking-options">
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => {
-                    setStartDate(e.target.value);
-                    setBookingDateError("");
-                  }}
-                  min={getTodayDate()}
-                  placeholder="Check-in"
-                  required
-                />
-                <input
-                  type="date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  min={startDate || getTodayDate()}
-                  placeholder="Check-out"
-                  required
-                />
-              </div>
-
-              <button onClick={handleReserveClick} className="reserve-button">
-                Reserve
-              </button>
-              {bookingDateError && (
-                <div className="error-message">{bookingDateError}</div>
-              )}
-            </div>
-          )}
-          {isOwner && (
-            <div className="owner-management-box">
-              <NavLink to={`/spots/current`} className="manage-spot-button">
-                Manage your spots
-              </NavLink>
-            </div>
-          )}
-
-          <div className="lower-spot-show">
-            <div className="description"></div>
-            <div className="price-star-review-wrapper"></div>
           </div>
+        ) : !isOwner && sessionUser ? (
+          <div className="reservation-content">
+            <div className="price-info">
+              <b>${spotArr.price}</b> night
+            </div>
+
+            <div className="booking-options">
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                  setBookingDateError("");
+                }}
+                min={getTodayDate()}
+                placeholder="Check-in"
+                required
+              />
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                min={startDate || getTodayDate()}
+                placeholder="Check-out"
+                required
+              />
+            </div>
+
+            <button onClick={handleReserveClick} className="reserve-button">
+              Reserve
+            </button>
+            {bookingDateError && (
+              <div className="error-message">{bookingDateError}</div>
+            )}
+          </div>
+        ) : (
+          <div className="owner-management-box">
+            <NavLink to={`/spots/current`} className="manage-spot-button">
+              Manage your spots
+            </NavLink>
+          </div>
+        )}
+
+        <div className="lower-spot-show">
+          <div className="description"></div>
+          <div className="price-star-review-wrapper"></div>
         </div>
       </div>
 
@@ -238,7 +237,9 @@ const SpotShow = () => {
       <section className="reviews-lower">
         <div className="reviews-lower-stars-number">
           <i className="fa fa-star"></i>{" "}
-          {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : "No reviews yet"}{" "}
+          {spotArr.avgStarRating > 0
+            ? spotArr.avgStarRating.toFixed(2)
+            : "No reviews yet"}{" "}
           &middot;{" "}
           {spotArr.numReviews === 1 ? (
             spotArr.numReviews + " " + "Review"
