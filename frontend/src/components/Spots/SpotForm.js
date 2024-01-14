@@ -35,14 +35,6 @@ const SpotForm = () => {
   const [formError, setFormError] = useState("");
 
 
-  const defaultImages = [
-    '/default1.jpg',
-    '/default2.jpg',
-    '/default3.jpg',
-    '/default4.jpg',
-    '/default5.jpg'
-  ];
-
 
 
   if (!user) {
@@ -67,6 +59,16 @@ const SpotForm = () => {
   };
 
 
+  const defaultImages = [
+    '/default1.jpg',
+    '/default2.jpg',
+    '/default3.jpg',
+    '/default4.jpg',
+    '/default5.jpg'
+  ];
+
+  const usedImages = new Set();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -76,16 +78,27 @@ const SpotForm = () => {
       return;
     }
 
-    const getRandomDefaultImage = () => {
-      const randomIndex = Math.floor(Math.random() * defaultImages.length);
-      return defaultImages[randomIndex];
+    const getRandomDefaultImage = (usedImages) => {
+      const availableImages = defaultImages.filter(image => !usedImages.has(image));
+      const randomIndex = Math.floor(Math.random() * availableImages.length);
+      return availableImages[randomIndex];
     };
 
-    const previewImageURL = previewImage || getRandomDefaultImage();
-    const smallImage1URL = smallImage1 || getRandomDefaultImage();
-    const smallImage2URL = smallImage2 || getRandomDefaultImage();
-    const smallImage3URL = smallImage3 || getRandomDefaultImage();
-    const smallImage4URL = smallImage4 || getRandomDefaultImage();
+
+    const previewImageURL = previewImage || getRandomDefaultImage(usedImages);
+    usedImages.add(previewImageURL);
+
+    const smallImage1URL = smallImage1 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage1URL);
+
+    const smallImage2URL = smallImage2 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage2URL);
+
+    const smallImage3URL = smallImage3 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage3URL);
+
+    const smallImage4URL = smallImage4 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage4URL);
 
     const payload = {
       address,
