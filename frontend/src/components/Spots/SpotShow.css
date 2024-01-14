@@ -114,9 +114,10 @@
 
 .lower-info-wrapper {
   display: flex;
-  justify-content: flex-end;
-  gap: 50%;
+  justify-content:flex-end;
   align-items:center;
+  gap:60px;
+
 }
 
 .top-price-star-review-wrapper {
@@ -216,7 +217,7 @@
 }
 
 .manage-spot-button {
-  display: inline-block;
+  display: flex;
   background-color: #FF5A5F;
   color: white;
   padding: 10px 20px;
@@ -227,6 +228,8 @@
   font-weight: bold;
   margin-top: 10px;
   transition: background-color 0.3s ease;
+  width:fit-content;
+
 }
 
 .manage-spot-button:hover {
@@ -265,4 +268,42 @@
   .description {
     font-size: 0.9em;
   }
+}
+
+@media (max-width: 1024px) {
+  .spot-show-outer-wrapper {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+
+
+  .big-photo-container, .small-photo-container {
+    width: 100%;
+  }
+
+  .content-and-reservation-wrapper {
+    flex-direction: column;
+  }
+
+  .reservation-box, .owner-management-box {
+    width: auto;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .spot-show-outer-wrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .parent-flex {
+    display:inline-block
+  }
+  .small-photo-container {
+    display:none;
+  }
+
+
 }

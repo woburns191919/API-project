@@ -177,14 +177,14 @@ const SpotShow = () => {
 
         {renderErrorMessages()}
         {!sessionUser && !isOwner ? (
-          <div className="reservation-box">
+          <div className="owner-management-box">
             <OpenModalButton
               buttonText="Log In to Reserve"
               modalComponent={<LoginFormModal />}
             />
           </div>
         ) : !isOwner && sessionUser ? (
-          <div className="reservation-content">
+          <div className="reservation-box">
             <div className="price-info">
               <b>${spotArr.price}</b> night
             </div>
