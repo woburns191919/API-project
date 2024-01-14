@@ -35,6 +35,15 @@ const SpotForm = () => {
   const [formError, setFormError] = useState("");
 
 
+  const defaultImages = [
+    '/default1.jpg',
+    '/default2.jpg',
+    '/default3.jpg',
+    '/default4.jpg',
+    '/default5.jpg'
+  ];
+
+
 
   if (!user) {
     alert("You must be logged in to create a spot!");
@@ -67,6 +76,17 @@ const SpotForm = () => {
       return;
     }
 
+    const getRandomDefaultImage = () => {
+      const randomIndex = Math.floor(Math.random() * defaultImages.length);
+      return defaultImages[randomIndex];
+    };
+
+    const previewImageURL = previewImage || getRandomDefaultImage();
+    const smallImage1URL = smallImage1 || getRandomDefaultImage();
+    const smallImage2URL = smallImage2 || getRandomDefaultImage();
+    const smallImage3URL = smallImage3 || getRandomDefaultImage();
+    const smallImage4URL = smallImage4 || getRandomDefaultImage();
+
     const payload = {
       address,
       city,
@@ -81,23 +101,23 @@ const SpotForm = () => {
 
     const imageObj = [
       {
-        url: previewImage,
+        url: previewImageURL,
         preview: true,
       },
       {
-        url: smallImage1,
+        url: smallImage1URL,
         preview: false,
       },
       {
-        url: smallImage2,
+        url: smallImage2URL,
         preview: false,
       },
       {
-        url: smallImage3,
+        url: smallImage3URL,
         preview: false,
       },
       {
-        url: smallImage4,
+        url: smallImage4URL,
         preview: false,
       },
     ];
@@ -302,7 +322,7 @@ const SpotForm = () => {
 
               <input
                 className="most-boxes"
-                required={true}
+                // required={true}
                 type="url"
                 name="preview image URL"
                 placeholder="Priview Image URL"
@@ -319,7 +339,7 @@ const SpotForm = () => {
             <input
               placeholder="Image URL"
               className="most-boxes"
-              required={true}
+              // required={true}
               type="url"
               name="image URL"
               value={smallImage1}
