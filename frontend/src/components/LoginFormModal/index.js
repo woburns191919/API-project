@@ -48,9 +48,10 @@ function LoginFormModal() {
   };
 
   const demoStyle = {
-    color: "blue",
+    color: "white",
     backgroundColor: "none",
     border: "none",
+    width:"fit-content"
   };
 
   const errorStyle = {
