@@ -66,6 +66,16 @@ const SpotShow = () => {
     "December",
   ];
 
+  const userPictures = {
+    1: "/dfw.jpg",
+    2: "/biggie.jpg",
+    3: "/nas.jpg",
+    4: "/joyce.jpg",
+    5: "/alissa.jpg",
+    6: "/wbheadshot.jpg",
+    7: "/tommy.jpg",
+  };
+
   const isOwner =
     sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
 
@@ -76,6 +86,20 @@ const SpotShow = () => {
     const yyyy = today.getFullYear();
 
     return yyyy + "-" + mm + "-" + dd;
+  };
+
+  const renderStarRating = (stars) => {
+    let starIcons = [];
+    for (let i = 0; i < 5; i++) {
+      starIcons.push(
+        <i
+          key={i}
+          className={`fa fa-star ${i < stars ? "filled" : ""}`}
+          aria-hidden="true"
+        ></i>
+      );
+    }
+    return <div className="review-stars">{starIcons}</div>;
   };
 
   const handleReserveClick = async () => {
@@ -113,8 +137,10 @@ const SpotShow = () => {
     return null;
   };
 
+
+
   return (
-    <main className="outer-wrapper">
+    <main className="spot-show-outer-wrapper">
       <div className="spot-name">{spot.name}</div>
 
       <div className="spot-photo-wrapper">
@@ -171,90 +197,73 @@ const SpotShow = () => {
               ? spotArr.numReviews + " " + "Review"
               : spotArr.numReviews > 0 && spotArr.numReviews !== 1
               ? spotArr.numReviews + " " + "Reviews"
-              : "new"}
+              : "No reviews yet"}
           </div>
         </div>
-        <div className="reservation-box">
-          {renderErrorMessages()}
-          {!sessionUser && !isOwner && (
+
+        {renderErrorMessages()}
+        {!sessionUser && !isOwner ? (
+          <div className="owner-management-box">
             <OpenModalButton
               buttonText="Log In to Reserve"
               modalComponent={<LoginFormModal />}
             />
-          )}
-          {!isOwner && sessionUser && (
-            <div className="reservation-content">
-              <div className="price-info">
-                <b>${spotArr.price}</b> per night
-              </div>
-
-              <div className="booking-options">
-                <input
-                  type="date"
-                  value={startDate}
-                  onChange={(e) => {
-                    setStartDate(e.target.value);
-                    setBookingDateError("");
-                  }}
-                  min={getTodayDate()}
-                  placeholder="Check-in"
-                  required
-                />
-                <input
-                  type="date"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                  min={startDate || getTodayDate()}
-                  placeholder="Check-out"
-                  required
-                />
-              </div>
-
-              <button onClick={handleReserveClick} className="reserve-button">
-                Reserve
-              </button>
-              {bookingDateError && (
-                <div className="error-message">{bookingDateError}</div>
-              )}
-            </div>
-          )}
-          {isOwner && (
-            <div className="owner-management-box">
-              <NavLink to={`/spots/current`} className="manage-spot-button">
-                Manage your spot
-              </NavLink>
-            </div>
-          )}
-
-          <div className="lower-spot-show">
-            <div className="description"></div>
-            <div className="price-star-review-wrapper"></div>
           </div>
+        ) : !isOwner && sessionUser ? (
+          <div className="reservation-box">
+            <div className="price-info">
+              <b>${spotArr.price}</b> night
+            </div>
+
+            <div className="booking-options">
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                  setBookingDateError("");
+                }}
+                min={getTodayDate()}
+                placeholder="Check-in"
+                required
+              />
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                min={startDate || getTodayDate()}
+                placeholder="Check-out"
+                required
+              />
+            </div>
+
+            <button onClick={handleReserveClick} className="reserve-button">
+              Reserve
+            </button>
+            {bookingDateError && (
+              <div className="error-message">{bookingDateError}</div>
+            )}
+          </div>
+        ) : (
+          <div className="owner-management-box">
+            <NavLink to={`/spots/current`} className="manage-spot-button">
+              Manage your spots
+            </NavLink>
+          </div>
+        )}
+
+        <div className="lower-spot-show">
+          <div className="description"></div>
+          <div className="price-star-review-wrapper"></div>
         </div>
       </div>
 
-      <hr />
-
       <section className="reviews-lower">
-        <div className="reviews-lower-stars-number">
-          <i className="fa fa-star"></i>{" "}
-          {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : "new"}{" "}
-          &middot;{" "}
-          {spotArr.numReviews === 1 ? (
-            spotArr.numReviews + " " + "Review"
-          ) : spotArr.numReviews > 0 && spotArr.numReviews !== 1 ? (
-            spotArr.numReviews + " " + "Reviews"
-          ) : spotArr.numReviews === 0 ? (
-            <p>Be the first to post a review!</p>
-          ) : (
-            "new"
-          )}
-        </div>
         {loggedInUser &&
           spotArr.Owner.id !== loggedInUser.id &&
           reviewsArr &&
           !reviewsArr.find((el) => el.userId === loggedInUser.id) && (
-            <Link to="/reviews/current">
+            <Link to={`/spots/${spotId}`}>
               <OpenModalButton
                 buttonText="Post Your Review"
                 modalComponent={<ReviewForm spotId={spotId} />}
@@ -269,12 +278,23 @@ const SpotShow = () => {
               .reverse()
               .map((reviewsObj, i) => (
                 <div key={i}>
+                  <div className="pic-and-name">
+                  <img
+                    className="profile-pics"
+                    src={userPictures[reviewsObj.User.id] || "/writer.jpg"}
+                    alt={`User ${reviewsObj.User.firstName}`}
+                  />
+
                   <h3>{reviewsObj.User.firstName}</h3>
+                  </div>
+                  <div className="star-and-date">
+                  {renderStarRating(reviewsObj.stars)}
                   <h4>
                     {months[parseInt(reviewsObj.createdAt.slice(5, 7))]},{" "}
                     {reviewsObj.createdAt.slice(0, 4)}
                   </h4>
-                  <p>{reviewsObj.review}</p>
+                  </div>
+                  <p className="review-p">{reviewsObj.review}</p>
                   {loggedInUser && loggedInUser.id === reviewsObj.userId && (
                     <OpenModalButton
                       buttonText="Delete"

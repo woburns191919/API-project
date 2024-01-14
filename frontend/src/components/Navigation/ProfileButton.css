@@ -38,6 +38,13 @@
   overflow-wrap: break-word;
 }
 
+.dropdownItem a {
+  text-decoration: none;
+  list-style: none !important;
+  color: #484848;
+
+}
+
 .logoutButton {
   background-color: #FF385C;
   color: white;

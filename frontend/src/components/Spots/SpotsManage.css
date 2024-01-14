@@ -1,8 +1,7 @@
 
 .outer-wrapper {
-  padding: 20px;
-  max-width: 1200px;
   margin: 0 auto;
+  padding:20px;
 }
 
 
@@ -18,7 +17,6 @@
   color: white;
   text-align: center;
   padding: 10px 20px;
-  border-radius: 5px;
   text-decoration: none;
   margin: 10px auto;
   width: max-content;
@@ -30,6 +28,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  padding:60px;
 }
 
 
@@ -47,6 +46,6 @@
 
 @media (max-width: 480px) {
   .photo-container {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }

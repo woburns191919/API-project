@@ -14,6 +14,7 @@ const BookingManage = () => {
 
   return (
     <main className="bookings-index-page">
+      <h3>Manage Your bookings</h3>
       <div className="bookings-container">
         {userBookings?.Bookings && userBookings.Bookings.length > 0 ? (
           userBookings.Bookings.map((booking, i) => (

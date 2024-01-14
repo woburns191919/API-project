@@ -54,6 +54,10 @@ const BookingEdit = () => {
       console.error("Booking ID is undefined");
       return;
     }
+    if (startDate === endDate) {
+      setError("Start date and end date cannot be the same.");
+      return;
+    }
 
     const updatedBooking = { startDate, endDate };
 
@@ -68,6 +72,7 @@ const BookingEdit = () => {
   };
 
   return (
+    <div className="outer-wrapper">
     <main className="form-wrapper">
       <form className="booking-form" onSubmit={handleSubmit}>
         <h3>Edit Your Booking</h3>
@@ -103,6 +108,7 @@ const BookingEdit = () => {
         <button type="submit">Update Booking</button>
       </form>
     </main>
+    </div>
   );
 };
 

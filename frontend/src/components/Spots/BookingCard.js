@@ -47,31 +47,36 @@ const BookingCard = ({ booking }) => {
             <p>End: {formatDate(booking.endDate)}</p>
           </div>
           <div className="booking-price">
-            <b>${booking.Spot.price}</b> per night
+            <b>${booking.Spot.price}</b> night
           </div>
         </div>
       </Link>
       {!isPastBooking(booking.endDate) && (
         <div className="booking-actions">
-          <NavLink
-            to={`/bookings/edit/${booking.id}`}
-            className="booking-action-button"
-          >
-            Update
-          </NavLink>
-          <OpenModalButton
-            buttonText="Cancel"
-            modalComponent={<BookingDelete bookingId={booking.id} />}
-            style={cancelBtnStyles}
-          />
+          <div className="booking-update-box">
+            <NavLink
+              to={`/bookings/edit/${booking.id}`}
+              className="booking-action-button"
+            >
+              Update
+            </NavLink>
+          </div>
+          <div className="booking-cancel-box">
+            <OpenModalButton
+              buttonText="Cancel"
+              modalComponent={<BookingDelete bookingId={booking.id} />}
+              style={cancelBtnStyles}
+            />
+          </div>
         </div>
       )}
       {isPastBooking(booking.endDate) && (
-        <p className="past-booking-message">This booking has ended and cannot be modified.</p>
+        <p className="past-booking-message">
+          This booking has ended and cannot be modified.
+        </p>
       )}
     </div>
   );
 };
-
 
 export default BookingCard;

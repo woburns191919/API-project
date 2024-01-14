@@ -8,6 +8,12 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  max-width: 1200px;
   margin: 0 auto;
+  padding:60px;
+}
+
+.bookings-index-page {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }

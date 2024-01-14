@@ -54,7 +54,8 @@ const ReviewForm = ({ spotId }) => {
     borderRadius: '4px',
     cursor: 'pointer',
     fontWeight: 'bold',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    width:'auto'
   };
 
 
@@ -99,7 +100,14 @@ const handleStarClick = (starValue) => {
     closeModal();
   }
 
+  const handleOverlayClick = (e) => {
+    if (e.target.id === "modal-overlay") {
+      closeModal();
+    }
+  };
+
   return (
+    <div id="modal-overlay" onClick={handleOverlayClick}>
     <div style={formContainerStyle}>
       <h4 style={headingStyle}>How was your stay?</h4>
 
@@ -125,6 +133,7 @@ const handleStarClick = (starValue) => {
       >
         Submit Your Review
       </button>
+    </div>
     </div>
   );
 };
