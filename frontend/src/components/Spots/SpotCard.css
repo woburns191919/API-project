@@ -46,6 +46,7 @@
   color: rgb(91, 88, 88);
   font-weight:600;
   font-family:Montserrat;
+  overflow:hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

@@ -22,6 +22,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size:14px;
 }
 
 .spot-image-manage {
@@ -56,6 +57,7 @@
   color: rgb(91, 88, 88);
   font-weight: 600;
   font-family: Montserrat;
+  max-width:70%;
 }
 
 .spot-rating-manage {

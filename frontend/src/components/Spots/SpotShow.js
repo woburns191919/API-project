@@ -189,7 +189,7 @@ const SpotShow = () => {
       <div className="lower-info-wrapper">
         <div className="top-price-star-review-wrapper">
           <div className="stars">
-            <i className="fa fa-star"></i>{" "}
+            <i className="fa fa-star filled"></i>{" "}
             {spotArr.avgStarRating > 0 ? spotArr.avgStarRating.toFixed(2) : ""}{" "}
           </div>
           <div className="reviews">
