@@ -36,6 +36,7 @@ const SpotForm = () => {
 
 
 
+
   if (!user) {
     alert("You must be logged in to create a spot!");
     history.push("/");
@@ -58,6 +59,16 @@ const SpotForm = () => {
   };
 
 
+  const defaultImages = [
+    '/default1.jpg',
+    '/default2.jpg',
+    '/default3.jpg',
+    '/default4.jpg',
+    '/default5.jpg'
+  ];
+
+  const usedImages = new Set();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -66,6 +77,28 @@ const SpotForm = () => {
       setValidationErrors(errors);
       return;
     }
+
+    const getRandomDefaultImage = (usedImages) => {
+      const availableImages = defaultImages.filter(image => !usedImages.has(image));
+      const randomIndex = Math.floor(Math.random() * availableImages.length);
+      return availableImages[randomIndex];
+    };
+
+
+    const previewImageURL = previewImage || getRandomDefaultImage(usedImages);
+    usedImages.add(previewImageURL);
+
+    const smallImage1URL = smallImage1 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage1URL);
+
+    const smallImage2URL = smallImage2 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage2URL);
+
+    const smallImage3URL = smallImage3 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage3URL);
+
+    const smallImage4URL = smallImage4 || getRandomDefaultImage(usedImages);
+    usedImages.add(smallImage4URL);
 
     const payload = {
       address,
@@ -81,23 +114,23 @@ const SpotForm = () => {
 
     const imageObj = [
       {
-        url: previewImage,
+        url: previewImageURL,
         preview: true,
       },
       {
-        url: smallImage1,
+        url: smallImage1URL,
         preview: false,
       },
       {
-        url: smallImage2,
+        url: smallImage2URL,
         preview: false,
       },
       {
-        url: smallImage3,
+        url: smallImage3URL,
         preview: false,
       },
       {
-        url: smallImage4,
+        url: smallImage4URL,
         preview: false,
       },
     ];
@@ -109,7 +142,7 @@ const SpotForm = () => {
 
     try {
       const createdSpot = await dispatch(thunkSpotCreateSpot(payload, user));
-      
+
       if (!createdSpot.id) {
         return null;
       } else {
@@ -128,9 +161,10 @@ const SpotForm = () => {
 
 
   return (
-    <main className="form-wrapper">
+    <main className="outer-wrapper">
+      <div className="form-wrapper">
       {formError && <div className="error-message">{formError}</div>}
-      <form className="spot-form" onSubmit={handleSubmit} style={{marginTop:'1100px'}} >
+      <form className="spot-form" onSubmit={handleSubmit} >
         <h3>Create a new Spot</h3>
         <div className="form-top-info">
           <h4>Where's your place located?</h4>
@@ -297,11 +331,11 @@ const SpotForm = () => {
             <label>
               <h4>Liven up your spot with photos </h4>
               <br></br>
-              <p>Submit a link to at least one photo to publish your spot.</p>
+              <p>Submit links to photos to publish your spot. For testing purposes, any blank image fields will generate pictures of tree houses.</p>
 
               <input
                 className="most-boxes"
-                required={true}
+                // required={true}
                 type="url"
                 name="preview image URL"
                 placeholder="Priview Image URL"
@@ -318,7 +352,7 @@ const SpotForm = () => {
             <input
               placeholder="Image URL"
               className="most-boxes"
-              required={true}
+              // required={true}
               type="url"
               name="image URL"
               value={smallImage1}
@@ -371,6 +405,7 @@ const SpotForm = () => {
           type="submit">Create Spot</button>
         </div>
       </form>
+      </div>
     </main>
   );
 };

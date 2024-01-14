@@ -1,9 +1,9 @@
 .booking-card {
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease-in-out;
-  background-color: white;
 }
 
 .booking-card:hover {
@@ -27,24 +27,27 @@
   padding: 10px;
 }
 
-.booking-location, .booking-dates, .booking-price {
+.booking-location,
+.booking-dates,
+.booking-price {
   font-size: 14px;
   color: #333;
 }
 
 .booking-price {
-  font-weight: bold;
-  color: #FF385C;
+  color: black;
 }
 
 .booking-actions {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-
 }
 
-.booking-action-button, .booking-cancel-button {
+.booking-update-box {
+  width: 50%;
+}
+
+.booking-update-box a, button {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -52,32 +55,34 @@
   display: inline-block;
   cursor: pointer;
   font-weight: bold;
-}
-
-.booking-action-button {
   background-color: #6e8695;
   color: white;
+  width:100%;
+  display:flex;
+  justify-content: center;
+  font-size:15px;
+  font-family:Montserrat;
 }
 
-.booking-cancel-button {
-  background-color: #FF5A5F;
-  color: white;
-  border: none;
+.booking-cancel-box {
+  width:50%;
+}
+
+.booking-cancel-box button {
+  background-color: red;
+
 }
 
 
 .past-booking-message {
-  color: #FF385C; 
-  background-color: #FFF0F0;
-  padding: 10px;
+  color: #ff385c;
   border-radius: 5px;
   margin-top: 10px;
   text-align: center;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .booking-card:hover .past-booking-message {
-  background-color: #FFE5E5;
+  background-color: #ffe5e5;
 }

@@ -53,6 +53,9 @@ function SignupFormModal() {
     gap: "10px",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom:"10px",
+
+
   };
 
   const inputStyle = {
@@ -74,6 +77,8 @@ function SignupFormModal() {
     fontWeight: "bold",
     textTransform: "uppercase",
     marginTop: "10px",
+    width: "auto"
+
   };
 
   const errorMessageStyle = {
@@ -86,6 +91,7 @@ function SignupFormModal() {
     color: "#484848",
     textAlign: "center",
     marginBottom: "20px",
+    paddingTop:"10px"
   };
 
   return (

@@ -1,3 +1,5 @@
+
+
 .profile-dropdown.hidden {
   display: none;
 }
@@ -13,10 +15,11 @@
 .header-right {
   display: flex;
   align-items: center;
-  gap: 10px;
-  border: .5px solid gray;
+  border: .5px solid rgb(176, 170, 170);
   border-radius: 30%;
-  padding: 10px;
+  padding-left: 10px;
+
+
 
 }
 
@@ -47,6 +50,7 @@
   align-items: center;
   padding: 0 40px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100px;
 }
 
 .style {
@@ -55,8 +59,64 @@
 .upper-right-nav-wrap {
   display: flex;
   align-items: center;
-  gap:5px;
+  justify-content:space-between;
+  gap:17px;
+
 }
+
+
+.nav-middle {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family:Montserrat;
+}
+
+.nav-item {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.add-guests {
+  color: gray;
+  position: relative;
+}
+
+.anywhere {
+  border-right: .1px solid gray;
+  padding-right:10px
+}
+
+.anyweek {
+  border-right: .1px solid gray;
+  padding-right:10px;
+
+
+}
+.search-icon {
+  color: white;
+  background-color: #FF385C;
+  border-radius:60%;
+  width: 30px;
+  height: 30px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-guests {
+  display: flex;
+  align-items:center;
+  gap:15px
+}
+
+.icon-box {
+
+}
+
 
 .profileButton {
   color: #484848;
@@ -75,7 +135,6 @@
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 16px;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -88,6 +147,11 @@
 
 .create-spot-in-manage-spots a {
   text-decoration: none;
-  color: white;
+  color: rgb(34, 34, 34);
   display: block;
+  font-family:Montserrat;
+}
+
+.globe {
+
 }
