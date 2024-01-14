@@ -3,6 +3,7 @@
   padding-left: 210px;
   padding-right: 210px;
   padding-top: 20px;
+  padding-bottom:40px;
 
 }
 
@@ -284,6 +285,48 @@
 .reviews-lower-text button {
   width:20%;
   background-color:#FF5A5F;
+  color:white;
+  padding:0;
+
+}
+
+.review-p {
+  padding-bottom:10px;
+
+}
+
+.pic-and-name {
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding-bottom:10px;
+}
+
+.pic-and-stars {
+  display:flex;
+  flex-direction:column;
+  width:10%
+}
+
+.review-stars .fa {
+  width:3px;
+  height:3px;
+}
+
+.pic-and-name h3 {
+  color: rgb(91, 88, 88);
+  font-weight:600;
+  font-size:16px;
+}
+
+.review-stars {
+  display:flex;
+  gap:5px;
+}
+
+.star-and-date {
+  display:flex;
+  gap:15px;
 }
 
 .review-item {

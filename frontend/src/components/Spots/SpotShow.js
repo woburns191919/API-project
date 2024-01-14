@@ -137,8 +137,7 @@ const SpotShow = () => {
     return null;
   };
 
-  console.log("revies array", reviewsArr);
-  console.log("alissa", userPictures[5]);
+
 
   return (
     <main className="spot-show-outer-wrapper">
@@ -279,6 +278,7 @@ const SpotShow = () => {
               .reverse()
               .map((reviewsObj, i) => (
                 <div key={i}>
+                  <div className="pic-and-name">
                   <img
                     className="profile-pics"
                     src={userPictures[reviewsObj.User.id] || "/writer.jpg"}
@@ -286,12 +286,15 @@ const SpotShow = () => {
                   />
 
                   <h3>{reviewsObj.User.firstName}</h3>
+                  </div>
+                  <div className="star-and-date">
                   {renderStarRating(reviewsObj.stars)}
                   <h4>
                     {months[parseInt(reviewsObj.createdAt.slice(5, 7))]},{" "}
                     {reviewsObj.createdAt.slice(0, 4)}
                   </h4>
-                  <p>{reviewsObj.review}</p>
+                  </div>
+                  <p className="review-p">{reviewsObj.review}</p>
                   {loggedInUser && loggedInUser.id === reviewsObj.userId && (
                     <OpenModalButton
                       buttonText="Delete"
