@@ -263,7 +263,7 @@ const SpotShow = () => {
           spotArr.Owner.id !== loggedInUser.id &&
           reviewsArr &&
           !reviewsArr.find((el) => el.userId === loggedInUser.id) && (
-            <Link to="/reviews/current">
+            <Link to={`/spots/${spotId}`}>
               <OpenModalButton
                 buttonText="Post Your Review"
                 modalComponent={<ReviewForm spotId={spotId} />}
