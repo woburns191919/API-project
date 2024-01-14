@@ -260,10 +260,25 @@
   border-top: .5px solid rgb(220, 219, 219);
 }
 
+.reviews-lower button {
+  background-color:white;
+  color:blue;
+  padding-bottom:4%;
+
+
+}
+
 .reviews-lower-text {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+.profile-pics {
+  border-radius: 70%;
+  height:60px;
+  width:60px;
+
 }
 
 .reviews-lower-text button {
@@ -280,6 +295,15 @@
   color: rgb(91, 88, 88);
   font-family:Montserrat;
 }
+
+.fa-star.filled {
+  color: rgb(32, 31, 29);
+}
+
+.fa-star {
+  color: lightgray;
+}
+
 
 
 

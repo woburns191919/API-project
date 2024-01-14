@@ -66,6 +66,16 @@ const SpotShow = () => {
     "December",
   ];
 
+  const userPictures = {
+    1: "/dfw.jpg",
+    2: "/biggie.jpg",
+    3: "/nas.jpg",
+    4: "/joyce.jpg",
+    5: "alissa.jpg",
+    6: "/wbheadshot.jpg",
+    7: "/tommy.jpg",
+  };
+
   const isOwner =
     sessionUser && spotArr.Owner && sessionUser.id === spotArr.Owner.id;
 
@@ -76,6 +86,20 @@ const SpotShow = () => {
     const yyyy = today.getFullYear();
 
     return yyyy + "-" + mm + "-" + dd;
+  };
+
+  const renderStarRating = (stars) => {
+    let starIcons = [];
+    for (let i = 0; i < 5; i++) {
+      starIcons.push(
+        <i
+          key={i}
+          className={`fa fa-star ${i < stars ? "filled" : ""}`}
+          aria-hidden="true"
+        ></i>
+      );
+    }
+    return <div className="review-stars">{starIcons}</div>;
   };
 
   const handleReserveClick = async () => {
@@ -112,6 +136,9 @@ const SpotShow = () => {
     }
     return null;
   };
+
+  console.log("revies array", reviewsArr);
+  console.log('alissa', userPictures[5])
 
   return (
     <main className="spot-show-outer-wrapper">
@@ -232,10 +259,7 @@ const SpotShow = () => {
         </div>
       </div>
 
-    
-
       <section className="reviews-lower">
-
         {loggedInUser &&
           spotArr.Owner.id !== loggedInUser.id &&
           reviewsArr &&
@@ -249,13 +273,16 @@ const SpotShow = () => {
           )}
 
         <div className="reviews-lower-text">
-        {reviewsArr &&
+          {reviewsArr &&
             reviewsArr
               .concat()
               .reverse()
               .map((reviewsObj, i) => (
                 <div key={i}>
+
+                  <img src="/biggie.jpg" alt="Description" className="profile-pics" />
                   <h3>{reviewsObj.User.firstName}</h3>
+                  {renderStarRating(reviewsObj.stars)}
                   <h4>
                     {months[parseInt(reviewsObj.createdAt.slice(5, 7))]},{" "}
                     {reviewsObj.createdAt.slice(0, 4)}
