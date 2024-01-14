@@ -331,7 +331,7 @@ const SpotForm = () => {
             <label>
               <h4>Liven up your spot with photos </h4>
               <br></br>
-              <p>Submit a link to at least one photo to publish your spot.</p>
+              <p>Submit links to photos to publish your spot. For testing purposes, any blank image fields will generate pictures of tree houses.</p>
 
               <input
                 className="most-boxes"
