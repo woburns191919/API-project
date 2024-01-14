@@ -1,5 +1,4 @@
 .spot-card-manage {
-
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
 }
@@ -14,24 +13,38 @@
   display: block;
 }
 
+.no-reviews {
+  font-size: 12px;
+}
+
+.spot-location-manage,
+.spot-rating-manage {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size:14px;
+}
+
 .spot-image-manage {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 7px;
 
 }
 
 .spot-info-manage {
   padding-top: 10px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .price-amount-manage {
-  font-weight:600;
+  font-weight: 600;
 }
-
 
 /* .spot-location-manage, .spot-rating-manage, .spot-price-manage {
   font-size: 14px;
@@ -42,26 +55,26 @@
 .spot-location-manage {
   font-size: 14px;
   color: rgb(91, 88, 88);
-  font-weight:600;
-  font-family:Montserrat;
+  font-weight: 600;
+  font-family: Montserrat;
+  max-width:70%;
 }
 
 .spot-rating-manage {
   color: black;
-  display:flex;
+  display: flex;
 }
 
 .spot-price-manage {
   font-size: 14px;
   color: rgb(91, 88, 88);
-  font-family:Montserrat;
+  font-family: Montserrat;
 }
 
 .spot-info-manage-box {
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
 }
-
 
 .spot-actions-manage {
   display: flex;
@@ -69,13 +82,11 @@
 }
 
 .spot-manage-update-box {
-  width:50%;
+  width: 50%;
 }
 .spot-manage-cancel-box {
-  width:50%;
+  width: 50%;
 }
-
-
 
 .spot-actions-manage a {
   border: none;
@@ -87,16 +98,14 @@
   font-weight: bold;
   background-color: #6e8695;
   color: white;
-  width:100%;
-  display:flex;
+  width: 100%;
+  display: flex;
   justify-content: center;
-  font-size:15px;
-  font-family:'Montserrat';
-
+  font-size: 15px;
+  font-family: "Montserrat";
 }
-
 
 .spot-actions-manage button {
   background-color: red;
-  border-radius:none;
+  border-radius: none;
 }

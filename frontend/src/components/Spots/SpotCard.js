@@ -13,7 +13,7 @@ const SpotCard = ({ spot }) => {
               {spot.city}, {spot.state}
             </div>
             <div className="spot-rating">
-              <i className="fa fa-star"></i>
+              <i className="fa fa-star filled"></i>
               {spot.avgRating > 0 ? spot.avgRating.toFixed(2) : "No reviews yet"}
             </div>
           </div>
