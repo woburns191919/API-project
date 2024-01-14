@@ -235,22 +235,7 @@ const SpotShow = () => {
       <hr />
 
       <section className="reviews-lower">
-        <div className="reviews-lower-stars-number">
-          <i className="fa fa-star"></i>{" "}
-          {spotArr.avgStarRating > 0
-            ? spotArr.avgStarRating.toFixed(2)
-            : "No reviews yet"}{" "}
-          &middot;{" "}
-          {spotArr.numReviews === 1 ? (
-            spotArr.numReviews + " " + "Review"
-          ) : spotArr.numReviews > 0 && spotArr.numReviews !== 1 ? (
-            spotArr.numReviews + " " + "Reviews"
-          ) : spotArr.numReviews === 0 ? (
-            <p>Be the first to post a review!</p>
-          ) : (
-            "No reviews yet"
-          )}
-        </div>
+        
         {loggedInUser &&
           spotArr.Owner.id !== loggedInUser.id &&
           reviewsArr &&
@@ -264,7 +249,7 @@ const SpotShow = () => {
           )}
 
         <div className="reviews-lower-text">
-          {reviewsArr &&
+        {reviewsArr &&
             reviewsArr
               .concat()
               .reverse()

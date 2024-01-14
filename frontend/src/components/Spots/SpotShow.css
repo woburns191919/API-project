@@ -254,11 +254,37 @@
   box-shadow:none;
 }
 
+.reviews-lower-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.reviews-lower-text button {
+  width:20%;
+  background-color:#FF5A5F;
+}
+
+.review-item {
+  margin-bottom: 20px;
+}
+
+.reviews-lower-text h4 {
+  font-size: 14px;
+  color: rgb(91, 88, 88);
+  font-family:Montserrat;
+}
+
+
+
 
 @media (max-width: 768px) {
   .host-info {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .reviews-section {
+    grid-template-columns: 1fr;
   }
 
   .host-profile-picture {
