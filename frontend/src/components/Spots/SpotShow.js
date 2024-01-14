@@ -71,7 +71,7 @@ const SpotShow = () => {
     2: "/biggie.jpg",
     3: "/nas.jpg",
     4: "/joyce.jpg",
-    5: "alissa.jpg",
+    5: "/alissa.jpg",
     6: "/wbheadshot.jpg",
     7: "/tommy.jpg",
   };
@@ -138,7 +138,7 @@ const SpotShow = () => {
   };
 
   console.log("revies array", reviewsArr);
-  console.log('alissa', userPictures[5])
+  console.log("alissa", userPictures[5]);
 
   return (
     <main className="spot-show-outer-wrapper">
@@ -279,8 +279,12 @@ const SpotShow = () => {
               .reverse()
               .map((reviewsObj, i) => (
                 <div key={i}>
+                  <img
+                    className="profile-pics"
+                    src={userPictures[reviewsObj.User.id] || "/writer.jpg"}
+                    alt={`User ${reviewsObj.User.firstName}`}
+                  />
 
-                  <img src="/biggie.jpg" alt="Description" className="profile-pics" />
                   <h3>{reviewsObj.User.firstName}</h3>
                   {renderStarRating(reviewsObj.stars)}
                   <h4>
