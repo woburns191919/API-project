@@ -232,10 +232,10 @@ const SpotShow = () => {
         </div>
       </div>
 
-      <hr />
+    
 
       <section className="reviews-lower">
-        
+
         {loggedInUser &&
           spotArr.Owner.id !== loggedInUser.id &&
           reviewsArr &&
