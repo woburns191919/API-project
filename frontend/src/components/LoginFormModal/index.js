@@ -45,13 +45,14 @@ function LoginFormModal() {
     cursor: "pointer",
     fontWeight: "bold",
     textTransform: "uppercase",
+    width: "auto"
   };
 
   const demoStyle = {
     color: "white",
     backgroundColor: "none",
     border: "none",
-    width:"fit-content"
+    width:"auto"
   };
 
   const errorStyle = {
@@ -129,7 +130,7 @@ function LoginFormModal() {
           ).then(closeModal)
         }
       >
-        Demo User Login
+        Demo User
       </button>
     </div>
   );

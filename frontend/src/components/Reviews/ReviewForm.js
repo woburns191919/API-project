@@ -54,7 +54,8 @@ const ReviewForm = ({ spotId }) => {
     borderRadius: '4px',
     cursor: 'pointer',
     fontWeight: 'bold',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    width:'auto'
   };
 
 
