@@ -16,7 +16,13 @@ const BookingCard = ({ booking }) => {
     const end = new Date(endDate);
     return end < today;
   };
-
+  const isOngoingBooking = (startDate, endDate) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    return start <= today && today <= end;
+  };
   const cancelBtnStyles = {
     backgroundColor: "#FF5A5F",
     color: "white",
@@ -51,7 +57,7 @@ const BookingCard = ({ booking }) => {
           </div>
         </div>
       </Link>
-      {!isPastBooking(booking.endDate) && (
+      {!isPastBooking(booking.endDate) && !isOngoingBooking(booking.startDate, booking.endDate) && (
         <div className="booking-actions">
           <div className="booking-update-box">
             <NavLink
@@ -75,6 +81,13 @@ const BookingCard = ({ booking }) => {
           This booking has ended and cannot be modified.
         </p>
       )}
+
+      {(isOngoingBooking(booking.startDate, booking.endDate)) && (
+        <p className="past-booking-message">
+          Ongoing bookings cannot be modified.
+        </p>
+      )}
+
     </div>
   );
 };

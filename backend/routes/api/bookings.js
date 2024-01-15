@@ -64,6 +64,13 @@ router.put("/:bookingId", requireAuth, async (req, res) => {
   const { startDate, endDate } = req.body;
   const today = new Date().toJSON().slice(0, 10);
 
+  if (new Date(endDate) <= new Date(startDate)) {
+    return res
+      .status(400)
+      .json({ message: "End date cannot be on or before start date" });
+  }
+
+
   if (today > startDate || today > endDate) {
     res.status(403);
     return res.json({
