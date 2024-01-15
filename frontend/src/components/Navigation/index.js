@@ -8,6 +8,10 @@ import SignupFormModal from "../SignupFormModal";
 
 import "./Navigation.css";
 
+const handleComingSoonClick = () => {
+  alert("Feature coming soon!");
+};
+
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -47,14 +51,18 @@ function Navigation({ isLoaded }) {
         </div>
         <div className="nav-middle">
           <div className="nav-item">
-            <p className="anywhere">Anywhere</p>
+            <p className="anywhere" onClick={handleComingSoonClick}>
+              Anywhere
+            </p>
           </div>
           <div className="nav-item">
-            <p className="anyweek">Any week</p>
+            <p className="anyweek" onClick={handleComingSoonClick}>
+              Any week
+            </p>
           </div>
-          <div className="nav-item add-guests">
+          <div className="nav-item add-guests" onClick={handleComingSoonClick}>
             <p>Add guests</p>
-            <div className="icon-box">
+            <div className="icon-box" onClick={handleComingSoonClick}>
               <i className="fa fa-search search-icon"></i>
             </div>
           </div>
