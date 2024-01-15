@@ -518,46 +518,47 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         .status(403)
         .json({ message: "You cannot book your own place" });
     }
-
     const { startDate, endDate } = req.body;
     const today = new Date();
-
-    if (new Date(startDate) < today || new Date(endDate) < today) {
-      return res
-        .status(400)
-        .json({ message: "Booking dates cannot be in the past" });
-    }
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
 
     if (new Date(endDate) <= new Date(startDate)) {
       return res
         .status(400)
         .json({ message: "End date cannot be on or before start date" });
+    } else if (new Date(startDate) < yesterday || new Date(endDate) < today) {
+      return res
+        .status(400)
+        .json({ message: "Booking dates cannot be in the past" });
     }
 
-    const existingBookings = await Booking.findAll({
-      where: {
-        spotId: req.params.spotId,
-      },
-    });
+    // const existingBookings = await Booking.findAll({
+    //   where: {
+    //     spotId: req.params.spotId,
+    //   },
+    // });
 
-    let bookingConflict = existingBookings.some((booking) => {
-      const existingStart = new Date(booking.startDate);
-      const existingEnd = new Date(booking.endDate);
-      return (
-        (new Date(startDate) >= existingStart &&
-          new Date(startDate) <= existingEnd) ||
-        (new Date(endDate) >= existingStart &&
-          new Date(endDate) <= existingEnd) ||
-        (new Date(startDate) <= existingStart &&
-          new Date(endDate) >= existingEnd)
-      );
-    });
+    // let bookingConflict = existingBookings.some((booking) => {
+    //   const existingStart = new Date(booking.startDate);
+    //   const existingEnd = new Date(booking.endDate);
+    //   return (
+    //     (new Date(startDate) >= existingStart &&
+    //       new Date(startDate) <= existingEnd) ||
+    //     (new Date(endDate) >= existingStart &&
+    //       new Date(endDate) <= existingEnd) ||
+    //     (new Date(startDate) <= existingStart &&
+    //       new Date(endDate) >= existingEnd)
+    //   );
+    // });
 
-    if (bookingConflict) {
-      return res.status(403).json({
-        message: "Sorry, this spot is already booked for the specified dates",
-      });
-    }
+    // const pastBeforeStart = new Date(endDate) <= new Date(startDate);
+
+    // if (bookingConflict && !pastBeforeStart) {
+    //   return res.status(403).json({
+    //     message: "Sorry, this spot is already booked for the specified dates",
+    //   });
+    // }
 
     const newBooking = await Booking.create({
       spotId: parseInt(req.params.spotId),

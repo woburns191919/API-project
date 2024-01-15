@@ -230,7 +230,10 @@ const SpotShow = () => {
               <input
                 type="date"
                 value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                  setBookingDateError(""); 
+                }}
                 min={startDate || getTodayDate()}
                 placeholder="Check-out"
                 required
