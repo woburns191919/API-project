@@ -76,9 +76,15 @@ const BookingCard = ({ booking }) => {
           </div>
         </div>
       )}
-      {(isPastBooking(booking.endDate) || isOngoingBooking(booking.startDate, booking.endDate)) && (
+      {isPastBooking(booking.endDate) && (
         <p className="past-booking-message">
           This booking has ended and cannot be modified.
+        </p>
+      )}
+
+      {(isOngoingBooking(booking.startDate, booking.endDate)) && (
+        <p className="past-booking-message">
+          Ongoing bookings cannot be modified.
         </p>
       )}
 
