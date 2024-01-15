@@ -519,24 +519,15 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
         .json({ message: "You cannot book your own place" });
     }
 
-    const { startDate, endDate } = req.body;
-    const today = new Date();
-
-    if (new Date(endDate) <= new Date(startDate)) {
-      return res
-        .status(400)
-        .json({ message: "End date cannot be on or before start date" });
-    // } else if (new Date(startDate) < today || new Date(endDate) < today) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Booking dates cannot be in the past" });
-    }
-
     const existingBookings = await Booking.findAll({
       where: {
         spotId: req.params.spotId,
       },
     });
+    const { startDate, endDate } = req.body;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     let bookingConflict = existingBookings.some((booking) => {
       const existingStart = new Date(booking.startDate);
@@ -551,19 +542,27 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
       );
     });
 
-    if (bookingConflict) {
+    if (new Date(endDate) <= new Date(startDate)) {
+      return res
+        .status(400)
+        .json({ message: "End date cannot be on or before start date" });
+    } else if (new Date(startDate) < today || new Date(endDate) < today) {
+      return res
+        .status(400)
+        .json({ message: "Booking dates cannot be in the past" });
+    } else if (bookingConflict) {
       return res.status(403).json({
         message: "Sorry, this spot is already booked for the specified dates",
       });
+    } else {
+      const newBooking = await Booking.create({
+        spotId: parseInt(req.params.spotId),
+        userId: req.user.id,
+        startDate,
+        endDate,
+      });
+      return res.status(201).json(newBooking);
     }
-
-    const newBooking = await Booking.create({
-      spotId: parseInt(req.params.spotId),
-      userId: req.user.id,
-      startDate,
-      endDate,
-    });
-    return res.status(201).json(newBooking);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "An error occurred" });
