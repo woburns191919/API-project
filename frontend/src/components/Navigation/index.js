@@ -45,8 +45,10 @@ function Navigation({ isLoaded }) {
       <header className="header">
         <div className="air-logo">
           <NavLink exact to="/">
-            <i className="fa fa-house"></i>
-            <h6>Slick Spots</h6>
+            <img src="/my-logo.jpg"
+            className="logo-pic"
+            alt="house image"
+            />
           </NavLink>
         </div>
         <div className="nav-middle">

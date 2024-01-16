@@ -10,6 +10,13 @@
   cursor: pointer;
 }
 
+.logo-pic {
+  border-radius: 70%;
+  height: 60px;
+  width: 60px;
+  
+}
+
 .header-right {
   display: flex;
   align-items: center;
