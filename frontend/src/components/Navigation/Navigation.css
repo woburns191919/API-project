@@ -114,6 +114,14 @@
   display:flex;
 }
 
+.nav-search-label {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+
 
 .profileButton {
   color: #484848;
@@ -170,6 +178,35 @@
 }
 
 
+
+.search-icon {
+  cursor: pointer;
+
+}
+
+
+.nav-search-area {
+  text-align: center;
+  padding: 10px;
+}
+
+.nav-search-prompt {
+  font-size: 14px;
+  color: rgb(83, 82, 82);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.nav-search-inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-search-inputs input {
+  margin-right: 5px;
+
+}
 
 .search-icon {
   cursor: pointer;

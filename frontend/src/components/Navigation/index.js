@@ -81,29 +81,32 @@ function Navigation({ isLoaded }) {
   return (
     <>
       <header className="header">
-      <div className="air-logo">
+        <div className="air-logo">
           <NavLink exact to="/">
             <i className="fa fa-house"></i>
             <h6>Slick Spots</h6>
           </NavLink>
         </div>
         <div className="nav-middle">
-          <div className="nav-item">
-            <input
-              type="text"
-              placeholder="City"
-              value={searchCity}
-              onChange={(e) => setSearchCity(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-            <input
-              type="text"
-              placeholder="State"
-              value={searchState}
-              onChange={(e) => setSearchState(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-            <i className="fa fa-search search-icon" onClick={handleSearch}></i>
+          <div className="nav-search-area">
+            <div className="nav-search-prompt">Where do you want to explore?</div>
+            <div className="nav-search-inputs">
+              <input
+                type="text"
+                placeholder="City"
+                value={searchCity}
+                onChange={(e) => setSearchCity(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              <input
+                type="text"
+                placeholder="State"
+                value={searchState}
+                onChange={(e) => setSearchState(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              <i className="fa fa-search search-icon" onClick={handleSearch}></i>
+            </div>
           </div>
         </div>
         <div className="upper-right-nav-wrap">
