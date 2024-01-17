@@ -45,14 +45,14 @@ function LoginFormModal() {
     cursor: "pointer",
     fontWeight: "bold",
     textTransform: "uppercase",
-    width: "auto"
+    width: "auto",
   };
 
   const demoStyle = {
     color: "white",
     backgroundColor: "none",
     border: "none",
-    width:"auto"
+    width: "auto",
   };
 
   const errorStyle = {
@@ -118,20 +118,20 @@ function LoginFormModal() {
         >
           Log In
         </button>
+        <button
+          style={demoStyle}
+          onClick={(e) =>
+            dispatch(
+              sessionActions.login({
+                credential: "Oblivion",
+                password: "mrsquishy",
+              })
+            ).then(closeModal)
+          }
+        >
+          Demo User
+        </button>
       </form>
-      <button
-        style={demoStyle}
-        onClick={(e) =>
-          dispatch(
-            sessionActions.login({
-              credential: "Oblivion",
-              password: "mrsquishy",
-            })
-          ).then(closeModal)
-        }
-      >
-        Demo User
-      </button>
     </div>
   );
 }
