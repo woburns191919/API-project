@@ -8,7 +8,15 @@ const SpotSearch = () => {
 
   const handleSearch = () => {
     dispatch(thunkGetAllSpots(searchParams));
+    setSearchParams({ city: '', state: '' });
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
 
   return (
     <div className="spot-search">
@@ -17,12 +25,14 @@ const SpotSearch = () => {
         placeholder="City"
         value={searchParams.city}
         onChange={(e) => setSearchParams({ ...searchParams, city: e.target.value })}
+        onKeyPress={handleKeyPress}
       />
       <input
         type="text"
         placeholder="State"
         value={searchParams.state}
         onChange={(e) => setSearchParams({ ...searchParams, state: e.target.value })}
+        onKeyPress={handleKeyPress}
       />
       <button onClick={handleSearch}>Search</button>
     </div>

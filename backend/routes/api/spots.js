@@ -531,7 +531,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res) => {
     if (req.user.id === spot.ownerId) {
       return res
         .status(403)
-        .json({ message: "You cannot book your own place" });
+        .json({ message: "You cannot book your own spot" });
     }
     const { startDate, endDate } = req.body;
     const today = new Date();

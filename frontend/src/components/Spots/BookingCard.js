@@ -53,7 +53,7 @@ const BookingCard = ({ booking }) => {
             <p>End: {formatDate(booking.endDate)}</p>
           </div>
           <div className="booking-price">
-            <b>${booking.Spot.price}</b> night
+            <b>${booking.Spot.price}</b> per night
           </div>
         </div>
       </Link>

@@ -41,6 +41,8 @@ function Navigation({ isLoaded }) {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
+      setSearchCity('');
+      setSearchState('');
     }
   };
 
@@ -89,7 +91,7 @@ function Navigation({ isLoaded }) {
         </div>
         <div className="nav-middle">
           <div className="nav-search-area">
-            <div className="nav-search-prompt">Where do you want to explore?</div>
+            <div className="nav-search-prompt">Explore a new place!</div>
             <div className="nav-search-inputs">
               <input
                 type="text"
@@ -113,13 +115,13 @@ function Navigation({ isLoaded }) {
           <div className="create-spot-in-manage-spots">
             {sessionUser && (
               <NavLink to="/spots/new" className="rent-home-link">
-                Rent Your Home
+                Rent Your Spot
               </NavLink>
             )}
           </div>
-          <div className="globe">
+          {/* <div className="globe">
             <i class="fa fa-globe"></i>
-          </div>
+          </div> */}
 
           <div className="header-right">
             <div className="list-icon">

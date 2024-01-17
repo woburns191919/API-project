@@ -55,8 +55,15 @@ function SignupFormModal() {
     justifyContent: "center",
     paddingBottom:"10px",
 
-
   };
+
+  const demoStyle = {
+    color: "white",
+    backgroundColor: "none",
+    border: "none",
+    width:"auto"
+  };
+
 
   const inputStyle = {
     width: "100%",
@@ -184,6 +191,19 @@ function SignupFormModal() {
         <button style={buttonStyle} type="submit">
           Sign Up
         </button>
+        <button
+        style={demoStyle}
+        onClick={(e) =>
+          dispatch(
+            sessionActions.login({
+              credential: "Oblivion",
+              password: "mrsquishy",
+            })
+          ).then(closeModal)
+        }
+      >
+        Demo User
+      </button>
       </form>
     </>
   );
