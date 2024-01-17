@@ -1,23 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
+import SpotCard from "../Spots/SpotCard";
 
 const SearchResults = () => {
-  const spots = useSelector(state => state.spots.allSpots);
-
-  console.log('spots', spots)
-
+  const spots = useSelector((state) => state.spots.allSpots);
   const spotsArray = spots ? Object.values(spots) : [];
-  console.log('spots array', spotsArray)
-
   return (
-    <div>
-      {spotsArray?.map(spot => (
-        <div key={spot.id}>
-          <h3>{spot.name}</h3>
-          <p>{spot.city}, {spot.state}</p>
-
-        </div>
-      ))}
+    <div className="search-results-page">
+      <div className="spots-container">
+        {spotsArray.length > 0 ? (
+          spotsArray.map((spot) => <SpotCard key={spot.id} spot={spot} />)
+        ) : (
+          <p>No spots found.</p>
+        )}
+      </div>
     </div>
   );
 };
