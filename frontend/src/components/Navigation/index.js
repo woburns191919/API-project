@@ -41,6 +41,8 @@ function Navigation({ isLoaded }) {
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
+      setSearchCity('');
+      setSearchState('');
     }
   };
 
