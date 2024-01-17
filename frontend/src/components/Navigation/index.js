@@ -23,8 +23,8 @@ function Navigation({ isLoaded }) {
     startDate: "",
     endDate: "",
   });
-  const [searchCity, setSearchCity] = useState('');
-  const [searchState, setSearchState] = useState('');
+  const [searchCity, setSearchCity] = useState("");
+  const [searchState, setSearchState] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,15 +38,20 @@ function Navigation({ isLoaded }) {
     setShowDatePicker(false);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const handleSearch = () => {
     const searchParams = {};
     if (searchCity) searchParams.city = searchCity;
     if (searchState) searchParams.state = searchState;
 
     dispatch(thunkGetAllSpots(searchParams));
-    history.push('/search-results');
+    history.push("/search-results");
   };
-
 
   let sessionLinks;
   if (sessionUser) {
@@ -82,20 +87,22 @@ function Navigation({ isLoaded }) {
           </NavLink>
         </div>
         <div className="nav-middle">
-        <div className="nav-item">
+          <div className="nav-item">
             <input
               type="text"
               placeholder="City"
               value={searchCity}
               onChange={(e) => setSearchCity(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
             <input
               type="text"
               placeholder="State"
               value={searchState}
               onChange={(e) => setSearchState(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
-            <button onClick={handleSearch}>Search</button>
+            <i className="fa fa-search search-icon" onClick={handleSearch}></i>
           </div>
         </div>
         <div className="upper-right-nav-wrap">

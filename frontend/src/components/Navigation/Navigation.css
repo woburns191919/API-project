@@ -110,9 +110,10 @@
   align-items: center;
   gap: 15px;
 }
-
-.icon-box {
+.nav-item {
+  display:flex;
 }
+
 
 .profileButton {
   color: #484848;
@@ -168,3 +169,9 @@
   background-color: #0056b3;
 }
 
+
+
+.search-icon {
+  cursor: pointer;
+
+}
