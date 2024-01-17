@@ -212,7 +212,7 @@ const SpotShow = () => {
         ) : !isOwner && sessionUser ? (
           <div className="reservation-box">
             <div className="price-info">
-              <b>${spotArr.price}</b> night
+              <b>${spotArr.price}</b> per night
             </div>
 
             <div className="booking-options">
@@ -232,7 +232,7 @@ const SpotShow = () => {
                 value={endDate}
                 onChange={(e) => {
                   setEndDate(e.target.value);
-                  setBookingDateError(""); 
+                  setBookingDateError("");
                 }}
                 min={startDate || getTodayDate()}
                 placeholder="Check-out"

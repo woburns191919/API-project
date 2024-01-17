@@ -85,7 +85,7 @@ const SpotEdit = () => {
         >
           <h3>Update your Spot</h3>
           <div className="form-top-info">
-            <h4>Where's your place located?</h4>
+            <h4>Where's your spot located?</h4>
             <p>
               Guests will only get your exact address once they booked a
               reservation.
@@ -174,7 +174,7 @@ const SpotEdit = () => {
           </div>
           <div className="textarea-description">
             <label>
-              <h4>Describe your place to guests</h4> <br></br>
+              <h4>Describe your spot to guests</h4> <br></br>
               <p>
                 Mention the best features of your space, any special amentities
                 like fast wifi or parking, and what you love about the
@@ -201,7 +201,7 @@ const SpotEdit = () => {
               <h4>Create a title for your spot</h4> <br></br>
               <p>
                 Catch guests' attention with a spot title that highlights what
-                makes your place special.
+                makes your spot special.
               </p>
               <input
                 placeholder="Name of your spot"

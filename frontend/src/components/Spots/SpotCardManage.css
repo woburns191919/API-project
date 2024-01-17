@@ -14,7 +14,7 @@
 }
 
 .no-reviews {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .spot-location-manage,
@@ -82,10 +82,10 @@
 }
 
 .spot-manage-update-box {
-  width: 50%;
+  width: 45%;
 }
 .spot-manage-cancel-box {
-  width: 50%;
+  width: 45%;
 }
 
 .spot-actions-manage a {
