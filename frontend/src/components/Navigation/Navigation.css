@@ -14,7 +14,7 @@
   border-radius: 70%;
   height: 60px;
   width: 60px;
-  
+
 }
 
 .header-right {
@@ -148,5 +148,23 @@
   font-family: Montserrat;
 }
 
-.globe {
+.nav-item input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
+
+.nav-item button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-item button:hover {
+  background-color: #0056b3;
+}
+

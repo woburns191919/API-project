@@ -111,11 +111,20 @@ const validatequery = [
 
 router.get("/", validatequery, async (req, res) => {
   const pagination = {};
+  const where = {};
 
   let { page, size } = req.query;
+  const { city, state } = req.query;
+
+  console.log('Received query params:', { city, state });
 
   page = parseInt(page);
   size = parseInt(size);
+
+  if (city) where.city = city.charAt(0).toUpperCase() + city.slice(1);
+  if (state) where.state = state.charAt(0).toUpperCase() + state.slice(1);
+
+  console.log('Sequelize where condition:', where);
 
   if (size > 20 || size < 1 || !size) size = 20;
   if (page > 10 || page < 1 || !page) page = 1;
@@ -124,6 +133,7 @@ router.get("/", validatequery, async (req, res) => {
   pagination.offset = (page - 1) * size;
 
   const allSpots = await Spot.findAll({
+    where,
     include: [
       {
         model: Review,
