@@ -47,6 +47,7 @@ function Navigation({ isLoaded }) {
   };
 
   const handleSearch = () => {
+    if (!searchCity.trim() && !searchState.trim()) return;
     const searchParams = {};
     if (searchCity) searchParams.city = searchCity;
     if (searchState) searchParams.state = searchState;
