@@ -1,10 +1,12 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import LocationGrid from "../NavSearch/LocationGrid";
+import { thunkGetAllSpots } from "../../store/spots";
 
 import "./Navigation.css";
 
@@ -14,6 +16,42 @@ const handleComingSoonClick = () => {
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDates, setSelectedDates] = useState({
+    startDate: "",
+    endDate: "",
+  });
+  const [searchCity, setSearchCity] = useState("");
+  const [searchState, setSearchState] = useState("");
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleSelectLocation = (location) => {
+    setSelectedLocation(location);
+    setShowLocationDropdown(false);
+  };
+
+  const handleSelectDates = (dates) => {
+    setSelectedDates(dates);
+    setShowDatePicker(false);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const handleSearch = () => {
+    const searchParams = {};
+    if (searchCity) searchParams.city = searchCity;
+    if (searchState) searchParams.state = searchState;
+
+    dispatch(thunkGetAllSpots(searchParams));
+    history.push("/search-results");
+  };
 
   let sessionLinks;
   if (sessionUser) {
@@ -45,27 +83,29 @@ function Navigation({ isLoaded }) {
       <header className="header">
         <div className="air-logo">
           <NavLink exact to="/">
-            <img src="/my-logo.jpg"
-            className="logo-pic"
-            alt="house image"
-            />
+            <i className="fa fa-house"></i>
+            <h6>Slick Spots</h6>
           </NavLink>
         </div>
         <div className="nav-middle">
-          <div className="nav-item">
-            <p className="anywhere" onClick={handleComingSoonClick}>
-              Anywhere
-            </p>
-          </div>
-          <div className="nav-item">
-            <p className="anyweek" onClick={handleComingSoonClick}>
-              Any week
-            </p>
-          </div>
-          <div className="nav-item add-guests" onClick={handleComingSoonClick}>
-            <p>Add guests</p>
-            <div className="icon-box" onClick={handleComingSoonClick}>
-              <i className="fa fa-search search-icon"></i>
+          <div className="nav-search-area">
+            <div className="nav-search-prompt">Where do you want to explore?</div>
+            <div className="nav-search-inputs">
+              <input
+                type="text"
+                placeholder="City"
+                value={searchCity}
+                onChange={(e) => setSearchCity(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              <input
+                type="text"
+                placeholder="State"
+                value={searchState}
+                onChange={(e) => setSearchState(e.target.value)}
+                onKeyPress={handleKeyPress}
+              />
+              <i className="fa fa-search search-icon" onClick={handleSearch}></i>
             </div>
           </div>
         </div>

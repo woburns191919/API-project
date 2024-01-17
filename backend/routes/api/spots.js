@@ -111,11 +111,25 @@ const validatequery = [
 
 router.get("/", validatequery, async (req, res) => {
   const pagination = {};
+  const where = {};
 
   let { page, size } = req.query;
+  const { city, state } = req.query;
+
+  const capitalizeWords = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
 
   page = parseInt(page);
   size = parseInt(size);
+
+  if (city) where.city = { [Op.like]: `%${capitalizeWords(city)}%` };
+  if (state) where.state = { [Op.like]: `%${capitalizeWords(state)}%` };
+
+  console.log("Sequelize where condition:", where);
 
   if (size > 20 || size < 1 || !size) size = 20;
   if (page > 10 || page < 1 || !page) page = 1;
@@ -124,6 +138,7 @@ router.get("/", validatequery, async (req, res) => {
   pagination.offset = (page - 1) * size;
 
   const allSpots = await Spot.findAll({
+    where,
     include: [
       {
         model: Review,

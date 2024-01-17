@@ -11,6 +11,7 @@ import SpotEdit from "./components/Spots/SpotEdit";
 import SpotDelete from "./components/Spots/SpotDelete";
 import BookingManage from "./components/Spots/BookingManage";
 import BookingEdit from "./components/Spots/BookingEdit";
+import SearchResults from "./components/NavSearch/SearchResults";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/spots/:spotId" component={SpotShow} />
           <Route exact path="/bookings/manage" component={BookingManage} />
           <Route path="/bookings/edit/:bookingId" component={BookingEdit} />
+          <Route path="/search-results" component={SearchResults} />
 
         </Switch>
       )}
