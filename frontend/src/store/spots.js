@@ -124,10 +124,18 @@ export const thunkGetCurrentSpots = () => async (dispatch) => {
   }
 };
 
-export const thunkGetAllSpots = () => async (dispatch) => {
-  const res = await csrfFetch("/api/spots");
+export const thunkGetAllSpots = (filterParams) => async (dispatch) => {
+  let url = "/api/spots";
+  if (filterParams) {
+    const query = new URLSearchParams(filterParams).toString();
+    url += `?${query}`;
+  }
+  console.log('Request URL:', url);
+  
+  const res = await csrfFetch(url);
   if (res.ok) {
     const data = await res.json();
+    console.log('data from search', data)
 
     dispatch(actionGetSpots(normalizerSpots(data)));
     return data;
