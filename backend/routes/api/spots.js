@@ -116,15 +116,20 @@ router.get("/", validatequery, async (req, res) => {
   let { page, size } = req.query;
   const { city, state } = req.query;
 
-  console.log('Received query params:', { city, state });
+  const capitalizeWords = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+  };
 
   page = parseInt(page);
   size = parseInt(size);
 
-  if (city) where.city = city.charAt(0).toUpperCase() + city.slice(1);
-  if (state) where.state = state.charAt(0).toUpperCase() + state.slice(1);
+  if (city) where.city = { [Op.like]: `%${capitalizeWords(city)}%` };
+  if (state) where.state = { [Op.like]: `%${capitalizeWords(state)}%` };
 
-  console.log('Sequelize where condition:', where);
+  console.log("Sequelize where condition:", where);
 
   if (size > 20 || size < 1 || !size) size = 20;
   if (page > 10 || page < 1 || !page) page = 1;
