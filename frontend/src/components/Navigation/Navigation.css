@@ -74,6 +74,8 @@
   padding: 8px 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: Montserrat;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .nav-item {
@@ -192,7 +194,7 @@
 
 .nav-search-prompt {
   font-size: 14px;
-  color: rgb(83, 82, 82);
+  color: rgb(129, 126, 126);
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -203,8 +205,12 @@
   align-items: center;
 }
 
+
+
+
 .nav-search-inputs input {
   margin-right: 5px;
+  border: 1px solid #e4e0e0;
 
 }
 
