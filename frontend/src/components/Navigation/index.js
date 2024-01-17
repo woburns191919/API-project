@@ -89,7 +89,7 @@ function Navigation({ isLoaded }) {
         </div>
         <div className="nav-middle">
           <div className="nav-search-area">
-            <div className="nav-search-prompt">Explore somewhere new!</div>
+            <div className="nav-search-prompt">Explore a new place!</div>
             <div className="nav-search-inputs">
               <input
                 type="text"
@@ -117,9 +117,9 @@ function Navigation({ isLoaded }) {
               </NavLink>
             )}
           </div>
-          <div className="globe">
+          {/* <div className="globe">
             <i class="fa fa-globe"></i>
-          </div>
+          </div> */}
 
           <div className="header-right">
             <div className="list-icon">
